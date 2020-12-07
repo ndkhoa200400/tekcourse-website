@@ -1,0 +1,33 @@
+{
+  "name": "tekcourse-website",
+  "version": "1.0.0",
+  "description": "PTUDW-18CLC-KTMP2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kerevin/tekcourse-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kerevin/tekcourse-website/issues"
+  },
+  "homepage": "https://github.com/Kerevin/tekcourse-website#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6",
+    "validator": "^13.5.1"
+  }
+}
