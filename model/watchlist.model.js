@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
-const Course = require("./course.model");
 
 const watchlistSchema = new mongoose.Schema(
   {
-    courses: [
+    courseID: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Course",
       },
     ],
-    user: {
+    userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

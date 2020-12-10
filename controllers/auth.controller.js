@@ -4,6 +4,7 @@ const catchAsync = require("./../utils/catchAsync");
 const appError = require("./../utils/appError");
 const { promisify } = require("util");
 const crypto = require("crypto");
+const Course = require('./../model/course.model')
 
 const signToken = (id) => {
     return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -212,4 +213,22 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
     // 4) Log user in, send JWT
     createSendToken(user, 200, res);
+});
+
+
+exports.allowedToLecture = catchAsync(async (req, res, next)=>{
+    // Check if student registed to the lecture or that lecture belongs to that teacher
+    // URL: .../:courseID/:lectureID
+    const userID = req.user.id;
+    const lectureID = req.params.lectureID;
+
+
+    const course = await Course.find({userID: userID, lectureID: lectureID});
+    if (!course)
+    {
+        return next(
+            new appError("You are not allowed to see this lecture", 500)
+        );
+    }
+    next();
 });

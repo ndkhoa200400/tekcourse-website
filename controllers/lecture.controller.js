@@ -1,18 +1,16 @@
 const Lecture = require('./../model/lecture.model');
+const Course = require('./../model/course.model');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory')
 
-// exports.getCourse = catchAsync(async(req,res,next) => {
-//     const sellerID = req.user.id;
-//     const shop = await Shop.find({sellerID: sellerID});
+exports.setCourseID = catchAsync(async(req,res,next) => {
+    // Tạo một lecture thì phải có course ID 
+    if(!req.params.courseID) req.body.courseID= req.params.courseID;
+    
+    next(); 
+});
 
-//     req.body.shopID = shop[0]._id;
-//     console.log(shop[0]._id);
-//     console.log(req.body);
-//     next(); // pass to getUser function
-// });
-
-exports.getAllLecture = factory.getAll(Lecture);
+exports.getAllLectures = factory.getAll(Lecture);
 
 exports.getLecture = factory.getOne(Lecture);
 

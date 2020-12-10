@@ -10,7 +10,7 @@ const app = express();
 // Routing
 const userRoute = require('./routes/user.route');
 const courseRoute = require('./routes/course.route');
-
+const lectureRoute = require('./routes/lecture.route');
 if(process.env.NODE_ENV ==='development')
     app.use(morgan('dev'));
 
@@ -27,7 +27,9 @@ const limiter = rateLimit({
 app.use("/", limiter);
 
 
-app.use('/user', userRoute);
+app.use('/api/user', userRoute);
+app.use('/api/course', courseRoute);
+app.use('/api/lecture', lectureRoute);
 app.all('*', (req, res, next)=>{
     // 404 Not Found Error;
     next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);

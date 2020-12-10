@@ -17,12 +17,12 @@ const feedbackSchema = new mongoose.Schema(
       type: Date,
       default: Date.now
     },
-    course: {
+    courseID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Course',
       required: [true, 'Review must belong to a course.']
     },
-    user: {
+    userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'Review must belong to a customer']

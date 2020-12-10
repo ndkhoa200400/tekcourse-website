@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
-
+const slugify = require("slugify");
 const lectureSchema = new mongoose.Schema({
+  courseID: {
+    type: mongoose.Schema.Types.ObjectId,
+    require: [true, "A lecture must belong to a course"],
+  },
+  slug: String,
+
   name: {
     type: String,
     required: [true, "A lecture must have a name"],
@@ -20,6 +26,10 @@ const lectureSchema = new mongoose.Schema({
   },
 });
 
+lectureSchema.pre('save', function(next){
+  this.slug = slugify(this.name, {lower:true});
+  next();
+})
 const Lecture = mongoose.model("Lecture", lectureSchema);
 
 module.exports = Lecture;
