@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const slugify = require("slugify");
 const lectureSchema = new mongoose.Schema({
   courseID: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
+    ref: "Course",
     require: [true, "A lecture must belong to a course"],
   },
   slug: String,
@@ -15,7 +16,7 @@ const lectureSchema = new mongoose.Schema({
     minlength: [5, "A lecture name must have more or equal 5 characters"],
   },
   length: {
-    type: Date,
+    type: String,
   },
   description: String,
   video: {
