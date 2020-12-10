@@ -30,11 +30,8 @@
     "mongoose": "^5.11.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
-<<<<<<< Updated upstream
-    "slugify": "^1.4.6",
-=======
     "path": "^0.12.7",
->>>>>>> Stashed changes
+    "slugify": "^1.4.6",
     "validator": "^13.5.1"
   }
 }

@@ -62,6 +62,7 @@ exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
     // 1) Check if email or username and password exist
     if (!email || !password) {
+        res.redirect('/users/login');
         return next(new appError("Please provide email or password!", 400));
     }
 

@@ -6,14 +6,19 @@ const router = express.Router();
 router.use(express.static('public'));
 
 router.post("/signup", authController.signup);
-router.get('/signup', function (req, res) {
-  res.render('sign_up');
-})
+// router.get('/signup', function (req, res) {
+//   res.render('sign_up');
+// })
 
-router.post("/login", authController.login);
-router.post("/login", function (req, res) {
-  res.render('sign_in');
-})
+router.post('/login', authController.login);
+router.get('/login', function (req, res) {
+    res.render('sign_in');
+  })
+
+// router.get('/logout', authController.logout);
+// router.route("/login").get((req,res)=> {
+//   res.render('sign_in')
+// }).post(authController.login);
 
 router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:id", authController.resetPassword);
