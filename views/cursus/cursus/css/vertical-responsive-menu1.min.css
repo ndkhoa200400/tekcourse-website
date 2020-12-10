@@ -30,7 +30,7 @@
 }
 
 .toggle_menu i:hover {
-    color: #ed2a26;
+    color:  #21d4c5;
 }
 	
 .vertical_nav {
@@ -76,12 +76,12 @@
 
 .menu--link:hover {
 	background: #ffecec;
-	color: #ed2a26 !important;
+	color:  #21d4c5 !important;
 }
 
 .menu--link.active {
 	background: #ffecec;
-	color: #ed2a26;
+	color:  #21d4c5;
 }
 
 .menu--item__has_sub_menu .menu--link:after {
@@ -157,7 +157,7 @@
 }
 
 .sub_menu--link:hover {
-	color: #ed2a26 !important;
+	color:  #21d4c5 !important;
 	background: #ffecec;
 }
 
@@ -230,7 +230,7 @@
     height: 60px;
     padding: 0;
     border: 0;
-    background: #ed2a26;
+    background:  #21d4c5;
     color: #fff;
     font-size: 30px;
     margin: 0;
