@@ -5,7 +5,7 @@ const factory = require('./handlerFactory')
 
 exports.setCourseID = catchAsync(async(req,res,next) => {
     // Tạo một lecture thì phải có course ID 
-    if(!req.params.courseID) req.body.courseID= req.params.courseID;
+    if(!req.body.courseID) req.body.courseID= req.params.courseID;
     
     next(); 
 });
