@@ -3,9 +3,18 @@ const authController = require("../controllers/auth.controller");
 const controller = require("../controllers/user.controller");
 
 const router = express.Router();
+router.use(express.static('public'));
 
 router.post("/signup", authController.signup);
+router.get('/signup', function (req, res) {
+  res.render('sign_up');
+})
+
 router.post("/login", authController.login);
+router.post("/login", function (req, res) {
+  res.render('sign_in');
+})
+
 router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:id", authController.resetPassword);
 
@@ -28,5 +37,6 @@ router
   .get(controller.getUser)
   .patch(controller.updateUser)
   .delete(controller.deleteUser);
+
 
 module.exports = router;

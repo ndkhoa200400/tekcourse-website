@@ -1,7 +1,8 @@
 .collapse_menu .collapse_menu--icon,.vertical_nav{
 	-moz-transition:all .3s ease-out;
 	-webkit-transition:all .3s ease-out;
-	transition:all .3s ease-out}*{box-sizing:border-box}:active,:focus{outline:0;}
+	transition:all .3s ease-out}
+	*{box-sizing:border-box}:active,:focus{outline:0;}
 
 .toggle_menu {
 	display: block;
@@ -256,4 +257,5 @@
 	display: block;
 	height: 40px;
 	line-height: 40px;
+}
 }
