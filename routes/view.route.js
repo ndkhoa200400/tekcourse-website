@@ -1,17 +1,25 @@
 const express = require('express');
-const viewsController = require('../controllers/view.controller');
-const authController = require('../controllers/auth.controller');
+const controller = require('./../controllers/view.controller');
+
+var hbs = require('hbs');
 
 const router = express.Router();
+router.use(express.static('public'));
+hbs.registerPartials(__dirname + '../views/partials');
 
-router.use(viewsController.alerts);
+router.get('/', controller.getOverview);
 
-router.get('/login', authController.login, viewsController.getLoginForm);
 
-// router.post(
-//   '/submit-user-data',
-//   authController.protect,
-//   viewsController.updateUserData
-// );
+router.get('/signup', (req, res)=>{
+  res.render('sign_up',{
+    title:'Sign up'
+  })
+})
+
+router.get('/login', (req,res)=>{
+  res.render('sign_in',{
+    title: 'Login'
+  });
+})
 
 module.exports = router;

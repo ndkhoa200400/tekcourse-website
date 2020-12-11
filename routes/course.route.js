@@ -2,9 +2,13 @@ const express = require('express');
 const controller = require('../controllers/course.controller')
 const authController = require('../controllers/auth.controller')
 const router = express.Router();
-const lectureRoute = require('./lecture.route')
+
+const lectureRoute = require('./lecture.route');
+const feedbackRoute = require('./feedback.route');
+
 
 router.use('/:courseID/lecture', lectureRoute); // For URL: /courseID/lecture/ID...
+router.use('/:courseID/feedback', feedbackRoute); // For URL: /courseID/feedback/ID...
 
 router.route('/')
     .get(controller.getAllCourse)

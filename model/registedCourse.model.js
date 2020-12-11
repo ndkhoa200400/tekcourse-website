@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
 
-const registedCourseSchema = new mongoose.Schema(
+const registeredCourseSchema = new mongoose.Schema(
   {
-    courseID: [{
-      type: mongoose.Schema.Types.ObjectId,
+    courses: [{
+      type: mongoose.Schema.ObjectId,
       ref: "Course",
     }],
     userID: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: "User",
+      required: [true,'Registered Course must belong to a customer']
     },
     registedAt: {
       type: Date,
@@ -21,13 +22,13 @@ const registedCourseSchema = new mongoose.Schema(
   }
 );
 
-registedCourseSchema.pre(/^find/, function(next){
+registeredCourseSchema.pre(/^find/, function(next){
   this.populate({
     path:'user',
     select:'name'
   })
 })
 
-const RegistedCourse = mongoose.model("RegistedCourse", registedCourseSchema);
+const RegisteredCourse = mongoose.model("RegisteredCourse", registeredCourseSchema);
 
-module.exports = RegistedCourse;
+module.exports = RegisteredCourse;

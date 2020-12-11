@@ -3,17 +3,14 @@ const authController = require("../controllers/auth.controller");
 const controller = require("../controllers/user.controller");
 
 const router = express.Router();
-router.use(express.static('public'));
 
 router.post("/signup", authController.signup);
-// router.get('/signup', function (req, res) {
-//   res.render('sign_up');
-// })
+router.get('/signup', function (req, res) {
+  res.render('sign_up');
+})
 
 router.post('/login', authController.login);
-router.get('/login', function (req, res) {
-    res.render('sign_in');
-  })
+
 
 // router.get('/logout', authController.logout);
 // router.route("/login").get((req,res)=> {

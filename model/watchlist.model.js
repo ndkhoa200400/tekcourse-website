@@ -4,12 +4,12 @@ const watchlistSchema = new mongoose.Schema(
   {
     courseID: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: "Course",
       },
     ],
     userID: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: "User",
     },
   },
@@ -19,7 +19,7 @@ const watchlistSchema = new mongoose.Schema(
   }
 );
 
-watchlistSchema.index({ user: 1 }, { unique: true });
+watchlistSchema.index({courseID: 1, userID: 1 }, { unique: true });
 
 const Watchlist = mongoose.model("Watchlist", watchlistSchema);
 

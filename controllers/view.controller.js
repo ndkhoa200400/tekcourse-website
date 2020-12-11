@@ -1,12 +1,15 @@
-const User = require("../model/user.model");
+const Course = require('./../model/course.model');
+const catchAsync = require('./../utils/catchAsync');
 
-exports.alerts = (req, res, next) => {
- 
-  };
 
-exports.getLoginForm = (req, res) => {
+
+
+exports.getOverview = catchAsync(async (req,res,next)=>{
+  const course = await Course.find();
+
   res.status(200).render('home', {
-    title: "Log into your account",
-  });
-};
+    title: 'Home',
+    course
+  })
 
+})

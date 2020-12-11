@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,8 @@
   },
   "homepage": "https://github.com/Kerevin/tekcourse-website#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "crypto": "^1.0.1",
@@ -30,6 +34,7 @@
     "mongoose": "^5.11.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
+    "parcel-bundler": "^1.12.4",
     "path": "^0.12.7",
     "slugify": "^1.4.6",
     "validator": "^13.5.1"

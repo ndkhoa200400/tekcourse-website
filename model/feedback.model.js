@@ -18,12 +18,12 @@ const feedbackSchema = new mongoose.Schema(
       default: Date.now
     },
     courseID: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'Course',
       required: [true, 'Review must belong to a course.']
     },
     userID: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: [true, 'Review must belong to a customer']
     }
@@ -34,8 +34,16 @@ const feedbackSchema = new mongoose.Schema(
   }
 );
 
-feedbackSchema.index({ Course: 1, user: 1 }, { unique: true });
+feedbackSchema.index({ courseID: 1, userID: 1 }, { unique: true });
 
+feedbackSchema.pre(/^find/, function (next) {
+  // Query
+  this.populate({
+    path: "user",
+    select: "name",
+  });
+  next();
+});
 
 feedbackSchema.statics.calcAverageRatings = async function(CourseId) {
   const stats = await this.aggregate([
@@ -74,7 +82,6 @@ feedbackSchema.post('save', function() {
 // findByIdAndDelete
 feedbackSchema.pre(/^findOneAnd/, async function(next) {
   this.r = await this.findOne();
-  // console.log(this.r);
   next();
 });
 
