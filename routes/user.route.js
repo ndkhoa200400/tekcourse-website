@@ -5,12 +5,10 @@ const controller = require("../controllers/user.controller");
 const router = express.Router();
 
 router.post("/signup", authController.signup);
-router.get('/signup', function (req, res) {
-  res.render('sign_up');
-})
 
 router.post('/login', authController.login);
 
+router.get('/logout', authController.logout);
 
 // router.get('/logout', authController.logout);
 // router.route("/login").get((req,res)=> {

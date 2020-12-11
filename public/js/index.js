@@ -1,10 +1,10 @@
 // Processing all the events
 import '@babel/polyfill';
-import {login, signup} from './login';
+import {login, signup, logout} from './login';
 
 const loginForm = document.querySelector(".form--login");
 const signupForm = document.querySelector(".form--signup");
-
+const logOutBtn = document.querySelector(".logout");
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -27,3 +27,6 @@ if (signupForm)
     signup(name, email, password,passwordConfirm);
   });
 }
+
+
+if (logOutBtn) logOutBtn.addEventListener('click', logout);
