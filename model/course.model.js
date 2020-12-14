@@ -70,6 +70,11 @@ courseSchema.virtual("createdDate").get(function(){
   return moment(this.createdAt).format("DD-MM-YYYY");
 });
 
+courseSchema.virtual("lastUpdatedDate").get(function(){
+  return moment(this.lastUpdated).format("DD-MM-YYYY");
+});
+
+
 courseSchema.virtual("categoryName").get(function(){
   if (this.category === "website")
     return "Web Development"

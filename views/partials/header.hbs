@@ -7,8 +7,8 @@
         <span class="collapse_menu--label"></span>
     </button>
     <div class="main_logo" id="logo">
-        <a href="index.html"><img src="images/logo.svg" alt="" /></a>
-        <a href="index.html"><img class="logo-inverse" src="images/ct_logo.svg" alt="" /></a>
+        <a href="/"><img src="/images/logo.svg" alt="" /></a>
+        <a href="/"><img class="logo-inverse" src="/images/ct_logo.svg" alt="" /></a>
     </div>
     <div class="search120">
         <div class="ui search">
@@ -22,10 +22,13 @@
     <div class="header_right">
         <ul>
             <li>
-                <a href="create_new_course.html" class="upload_btn">Create New Course</a>
+                {{#is user.role "teacher"}}
+            
+                <a href="/course/create-new-course" class="upload_btn">Create New Course</a>
+                {{/is}}
             </li>
             <li>
-                <a href="index.html" class="option_links"><i class="uil uil-home-alt"></i><span
+                <a href="/" class="option_links"><i class="uil uil-home-alt"></i><span
                         class="noti_count">9+</span></a>
             </li>
             <li class="ui dropdown">
@@ -34,7 +37,7 @@
                 <div class="menu dropdown_ms">
                     <a href="#" class="channel_my item">
                         <div class="profile_link">
-                            <img src="images/left-imgs/img-6.jpg" alt="" />
+                            <img src="/images/left-imgs/img-6.jpg" alt="" />
                             <div class="pd_content">
                                 <h6>Zoena Singh</h6>
                                 <p>
@@ -47,7 +50,7 @@
                     </a>
                     <a href="#" class="channel_my item">
                         <div class="profile_link">
-                            <img src="images/left-imgs/img-5.jpg" alt="" />
+                            <img src="/images/left-imgs/img-5.jpg" alt="" />
                             <div class="pd_content">
                                 <h6>Joy Dua</h6>
                                 <p>
@@ -60,7 +63,7 @@
                     </a>
                     <a href="#" class="channel_my item">
                         <div class="profile_link">
-                            <img src="images/left-imgs/img-8.jpg" alt="" />
+                            <img src="/images/left-imgs/img-8.jpg" alt="" />
                             <div class="pd_content">
                                 <h6>Jass</h6>
                                 <p>Thanks Sir, Such a nice video.</p>
@@ -68,7 +71,7 @@
                             </div>
                         </div>
                     </a>
-                    <a class="vbm_btn" href="instructor_messages.html">View All <i class="uil uil-arrow-right"></i></a>
+                    <a class="vbm_btn" href="/instructor_messages.html">View All <i class="uil uil-arrow-right"></i></a>
                 </div>
             </li>
             <li class="ui dropdown">
@@ -76,7 +79,7 @@
                 <div class="menu dropdown_mn">
                     <a href="#" class="channel_my item">
                         <div class="profile_link">
-                            <img src="images/left-imgs/img-1.jpg" alt="" />
+                            <img src="/images/left-imgs/img-1.jpg" alt="" />
                             <div class="pd_content">
                                 <h6>Rock William</h6>
                                 <p>
@@ -89,7 +92,7 @@
                     </a>
                     <a href="#" class="channel_my item">
                         <div class="profile_link">
-                            <img src="images/left-imgs/img-2.jpg" alt="" />
+                            <img src="/images/left-imgs/img-2.jpg" alt="" />
                             <div class="pd_content">
                                 <h6>Jassica Smith</h6>
                                 <p>
@@ -102,7 +105,7 @@
                     </a>
                     <a href="#" class="channel_my item">
                         <div class="profile_link">
-                            <img src="images/left-imgs/img-9.jpg" alt="" />
+                            <img src="/images/left-imgs/img-9.jpg" alt="" />
                             <div class="pd_content">
                                 <p>
                                     Your Membership Approved <strong>Upload Video</strong>.
@@ -119,12 +122,12 @@
             <li class="ui dropdown">
                 <a href="#" class="opts_account">
                 
-                    <img src="images/hd_dp.jpg" alt="" />
+                    <img src="/images/hd_dp.jpg" alt="" />
                 </a>
                 <div class="menu dropdown_account">
                     <div class="channel_my">
                         <div class="profile_link">
-                            <img src="images/hd_dp.jpg" alt="" />
+                            <img src="/images/hd_dp.jpg" alt="" />
                             <div class="pd_content">
                                 <div class="rhte85">
                                   {{#with user}}  
@@ -158,7 +161,7 @@
                 </div>
             </li>
             {{else}}
-            <a href="login" class="upload_btn">Login</a>
+            <a href="/login" class="upload_btn">Login</a>
 
             {{/if}}
         </ul>

@@ -5,8 +5,7 @@ const AppError = require('./utils/appError')
 const rateLimit = require("express-rate-limit");
 const exphbs  = require('express-handlebars');
 const path = require('path');
-var hbs = require('hbs');
-
+const hbsHelpers = require('handlebars-helpers')();
 const app = express();
 
 //this required before view engine setup
@@ -20,7 +19,8 @@ app.engine(
     extname: 'hbs',
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'views', 'partials'),
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: hbsHelpers
   })
 );
 
@@ -37,9 +37,8 @@ const feedbackRoute = require('./routes/feedback.route');
 
 if(process.env.NODE_ENV ==='development')
     app.use(morgan('dev'));
-
-app.use(express.static('public'));
-
+app.use(express.static((__dirname + "/public")));
+app.use('/static', express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 app.use(cookieParser());
 
@@ -61,7 +60,7 @@ app.use('/api/feedback', feedbackRoute);
 
 app.all('*', (req, res, next)=>{
     // 404 Not Found Error;
-    next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
+   res.render('error_404');
 });
 
 

@@ -43,7 +43,7 @@
                   {{#each courses}}
                   <div class="item">
                     <div class="fcrse_1 mb-20">
-                      <a href="course_detail_view.html" class="fcrse_img">
+                      <a href="course/{{slug}}" class="fcrse_img">
                         <img src="images/courses/img-1.jpg" alt="" />
                         <div class="course-overlay">
                           <div class="badge_seller">Best seller</div>
@@ -65,14 +65,14 @@
                           </div>
                         </div>
                         <div class="vdtodt">
-                          <span class="vdt14">109k views</span>
+                          <span class="vdt14">{{views}} views</span>
                           <span class="vdt14">Created at: {{createdDate}}</span>
                         </div>
                         <a href="course_detail_view.html" class="crse14s">{{name}}</a>
                         <a href="#" class="crse-cate">{{categoryName}}</a>
                         <div class="auth1lnkprce">
                           <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
-                          <div class="prce142">{{price}}</div>
+                          <div class="prce142">${{price}}</div>
                      
                      
                       </div>
@@ -675,5 +675,6 @@
   </div>
 </div>
 {{!-- {{> footer}} --}}
+{{> footer}}
 </div>
 <!-- Body End -->

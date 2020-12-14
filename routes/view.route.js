@@ -4,12 +4,24 @@ const authController = require('./../controllers/auth.controller')
 var hbs = require('hbs');
 
 const router = express.Router();
-router.use(express.static('public'));
+router.use(express.static(__dirname +'public'));
 hbs.registerPartials(__dirname + '../views/partials');
+
 
 router.use(authController.isLoggedIn);
 
+
 router.get('/', controller.getOverview);
+
+
+router.get('/course/create-new-course', (req, res)=>{
+  res.render('create_new_course',{
+    title: "Create new course"
+  })
+})
+
+router.get('/course/:slug', controller.getCourse);
+
 
 
 router.get('/signup', (req, res)=>{
@@ -23,5 +35,6 @@ router.get('/login', (req,res)=>{
     title: 'Login'
   });
 })
+
 
 module.exports = router;

@@ -5,6 +5,9 @@ import {login, signup, logout} from './login';
 const loginForm = document.querySelector(".form--login");
 const signupForm = document.querySelector(".form--signup");
 const logOutBtn = document.querySelector(".logout");
+const addToCartBtn = document.getElementById('add-cart-btn');
+const buyBtn = document.getElementById('buy-btn');
+
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -30,3 +33,17 @@ if (signupForm)
 
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+if (addToCartBtn) {
+ 
+  addToCartBtn.addEventListener('click', function(){
+    console.log('OK')
+  })
+}
+
+if (buyBtn)
+{
+  buyBtn.addEventListener('click', function(){
+
+  });
+}
