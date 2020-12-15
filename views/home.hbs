@@ -13,10 +13,10 @@
           </label>
           <ul class="sub_menu">
             <li class="sub_menu--item">
-              <a href="certification_center.html" class="sub_menu--link">Web Development</a>
+              <a href="/category/" class="sub_menu--link">Web Development</a>
             </li>
             <li class="sub_menu--item">
-              <a href="certification_start_form.html" class="sub_menu--link">Mobile Development</a>
+              <a href="/category/" class="sub_menu--link">Mobile Development</a>
             </li>
           </ul>
         </li>
@@ -33,41 +33,37 @@
         <div class="col-xl-12 col-lg-12">
           <div class="section3125 mt-50">
             <h4 class="item_title">Top trending</h4>
-         
+
             <a href="#" class="see150">See all</a>
-           
-              <div class="la5lo1">
-                 
-               
-                <div class="owl-carousel featured_courses owl-theme">
-                  {{#each courses}}
-                  <div class="item">
-                    <div class="fcrse_1 mb-20">
-                      <a href="course/{{slug}}" class="fcrse_img">
-                        <img src="images/courses/img-1.jpg" alt="" />
-                        <div class="course-overlay">
-                          <div class="badge_seller">Best seller</div>
-                          <div class="crse_reviews">                                       
-                            <i class="uil uil-star">{{ratingsAverage}}</i>             
-                          </div>
-                          <span class="play_btn1"><i class="uil uil-play"></i></span>
-                          <div class="crse_timer">25 hours</div>
+
+            <div class="la5lo1">
+
+
+              <div class="owl-carousel featured_courses owl-theme">
+                {{#each courses}}
+                <div class="item">
+                  <div class="fcrse_1 mb-20">
+                    <a href="course/{{slug}}" class="fcrse_img">
+                      <img src="images/courses/img-1.jpg" alt="" />
+                      <div class="course-overlay">
+                        <div class="badge_seller">Best seller</div>
+                        <div class="crse_reviews">
+                          <i class="uil uil-star">{{ratingsAverage}}</i>
                         </div>
-                      </a>
-                      <div class="fcrse_content">
-                        <div class="eps_dots more_dropdown">
-                          <a href="#"><i class="uil uil-ellipsis-v"></i></a>
-                          <div class="dropdown-content">
-                            <span><i class="uil uil-share-alt"></i>Share</span>
-                            <span><i class="uil uil-clock-three"></i>Save</span>
-                            <span><i class="uil uil-ban"></i>Not Interested</span>
-                            <span><i class="uil uil-windsock"></i>Report</span>
-                          </div>
+                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                        <div class="crse_timer">25 hours</div>
+                      </div>
+                    </a>
+                    <div class="fcrse_content">
+                      <div class="eps_dots more_dropdown">
+                        <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                        <div class="dropdown-content">
+                          <span><i class="uil uil-share-alt"></i>Share</span>
+                          <span><i class="uil uil-clock-three"></i>Save</span>
+                          <span><i class="uil uil-ban"></i>Not Interested</span>
+                          <span><i class="uil uil-windsock"></i>Report</span>
                         </div>
-                        <div class="vdtodt">
-                          <span class="vdt14">{{views}} views</span>
-                          <span class="vdt14">Created at: {{createdDate}}</span>
-                        </div>
+<<<<<<< Updated upstream
                         <a href="/course/{{slug}}" class="crse14s">{{name}}</a>
                         <a href="#" class="crse-cate">{{categoryName}}</a>
                         <div class="auth1lnkprce">
@@ -75,16 +71,30 @@
                           <div class="prce142">${{price}}</div>
                      
                      
+=======
+                      </div>
+                      <div class="vdtodt">
+                        <span class="vdt14">{{views}} views</span>
+                        <span class="vdt14">Created at: {{createdDate}}</span>
+                      </div>
+                      <a href="course_detail_view.html" class="crse14s">{{name}}</a>
+                      <a href="#" class="crse-cate">{{categoryName}}</a>
+                      <div class="auth1lnkprce">
+                        <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
+                        <div class="prce142">${{price}}</div>
+
+
+>>>>>>> Stashed changes
                       </div>
                     </div>
                   </div>
-                 
+
                 </div>
-                  {{/each}}
+                {{/each}}
               </div>
-              
+
             </div>
-            
+
           </div>
         </div>
 
