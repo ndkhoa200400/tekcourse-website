@@ -7,7 +7,7 @@ const signupForm = document.querySelector(".form--signup");
 const logOutBtn = document.querySelector(".logout");
 const addToCartBtn = document.getElementById('add-cart-btn');
 const buyBtn = document.getElementById('buy-btn');
-
+const createCourseBtn = document.getElementById('submit-course-btn');
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -46,4 +46,16 @@ if (buyBtn)
   buyBtn.addEventListener('click', function(){
 
   });
+}
+
+if (createCourseBtn)
+{
+  createCourseBtn.addEventListener('click', function(){
+    const title = document.getElementById("main[title]").value;
+    const description = document.getElementById("id_course_description").value;
+    const category = document.getElementById("category-selection").value;
+    const price = document.getElementById("course-price").value;
+
+    console.log(title, description, category, price);
+  })
 }

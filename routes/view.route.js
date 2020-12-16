@@ -14,9 +14,14 @@ router.use(authController.isLoggedIn);
 router.get('/', controller.getOverview);
 
 
-router.get('/course/create-new-course', (req, res) => {
-  res.render('create_new_course', {
-    title: "Create new course"
+router.get('/course/create-new-course', (req, res)=>{
+
+  let user = res.locals.user;
+
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+  res.render('create_new_course',{
+    title: "Create new course",
+    user: user
   })
 })
 
