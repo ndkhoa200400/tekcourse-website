@@ -14,12 +14,12 @@ router.use(authController.isLoggedIn);
 router.get('/', controller.getOverview);
 
 
-router.get('/course/create-new-course', (req, res)=>{
+router.get('/course/create-new-course', (req, res) => {
 
   let user = res.locals.user;
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
-  res.render('create_new_course',{
+  res.render('create_new_course', {
     title: "Create new course",
     user: user
   })
@@ -41,9 +41,24 @@ router.get('/login', (req, res) => {
   });
 })
 
-router.get('/category', (req, res) => {
-  res.render('category', {
-    title: 'Category',
+// test mobile-development category
+router.get('/mobile-development', (req, res) => {
+  res.render('mobile_development', {
+    title: 'All courses of Mobile Development',
+    images: '/images/courses/img-1.jpg',
+    rating: 1000000000,
+    views: -100,
+    createdDate: 15,
+    name: 'Basic Kotlin Tutorial',
+    category: 'Mobile development',
+    teacher: 'MY toda LE',
+    price: 3
+  })
+});
+// test web-development category
+router.get('/web-development', (req, res) => {
+  res.render('web_development', {
+    title: 'All courses of Web Development',
     images: '/images/courses/img-1.jpg',
     rating: 1000000000,
     views: -100,

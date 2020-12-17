@@ -42,5 +42,6 @@
     "path": "^0.12.7",
     "slugify": "^1.4.6",
     "validator": "^13.5.1"
-  }
+  },
+  "devDependencies": {}
 }
