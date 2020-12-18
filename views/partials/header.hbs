@@ -122,12 +122,23 @@
             <li class="ui dropdown">
                 <a href="#" class="opts_account">
                 
-                    <img src="/images/hd_dp.jpg" alt="" />
+                   {{#is user.role "teacher"}}
+                        <img src="\images\left-imgs\img-3.jpg" alt="" />
+                    {{/is}}
+                    {{#is user.role "customer"}}
+                        <img src="\images\left-imgs\img-17.jpg" alt="" />
+                    {{/is}}
                 </a>
                 <div class="menu dropdown_account">
                     <div class="channel_my">
                         <div class="profile_link">
-                            <img src="/images/hd_dp.jpg" alt="" />
+                            
+                            {{#is user.role "teacher"}}
+                                <img src="\images\left-imgs\img-3.jpg" alt="" />
+                            {{/is}}
+                            {{#is user.role "customer"}}
+                                <img src="\images\left-imgs\img-17.jpg" alt="" />
+                            {{/is}}
                             <div class="pd_content">
                                 <div class="rhte85">
                                   {{#with user}}  
@@ -142,7 +153,13 @@
                               
                             </div>
                         </div>
-                        <a href="#" class="dp_link_12">View Instructor Profile</a>
+                       
+                         {{#is user.role "teacher"}}
+                             <a href="/profile" class="dp_link_12">View Profile</a>
+                        {{/is}}
+                        {{#is user.role "customer"}}
+                             <a href="/student_profile" class="dp_link_12">View Profile</a>
+                        {{/is}}
                     </div>
                     <div class="night_mode_switch__btn">
                         <a href="#" id="night-mode" class="btn-night-mode">
@@ -152,11 +169,13 @@
                             </span>
                         </a>
                     </div>
-                    <a href="instructor_dashboard.html" class="item channel_item">Cursus dashboard</a>
-                    <a href="membership.html" class="item channel_item">Paid Memberships</a>
-                    <a href="setting.html" class="item channel_item">Setting</a>
-                    <a href="help.html" class="item channel_item">Help</a>
-                    <a href="feedback.html" class="item channel_item">Send Feedback</a>
+                     {{#is user.role "teacher"}}
+                        <a href="instructor_dashboard.html" class="item channel_item">My dashboard</a>
+                    {{/is}}
+                     {{#is user.role "customer"}}
+                        <a href="instructor_dashboard.html" class="item channel_item">My courses</a>
+                    {{/is}}
+                    
                     <a href="login" class="item channel_item logout">Sign Out</a>
                 </div>
             </li>
