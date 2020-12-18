@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-rate-limit": "^5.2.3",
+    "handlebars": "^4.7.6",
     "handlebars-helpers": "^0.10.0",
     "hbs": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
@@ -41,5 +42,6 @@
     "path": "^0.12.7",
     "slugify": "^1.4.6",
     "validator": "^13.5.1"
-  }
+  },
+  "devDependencies": {}
 }

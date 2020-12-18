@@ -5,16 +5,7 @@ const controller = require("../controllers/user.controller");
 const router = express.Router();
 
 router.post("/signup", authController.signup);
-
-router.post('/login', authController.login);
-
-router.get('/logout', authController.logout);
-
-// router.get('/logout', authController.logout);
-// router.route("/login").get((req,res)=> {
-//   res.render('sign_in')
-// }).post(authController.login);
-
+router.post("/login", authController.login);  
 router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:id", authController.resetPassword);
 
@@ -37,6 +28,5 @@ router
   .get(controller.getUser)
   .patch(controller.updateUser)
   .delete(controller.deleteUser);
-
 
 module.exports = router;

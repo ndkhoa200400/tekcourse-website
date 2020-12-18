@@ -4,7 +4,7 @@ const authController = require('./../controllers/auth.controller')
 var hbs = require('hbs');
 
 const router = express.Router();
-router.use(express.static(__dirname +'public'));
+router.use(express.static(__dirname + 'public'));
 hbs.registerPartials(__dirname + '../views/partials');
 
 
@@ -25,9 +25,14 @@ router.get('/profile',(req, res)=>{
   })
 } );
 
-router.get('/course/create-new-course', (req, res)=>{
-  res.render('create_new_course',{
-    title: "Create new course"
+router.get('/course/create-new-course', (req, res) => {
+
+  let user = res.locals.user;
+
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+  res.render('create_new_course', {
+    title: "Create new course",
+    user: user
   })
 })
 
@@ -39,11 +44,38 @@ router.get('/signup', (req, res)=>{
   })
 })
 
-router.get('/login', (req,res)=>{
-  res.render('sign_in',{
+router.get('/login', (req, res) => {
+  res.render('sign_in', {
     title: 'Login'
   });
 })
 
-
+// test mobile-development category
+router.get('/mobile-development', (req, res) => {
+  res.render('mobile_development', {
+    title: 'All courses of Mobile Development',
+    images: '/images/courses/img-1.jpg',
+    rating: 1000000000,
+    views: -100,
+    createdDate: 15,
+    name: 'Basic Kotlin Tutorial',
+    category: 'Mobile development',
+    teacher: 'MY toda LE',
+    price: 3
+  })
+});
+// test web-development category
+router.get('/web-development', (req, res) => {
+  res.render('web_development', {
+    title: 'All courses of Web Development',
+    images: '/images/courses/img-1.jpg',
+    rating: 1000000000,
+    views: -100,
+    createdDate: 15,
+    name: 'Basic Kotlin Tutorial',
+    category: 'Mobile development',
+    teacher: 'MY toda LE',
+    price: 3
+  })
+})
 module.exports = router;
