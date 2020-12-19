@@ -48,3 +48,21 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     user: user
   });
 });
+
+exports.ProByCat = catchAsync(async (req, res, next) => {
+  const catName = req.param('cat');
+  const course = await Course.find({ category: catName })
+    .lean({ virtuals: true });
+
+  let user = res.locals.user;
+  
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+
+  res.status(200).render("search_result", {
+    title: catName,
+    course: course,
+    user: user,
+    empty : course.empty,
+    // num : course thả chổ để length course cho tao!
+  });
+});
