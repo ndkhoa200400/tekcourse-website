@@ -15,13 +15,19 @@ exports.getOverview = catchAsync(async (req, res, next) => {
       select: "-__v -passwordChangedAt -_id",
     })
     .lean({ virtuals: true });
+  const categories = await Course.find({})
+  .populate('category')
+  .distinct('category')
+  .lean({ virtuals: true });
+  
   let user = res.locals.user;
-
+  console.log(categories);
   if (user) user = { name: user.name, email: user.email, role: user.role };
   res.status(200).render("home", {
     title: "Home",
     user: user,
     courses: courses,
+    categories: categories
   });
 });
 
@@ -50,19 +56,26 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 });
 
 exports.ProByCat = catchAsync(async (req, res, next) => {
-  const catName = req.param('cat');
+  const catName = req.param('catName');
   const course = await Course.find({ category: catName })
     .lean({ virtuals: true });
+  const categories = await Course.find({})
+  .populate('category')
+  .distinct('category')
+  .lean({ virtuals: true });
+
+  console.log(categories);
 
   let user = res.locals.user;
   
   if (user) user = { name: user.name, email: user.email, role: user.role };
-
+  console.log(course);
   res.status(200).render("search_result", {
     title: catName,
     course: course,
     user: user,
-    empty : course.empty,
+    empty : course === null,
+    categories: categories
     // num : course thả chổ để length course cho tao!
   });
 });

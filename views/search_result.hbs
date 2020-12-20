@@ -12,7 +12,7 @@
 									<nav aria-label="breadcrumb">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item"><a href="/">Home</a></li>
-											<li class="breadcrumb-item active" aria-current="page">Web Development</li>
+											<li class="breadcrumb-item active" aria-current="page">{{this.categories}}</li>
 										</ol>
 									</nav>
 								</div>
@@ -229,10 +229,10 @@
 									{{#if empty}}
 										<p>No matching results</p>
 									{{else}}
-									{{#each courses}}
+									{{#each course}}
 									<div class="fcrse_1">
 										<a href="course_detail_view.html" class="hf_img">
-											<img src="{{this.images}}" alt="">
+											<img src="images/courses/img-1.jpg" alt="">
 											<div class="course-overlay">
 												<div class="badge_seller">Bestseller</div>
 												<div class="crse_reviews">
@@ -275,7 +275,7 @@
 										</div>																										
 									</div>
 									
-									{{!-- {{/if}} --}}
+									{{/if}}
 								</div>									
 							</div>																		
 						</div>							

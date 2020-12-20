@@ -9,10 +9,9 @@
           </label>
           <ul class="sub_menu">
             <li class="sub_menu--item">
-              <a href="/category?cat=website" class="sub_menu--link" name ="CatName">Web Development</a>
-            </li>
-            <li class="sub_menu--item">
-              <a href="/category?cat=mobile" class="sub_menu--link" name ="CatName">Mobile Development</a>
+              {{#each categories}}
+              <a href="/category/{{this}}" class="sub_menu--link" name ="CatName">{{this}}</a>
+              {{/each }}
             </li>
           </ul>
         </li>

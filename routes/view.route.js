@@ -13,7 +13,7 @@ router.use(authController.isLoggedIn);
 
 router.get('/', controller.getOverview);
 
-router.get('/category',controller.ProByCat);
+router.get('/category/:catName',controller.ProByCat);
   
 router.get('/profile',(req, res)=>{
   res.render('profile',{
