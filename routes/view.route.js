@@ -78,6 +78,12 @@ router.get('/cart', (req, res) => {
     totalPrice: 13,
   });
 })
+//test check-out page
+router.get('/check-out', (req, res) => {
+  res.render('check_out', {
+    title: 'Thank you'
+  });
+})
 // test mobile-development category
 // router.get('/mobile-development', (req, res) => {
 //   res.render('mobile_development', {
