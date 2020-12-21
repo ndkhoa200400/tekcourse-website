@@ -1,0 +1,113 @@
+{{> header_1}}
+<!-- Header End -->
+<!-- Body Start -->
+<div class="wrapper _bg4586 _new89">
+    <div class="_215b15">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title125">
+                        <div class="titleleft">
+                            <div class="ttl121">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{this.categories}}</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="titleright">
+                            <div class="explore_search">
+                                <div class="ui search focus">
+                                    <div class="ui left icon input swdh11 swdh15">
+                                        <input class="prompt srch_explore" type="text" placeholder="Search">
+                                        <i class="uil uil-search-alt icon icon2"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="title126">
+                        <h2>{{CatName}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sa4d25 mb4d25">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-9 col-md-8">
+                    <div class="_14d25 mb-20">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{#if empty}}
+                                <p>Nothing in your cart</p>
+                                {{else}}
+                                {{#each courseInCart}}
+                                <div class="fcrse_1">
+                                    <a href="course_detail_view.html" class="hf_img">
+                                        <img src="images/courses/img-1.jpg" alt="">
+                                        <div class="course-overlay">
+                                            {{#if bestseller}}
+                                            <div class="badge_seller">Bestseller</div>
+                                            {{/if}}
+                                            <div class="crse_reviews">
+                                                <i class="uil uil-star"></i>{{ratingsAverage}}
+                                            </div>
+                                            <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                            <div class="crse_timer">
+                                                {{courseTime}} hour(s)
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="hs_content">
+                                        <div class="eps_dots eps_dots10 more_dropdown">
+                                            <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                            <div class="dropdown-content">
+                                                <span><i class="uil uil-ban"></i>Delete</span>
+                                            </div>
+                                        </div>
+                                        <div class="vdtodt">
+                                            <span class="vdt14">{{views}} views</span>
+                                            <span class="vdt14">Created at: {{createdDate}}</span>
+                                        </div>
+                                        {{!-- <a href="course/{{slug}}" class="crse14s title900">{{name}}</a> --}}
+                                        <a href="/course_detail_view" class="crse14s title900">{{name}}</a>
+                                        <a href="#" class="crse-cate">{{categoryName}}</a>
+                                        <div class="auth1lnkprce">
+                                            <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
+                                            <div class="prce142">${{price}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="right_side">
+                        <div class="get1452">
+                            <div class="cater_ttle">
+                                <h4>Total payment</h4>
+                            </div>
+                            <h4>Number of courses: {{numCourse}}</h4>
+                            <h4>Total price: {{totalPrice}} $</h4>
+                            <div class="live_text">
+                                <div class="live-content">
+                                    <button class="live_link" id="buy-btn"
+                                        onclick="window.location.href = '/check-out';">Buy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer}}
+</div>
+<!-- Body End -->

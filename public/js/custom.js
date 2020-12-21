@@ -238,10 +238,3 @@ $('input[name="paymentmethod"]').on('click', function () {
 	$('.return-departure-dts').slideUp();
 	$('[data-method="' + $value + '"]').slideDown();
 });
-
-
-// Right Click Disable
-window.oncontextmenu = function () {
-	return false;
-}
-

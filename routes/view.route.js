@@ -13,9 +13,14 @@ router.use(authController.isLoggedIn);
 
 router.get('/', controller.getOverview);
 
-router.get('/category/:catName',controller.ProByCat);
-  
-router.get("/profile", authController.protect, controller.getMe);
+router.get('/category/:catName', controller.ProByCat);
+
+router.get('/profile', (req, res) => {
+  res.render('profile', {
+    title: "My Profile"
+  })
+});
+
 router.get('/course/create-new-course', (req, res) => {
 
   let user = res.locals.user;
@@ -29,9 +34,9 @@ router.get('/course/create-new-course', (req, res) => {
 
 router.get('/course/:slug', controller.getCourse);
 
-router.get('/signup', (req, res)=>{
-  res.render('sign_up',{
-    title:'Sign up'
+router.get('/signup', (req, res) => {
+  res.render('sign_up', {
+    title: 'Sign up'
   })
 })
 
@@ -41,6 +46,38 @@ router.get('/login', (req, res) => {
   });
 })
 
+//test CART PAGE
+router.get('/cart', (req, res) => {
+  res.render('cart', {
+    title: 'Your cart',
+    courseInCart: {
+      course1: {
+        bestseller: false,
+        rating: 4,
+        views: 100,
+        createdDate: '01/01/2020',
+        name: 'Basic Kotlin Tutorial',
+        categoryName: 'Mobile development',
+        teacherID: { name: 'MY toda LE' },
+        price: 3,
+        courseTime: 15
+      },
+      course2: {
+        bestseller: true,
+        rating: 4,
+        views: 89,
+        createdDate: '01/01/2020',
+        name: 'Basic CSS Tutorial',
+        categoryName: 'Web development',
+        teacherID: { name: 'MY toda LE' },
+        price: 10,
+        courseTime: 20
+      },
+    },
+    numCourse: 2,
+    totalPrice: 13,
+  });
+})
 // test mobile-development category
 // router.get('/mobile-development', (req, res) => {
 //   res.render('mobile_development', {
