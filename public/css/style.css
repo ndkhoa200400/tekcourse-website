@@ -7898,3 +7898,48 @@ a.rmv-btn i {
   .alert--error {
     background-color: #eb4d4b;
   }
+
+  +.dropzone {
+    margin-top: 1%;
+    border: 4px dashed #ccc;
+    height: 50px;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 100%;
+}
+.dropzone.dropzone-dragging {
+    border-color: #000
+}
+.dropzone p {
+    /*height: 100%;*/
+    /*line-height: 200px;*/
+    margin: 0%;
+    text-align: center;
+    width: 100%;
+}
+
+.loading-modal {
+    background-color: rgba(255, 255, 255, .8);
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%
+}
+
+.loading-table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+.image-url {
+    width: 50%;
+}
+
+.info {
+    margin-top: 2%;
+}

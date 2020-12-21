@@ -14,7 +14,7 @@ export const login = async (email, password) => {
     });
 
     if (res.data.status === "success") {
-      console.log('ok');
+      
       showAlert ('success', 'Logged in successfully');
       window.setTimeout(() => {
         location.assign("/"); // back to home page
@@ -50,7 +50,8 @@ export const signup = async (name, email, password, passwordConfirm) => {
       showAlert('error', "Email has already been taken!");
     }
   } catch (err) {
-    // show alert page here
+    res = error.response.data;
+		alert(error.response.data.message);
   }
 };
 
@@ -63,5 +64,6 @@ export const logout = async () => {
 
   } catch (err) {
     // show alert page here
+    alert("LOI" + err);
   }
 };

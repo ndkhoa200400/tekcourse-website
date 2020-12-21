@@ -22,12 +22,12 @@ const registeredCourseSchema = new mongoose.Schema(
   }
 );
 
-registeredCourseSchema.pre(/^find/, function(next){
-  this.populate({
-    path:'user',
-    select:'name'
-  })
-})
+// registeredCourseSchema.pre(/^find/, function(next){
+//   this.populate({
+//     path:'user',
+//     select:'name'
+//   })
+// })
 
 const RegisteredCourse = mongoose.model("RegisteredCourse", registeredCourseSchema);
 

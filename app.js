@@ -6,6 +6,7 @@ const rateLimit = require("express-rate-limit");
 const exphbs  = require('express-handlebars');
 const path = require('path');
 const hbsHelpers = require('handlebars-helpers')();
+const globalErrorHandler = require("./controllers/error.controller");
 var hbs = require('hbs');
 // const numeral = require('numeral');
 
@@ -41,6 +42,7 @@ const courseRoute = require('./routes/course.route');
 const lectureRoute = require('./routes/lecture.route');
 const viewRouter = require('./routes/view.route');
 const feedbackRoute = require('./routes/feedback.route');
+const registeredCourse = require("./routes/registeredCourse.route");
 
 if(process.env.NODE_ENV ==='development')
     app.use(morgan('dev'));
@@ -65,7 +67,7 @@ app.use('/api/user', userRoute);
 app.use('/api/course', courseRoute);
 app.use('/api/lecture', lectureRoute);
 app.use('/api/feedback', feedbackRoute);
-
+app.use('/api/checkout', registeredCourse);
 app.get('*', function(req, res,next){
   res.status(404);
   // 404 Not Found Error;
@@ -75,5 +77,5 @@ app.get('*', function(req, res,next){
   })
   //next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
 });
-
+app.use(globalErrorHandler);
 module.exports = app;

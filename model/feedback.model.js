@@ -75,7 +75,7 @@ feedbackSchema.statics.calcAverageRatings = async function(CourseId) {
 
 feedbackSchema.post('save', function() {
   // this points to current review
-  this.constructor.calcAverageRatings(this.Course);
+  this.constructor.calcAverageRatings(this.courseID);
 });
 
 // findByIdAndUpdate

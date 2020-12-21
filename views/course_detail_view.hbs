@@ -1,6 +1,4 @@
-﻿
-
-<body>
+﻿<body>
 	<!-- Video Model Start -->
 	<div class="modal vd_mdl fade" id="videoModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
@@ -18,7 +16,7 @@
 		</div>
 	</div>
 	<!-- Video Model End -->
-	<!-- Header Start --> 
+	<!-- Header Start -->
 	{{> header}}
 	<!-- Header End -->
 	<!-- Left Sidebar Start -->
@@ -32,14 +30,14 @@
 							<span class="menu--label">Home</span>
 						</a>
 					</li>
-		
+
 					<li class="menu--item">
 						<a href="categories.html" class="menu--link" title="Categories">
 							<i class='uil uil-layers menu--icon'></i>
 							<span class="menu--label">Categories</span>
 						</a>
 					</li>
-					
+
 					<li class="menu--item">
 						<a href="saved_courses.html" class="menu--link" title="Saved Courses">
 							<i class="uil uil-heart-alt menu--icon"></i>
@@ -232,13 +230,18 @@
 									</div>
 									<div class="_215b05">
 										<h3>${{course.price}}</h3>
-									
-									</div>
 
+									</div>
+									{{#if user}}
+									{{#is user.role "customer"}}
 									<ul class="_215b31">
 										<li><button class="btn_adcart" id="add-cart-btn">Add to Cart</button></li>
 										<li><button class="btn_buy" id="buy-btn">Buy Now</button></li>
 									</ul>
+									{{/is}}
+									
+
+									{{/if}}
 								</div>
 							</div>
 						</div>
@@ -264,7 +267,8 @@
 							<div class="user_dt_right">
 								<ul>
 									<li>
-										<a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>{{course.views}}</span></a>
+										<a href="#" class="lkcm152"><i
+												class="uil uil-eye"></i><span>{{course.views}}</span></a>
 									</li>
 									<li>
 										<a href="#" class="lkcm152"><i
@@ -802,7 +806,7 @@
 
 						</div>
 					</div>
-					
+
 					<div class="tab-pane fade" id="nav-courses" role="tabpanel">
 						<div class="crse_content">
 							<h3>Course content</h3>

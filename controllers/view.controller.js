@@ -1,5 +1,6 @@
 const Course = require("./../model/course.model");
 const catchAsync = require("./../utils/catchAsync");
+const User = require("./../model/user.model")
 const moment = require("moment");
 
 exports.getOverview = catchAsync(async (req, res, next) => {
@@ -12,7 +13,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   )
     .populate({
       path: "teacherID",
-      select: "-__v -passwordChangedAt -_id",
+      select: "name"
     })
     .lean({ virtuals: true });
   const categories = await Course.find({})
@@ -78,4 +79,24 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
     categories: categories
     // num : course thả chổ để length course cho tao!
   });
+});
+
+exports.getMe =  catchAsync(async (req, res, next)=> {
+try {
+  const userID = req.user.id;
+
+  const user = await User.findById(userID).lean();
+  const courses = await Course.find({teacherID: userID}).lean({virtuals:true});
+  console.log(courses.length);
+  res.status(200).render("profile", {
+    title: "Profile",
+    user: user,
+    courses: courses,
+    numCourse: courses.length
+  });
+} catch (error) {
+  console.log(error);
+}
+  
+
 });

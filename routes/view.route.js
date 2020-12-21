@@ -15,12 +15,7 @@ router.get('/', controller.getOverview);
 
 router.get('/category/:catName',controller.ProByCat);
   
-router.get('/profile',(req, res)=>{
-  res.render('profile',{
-    title : "My Profile"
-  })
-} );
-
+router.get("/profile", authController.protect, controller.getMe);
 router.get('/course/create-new-course', (req, res) => {
 
   let user = res.locals.user;

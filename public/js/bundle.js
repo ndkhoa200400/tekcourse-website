@@ -8423,7 +8423,6 @@ var hideAlert = function hideAlert() {
 exports.hideAlert = hideAlert;
 
 var showAlert = function showAlert(type, msg) {
-  console.log("ko");
   hideAlert();
   var markup = "<div class=\"alert alert--".concat(type, "\">").concat(msg, "</div>");
   document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
@@ -8451,7 +8450,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var login = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(email, password) {
-    var res;
+    var _res;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8468,10 +8468,9 @@ var login = /*#__PURE__*/function () {
             });
 
           case 3:
-            res = _context.sent;
+            _res = _context.sent;
 
-            if (res.data.status === "success") {
-              console.log('ok');
+            if (_res.data.status === "success") {
               (0, _alert.showAlert)('success', 'Logged in successfully');
               window.setTimeout(function () {
                 location.assign("/"); // back to home page
@@ -8504,7 +8503,8 @@ exports.login = login;
 
 var signup = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(name, email, password, passwordConfirm) {
-    var res;
+    var _res2;
+
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -8523,9 +8523,9 @@ var signup = /*#__PURE__*/function () {
             });
 
           case 3:
-            res = _context2.sent;
+            _res2 = _context2.sent;
 
-            if (res.data.status === "success") {
+            if (_res2.data.status === "success") {
               (0, _alert.showAlert)('success', 'Signed up successfully');
               window.setTimeout(function () {
                 location.assign("/"); // back to home page
@@ -8534,14 +8534,16 @@ var signup = /*#__PURE__*/function () {
               (0, _alert.showAlert)('error', "Email has already been taken!");
             }
 
-            _context2.next = 9;
+            _context2.next = 11;
             break;
 
           case 7:
             _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
+            res = error.response.data;
+            alert(error.response.data.message);
 
-          case 9:
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -8558,7 +8560,8 @@ exports.signup = signup;
 
 var logout = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var res;
+    var _res3;
+
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -8571,15 +8574,17 @@ var logout = /*#__PURE__*/function () {
             });
 
           case 3:
-            res = _context3.sent;
-            _context3.next = 8;
+            _res3 = _context3.sent;
+            _context3.next = 9;
             break;
 
           case 6:
             _context3.prev = 6;
             _context3.t0 = _context3["catch"](0);
+            // show alert page here
+            alert("LOI" + _context3.t0);
 
-          case 8:
+          case 9:
           case "end":
             return _context3.stop();
         }
@@ -8936,7 +8941,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55696" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54858" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

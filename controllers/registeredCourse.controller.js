@@ -1,33 +1,54 @@
 const RegisteredCourse = require('./../model/registedCourse.model');
 const catchAsync = require('./../utils/catchAsync')
 const AppError = require('./../utils/appError')
-
-exports.getAllRegisteredCourse = factory.getAll(Course);
+const factory = require('./handlerFactory')
+const Course = require('../model/course.model');
+exports.getAllRegisteredCourse = factory.getAll(RegisteredCourse);
 exports.getCourse = factory.getOne(Course);
 
-exports.registerNewCourse =  catchAsync(async(req, res, next)=>{
+exports.registerNewCourse = catchAsync(async (req, res, next) => {
+
+
+
     const userID = req.user.id;
-    const courseID = req.body.courseID;
-    const registersedCourse = await RegisteredCourse.find({userID:userID});
-    let course;
-    if (!registersedCourse)
+    console.log(userID)
+    const courseSlugName = req.body.courseSlugName;
+    console.log(courseSlugName)
+  
+        const registersedCourse = await RegisteredCourse.findOne({ userID: userID });
+        const selectedCourse = await Course.findOne({ slug: courseSlugName });
+        console.log(registersedCourse)
+  
+   
+    if (!selectedCourse)
     {
-        course = await RegisteredCourse.create({userID: userID, courses:[courseID]});
+        return next(new AppError("Cannot find this course", 404));
     }
-    else{
-        registersedCourse.courses.push(courseID);
-        course = await registersedCourse.save();
+  
+    if (!registersedCourse) {
+        course = await RegisteredCourse.create({ userID: userID, courses: [selectedCourse.id] });
     }
+    else {
+        if (!registersedCourse.courses.includes(selectedCourse.id)) {
+            registersedCourse.courses.push(selectedCourse.id);
+            course = await registersedCourse.save();
+        }
+        else {
+            return next(new AppError("You already purchased this course", 400));
+        }
+    } 
+
+
     res.status(200).json({
-        stauts:'success',
+        stauts: 'success',
         data: {
             doc: course
         }
     })
-    
+
 })
 
-exports.updateCourse = factory.updateOne(Course);
+exports.updateCourse = factory.updateOne(RegisteredCourse);
 
-exports.deleteCourse = factory.deleteOne(Course);
+exports.deleteCourse = factory.deleteOne(RegisteredCourse);
 
