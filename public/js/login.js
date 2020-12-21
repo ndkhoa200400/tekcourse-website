@@ -23,7 +23,8 @@ export const login = async (email, password) => {
       showAlert('error', "Incorrect password or email");
     }
   } catch (err) {
-    // show alert page here
+    let res = err.response.data;
+		alert(err.response.data.message);
   }
 };
 
@@ -50,8 +51,8 @@ export const signup = async (name, email, password, passwordConfirm) => {
       showAlert('error', "Email has already been taken!");
     }
   } catch (err) {
-    res = error.response.data;
-		alert(error.response.data.message);
+    res = err.response.data;
+		alert(err.response.data.message);
   }
 };
 

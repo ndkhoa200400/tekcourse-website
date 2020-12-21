@@ -17,7 +17,14 @@ const courseSchema = new mongoose.Schema({
     required: [true, "A course must have a price"],
   },
   discount: Number,
-  avatar: String,
+  avatar: {
+    type: String,
+    default: ""
+  },
+  promotionalVideo: {
+    type: String,
+    default: ""
+  },
   description: String,
   shortDescription: String,
   ratingsAverage: {
@@ -31,6 +38,7 @@ const courseSchema = new mongoose.Schema({
   },
   numStudents: {
     type: Number,
+    default: 0
   },
   teacherID: {
     type: mongoose.Schema.ObjectId,
@@ -41,6 +49,10 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide category of course"],
     enum: ["mobile", "website"],
+  },
+  subcategory:{
+    type: String,
+    default: "none"
   },
   createdAt: {
     type: Date,
@@ -64,6 +76,7 @@ courseSchema.virtual("lectures", {
   foreignField: "course",
   localField: "_id",
 });
+
 
 
 courseSchema.virtual("createdDate").get(function(){

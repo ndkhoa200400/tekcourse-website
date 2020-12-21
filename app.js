@@ -1,9 +1,9 @@
 const express = require('express');
-const morgan =  require("morgan");
+const morgan = require("morgan");
 const cookieParser = require('cookie-parser');
 const AppError = require('./utils/appError')
 const rateLimit = require("express-rate-limit");
-const exphbs  = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const path = require('path');
 const hbsHelpers = require('handlebars-helpers')();
 const globalErrorHandler = require("./controllers/error.controller");
@@ -33,9 +33,15 @@ app.engine(
 );
 
 app.use(express.urlencoded({
-    extended: true
-  }));
-
+  extended: true
+}));
+app.use(function (req, res, next) {
+  //Enabling CORS
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+  next();
+});
 // Routing
 const userRoute = require('./routes/user.route');
 const courseRoute = require('./routes/course.route');
@@ -44,23 +50,17 @@ const viewRouter = require('./routes/view.route');
 const feedbackRoute = require('./routes/feedback.route');
 const registeredCourse = require("./routes/registeredCourse.route");
 
-if(process.env.NODE_ENV ==='development')
-    app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development')
+  app.use(morgan('dev'));
 app.use(express.static((__dirname + "/public")));
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname , "./" , "/public")));
+app.use(express.static(path.join(__dirname, "./", "/public")));
 
-const limiter = rateLimit({
-    // Alow 100 requests from the same IP in 1 hour
-    max: 100,
-    window: 60 * 60 * 1000,
-    message: "Too many requests from this IP, please try again in an hour!",
-  });
-app.use("/", limiter);
+
 
 app.use('/', viewRouter);
 app.use('/api/user', userRoute);
@@ -68,12 +68,12 @@ app.use('/api/course', courseRoute);
 app.use('/api/lecture', lectureRoute);
 app.use('/api/feedback', feedbackRoute);
 app.use('/api/checkout', registeredCourse);
-app.get('*', function(req, res,next){
+app.get('*', function (req, res, next) {
   res.status(404);
   // 404 Not Found Error;
-  res.render('error_404',{
+  res.render('error_404', {
     title: 'Not Found',
-    layout : false
+    layout: false
   })
   //next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
 });

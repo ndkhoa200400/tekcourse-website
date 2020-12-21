@@ -12,7 +12,7 @@ router.use(authController.isLoggedIn);
 
 
 router.get('/', controller.getOverview);
-
+router.get('/course/search', controller.getFilteredCourses);
 router.get('/category/:catName', controller.ProByCat);
 
 router.get('/profile', (req, res) => {

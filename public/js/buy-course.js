@@ -2,17 +2,22 @@ import axios from "axios";
 
 
 
-export const buyCourse = async (courseSlugName)
+export const buyCourse = async (courseSlugName) =>
 {
     try {
         const res = await axios({
             method: "POST",
-            url: "localhost:8000/checkout",
+            url: "http://localhost:8000/api/checkout",
             data:{
                 courseSlugName: courseSlugName
             }
         })
+        if (res.data.status === 'success')
+        {
+            alert("Successfully");
+        }
     } catch (error) {
-        alert(err.message);
+        let res = error.response.data;
+        alert(error.response.data.message)
     }
 }

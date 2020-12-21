@@ -68,7 +68,7 @@ exports.getOne = (Model, populateOptions) =>
     });
   });
 
-exports.getAll = (Model) =>
+exports.getAll = (Model, populateOptions) =>
   catchAsync(async (req, res) => {
     // To allow for nested GET feedback on course
     let filter = {};
@@ -81,7 +81,7 @@ exports.getAll = (Model) =>
       .sort()
       .limitFields()
       .paginate();
-
+    if (populateOptions) features.query = features.query.populate(populateOptions);
     const docs = await features.query;
 
     res.status("200").json({

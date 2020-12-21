@@ -19,7 +19,7 @@ export const createCourse = async(data) =>{
         }
 
     } catch (error) {
-        console.log("ERROR fro creating course:" + error);
+      
         res = error.response.data;
         alert(error.response.data.message)
     }     

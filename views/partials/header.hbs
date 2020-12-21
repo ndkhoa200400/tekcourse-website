@@ -11,25 +11,31 @@
         <a href="/"><img class="logo-inverse" src="/images/ct_logo.svg" alt="" /></a>
     </div>
     <div class="search120">
-        <div class="ui search">
-            <div class="ui left icon input swdh10">
-                <input class="prompt srch10" type="text"
-                    placeholder="Search for Tuts Videos, Tutors, Tests and more.." />
-                <i class="uil uil-search-alt icon icon1"></i>
+        <form action="/course/search?" id="form--search"  >
+            <div class="ui search">
+                <div class="ui left icon input swdh10">
+
+                    <i class="uil uil-search-alt icon icon1"></i>
+
+                    <input name="name" class="prompt srch10" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more.." />
+
+
+
+
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="header_right">
         <ul>
             <li>
                 {{#is user.role "teacher"}}
-            
+
                 <a href="/course/create-new-course" class="upload_btn">Create New Course</a>
                 {{/is}}
             </li>
             <li>
-                <a href="/" class="option_links"><i class="uil uil-home-alt"></i><span
-                        class="noti_count">9+</span></a>
+                <a href="/" class="option_links"><i class="uil uil-home-alt"></i><span class="noti_count">9+</span></a>
             </li>
             <li class="ui dropdown">
                 <a href="#" class="option_links"><i class="uil uil-envelope-alt"></i><span
@@ -121,45 +127,45 @@
             {{#if user}}
             <li class="ui dropdown">
                 <a href="#" class="opts_account">
-                
-                   {{#is user.role "teacher"}}
-                        <img src="\images\left-imgs\img-3.jpg" alt="" />
+
+                    {{#is user.role "teacher"}}
+                    <img src="\images\left-imgs\img-3.jpg" alt="" />
                     {{/is}}
                     {{#is user.role "customer"}}
-                        <img src="\images\left-imgs\img-17.jpg" alt="" />
+                    <img src="\images\left-imgs\img-17.jpg" alt="" />
                     {{/is}}
                 </a>
                 <div class="menu dropdown_account">
                     <div class="channel_my">
                         <div class="profile_link">
-                            
+
                             {{#is user.role "teacher"}}
-                                <img src="\images\left-imgs\img-3.jpg" alt="" />
+                            <img src="\images\left-imgs\img-3.jpg" alt="" />
                             {{/is}}
                             {{#is user.role "customer"}}
-                                <img src="\images\left-imgs\img-17.jpg" alt="" />
+                            <img src="\images\left-imgs\img-17.jpg" alt="" />
                             {{/is}}
                             <div class="pd_content">
                                 <div class="rhte85">
-                                   
-                                  {{#with user}}  
+
+                                    {{#with user}}
                                     <h6>{{name}}</h6>
                                     <div class="mef78" title="Verify">
                                         <i class="uil uil-check-circle"></i>
                                     </div>
-                                </div>                        
+                                </div>
                                 <div>{{email}}</div>
                                 <div>{{role}}</div>
-                               {{/with}}
-                              
+                                {{/with}}
+
                             </div>
                         </div>
-                       
-                         {{#is user.role "teacher"}}
-                             <a href="/profile" class="dp_link_12">View Profile</a>
+
+                        {{#is user.role "teacher"}}
+                        <a href="/profile" class="dp_link_12">View Profile</a>
                         {{/is}}
                         {{#is user.role "customer"}}
-                             <a href="/student_profile" class="dp_link_12">View Profile</a>
+                        <a href="/student_profile" class="dp_link_12">View Profile</a>
                         {{/is}}
                     </div>
                     <div class="night_mode_switch__btn">
@@ -170,13 +176,13 @@
                             </span>
                         </a>
                     </div>
-                     {{#is user.role "teacher"}}
-                        <a href="instructor_dashboard.html" class="item channel_item">My dashboard</a>
+                    {{#is user.role "teacher"}}
+                    <a href="instructor_dashboard.html" class="item channel_item">My dashboard</a>
                     {{/is}}
-                     {{#is user.role "customer"}}
-                        <a href="instructor_dashboard.html" class="item channel_item">My courses</a>
+                    {{#is user.role "customer"}}
+                    <a href="instructor_dashboard.html" class="item channel_item">My courses</a>
                     {{/is}}
-                    
+
                     <a href="/login" class="item channel_item logout">Sign Out</a>
                 </div>
             </li>

@@ -1,6 +1,8 @@
 // Processing all the events
 import '@babel/polyfill';
 import {login, signup, logout} from './login';
+import {buyCourse} from './buy-course';
+import {createCourse} from './newcourse';
 
 const loginForm = document.querySelector(".form--login");
 const signupForm = document.querySelector(".form--signup");
@@ -8,6 +10,8 @@ const logOutBtn = document.querySelector(".logout");
 const addToCartBtn = document.getElementById('add-cart-btn');
 const buyBtn = document.getElementById('buy-btn');
 const createCourseBtn = document.getElementById('submit-course-btn');
+
+
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -44,18 +48,22 @@ if (addToCartBtn) {
 if (buyBtn)
 {
   buyBtn.addEventListener('click', function(){
-
+    let slugName = window.location.pathname.replace("/course/","");
+    buyCourse(slugName);
   });
 }
 
 if (createCourseBtn)
 {
   createCourseBtn.addEventListener('click', function(){
-    const title = document.getElementById("main[title]").value;
-    const description = document.getElementById("id_course_description").value;
-    const category = document.getElementById("category-selection").value;
-    const price = document.getElementById("course-price").value;
-
-    console.log(title, description, category, price);
+    const data = [];
+    data["name"] = document.getElementById("main[title]").value;
+    data["description"] = document.getElementById("id_course_description").value;
+    data["category"] = document.getElementById("category-selection").value;
+    data["price"] = document.getElementById("course-price").value;
+    data["subcategory"] = document.getElementById("subcategory-selection").value;
+    data["avatar"] = document.getElementById("img-link").value;
+    data["promotionalVideo"] = document.getElementById("promotional-video-link");
+    createCourse(data);
   })
 }
