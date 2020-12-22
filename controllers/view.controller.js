@@ -3,17 +3,16 @@ const catchAsync = require("./../utils/catchAsync");
 const User = require("./../model/user.model")
 const moment = require("moment");
 const axios = require("axios");
-const courseController = require("./course.controller")
-
+const registeredCourse = require('./../model/registedCourse.model')
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   const courses = Course.find({}, { _id: 0, __v: 0, }).lean({ virtuals: true });
-  
+
   const topViewedCourses = await courses.sort("-view").limit(10);
 
   const topNewestCourses = await courses.sort("-createdAt").limit(10);
 
-  const topTrending = await courses.sort({"view":1, 'createdAt':-1}).limit(5);
+  const topTrending = await courses.sort({ "view": 1, 'createdAt': -1 }).limit(5);
 
 
   let categories = Course.schema.path('category').enumValues; // Get all enum values of category
@@ -33,12 +32,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
 exports.getCourse = catchAsync(async (req, res, next) => {
   const slugName = req.params.slug;
-  const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } })
-    .populate({
-      path: "teacherID",
-      select: "-__v -passwordChangedAt -_id",
-    })
-    .lean({ virtuals: true });
+  const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).lean({ virtuals: true });
 
   if (!course) {
     res.redirect("/");
@@ -86,12 +80,6 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
   const catName = req.param('catName');
   const course = await Course.find({ category: catName })
     .lean({ virtuals: true });
-  const categories = await Course.find({})
-    .populate('category')
-    .distinct('category')
-    .lean({ virtuals: true });
-
-
 
   let user = res.locals.user;
 
@@ -102,12 +90,12 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
     course: course,
     user: user,
     empty: course === null,
-    categories: categories
-    // num : course thả chổ để length course cho tao!
+    categories: catName,
+    num: course.length
   });
 });
 
-exports.getMe = catchAsync(async (req, res, next) => {
+exports.getTeacherProfile = catchAsync(async (req, res, next) => {
   try {
     const userID = req.user.id;
 
@@ -125,3 +113,25 @@ exports.getMe = catchAsync(async (req, res, next) => {
 
 
 });
+
+exports.getStudentProfile = catchAsync(async (req, res, next) => {
+  try {
+
+    const userID = req.user.id;
+    const user = await User.findById(userID).lean();
+    const course = await registeredCourse.findOne({ userID: userID }).lean({ virtuals: true });
+    let categories = Course.schema.path('category').enumValues; // Get all enum values of category
+
+    res.status(200).render("student_profile", {
+      title: "Profile",
+      user: user,
+      courses: course.courses,
+      numCourses: course.courses.length,
+      categories: categories
+    });
+  } catch (error) {
+    console.log(error)
+  }
+
+
+})

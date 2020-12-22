@@ -15,11 +15,9 @@ router.get('/', controller.getOverview);
 router.get('/course/search', controller.getFilteredCourses);
 router.get('/category/:catName', controller.ProByCat);
 
-router.get('/profile', (req, res) => {
-  res.render('profile', {
-    title: "My Profile"
-  })
-});
+router.get('/student-profile',authController.protect, controller.getStudentProfile)
+
+router.get('/profile',authController.protect, controller.getTeacherProfile);
 
 router.get('/course/create-new-course', (req, res) => {
 
@@ -27,7 +25,7 @@ router.get('/course/create-new-course', (req, res) => {
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
   res.render('create_new_course', {
-    title: "Create new course",
+    title: "Create New Course",
     user: user
   })
 })

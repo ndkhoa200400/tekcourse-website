@@ -16,7 +16,7 @@ exports.registerNewCourse = catchAsync(async (req, res, next) => {
     console.log(courseSlugName)
   
         const registersedCourse = await RegisteredCourse.findOne({ userID: userID });
-        const selectedCourse = await Course.findOne({ slug: courseSlugName });
+        const selectedCourse = await Course.findOneAndUpdate({ slug: courseSlugName },{ $inc: { numStudents: 1 } });
         
     if (!selectedCourse)
     {
@@ -35,10 +35,9 @@ exports.registerNewCourse = catchAsync(async (req, res, next) => {
             return next(new AppError("You already purchased this course", 400));
         }
     } 
-    selectedCourse.updateOne({ $inc: { views: 1 } });
-
+    
     res.status(200).json({
-        stauts: 'success',
+        status: 'success',
         data: {
             doc: course
         }

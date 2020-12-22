@@ -8648,7 +8648,7 @@ var buyCourse = /*#__PURE__*/function () {
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             _res = _context.t0.response.data;
-            alert(_context.t0.response.data.message);
+            alert(_res.message);
 
           case 11:
           case "end":
@@ -9083,7 +9083,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54214" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62458" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

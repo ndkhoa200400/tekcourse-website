@@ -18,6 +18,6 @@ export const buyCourse = async (courseSlugName) =>
         }
     } catch (error) {
         let res = error.response.data;
-        alert(error.response.data.message)
+        alert(res.message)
     }
 }

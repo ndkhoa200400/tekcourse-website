@@ -1,76 +1,81 @@
 <header class="header clearfix">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="back_link">
-						<a href="/" class="hde151">Back To Cursus</a>
-						<a href="/" class="hde152">Back</a>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="back_link">
+					<a href="/" class="hde151">Back To Cursus</a>
+					<a href="/" class="hde152">Back</a>
+				</div>
+				<div class="ml_item">
+					<div class="main_logo main_logo15" id="logo">
+						<a href="/"><img src="images/logo.svg" alt=""></a>
+						<a href="/"><img class="logo-inverse" src="images/ct_logo.svg" alt=""></a>
 					</div>
-					<div class="ml_item">
-						<div class="main_logo main_logo15" id="logo">
-							<a href="/"><img src="images/logo.svg" alt=""></a>
-							<a href="/"><img class="logo-inverse" src="images/ct_logo.svg" alt=""></a>
-						</div>				
-					</div>				
-					<div class="header_right pr-0">
-						<ul>	
-                            {{#if user}}			
-							<li class="ui top right pointing dropdown">
-								<a href="#" class="opts_account">
-									 {{#is user.role "teacher"}}
-                                        <img src="\images\left-imgs\img-3.jpg" alt="" />
-                                    {{/is}}
-                                    {{#is user.role "customer"}}
-                                        <img src="\images\left-imgs\img-17.jpg" alt="" />
-                                    {{/is}}
-								</a>
-								<div class="menu dropdown_account">
-									<div class="channel_my">
-										<div class="profile_link">
-											 {{#is user.role "teacher"}}
-                                                <img src="\images\left-imgs\img-3.jpg" alt="" />
-                                            {{/is}}
-                                            {{#is user.role "customer"}}
-                                                <img src="\images\left-imgs\img-17.jpg" alt="" />
-                                            {{/is}}
+				</div>
+				<div class="header_right pr-0">
+					<ul>
+						{{#if user}}
+						<li class="ui top right pointing dropdown">
+							<a href="#" class="opts_account">
+								{{#is user.role "teacher"}}
+								<img src="\images\left-imgs\img-3.jpg" alt="" />
+								{{/is}}
+								{{#is user.role "customer"}}
+								<img src="\images\left-imgs\img-17.jpg" alt="" />
+								{{/is}}
+							</a>
+							<div class="menu dropdown_account">
+								<div class="channel_my">
+									<div class="profile_link">
+										{{#is user.role "teacher"}}
+										<img src="\images\left-imgs\img-3.jpg" alt="" />
+										{{/is}}
+										{{#is user.role "customer"}}
+										<img src="\images\left-imgs\img-17.jpg" alt="" />
+										{{/is}}
 
-                                            {{#with user}} 
-											<div class="pd_content">  
-												<div class="rhte85">
-													<h6>{{name}}</h6>
-													<div class="mef78" title="Verify">
-														<i class='uil uil-check-circle'></i>
-													</div>
+										{{#with user}}
+										<div class="pd_content">
+											<div class="rhte85">
+												<h6>{{name}}</h6>
+												<div class="mef78" title="Verify">
+													<i class='uil uil-check-circle'></i>
 												</div>
-												<span>{{email}}</span>
 											</div>
-                                            {{/with}}							
+											<span>{{email}}</span>
 										</div>
-										<a href="my_instructor_profile_view.html" class="dp_link_12">View Instructor Profile</a>
+										{{/with}}
 									</div>
-									<div class="night_mode_switch__btn">
-										<a href="#" id="night-mode" class="btn-night-mode">
-											<i class="uil uil-moon"></i> Night mode
-											<span class="btn-night-mode-switch">
-												<span class="uk-switch-button"></span>
-											</span>
-										</a>
-									</div>
-									 {{#is user.role "teacher"}}
-                                        <a href="instructor_dashboard.html" class="item channel_item">My dashboard</a>
-                                    {{/is}}
-                                    {{#is user.role "customer"}}
-                                        <a href="instructor_dashboard.html" class="item channel_item">My courses</a>
-                                    {{/is}}	
-									<a href="sign_in.html" class="item channel_item">Sign Out</a>
+									{{#is user.role "teacher"}}
+									<a href=".profile" class="dp_link_12">My Profile</a>
+									{{/is}}
+									{{#is user.role "customer"}}
+									<a href="student-profile" class="dp_link_12">My Profile</a>
+									{{/is}}
 								</div>
-							</li>
-                            {{else}}
-                                <a href="/login" class="upload_btn">Login</a>
-                             {{/if}}
-						</ul>
-					</div>		
-				</div>		
+								<div class="night_mode_switch__btn">
+									<a href="#" id="night-mode" class="btn-night-mode">
+										<i class="uil uil-moon"></i> Night mode
+										<span class="btn-night-mode-switch">
+											<span class="uk-switch-button"></span>
+										</span>
+									</a>
+								</div>
+								{{#is user.role "teacher"}}
+								<a href="instructor_dashboard.html" class="item channel_item">My dashboard</a>
+								{{/is}}
+								{{#is user.role "customer"}}
+								<a href="instructor_dashboard.html" class="item channel_item">My courses</a>
+								{{/is}}
+								<a href="/login" class="item channel_item">Sign Out</a>
+							</div>
+						</li>
+						{{else}}
+						<a href="/login" class="upload_btn">Login</a>
+						{{/if}}
+					</ul>
+				</div>
 			</div>
 		</div>
-	</header>
+	</div>
+</header>
