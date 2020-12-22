@@ -71,6 +71,11 @@ const courseSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
+courseSchema.index({slug: 1});
+
+courseSchema.index({teacherID: 1});
+
+
 courseSchema.virtual("lectures", {
   ref: "Lecture",
   foreignField: "course",
@@ -104,10 +109,20 @@ courseSchema.post("findOneAndUpdate", async function () {
   });
 });
 
+// courseSchema.pre("updateOne", async function(){
+//     await this.model.updateOne(this.getQuery(), {
+//       lastUpdated: Date.now()
+//     });
+// })
+
 courseSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
+
+courseSchema.pre(/^find/, function(){
+  this.populate("teacherID");
+})
 
 courseSchema.plugin(mongooseLeanVirtuals);
 const Course = mongoose.model("Course", courseSchema);

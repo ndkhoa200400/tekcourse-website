@@ -196,7 +196,11 @@
 								<div class="col-xl-4 col-lg-5 col-md-6">
 									<div class="preview_video">
 										<a href="#" class="fcrse_img" data-toggle="modal" data-target="#videoModal">
+											{{#if course.avatar}}
+											<img src="{{course.avatar}}" alt="">
+											{{else}}
 											<img src="/images/courses/img-2.jpg" alt="">
+											{{/if}}
 											<div class="course-overlay">
 												<div class="badge_seller">Bestseller</div>
 												<span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -213,7 +217,12 @@
 								<div class="col-xl-8 col-lg-7 col-md-6">
 									<div class="_215b03">
 										<h2>{{course.name}}</h2>
-										<span class="_215b04">{{course.categoryName}}</span>
+										<a href="/course/category={{course.category}}"class="_215b04">{{course.categoryName}}</a>
+										{{#if course.subcategory}}
+										<span class="_215b04"> | </span>
+										<a href="/course/search?subcategory={{course.subcategory}}"class="_215b04"> {{course.subcategory}}</a>
+
+										{{/if}}
 									</div>
 									<div class="_215b05">
 										<div class="crse_reviews mr-2">
@@ -222,7 +231,7 @@
 										({{course.ratingsQuantity}} ratings)
 									</div>
 									<div class="_215b05">
-										114,521 students enrolled
+										{{course.numStudents}} students enrolled
 									</div>
 
 									<div class="_215b05">

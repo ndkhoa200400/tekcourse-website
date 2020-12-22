@@ -8700,7 +8700,9 @@ var createCourse = /*#__PURE__*/function () {
           case 3:
             res = _context.sent;
 
-            if (res.data.status === "success") {} else {
+            if (res.data.status === "success") {
+              alert("Successfully");
+            } else {
               alert("ERROR");
             }
 
@@ -9042,14 +9044,14 @@ if (buyBtn) {
 
 if (createCourseBtn) {
   createCourseBtn.addEventListener('click', function () {
-    var data = [];
+    var data = {};
     data["name"] = document.getElementById("main[title]").value;
     data["description"] = document.getElementById("id_course_description").value;
     data["category"] = document.getElementById("category-selection").value;
     data["price"] = document.getElementById("course-price").value;
     data["subcategory"] = document.getElementById("subcategory-selection").value;
     data["avatar"] = document.getElementById("img-link").value;
-    data["promotionalVideo"] = document.getElementById("promotional-video-link");
+    data["promotionalVideo"] = document.getElementById("promotional-video-link").value;
     (0, _newcourse.createCourse)(data);
   });
 }
@@ -9081,7 +9083,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65444" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54214" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

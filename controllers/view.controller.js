@@ -7,30 +7,26 @@ const courseController = require("./course.controller")
 
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  const courses = await Course.find(
-    {},
-    {
-      _id: 0,
-      __v: 0,
-    }
-  )
-    .populate({
-      path: "teacherID",
-      select: "name"
-    })
-    .lean({ virtuals: true });
-  const categories = await Course.find({})
-    .populate('category')
-    .distinct('category')
-    .lean({ virtuals: true });
+  const courses = Course.find({}, { _id: 0, __v: 0, }).lean({ virtuals: true });
+  
+  const topViewedCourses = await courses.sort("-view").limit(10);
+
+  const topNewestCourses = await courses.sort("-createdAt").limit(10);
+
+  const topTrending = await courses.sort({"view":1, 'createdAt':-1}).limit(5);
+
+
+  let categories = Course.schema.path('category').enumValues; // Get all enum values of category
+  //categories = categories.map(category => category[0].toUpperCase() + category.slice(1)); // Uppercase first letter
 
   let user = res.locals.user;
-  console.log(categories);
   if (user) user = { name: user.name, email: user.email, role: user.role };
   res.status(200).render("home", {
     title: "Home",
     user: user,
-    courses: courses,
+    topTrending: topTrending,
+    topViewedCourses: topViewedCourses,
+    topNewestCourses: topNewestCourses,
     categories: categories
   });
 });
@@ -63,17 +59,17 @@ exports.getFilteredCourses = catchAsync(async (req, res, next) => {
   const queryString = req.url.substring(req.url.indexOf("?"));
   let user = res.locals.user;
   if (user) user = { name: user.name, email: user.email, role: user.role };
- 
-    const response = await axios({
-      method: "GET",
-      url: "http://localhost:8000/api/course" + queryString
-    });
-    
+
+  const response = await axios({
+    method: "GET",
+    url: "http://localhost:8000/api/course" + queryString
+  });
+
   if (response.data.status === "success") {
     res.status(200).render("search_result", {
       title: "Results",
       course: response.data.data.docs,
-    
+
 
       user: user,
 

@@ -11,26 +11,96 @@
       <div class="row">
         <div class="col-xl-12 col-lg-12">
           <div class="section3125 mt-50">
-            <h4 class="item_title">Top trending</h4>
-         
+            <h4 class="item_title">Top Trending</h4>
+
             <a href="/category" class="see150">See all</a>
-           
-              <div class="la5lo1">
-                <div class="owl-carousel featured_courses owl-theme">
-                  {{#each courses}}
-                  <div class="item">
-                    <div class="fcrse_1 mb-20">
-                      <a href="course/{{slug}}" class="fcrse_img">
-                        <img src="images/courses/img-1.jpg" alt="" />
-                        <div class="course-overlay">
-                          <div class="badge_seller">Best seller</div>
-                          <div class="crse_reviews">                                       
-                            <i class="uil uil-star">{{ratingsAverage}}</i>             
-                          </div>
-                          <span class="play_btn1"><i class="uil uil-play"></i></span>
-                          <div class="crse_timer">25 hours</div>
+
+            <div class="la5lo1">
+              <div class="owl-carousel featured_courses owl-theme">
+                {{#each topTrending}}
+                <div class="item">
+                  <div class="fcrse_1 mb-20">
+                    <a href="course/{{slug}}" class="fcrse_img">
+                      {{#if avatar}}
+                      <img src="{{avatar}}" alt="" />
+                      {{else}}
+                      <img src="images/courses/img-1.jpg" alt="" />
+                      {{/if}}
+                      <div class="course-overlay">
+                        <div class="badge_seller">Best seller</div>
+                        <div class="crse_reviews">
+                          <i class="uil uil-star">{{ratingsAverage}}</i>
                         </div>
-                      </a>
+                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                        <div class="crse_timer">25 hours</div>
+                      </div>
+                    </a>
+                    <div class="fcrse_content">
+                      <div class="eps_dots more_dropdown">
+                        <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                        <div class="dropdown-content">
+                          <span><i class="uil uil-share-alt"></i>Share</span>
+                          <span><i class="uil uil-clock-three"></i>Save</span>
+                          <span><i class="uil uil-ban"></i>Not Interested</span>
+                          <span><i class="uil uil-windsock"></i>Report</span>
+                        </div>
+                      </div>
+                      <div class="vdtodt">
+                        <span class="vdt14">{{views}} views</span>
+                        <span class="vdt14">Created at: {{createdDate}}</span>
+                      </div>
+                      <a href="course/{{slug}}" class="crse14s">{{name}}</a>
+                      <div class="_215b03" style="display:flex">
+                        <a href="/category/{{category}}" class="crse-cate">{{categoryName}}</a>
+                        {{#if subcategory}}
+                        <span style="padding-left:5px; padding-right:5px">|</span>
+                        <a href="/course/search?subcategory={{subcategory}}" class="crse-cate">
+                          {{subcategory}}</a>
+                        {{/if}}
+                      </div>
+                      <div class="auth1lnkprce">
+                        <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
+                        <div class="prce142">${{price}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <div class="section3125 mt-50">
+            <h4 class="item_title">Top 10 Viewed Course</h4>
+
+            <a href="/category" class="see150">See all</a>
+
+            <div class="la5lo1">
+              <div class="owl-carousel featured_courses owl-theme">
+                {{#each topViewedCourses}}
+                <div class="item">
+                  <div class="fcrse_1 mb-20">
+                    <a href="course/{{slug}}" class="fcrse_img">
+                      {{#if avatar}}
+                      <img src="{{avatar}}" alt="" />
+                      {{else}}
+                      <img src="images/courses/img-1.jpg" alt="" />
+                      {{/if}}
+                      <div class="course-overlay">
+                        <div class="badge_seller">Best seller</div>
+                        <div class="crse_reviews">
+                          <i class="uil uil-star">{{ratingsAverage}}</i>
+                        </div>
+                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                        <div class="crse_timer">25 hours</div>
+                      </div>
+                    </a>
                     <div class="fcrse_content">
                       <div class="eps_dots more_dropdown">
                         <a href="#"><i class="uil uil-ellipsis-v"></i></a>
@@ -46,123 +116,92 @@
                         <span class="vdt14">Created at: {{createdDate}}</span>
                       </div>
                       <a href="course_detail_view.html" class="crse14s">{{name}}</a>
-                      <a href="#" class="crse-cate">{{categoryName}}</a>
+                      <a href="/category/{{category}}" class="crse-cate">{{categoryName}}</a>
+                      {{#if subcategory}}
+                      <a href="/course/search?subcategory={{subcategory}}" class="crse-cate">{{subcategory}}</a>
+                      {{/if}}
                       <div class="auth1lnkprce">
                         <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
                         <div class="prce142">${{price}}</div>
-
-
                       </div>
                     </div>
                   </div>
-
                 </div>
                 {{/each}}
               </div>
-
-            </div>
-
-          </div>
-        </div>
-
-        <div class="section3125 mt-30">
-          <h4 class="item_title">Top 10 Viewed Courses</h4>
-          <a href="#" class="see150">See all</a>
-          <div class="la5lo1">
-            <div class="owl-carousel featured_courses owl-theme">
-             
-               {{#each courses}}
-                  <div class="item">
-                    <div class="fcrse_1 mb-20">
-                      <a href="course/{{slug}}" class="fcrse_img">
-                        <img src="images/courses/img-1.jpg" alt="" />
-                        <div class="course-overlay">
-                          <div class="badge_seller">Best seller</div>
-                          <div class="crse_reviews">                                       
-                            <i class="uil uil-star">{{ratingsAverage}}</i>             
-                          </div>
-                          <span class="play_btn1"><i class="uil uil-play"></i></span>
-                          <div class="crse_timer">25 hours</div>
-                        </div>
-                      </a>
-                      <div class="fcrse_content">
-                        <div class="eps_dots more_dropdown">
-                          <a href="#"><i class="uil uil-ellipsis-v"></i></a>
-                          <div class="dropdown-content">
-                            <span><i class="uil uil-share-alt"></i>Share</span>
-                            <span><i class="uil uil-clock-three"></i>Save</span>
-                            <span><i class="uil uil-ban"></i>Not Interested</span>
-                            <span><i class="uil uil-windsock"></i>Report</span>
-                          </div>
-                        </div>
-                        <div class="vdtodt">
-                          <span class="vdt14">{{views}} views</span>
-                          <span class="vdt14">Created at: {{createdDate}}</span>
-                        </div>
-                        <a href="course_detail_view.html" class="crse14s">{{name}}</a>
-                        <a href="#" class="crse-cate">{{categoryName}}</a>
-                        <div class="auth1lnkprce">
-                          <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
-                          <div class="prce142">${{price}}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                  {{/each}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section3125 mt-30">
-          <h4 class="item_title">Top 10 Newest Courses</h4>
-          <a href="#" class="see150">See all</a>
-          <div class="la5lo1">
-            <div class="owl-carousel featured_courses owl-theme">
-              {{#each courses}}
-                  <div class="item">
-                    <div class="fcrse_1 mb-20">
-                      <a href="course/{{slug}}" class="fcrse_img">
-                        <img src="images/courses/img-1.jpg" alt="" />
-                        <div class="course-overlay">
-                          <div class="badge_seller">Best seller</div>
-                          <div class="crse_reviews">                                       
-                            <i class="uil uil-star">{{ratingsAverage}}</i>             
-                          </div>
-                          <span class="play_btn1"><i class="uil uil-play"></i></span>
-                          <div class="crse_timer">25 hours</div>
-                        </div>
-                      </a>
-                      <div class="fcrse_content">
-                        <div class="eps_dots more_dropdown">
-                          <a href="#"><i class="uil uil-ellipsis-v"></i></a>
-                          <div class="dropdown-content">
-                            <span><i class="uil uil-share-alt"></i>Share</span>
-                            <span><i class="uil uil-clock-three"></i>Save</span>
-                            <span><i class="uil uil-ban"></i>Not Interested</span>
-                            <span><i class="uil uil-windsock"></i>Report</span>
-                          </div>
-                        </div>
-                        <div class="vdtodt">
-                          <span class="vdt14">{{views}} views</span>
-                          <span class="vdt14">Created at: {{createdDate}}</span>
-                        </div>
-                        <a href="course_detail_view.html" class="crse14s">{{name}}</a>
-                        <a href="#" class="crse-cate">{{categoryName}}</a>
-                        <div class="auth1lnkprce">
-                          <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
-                          <div class="prce142">${{price}}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                  {{/each}}
             </div>
           </div>
         </div>
       </div>
+
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <div class="section3125 mt-50">
+            <h4 class="item_title">Top 10 Newest Courses</h4>
+
+            <a href="/category" class="see150">See all</a>
+
+            <div class="la5lo1">
+              <div class="owl-carousel featured_courses owl-theme">
+                {{#each topNewestCourses}}
+                <div class="item">
+                  <div class="fcrse_1 mb-20">
+                    <a href="course/{{slug}}" class="fcrse_img">
+                      {{#if avatar}}
+                      <img src="{{avatar}}" alt="" />
+                      {{else}}
+                      <img src="images/courses/img-1.jpg" alt="" />
+                      {{/if}}
+                      <div class="course-overlay">
+                        <div class="badge_seller">Best seller</div>
+                        <div class="crse_reviews">
+                          <i class="uil uil-star">{{ratingsAverage}}</i>
+                        </div>
+                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                        <div class="crse_timer">25 hours</div>
+                      </div>
+                    </a>
+                    <div class="fcrse_content">
+                      <div class="eps_dots more_dropdown">
+                        <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                        <div class="dropdown-content">
+                          <span><i class="uil uil-share-alt"></i>Share</span>
+                          <span><i class="uil uil-clock-three"></i>Save</span>
+                          <span><i class="uil uil-ban"></i>Not Interested</span>
+                          <span><i class="uil uil-windsock"></i>Report</span>
+                        </div>
+                      </div>
+                      <div class="vdtodt">
+                        <span class="vdt14">{{views}} views</span>
+                        <span class="vdt14">Created at: {{createdDate}}</span>
+                      </div>
+                      <a href="course_detail_view.html" class="crse14s">{{name}}</a>
+                      <a href="/category/{{category}}" class="crse-cate">{{categoryName}}</a>
+                      {{#if subcategory}}
+                      <a href="/course/search?subcategory={{subcategory}}" class="crse-cate">{{subcategory}}</a>
+                      {{/if}}
+                      <div class="auth1lnkprce">
+                        <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
+                        <div class="prce142">${{price}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+
 </div>
+</div>
+
 <!-- footer -->
 {{> footer}}
 </div>

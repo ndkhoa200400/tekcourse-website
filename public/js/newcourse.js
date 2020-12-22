@@ -13,7 +13,7 @@ export const createCourse = async(data) =>{
      
         if (res.data.status==="success")
         {
-
+            alert("Successfully")
         }else{
             alert("ERROR")
         }

@@ -56,14 +56,14 @@ if (buyBtn)
 if (createCourseBtn)
 {
   createCourseBtn.addEventListener('click', function(){
-    const data = [];
+    const data = {};
     data["name"] = document.getElementById("main[title]").value;
     data["description"] = document.getElementById("id_course_description").value;
     data["category"] = document.getElementById("category-selection").value;
     data["price"] = document.getElementById("course-price").value;
     data["subcategory"] = document.getElementById("subcategory-selection").value;
     data["avatar"] = document.getElementById("img-link").value;
-    data["promotionalVideo"] = document.getElementById("promotional-video-link");
+    data["promotionalVideo"] = document.getElementById("promotional-video-link").value;
     createCourse(data);
   })
 }
