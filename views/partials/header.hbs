@@ -34,6 +34,9 @@
 
                 <a href="/course/create-new-course" class="upload_btn">Create New Course</a>
                 {{/is}}
+                {{#is user.role "customer"}}
+                <a href="/cart" class="upload_btn"> Your Cart ({{length this.cart}})</a>
+                {{/is}}
             </li>
             <li>
                 <a href="/" class="option_links"><i class="uil uil-home-alt"></i><span class="noti_count">9+</span></a>

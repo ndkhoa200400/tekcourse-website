@@ -4,10 +4,9 @@ const User = require("./../model/user.model")
 const moment = require("moment");
 const axios = require("axios");
 const registeredCourse = require('./../model/registedCourse.model');
-const { get } = require("mongoose");
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  console.log(req.session)
+
   const topViewedCourses = await Course.find({}, { _id: 0, __v: 0, }).sort({ "views": -1 }).limit(10).lean({ virtuals: true });
 
   const topNewestCourses = await Course.find({}, { _id: 0, __v: 0, }).sort({ "createdAt": -1 }).limit(10).lean({ virtuals: true });
@@ -48,29 +47,25 @@ exports.getCourse = catchAsync(async (req, res, next) => {
   let user = res.locals.user;
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
-  try {
-    if (user.role === 'customer') {
-      const registeredcouse = await registeredCourse.findOne({ userID: res.locals.user.id });
-      if (registeredcouse)
-        registeredcouse.courses.forEach(element => {
-          if (element.id === course.id) {
-            isPurchase = true;
-            return;
-          }
-        });
-    }
 
-    console.log(isPurchase);
-    course.views++;
-    res.status(200).render("course_detail_view", {
-      title: course.name,
-      course: course,
-      user: user,
-      isPurchase: isPurchase
-    });
-  } catch (error) {
-    console.log(error);
+  if (user.role === 'customer') {
+    const registeredcouse = await registeredCourse.findOne({ userID: res.locals.user.id });
+    if (registeredcouse)
+      registeredcouse.courses.forEach(element => {
+        if (element.id === course.id) {
+          isPurchase = true;
+          return;
+        }
+      });
   }
+  course.views++;
+  res.status(200).render("course_detail_view", {
+    title: course.name,
+    course: course,
+    user: user,
+    isPurchase: isPurchase
+  });
+
 });
 
 exports.getFilteredCourses = catchAsync(async (req, res, next) => {
@@ -97,8 +92,13 @@ exports.getFilteredCourses = catchAsync(async (req, res, next) => {
   }
 })
 
-
-
+exports.getSessionCart = (req, res, next)=>{
+  if (req.session.cart)
+  {
+    res.locals.cart = req.session.cart;
+  }
+  next();
+}
 
 exports.ProByCat = catchAsync(async (req, res, next) => {
   const catName = req.param('catName');
@@ -140,31 +140,63 @@ exports.getTeacherProfile = catchAsync(async (req, res, next) => {
 
 exports.getStudentProfile = catchAsync(async (req, res, next) => {
 
-    const userID = req.user.id;
-    const user = await User.findById(userID).lean();
-    const course = await registeredCourse.findOne({ userID: userID }).lean({ virtuals: true });
-    let categories = Course.schema.path('category').enumValues; // Get all enum values of category
-    if (course != null)
-      res.status(200).render("student_profile", {
-        title: "Profile",
-        user: user,
-        courses: course.courses,
-        numCourses: course.courses.length,
-        categories: categories
-      });
-    else
-      res.status(200).render("student_profile", {
-        title: "Profile",
-        user: user,
-        course: null,
-        numCourses: 0,
-        categories: categories
-      })
+  const userID = req.user.id;
+  const user = await User.findById(userID).lean();
+  const course = await registeredCourse.findOne({ userID: userID }).lean({ virtuals: true });
+  let categories = Course.schema.path('category').enumValues; // Get all enum values of category
+  if (course != null)
+    res.status(200).render("student_profile", {
+      title: "Profile",
+      user: user,
+      courses: course.courses,
+      numCourses: course.courses.length,
+      categories: categories
+    });
+  else
+    res.status(200).render("student_profile", {
+      title: "Profile",
+      user: user,
+      course: null,
+      numCourses: 0,
+      categories: categories
+    })
 
 });
 
-exports.getCart = catchAsync(async (req, res, next)=>{
-  console.log(req.session);
+exports.getCart = catchAsync(async (req, res, next) => {
+  try {
+    const cart = req.session.cart;
+    let user = res.locals.user;
 
-  res.status(200).render("cart");
-})
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+    let totalPrice = 0;
+    let isEmpty = true;
+    let numCourse = 0;
+    let courses = [];
+    if (cart) {
+      for(let i = 0; i< cart.length; i++)
+      {
+        courses.push(await Course.findOne({slug: cart[i]}).lean());
+      }
+
+      courses.forEach(element => {
+        totalPrice += element.price;
+      });
+      numCourse = courses.length;
+      if (numCourse != 0) isEmpty = false;
+
+    }
+
+    res.status(200).render("cart", {
+      title: "Cart",
+      user: user,
+      empty: isEmpty,
+      courseInCart: courses,
+      numCourse: numCourse,
+      totalPrice: totalPrice
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+});

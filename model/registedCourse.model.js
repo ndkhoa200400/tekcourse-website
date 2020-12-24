@@ -5,6 +5,7 @@ const registeredCourseSchema = new mongoose.Schema(
     courses: [{
       type: mongoose.Schema.ObjectId,
       ref: "Course",
+      
     }],
     userID: {
       type: mongoose.Schema.ObjectId,

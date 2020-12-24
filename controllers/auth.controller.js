@@ -97,7 +97,9 @@ exports.protect = catchAsync(async (req, res, next) => {
     // Get cookie from local storage of browser
     token = req.cookies.jwt;
   }
+ 
   if (!token) {
+    
     return next(
       new appError("You are not logged in! Please log in to get access", 401)
     );
@@ -114,6 +116,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 4) Check if user changed password after the token was issued
   if (freshUser.changePasswordAfter(decoded.iat)) {
+  
     return next(
       new appError("User recently changed password! Please log in again.", 401)
     );
@@ -121,7 +124,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // GRANT ACCESS TO PROTECTED ROUTES
   req.user = freshUser;
-
   next();
 });
 

@@ -6,8 +6,63 @@ const Course = require('../model/course.model');
 exports.getAllRegisteredCourse = factory.getAll(RegisteredCourse);
 exports.getCourse = factory.getOne(Course);
 
-exports.registerNewCourse = catchAsync(async (req, res, next) => {
+exports.registerManyCourses = catchAsync(async (req, res, next) => {
 
+    try {
+        const userID = req.user.id;
+
+        const coursesSlugName = req.session.cart;
+
+        if (coursesSlugName) {
+            let registersedCourse = await RegisteredCourse.findOne({ userID: userID });
+            if (!registersedCourse) {
+
+                registersedCourse = await RegisteredCourse.create({ userID: userID, courses: [] });
+            }
+            for (let i = 0; i < coursesSlugName.length; i++) {
+
+                let selectedCourse = await Course.findOne({ slug: coursesSlugName[i] });
+                let isExisted = false;
+                if (!selectedCourse) {
+                    return next(new AppError("Cannot find this course", 404));
+                }
+
+                else {
+
+                    for (let i = 0; i < registersedCourse.courses.length; i++) {
+                        if (registersedCourse.courses[i].id === selectedCourse.id) {
+                            isExisted = true;
+                            break;
+                        }
+                    }
+
+                }
+                if (isExisted) continue;
+                registersedCourse.courses.push(selectedCourse.id);
+                selectedCourse.updateOne({ $inc: { numStudents: 1 } });
+            }
+
+            registersedCourse.save();
+            req.session.cart = [];
+            res.status(200).json({
+                status: 'success',
+                data: {
+                    doc: registersedCourse
+                }
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'fail'
+            })
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+exports.registerNewCourse = catchAsync(async (req, res, next) => {
 
     const userID = req.user.id;
     const courseSlugName = req.body.courseSlugName;
@@ -20,7 +75,11 @@ exports.registerNewCourse = catchAsync(async (req, res, next) => {
     }
 
     if (!registersedCourse) {
-        course = await RegisteredCourse.create({ userID: userID, courses: [selectedCourse.id] });
+
+
+        await RegisteredCourse.create({ userID: userID, courses: [selectedCourse.id] });
+        await selectedCourse.updateOne({ $inc: { numStudents: 1 } });
+
     }
     else {
 
@@ -29,23 +88,14 @@ exports.registerNewCourse = catchAsync(async (req, res, next) => {
                 return next(new AppError("You already purchased this course", 400));
         });
 
-        registersedCourse.courses.push(selectedCourse._id);
-        selectedCourse.updateOne({ $inc: { numStudents: 1 } });
-        registersedCourse.save();
-
+        registersedCourse.courses.push(selectedCourse.id);
+        await selectedCourse.updateOne({ $inc: { numStudents: 1 } });
+        await registersedCourse.save();
     }
     res.status(200).json({
-        status: 'success',
-        data: {
-            doc: registersedCourse
-        }
+        status: 'success'
     })
-
-
-
-
-
-})
+});
 
 exports.updateCourse = factory.updateOne(RegisteredCourse);
 

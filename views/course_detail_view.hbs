@@ -216,11 +216,13 @@
 								</div>
 								<div class="col-xl-8 col-lg-7 col-md-6">
 									<div class="_215b03">
-										<h2>{{course.name}}</h2>
-										<a href="/category/{{course.category}}"class="_215b04">{{course.categoryName}}</a>
+										<h2 data-id={{course.id}}>{{course.name}}</h2>
+										<a href="/category/{{course.category}}"
+											class="_215b04">{{course.categoryName}}</a>
 										{{#if course.subcategory}}
 										<span class="_215b04"> | </span>
-										<a href="/course/search?subcategory={{course.subcategory}}"class="_215b04"> {{course.subcategory}}</a>
+										<a href="/course/search?subcategory={{course.subcategory}}" class="_215b04">
+											{{course.subcategory}}</a>
 
 										{{/if}}
 									</div>
@@ -249,12 +251,21 @@
 									</div>
 									{{else}}
 									<ul class="_215b31">
-										<li><button class="btn_adcart" id="add-cart-btn">Add to Cart</button></li>
+
+										<li>
+											<form action="/cart/add" method="POST">
+											
+												<div class="input-group">
+													<input type="hidden" value="{{course.slug}}" name="id">
+													<button class="btn_adcart" id="add-cart-btn">Add to Cart</button>
+												
+											</form>
+										</li>
 										<li><button class="btn_buy" id="buy-btn">Buy Now</button></li>
 									</ul>
 									{{/if}}
 									{{/is}}
-									
+
 
 									{{/if}}
 								</div>

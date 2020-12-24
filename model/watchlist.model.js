@@ -18,8 +18,10 @@ const watchlistSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+watchlistSchema.pre(/^find/, function(){
+  this.populate('courses')
+})
 
-watchlistSchema.index({courseID: 1, userID: 1 }, { unique: true });
 
 const Watchlist = mongoose.model("Watchlist", watchlistSchema);
 

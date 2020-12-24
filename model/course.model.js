@@ -76,11 +76,11 @@ courseSchema.index({slug: 1});
 courseSchema.index({teacherID: 1});
 
 
-courseSchema.virtual("lectures", {
-  ref: "Lecture",
-  foreignField: "course",
-  localField: "_id",
-});
+// courseSchema.virtual("lectures", {
+//   ref: "Lecture",
+//   foreignField: "course",
+//   localField: "_id",
+// });
 
 
 

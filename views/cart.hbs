@@ -47,8 +47,12 @@
                                 {{else}}
                                 {{#each courseInCart}}
                                 <div class="fcrse_1">
-                                    <a href="course_detail_view.html" class="hf_img">
+                                    <a href="/courses/{{this.slug}}" class="hf_img">
+                                        {{#if this.avatar}}
+                                        <img src="{{this.avatar}}" >
+                                        {{else}}
                                         <img src="images/courses/img-1.jpg" alt="">
+                                        {{/if}}
                                         <div class="course-overlay">
                                             {{#if bestseller}}
                                             <div class="badge_seller">Bestseller</div>
@@ -58,7 +62,7 @@
                                             </div>
                                             <span class="play_btn1"><i class="uil uil-play"></i></span>
                                             <div class="crse_timer">
-                                                {{courseTime}} hour(s)
+                                                25 hour(s)
                                             </div>
                                         </div>
                                     </a>
@@ -73,9 +77,8 @@
                                             <span class="vdt14">{{views}} views</span>
                                             <span class="vdt14">Created at: {{createdDate}}</span>
                                         </div>
-                                        {{!-- <a href="course/{{slug}}" class="crse14s title900">{{name}}</a> --}}
-                                        <a href="/course_detail_view" class="crse14s title900">{{name}}</a>
-                                        <a href="#" class="crse-cate">{{categoryName}}</a>
+                                        <a href="course/{{slug}}" class="crse14s title900">{{name}}</a>
+                                        <a href="/category/{{category}}" class="crse-cate">{{categoryName}}</a>
                                         <div class="auth1lnkprce">
                                             <p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
                                             <div class="prce142">${{price}}</div>
@@ -95,11 +98,12 @@
                                 <h4>Total payment</h4>
                             </div>
                             <h4>Number of courses: {{numCourse}}</h4>
-                            <h4>Total price: {{totalPrice}} $</h4>
+                            <h4>Total price: {{floor totalPrice 3}} $</h4>
                             <div class="live_text">
                                 <div class="live-content">
-                                    <button class="live_link" id="buy-btn"
-                                        onclick="window.location.href = '/check-out';">Buy</button>
+                                   
+                                    <button class="live_link" id="check-out-btn">Buy</button>
+                                   
                                 </div>
                             </div>
                         </div>

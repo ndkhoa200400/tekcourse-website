@@ -2,6 +2,7 @@ const express = require('express');
 const controller = require('./../controllers/view.controller');
 const authController = require('./../controllers/auth.controller')
 var hbs = require('hbs');
+const Course = require('../model/course.model');
 
 const router = express.Router();
 router.use(express.static(__dirname + 'public'));
@@ -10,8 +11,10 @@ hbs.registerPartials(__dirname + '../views/partials');
 
 router.use(authController.isLoggedIn);
 
+router.use(controller.getSessionCart);
 
 router.get('/', controller.getOverview);
+
 
 router.get('/course/search', controller.getFilteredCourses);
 
@@ -46,8 +49,6 @@ router.get('/login', (req, res) => {
   });
 })
 
-//test CART PAGE  
-router.get('/cart', authController.protect, authController.restrictTo("customer"), controller.getCart)
 //test check-out page
 router.get('/check-out', (req, res) => {
   res.render('check_out', {

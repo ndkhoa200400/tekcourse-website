@@ -1,17 +1,16 @@
 // Processing all the events
 import '@babel/polyfill';
 import { login, signup, logout } from './login';
-import { buyCourse } from './buy-course';
+import { buyCourse, checkOutCart } from './checkout';
 import { createCourse } from './newcourse';
 
 const loginForm = document.querySelector(".form--login");
 const signupForm = document.querySelector(".form--signup");
 const logOutBtn = document.querySelector(".logout");
-const addToCartBtn = document.getElementById('add-cart-btn');
+const checkOutBtn = document.getElementById('check-out-btn');
 const buyBtn = document.getElementById('buy-btn');
 const createCourseBtn = document.getElementById('submit-course-btn');
 const courseSort = document.getElementsByClassName('course-sort');
-
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -37,27 +36,35 @@ if (signupForm) {
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
-if (addToCartBtn) {
-
-  addToCartBtn.addEventListener('click', function () {
-    let newCourse = window.location.pathname.replace("/course/", "");
-    if (!window.sessionStorage.getItem('cart')) {
-      window.sessionStorage.setItem('cart', JSON.stringify([newCourse]));
-      alert("Successfully")
-    }
-    else {
-      let courses = JSON.parse(window.sessionStorage.getItem('cart'));
-      if (!courses.includes(newCourse)) {
-        courses.push(newCourse)
-        window.sessionStorage.setItem('cart', JSON.stringify(courses));
-        alert("Successfully")
-      }
-      else {
-        alert("Already in your cart");
-      }
-    }
+if(checkOutBtn)
+{
+  checkOutBtn.addEventListener('click', function(){
+    alert('ok')
+    checkOutCart();
   })
 }
+
+// if (addToCartBtn) {
+
+//   addToCartBtn.addEventListener('click', function () {
+//     let newCourse = window.location.pathname.replace("/course/", "");
+//     if (!window.sessionStorage.getItem('cart')) {
+//       window.sessionStorage.setItem('cart', JSON.stringify([newCourse]));
+//       alert("Successfully")
+//     }
+//     else {
+//       let courses = JSON.parse(window.sessionStorage.getItem('cart'));
+//       if (!courses.includes(newCourse)) {
+//         courses.push(newCourse)
+//         window.sessionStorage.setItem('cart', JSON.stringify(courses));
+//         alert("Successfully")
+//       }
+//       else {
+//         alert("Already in your cart");
+//       }
+//     }
+//   })
+// }
 if (buyBtn) {
   buyBtn.addEventListener('click', function () {
     let slugName = window.location.pathname.replace("/course/", "");
@@ -92,3 +99,4 @@ if (courseSort) {
 
   }
 }
+

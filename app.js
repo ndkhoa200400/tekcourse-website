@@ -50,7 +50,7 @@ const lectureRoute = require('./routes/lecture.route');
 const viewRouter = require('./routes/view.route');
 const feedbackRoute = require('./routes/feedback.route');
 const registeredCourse = require("./routes/registeredCourse.route");
-
+const cartRoute = require('./routes/cart.route');
 if (process.env.NODE_ENV === 'development')
   app.use(morgan('dev'));
 app.use(express.static((__dirname + "/public")));
@@ -58,19 +58,19 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.use(express.json());
 app.use(cookieParser());
-
-app.use(express.static(path.join(__dirname, "./", "/public")));
+app.set('trust proxy', 1)
 app.use(session({
   secret: 'SECRET_KEY',
-  resave: true,
+  resave: false,
   saveUninitialized: true,
-  cookie: {
-    // secure: true
-  }
+  maxAge: Date.now() + (60 * 60 * 1000)
 }));
+app.use(express.static(path.join(__dirname, "./", "/public")));
+
 
 
 app.use('/', viewRouter);
+app.use('/cart', cartRoute);
 app.use('/api/user', userRoute);
 app.use('/api/course', courseRoute);
 app.use('/api/lecture', lectureRoute);
