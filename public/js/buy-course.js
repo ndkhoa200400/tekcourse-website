@@ -18,6 +18,7 @@ export const buyCourse = async (courseSlugName) =>
         }
     } catch (error) {
         let res = error.response.data;
+        console.log(res);
         alert(res.message)
     }
 }

@@ -60,15 +60,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "./", "/public")));
-// app.use(session({
-//   secret: 'SECRET_KEY',
-//   resave: false,
-//   saveUninitialized: true,
-//   store: sessionStore,
-//   cookie: {
-//     // secure: true
-//   }
-// }));
+app.use(session({
+  secret: 'SECRET_KEY',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    // secure: true
+  }
+}));
 
 
 app.use('/', viewRouter);

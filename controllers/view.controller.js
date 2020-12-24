@@ -16,7 +16,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
   let date = new Date(Date.now);
   //date
-  const topPurchasedCourses = await Course.find({}, { _id: 0, __v: 0, }).sort({"numStudents": -1}).limit(5).lean({ virtuals: true });
+  const topPurchasedCourses = await Course.find({}, { _id: 0, __v: 0, }).sort({ "numStudents": -1 }).limit(5).lean({ virtuals: true });
 
 
 
@@ -59,17 +59,18 @@ exports.getCourse = catchAsync(async (req, res, next) => {
           }
         });
     }
+
+    console.log(isPurchase);
+    course.views++;
+    res.status(200).render("course_detail_view", {
+      title: course.name,
+      course: course,
+      user: user,
+      isPurchase: isPurchase
+    });
   } catch (error) {
     console.log(error);
   }
-  console.log(isPurchase);
-  course.views++;
-  res.status(200).render("course_detail_view", {
-    title: course.name,
-    course: course,
-    user: user,
-    isPurchase: isPurchase
-  });
 });
 
 exports.getFilteredCourses = catchAsync(async (req, res, next) => {
