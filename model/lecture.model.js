@@ -7,7 +7,6 @@ const lectureSchema = new mongoose.Schema({
     require: [true, "A lecture must belong to a course"],
   },
   slug: String,
-
   name: {
     type: String,
     required: [true, "A lecture must have a name"],

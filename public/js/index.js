@@ -40,15 +40,24 @@ if (logOutBtn) logOutBtn.addEventListener('click', logout);
 if (addToCartBtn) {
 
   addToCartBtn.addEventListener('click', function () {
-    console.log(document.cookie);
-    if (window.sessionStorage.getItem("cart"))
-      {window.sessionStorage.cart}
-    else{
-      window.sessionStorage.setItem('cart', [window.location.pathname]);
+    let newCourse = window.location.pathname.replace("/course/", "");
+    if (!window.sessionStorage.getItem('cart')) {
+      window.sessionStorage.setItem('cart', JSON.stringify([newCourse]));
+      alert("Successfully")
+    }
+    else {
+      let courses = JSON.parse(window.sessionStorage.getItem('cart'));
+      if (!courses.includes(newCourse)) {
+        courses.push(newCourse)
+        window.sessionStorage.setItem('cart', JSON.stringify(courses));
+        alert("Successfully")
+      }
+      else {
+        alert("Already in your cart");
+      }
     }
   })
 }
-
 if (buyBtn) {
   buyBtn.addEventListener('click', function () {
     let slugName = window.location.pathname.replace("/course/", "");

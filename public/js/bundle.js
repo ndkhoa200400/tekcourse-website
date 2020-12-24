@@ -9032,12 +9032,21 @@ if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
 
 if (addToCartBtn) {
   addToCartBtn.addEventListener('click', function () {
-    console.log(document.cookie);
+    var newCourse = window.location.pathname.replace("/course/", "");
 
-    if (window.sessionStorage.getItem("cart")) {
-      window.sessionStorage.cart;
+    if (!window.sessionStorage.getItem('cart')) {
+      window.sessionStorage.setItem('cart', JSON.stringify([newCourse]));
+      alert("Successfully");
     } else {
-      window.sessionStorage.setItem('cart', [window.location.pathname]);
+      var courses = JSON.parse(window.sessionStorage.getItem('cart'));
+
+      if (!courses.includes(newCourse)) {
+        courses.push(newCourse);
+        window.sessionStorage.setItem('cart', JSON.stringify(courses));
+        alert("Successfully");
+      } else {
+        alert("Already in your cart");
+      }
     }
   });
 }
@@ -9106,7 +9115,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55271" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55427" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -139,7 +139,6 @@ exports.getTeacherProfile = catchAsync(async (req, res, next) => {
 });
 
 exports.getStudentProfile = catchAsync(async (req, res, next) => {
-  try {
 
     const userID = req.user.id;
     const user = await User.findById(userID).lean();
@@ -161,9 +160,11 @@ exports.getStudentProfile = catchAsync(async (req, res, next) => {
         numCourses: 0,
         categories: categories
       })
-  } catch (error) {
-    console.log(error)
-  }
 
+});
 
+exports.getCart = catchAsync(async (req, res, next)=>{
+  console.log(req.session);
+
+  res.status(200).render("cart");
 })

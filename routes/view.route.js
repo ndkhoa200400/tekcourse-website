@@ -17,9 +17,9 @@ router.get('/course/search', controller.getFilteredCourses);
 
 router.get('/category/:catName', controller.ProByCat);
 
-router.get('/student-profile',authController.protect, controller.getStudentProfile)
+router.get('/student-profile', authController.protect, controller.getStudentProfile)
 
-router.get('/profile',authController.protect, controller.getTeacherProfile);
+router.get('/profile', authController.protect, controller.getTeacherProfile);
 
 router.get('/course/create-new-course', (req, res) => {
 
@@ -47,37 +47,7 @@ router.get('/login', (req, res) => {
 })
 
 //test CART PAGE  
-router.get('/cart', (req, res) => {
-  res.render('cart', {
-    title: 'Your cart',
-    courseInCart: {
-      course1: {
-        bestseller: false,
-        ratingsAverage: 4,
-        views: 100,
-        createdDate: '01/01/2020',
-        name: 'Basic Kotlin Tutorial',
-        categoryName: 'Mobile development',
-        teacherID: { name: 'MY toda LE' },
-        price: 3,
-        courseTime: 15
-      },
-      course2: {
-        bestseller: true,
-        rating: 4,
-        views: 89,
-        createdDate: '01/01/2020',
-        name: 'Basic CSS Tutorial',
-        categoryName: 'Web development',
-        teacherID: { name: 'MY toda LE' },
-        price: 10,
-        courseTime: 20
-      },
-    },
-    numCourse: 2,
-    totalPrice: 13,
-  });
-})
+router.get('/cart', authController.protect, authController.restrictTo("customer"), controller.getCart)
 //test check-out page
 router.get('/check-out', (req, res) => {
   res.render('check_out', {
@@ -85,7 +55,7 @@ router.get('/check-out', (req, res) => {
   });
 });
 
-router.get('/instructor', (req, res)=>{
+router.get('/instructor', (req, res) => {
   res.render('instructor_courses')
 })
 
