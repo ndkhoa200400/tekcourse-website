@@ -14,28 +14,32 @@ exports.registerNewCourse = catchAsync(async (req, res, next) => {
     console.log(userID)
     const courseSlugName = req.body.courseSlugName;
     console.log(courseSlugName)
-  
-        const registersedCourse = await RegisteredCourse.findOne({ userID: userID });
-        const selectedCourse = await Course.findOneAndUpdate({ slug: courseSlugName },{ $inc: { numStudents: 1 } });
-        
-    if (!selectedCourse)
-    {
+
+    const registersedCourse = await RegisteredCourse.findOne({ userID: userID });
+    const selectedCourse = await Course.findOneAndUpdate({ slug: courseSlugName }, { $inc: { numStudents: 1 } });
+
+    if (!selectedCourse) {
         return next(new AppError("Cannot find this course", 404));
     }
-  
+
     if (!registersedCourse) {
         course = await RegisteredCourse.create({ userID: userID, courses: [selectedCourse.id] });
     }
     else {
-        if (!registersedCourse.courses.includes(selectedCourse.id)) {
-            registersedCourse.courses.push(selectedCourse.id);
-            course = await registersedCourse.save();
-        }
-        else {
-            return next(new AppError("You already purchased this course", 400));
-        }
-    } 
+        try {
+            registersedCourse.courses.forEach(element => {
+                if (element.id === selectedCourse.id)
+                    return next(new AppError("You already purchased this course", 400));
+            });
     
+            registersedCourse.courses.push(selectedCourse._id);
+        } catch (error) {
+            console.log(error);    
+        }
+        
+
+    }
+
     res.status(200).json({
         status: 'success',
         data: {

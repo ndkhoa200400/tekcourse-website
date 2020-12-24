@@ -12,7 +12,9 @@ router.use(authController.isLoggedIn);
 
 
 router.get('/', controller.getOverview);
+
 router.get('/course/search', controller.getFilteredCourses);
+
 router.get('/category/:catName', controller.ProByCat);
 
 router.get('/student-profile',authController.protect, controller.getStudentProfile)
@@ -44,14 +46,14 @@ router.get('/login', (req, res) => {
   });
 })
 
-//test CART PAGE
+//test CART PAGE  
 router.get('/cart', (req, res) => {
   res.render('cart', {
     title: 'Your cart',
     courseInCart: {
       course1: {
         bestseller: false,
-        rating: 4,
+        ratingsAverage: 4,
         views: 100,
         createdDate: '01/01/2020',
         name: 'Basic Kotlin Tutorial',
@@ -81,7 +83,12 @@ router.get('/check-out', (req, res) => {
   res.render('check_out', {
     title: 'Thank you'
   });
+});
+
+router.get('/instructor', (req, res)=>{
+  res.render('instructor_courses')
 })
+
 // test mobile-development category
 // router.get('/mobile-development', (req, res) => {
 //   res.render('mobile_development', {
@@ -110,4 +117,6 @@ router.get('/check-out', (req, res) => {
 //     price: 3
 //   })
 // })
+
+
 module.exports = router;

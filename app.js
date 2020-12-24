@@ -8,6 +8,7 @@ const path = require('path');
 const hbsHelpers = require('handlebars-helpers')();
 const globalErrorHandler = require("./controllers/error.controller");
 var hbs = require('hbs');
+const session = require('express-session');
 // const numeral = require('numeral');
 
 const app = express();
@@ -59,7 +60,15 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "./", "/public")));
-
+// app.use(session({
+//   secret: 'SECRET_KEY',
+//   resave: false,
+//   saveUninitialized: true,
+//   store: sessionStore,
+//   cookie: {
+//     // secure: true
+//   }
+// }));
 
 
 app.use('/', viewRouter);

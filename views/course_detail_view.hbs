@@ -217,7 +217,7 @@
 								<div class="col-xl-8 col-lg-7 col-md-6">
 									<div class="_215b03">
 										<h2>{{course.name}}</h2>
-										<a href="/course/category={{course.category}}"class="_215b04">{{course.categoryName}}</a>
+										<a href="/category/{{course.category}}"class="_215b04">{{course.categoryName}}</a>
 										{{#if course.subcategory}}
 										<span class="_215b04"> | </span>
 										<a href="/course/search?subcategory={{course.subcategory}}"class="_215b04"> {{course.subcategory}}</a>
@@ -243,10 +243,16 @@
 									</div>
 									{{#if user}}
 									{{#is user.role "customer"}}
+									{{#if isPurchase}}
+									<div class="_215b05">
+										<h4>You already purchase this course</h4>
+									</div>
+									{{else}}
 									<ul class="_215b31">
 										<li><button class="btn_adcart" id="add-cart-btn">Add to Cart</button></li>
 										<li><button class="btn_buy" id="buy-btn">Buy Now</button></li>
 									</ul>
+									{{/if}}
 									{{/is}}
 									
 

@@ -12,19 +12,23 @@
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="/">Home</a></li>
-										<li class="breadcrumb-item active" aria-current="page">{{this.categories}}</li>
+										<li class="breadcrumb-item active" aria-current="page">{{capitalize
+											this.categories}}</li>
 									</ol>
 								</nav>
 							</div>
 						</div>
 						<div class="titleright">
 							<div class="explore_search">
-								<div class="ui search focus">
-									<div class="ui left icon input swdh11 swdh15">
-										<input class="prompt srch_explore" type="text" placeholder="Search">
-										<i class="uil uil-search-alt icon icon2"></i>
+								<form action="/course/search?" id="form--search">
+									<div class="ui search focus">
+										<div class="ui left icon input swdh11 swdh15">
+
+											<input name="name" 	class="prompt srch_explore" type="text" placeholder="Search">
+											<i class="uil uil-search-alt icon icon2"></i>
+										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -44,12 +48,12 @@
 							<div class="rs6t_title">Filters</div>
 							<div class="filter_selector">
 								<div class="ui inline dropdown flt145">
-									<div class="text">Sort</div>
+									<div class="text" id='name-sort'>Sort</div>
 									<i class="dropdown icon"></i>
 									<div class="menu">
-										<div class="item">Price: Low to High</div>
-										<div class="item">Top Rated</div>
-										<div class="item">Newest Courses</div>
+										<div class="item course-sort" data-sort-type="-price=">Price: Low to High</div>
+										<div class="item course-sort" data-sort-type="-ratingsAverage">Top Rated</div>
+										<div class="item course-sort" data-sort-type="-createdAt">Newest Courses</div>
 									</div>
 								</div>
 							</div>
