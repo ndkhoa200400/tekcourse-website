@@ -8638,20 +8638,19 @@ var buyCourse = /*#__PURE__*/function () {
             res = _context.sent;
 
             if (res.data.status === 'success') {
-              alert("Successfully");
+              window.location.href = "/check-out";
             }
 
-            _context.next = 12;
+            _context.next = 11;
             break;
 
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             _res = _context.t0.response.data;
-            console.log(_res);
-            alert(_res.message);
+            console.log(_res); //alert(res.message)
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -9107,7 +9106,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51588" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55271" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
