@@ -16,7 +16,7 @@ router.use(controller.getSessionCart);
 router.get('/', controller.getOverview);
 
 
-router.get('/course/search', controller.getFilteredCourses);
+// localhost:8000/category/mobile??duration=long&ratings=4.5&sort=highest-rated
 
 router.get('/category/:catName', controller.ProByCat);
 
@@ -59,35 +59,6 @@ router.get('/check-out', (req, res) => {
 router.get('/instructor', (req, res) => {
   res.render('instructor_courses')
 })
-
-// test mobile-development category
-// router.get('/mobile-development', (req, res) => {
-//   res.render('mobile_development', {
-//     title: 'All courses of Mobile Development',
-//     images: '/images/courses/img-1.jpg',
-//     rating: 1000000000,
-//     views: -100,
-//     createdDate: 15,
-//     name: 'Basic Kotlin Tutorial',
-//     category: 'Mobile development',
-//     teacher: 'MY toda LE',
-//     price: 3
-//   })
-// });
-// // test web-development category
-// router.get('/web-development', (req, res) => {
-//   res.render('web_development', {
-//     title: 'All courses of Web Development',
-//     images: '/images/courses/img-1.jpg',
-//     rating: 1000000000,
-//     views: -100,
-//     createdDate: 15,
-//     name: 'Basic Kotlin Tutorial',
-//     category: 'Mobile development',
-//     teacher: 'MY toda LE',
-//     price: 3
-//   })
-// })
 
 
 module.exports = router;

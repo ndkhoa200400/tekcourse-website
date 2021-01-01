@@ -68,29 +68,7 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 
 });
 
-exports.getFilteredCourses = catchAsync(async (req, res, next) => {
-  const queryString = req.url.substring(req.url.indexOf("?"));
-  let user = res.locals.user;
-  if (user) user = { name: user.name, email: user.email, role: user.role };
 
-  const response = await axios({
-    method: "GET",
-    url: "http://localhost:8000/api/course" + queryString
-  });
-
-  if (response.data.status === "success") {
-    res.status(200).render("search_result", {
-      title: "Results",
-      course: response.data.data.docs,
-
-
-      user: user,
-
-    });
-  } else {
-    res.render("error");
-  }
-})
 
 exports.getSessionCart = (req, res, next)=>{
   if (req.session.cart)
@@ -99,6 +77,35 @@ exports.getSessionCart = (req, res, next)=>{
   }
   next();
 }
+
+// exports.getFilteredCourses = catchAsync(async (req, res, next) => {
+//   const queryString = req.url.substring(req.url.indexOf("?"));
+//   const catName = req.param('catName');
+
+//   const course = await Course.find({ category: catName })
+//     .lean({ virtuals: true });
+//   let user = res.locals.user;
+//   if (user) user = { name: user.name, email: user.email, role: user.role };
+
+//   const response = await axios({
+//     method: "GET",
+//     url: "http://localhost:8000" + queryString
+//   });
+
+//   if (response.data.status === "success") {
+//     res.status(200).render("search_result", {
+//       title: catName,
+//       course: response.data.data.docs,
+//       empty: course === null,
+//       categories: catName,
+//       num: course.length,
+//       user: user,
+
+//     });
+//   } else {
+//     res.render("error");
+//   }
+// })
 
 exports.ProByCat = catchAsync(async (req, res, next) => {
   const catName = req.param('catName');

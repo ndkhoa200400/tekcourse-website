@@ -24,7 +24,8 @@
 									<div class="ui search focus">
 										<div class="ui left icon input swdh11 swdh15">
 
-											<input name="name" 	class="prompt srch_explore" type="text" placeholder="Search">
+											<input name="name" class="prompt srch_explore" type="text"
+												placeholder="Search">
 											<i class="uil uil-search-alt icon icon2"></i>
 										</div>
 									</div>
@@ -45,15 +46,19 @@
 				<div class="col-lg-3 col-md-4">
 					<div class="section3125 hstry142">
 						<div class="result_stitles">
+
 							<div class="rs6t_title">Filters</div>
 							<div class="filter_selector">
 								<div class="ui inline dropdown flt145">
 									<div class="text" id='name-sort'>Sort</div>
 									<i class="dropdown icon"></i>
 									<div class="menu">
-										<div class="item course-sort" data-sort-type="-price=">Price: Low to High</div>
-										<div class="item course-sort" data-sort-type="-ratingsAverage">Top Rated</div>
-										<div class="item course-sort" data-sort-type="-createdAt">Newest Courses</div>
+										<div class="item course-sort" data-sort-type="-price"><a
+												href="?sort="></a>Price: Low to High</a> </div>
+										<div class="item course-sort" data-sort-type="-ratingsAverage"><a
+												href="?sort="></a>Top Rated</div>
+										<div class="item course-sort" data-sort-type="-createdAt"><a
+												href="?sort="></a>Newest Courses</div>
 									</div>
 								</div>
 							</div>
@@ -86,7 +91,8 @@
 													<div class="ui form checkbox_sign">
 														<div class="inline field">
 															<div class="ui checkbox mncheck">
-																<input type="checkbox" tabindex="0" class="hidden">
+																<input type="checkbox" tabindex="0" class="hidden"
+																	value="paid" name = "price">
 																<label>Paid<span
 																		class="filter__counter">(3000)</span></label>
 															</div>
@@ -95,7 +101,8 @@
 													<div class="ui form checkbox_sign">
 														<div class="inline field">
 															<div class="ui checkbox mncheck">
-																<input type="checkbox" tabindex="0" class="hidden">
+																<input type="checkbox" tabindex="0" class="hidden"
+																	value="free" name ="price">
 																<label>Free<span
 																		class="filter__counter">(50)</span></label>
 															</div>
@@ -178,51 +185,66 @@
 													<div class="ui form checkbox_sign">
 														<div class="inline field">
 															<div class="ui checkbox mncheck">
-																<input type="checkbox" tabindex="0" class="hidden">
+																<input type="checkbox" tabindex="0" class="hidden"
+																	value="5" name = "rating">
 																<label class="rating_filter">
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
-																	5.0 &amp; up
+																	5.0
 																	<span class="filter__counter">(5000)</span>
 																</label>
 															</div>
 														</div>
 														<div class="inline field">
 															<div class="ui checkbox mncheck">
-																<input type="checkbox" tabindex="0" class="hidden">
+																<input type="checkbox" tabindex="0" class="hidden"
+																	value="4" name = "rating">
 																<label class="rating_filter">
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
-																	4.0 &amp; up
+																	4.0
 																	<span class="filter__counter">(2500)</span>
 																</label>
 															</div>
 														</div>
 														<div class="inline field">
 															<div class="ui checkbox mncheck">
-																<input type="checkbox" tabindex="0" class="hidden">
+																<input type="checkbox" tabindex="0" class="hidden"
+																	value="3" name = "rating" >
 																<label class="rating_filter">
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
-																	3.0 &amp; up
+																	3.0
 																	<span class="filter__counter">(1500)</span>
 																</label>
 															</div>
 														</div>
 														<div class="inline field">
 															<div class="ui checkbox mncheck">
-																<input type="checkbox" tabindex="0" class="hidden">
+																<input type="checkbox" tabindex="0" 
+																	value="2" name = "rating">
 																<label class="rating_filter">
 																	<i class="uil uil-star"></i>
 																	<i class="uil uil-star"></i>
-																	2.0 &amp; up
+																	2.0
 																	<span class="filter__counter">(122)</span>
+																</label>
+															</div>
+														</div>
+														<div class="inline field">
+															<div class="ui checkbox mncheck">
+																<input type="checkbox" tabindex="0" class="hidden"
+																	value="1" name = "rating">
+																<label class="rating_filter">
+																	<i class="uil uil-star"></i>
+																	1.0
+																	<span class="filter__counter">(200)</span>
 																</label>
 															</div>
 														</div>
@@ -303,6 +325,21 @@
 			</div>
 		</div>
 	</div>
-	{{> footer}}
-</div>
-<!-- Body End -->
+	<p><b>Results:</b> <span id="results"></span></p>
+
+	<script>
+
+		$(":checkbox").click(function () {
+			var str = $('input[type=checkbox]:checked').map(function () { 
+				return this.name + "=" + this.value; }).get().join("&");
+			if (str != "") str += "";
+			else str += str;
+
+			const nextURL = window.location.href + str;
+			window.location.replace(nextURL);
+			console.log (str);
+			//$("#results").text(str);
+		});
+
+	</script>
+	<!-- Body End -->
