@@ -5268,7 +5268,7 @@ a.rmv-btn i {
   padding: 7px 12px;
   margin-left: 8px;
   line-height: 1.25;
-  color: #686f7a;
+  color: #21d4c5;
   border-radius: 3px;
   background-color: #fff;
   border: 1px solid #efefef;
@@ -5279,7 +5279,7 @@ a.rmv-btn i {
 .main-p-pagination .pagination .page-link.active {
   background: #333;
   border: 1px solid #333;
-  color: #fff;
+  color: #21d4c5;
 }
 
 .main-p-pagination .pagination .page-link:hover {
@@ -8100,3 +8100,14 @@ a.rmv-btn i {
 .info {
   margin-top: 2%;
 }
+
+.node{
+  background-color: none;
+  border: 2px solid #21d4c5;
+  color: #21d4c5;
+} 
+.acnode{
+  background-color: #21d4c5;
+  border: 2px solid #21d4c5;
+  color: black;
+} 

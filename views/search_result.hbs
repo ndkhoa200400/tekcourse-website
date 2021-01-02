@@ -310,11 +310,22 @@
 								</div>
 								{{/each}}
 								<div class="main-loader mt-50">
-									<div class="spinner">
-										<div class="bounce1"></div>
-										<div class="bounce2"></div>
-										<div class="bounce3"></div>
-									</div>
+									<nav aria-label="Page navigation example">
+										<ul class="pagination justify-content-center">
+											{{#each this.page_numbers}}
+											{{#if isCurrentPage}}
+											<li class="page-item vien"><a class="page-link acnode" href="javascript:;" style ="color:white;background-color:#21d4c5">{{value}}</a></li>
+											{{else}}
+											<li class="page-item vien"><a class="page-link node" href="?page={{value}}" style ="color:#21d4c5">{{value}}</a></li>
+											{{/if}}
+											{{/each}}
+											<li class="page-item vien">
+											<a class="page-link node" href="?page={{this.next_page}}" style ="color:#21d4c5" aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+											</li>
+										</ul>
+										</nav>
 								</div>
 
 								{{/if}}

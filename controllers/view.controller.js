@@ -4,6 +4,7 @@ const User = require("./../model/user.model")
 const moment = require("moment");
 const axios = require("axios");
 const registeredCourse = require('./../model/registedCourse.model');
+const pagination = require('./../utils/pagination');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
 
@@ -108,11 +109,24 @@ exports.getSessionCart = (req, res, next)=>{
 // })
 
 exports.ProByCat = catchAsync(async (req, res, next) => {
-  const catName = req.param('catName');
-  const course = await Course.find({ category: catName })
-    .lean({ virtuals: true });
+  let page = req.query.page || 1;
+  if (page < 1) page = 1;
 
+  const catName = req.param('catName');
+  const total = await Course.count({ category: catName })
+    .lean({ virtuals: true });
+  // var total = totalCourse.length;
+  
+  console.log(total);
+
+  const page_numbers = pagination.calcPageNumbers(total, page);
+  const offset = pagination.calcOffset(page);
+  const next_page = pagination.calcNextPage(page, page_numbers);
   let user = res.locals.user;
+
+  const course = await Course.find({ category: catName }).limit(pagination.limit).skip(offset)
+    .lean({ virtuals: true });
+  console.log(course);
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
 
@@ -122,7 +136,9 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
     user: user,
     empty: course === null,
     categories: catName,
-    num: course.length
+    num: course.length,
+    page_numbers,
+    next_page
   });
 });
 

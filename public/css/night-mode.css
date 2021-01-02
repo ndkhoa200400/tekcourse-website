@@ -2295,4 +2295,14 @@ Night Mood
 .night-mode .btn-subscribe .button:before ,
 .night-mode .post-comment-text::before{
     border-right-color: #201f23;
-}
+} 
+.night-mode .node{
+    background-color: black;
+    border: 2px solid #21d4c5;
+    color: #21d4c5;
+} 
+.night-mode .acnode{
+    background-color: #21d4c5;
+    border: 2px solid #21d4c5;
+    color: black;
+} 

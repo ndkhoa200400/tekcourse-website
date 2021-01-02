@@ -181,10 +181,10 @@
                         </a>
                     </div>
                     {{#is user.role "teacher"}}
-                    <a href="#" class="item channel_item">My dashboard</a>
+                    <a href="/profile" class="item channel_item">My dashboard</a>
                     {{/is}}
                     {{#is user.role "customer"}}
-                    <a href="#" class="item channel_item">My courses</a>
+                    <a href="/student-profile" class="item channel_item">My courses</a>
                     {{/is}}
 
                     <a href="/login" class="item channel_item logout">Sign Out</a>
