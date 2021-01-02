@@ -116,8 +116,6 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
   const total = await Course.count({ category: catName })
     .lean({ virtuals: true });
   // var total = totalCourse.length;
-  
-  console.log(total);
 
   const page_numbers = pagination.calcPageNumbers(total, page);
   const offset = pagination.calcOffset(page);
@@ -126,7 +124,6 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
 
   const course = await Course.find({ category: catName }).limit(pagination.limit).skip(offset)
     .lean({ virtuals: true });
-  console.log(course);
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
 
