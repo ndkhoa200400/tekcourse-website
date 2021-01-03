@@ -1,30 +1,31 @@
-﻿<body>
+﻿
 	<!-- Header Start -->
-	{{>header}}
+	{{> header}}
 	<!-- Header End -->
 	<!-- Left Sidebar Start -->
-	{{>nav}}
+	{{> nav_2}}
 	<!-- Left Sidebar End -->
 	<!-- Body Start -->
 	<div class="wrapper">
 		<div class="sa4d25">
-			<div class="container-fluid">
+			<div class="container-fluid">			
 				<div class="row">
 					<div class="col-lg-3 col-md-4 ">
 						<div class="section3125 hstry142">
 							<div class="grp_titles pt-0">
-								<div class="ht_title">Favourite Courses</div>
+								<div class="ht_title">Wish List</div>
+								<a href="#" class="ht_clr">Remove All</a>
 							</div>
 							<div class="tb_145">
 								<div class="wtch125">
-									<span class="vdt14">{{numCourses}} Courses</span>
+									<span class="vdt14">{{favouriteCourses.length}} Courses</span>
 								</div>
-								<a href="#" class="rmv-btn"><i class='uil uil-trash-alt'></i>Remove All</a>
-							</div>
-						</div>
-					</div>
+								<a href="#" class="rmv-btn"><i class='uil uil-trash-alt'></i>Remove Saved Courses</a>
+							</div>						
+						</div>							
+					</div>					
 					<div class="col-md-9">
-						<div class="_14d25 mb-20">
+						<div class="_14d25 mb-20">						
 							<div class="row">
 								<div class="col-md-12">
 									{{#each favouriteCourses}}
@@ -69,14 +70,13 @@
 										</div>
 									</div>
 									{{/each}}
-								</div>
-							</div>
-						</div>
-					</div>
+								</div>								
+							</div>																		
+						</div>								
+					</div>				
 				</div>
 			</div>
 		</div>
-		{{>footer}}
+		{{> footer}}
 	</div>
 	<!-- Body End -->
-</body>

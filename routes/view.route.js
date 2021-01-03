@@ -22,6 +22,8 @@ router.get('/category/:catName', controller.ProByCat);
 
 router.get('/student-profile', authController.protect, controller.getStudentProfile)
 
+// router.get('/student-profile/wishlist', authController.protect, controller.getStudentWatchedList);
+
 router.get('/profile', authController.protect, controller.getTeacherProfile);
 
 router.get('/course/create-new-course', (req, res) => {
@@ -59,6 +61,7 @@ router.get('/check-out', (req, res) => {
 router.get('/instructor', (req, res) => {
   res.render('instructor_courses')
 })
+
 
 
 module.exports = router;

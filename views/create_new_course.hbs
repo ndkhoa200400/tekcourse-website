@@ -30,6 +30,14 @@
       'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
     ],
   });
+   tinymce.init({
+    selector: '#id_part_description',
+    plugins: 'paste image link autolink lists table media',
+    menubar: false,
+    toolbar: [
+      'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+    ],
+  });
 </script>
 
 <!-- Header Start -->
@@ -129,7 +137,7 @@
 														<div class="course_des_textarea mt-30 lbel25">
 															<label>Course Short Description*</label>
 															<div class="course_des_bg">
-																<ul class="course_des_ttle">
+																{{!-- <ul class="course_des_ttle">
 																	<li><a href="#"><i class="uil uil-bold"></i></a>
 																	</li>
 																	<li><a href="#"><i class="uil uil-italic"></i></a>
@@ -151,7 +159,7 @@
 																				class="uil uil-text-size"></i></a></li>
 																	<li><a href="#"><i class="uil uil-text"></i></a>
 																	</li>
-																</ul>
+																</ul> --}}
 																<div class="textarea_dt">
 																	<div class="ui form swdh339">
 																		<div class="field">
@@ -377,35 +385,7 @@
 																	<div class="course_des_textarea mt-30 lbel25">
 																		<label>Description*</label>
 																		<div class="course_des_bg">
-																			<ul class="course_des_ttle">
-																				<li><a href="#"><i
-																							class="uil uil-bold"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-italic"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-list-ul"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-left-to-right-text-direction"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-right-to-left-text-direction"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-list-ui-alt"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-link"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-text-size"></i></a>
-																				</li>
-																				<li><a href="#"><i
-																							class="uil uil-text"></i></a>
-																				</li>
-																			</ul>
+																	
 																			<div class="textarea_dt">
 																				<div class="ui form swdh339">
 																					<div class="field">
