@@ -15,7 +15,7 @@ router.use(controller.getSessionCart);
 
 router.get('/', controller.getOverview);
 
-
+router.get('/course/search', controller.getFilteredCourses);
 // localhost:8000/category/mobile??duration=long&ratings=4.5&sort=highest-rated
 
 router.get('/category/:catName', controller.ProByCat);

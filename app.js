@@ -6,6 +6,7 @@ const rateLimit = require("express-rate-limit");
 const exphbs = require('express-handlebars');
 const path = require('path');
 const hbsHelpers = require('handlebars-helpers')();
+const hbs_sections = require('express-handlebars-sections');
 const globalErrorHandler = require("./controllers/error.controller");
 var hbs = require('hbs');
 const session = require('express-session');
@@ -24,12 +25,15 @@ app.engine(
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'views', 'partials'),
     defaultLayout: 'main',
-    helpers: hbsHelpers
-    // helpers: {
+    helpers: hbsHelpers,
+    section: hbs_sections
+    // helpers:{
+    //   section: hbs_sections(),
     //   format_number(val) {
     //     return numeral(val).format('0,0');
     //   }
-    // }
+    
+    
   })
 );
 
