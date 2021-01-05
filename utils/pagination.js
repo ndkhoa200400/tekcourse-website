@@ -26,5 +26,11 @@ module.exports = {
         if ((pg + 1) > page_numbers.length)
             return pg;
         return pg + 1;
+    },
+    calcPreviousPage(page, page_numbers) {
+        const pg = parseInt(page);
+        if ((pg - 1) < 1)
+            return pg;
+        return pg - 1;
     }
 };

@@ -14,15 +14,17 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
   const topTrending = await Course.find({}, { _id: 0, __v: 0, }).sort({ "ratingsAverage": 1, 'createdAt': -1 }).limit(5).lean({ virtuals: true });
 
+  //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
+  //const topSubCate = await Course.find({},{_id: 0, __v: 0, }).select('subcategory -_id').lean({ virtuals: true });
+  const subcategories = await Course.find({}).distinct("subcategory").populate("subcategory").lean({ virtuals: true });
+
   let date = new Date(Date.now);
   //date
   const topPurchasedCourses = await Course.find({}, { _id: 0, __v: 0, }).sort({ "numStudents": -1 }).limit(5).lean({ virtuals: true });
 
-
-
   let categories = Course.schema.path('category').enumValues; // Get all enum values of category
   //categories = categories.map(category => category[0].toUpperCase() + category.slice(1)); // Uppercase first letter
-
+  
   let user = res.locals.user;
   if (user) user = { name: user.name, email: user.email, role: user.role };
   res.status(200).render("home", {
@@ -32,6 +34,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     topViewedCourses: topViewedCourses,
     topNewestCourses: topNewestCourses,
     topPurchasedCourses: topPurchasedCourses,
+    topCategories : subcategories,
     categories: categories
   });
 });
@@ -115,6 +118,7 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
   const page_numbers = pagination.calcPageNumbers(total, page);
   const offset = pagination.calcOffset(page);
   const next_page = pagination.calcNextPage(page, page_numbers);
+  const prev_page = pagination.calcPreviousPage(page, page_numbers);
   let user = res.locals.user;
 
   const course = await Course.find({ category: catName }).limit(pagination.limit).skip(offset)
@@ -130,7 +134,8 @@ exports.ProByCat = catchAsync(async (req, res, next) => {
     categories: catName,
     num: course.length,
     page_numbers,
-    next_page
+    next_page,
+    prev_page
   });
 });
 
@@ -175,6 +180,14 @@ exports.getStudentProfile = catchAsync(async (req, res, next) => {
       numCourses: 0,
       categories: categories
     })
+
+});
+
+exports.editStudentProfile = catchAsync(async (req, res, next) => {
+    res.status(200).render("setting", {
+      title: "Edit My Profile",
+      user: user,
+    });
 
 });
 

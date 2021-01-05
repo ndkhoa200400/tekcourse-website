@@ -316,6 +316,12 @@
 								<div class="main-loader mt-50">
 									<nav aria-label="Page navigation example">
 										<ul class="pagination justify-content-center">
+											<li class="page-item vien">
+												<a class="page-link node" href="?page={{this.prev_page}}"
+													style="color:#21d4c5" aria-label="Next">
+													<span aria-hidden="true">&laquo;</span>
+												</a>
+											</li>
 											{{#each this.page_numbers}}
 											{{#if isCurrentPage}}
 											<li class="page-item vien"><a class="page-link acnode" href="javascript:;"

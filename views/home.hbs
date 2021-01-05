@@ -9,8 +9,9 @@
   <div class="sa4d25">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xl-12 col-lg-12">
-          <div class="section3125 mt-50">
+        <div class="col-xl-9 col-lg-8">
+          
+          <div class="section3125">
             <h4 class="item_title">Top Trending</h4>
 
             <a href="/category" class="see150">See all</a>
@@ -69,14 +70,7 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-12 col-lg-12">
-          <div class="section3125 mt-50">
+           <div class="section3125 mt-50">
             <h4 class="item_title">Top 10 Viewed Course</h4>
 
             <a href="/category" class="see150">See all</a>
@@ -131,14 +125,7 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-12 col-lg-12">
-          <div class="section3125 mt-50">
+           <div class="section3125 mt-50">
             <h4 class="item_title">Top 10 Newest Courses</h4>
 
             <a href="/category" class="see150">See all</a>
@@ -193,14 +180,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-12 col-lg-12">
           <div class="section3125 mt-50">
             <h4 class="item_title">Top 10 Purchased Course</h4>
 
@@ -253,19 +232,44 @@
                   </div>
                 </div>
                 {{/each}}
+
+                
               </div>
             </div>
           </div>
         </div>
+        <div class="col-xl-3 col-lg-4">
+						<div class="right_side">
+						
+							<div class="fcrse_3">
+								<div class="cater_ttle">
+									<h4>Top Categories In This Week!</h4>
+								</div>
+								<ul class="allcate15">
+                  {{#each topCategories}}
+									<li><a href="/course/search?subcategory={{this}}" class="ct_item"><i class='uil uil-arrow'></i>{{this}}</a></li>
+									{{!-- <li><a href="#" class="ct_item"><i class='uil uil-monitor'></i>IT and Software</a></li> --}}
+									 {{/each}}
+								</ul>
+							</div>
+						
+						</div>
+					</div>
+
       </div>
 
     </div>
+    
+  
+
+   
   </div>
 
 </div>
 </div>
 
 <!-- footer -->
-{{> footer}}
+
 </div>
+{{> footer}}
 <!-- Body End -->

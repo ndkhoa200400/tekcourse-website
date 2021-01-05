@@ -22,6 +22,8 @@ router.get('/category/:catName', controller.ProByCat);
 
 router.get('/student-profile', authController.protect, controller.getStudentProfile)
 
+router.get('/student-profile/edit', authController.protect, controller.editStudentProfile)
+
 // router.get('/student-profile/wishlist', authController.protect, controller.getStudentWatchedList);
 
 router.get('/profile', authController.protect, controller.getTeacherProfile);
