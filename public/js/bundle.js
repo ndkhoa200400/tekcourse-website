@@ -9045,7 +9045,6 @@ var loginForm = document.querySelector(".form--login");
 var signupForm = document.querySelector(".form--signup");
 var logOutBtn = document.querySelector(".logout");
 var checkOutBtn = document.getElementById('check-out-btn');
-var buyBtn = document.getElementById('buy-btn');
 var createCourseBtn = document.getElementById('submit-course-btn');
 var courseSort = document.getElementsByClassName('course-sort');
 
@@ -9072,10 +9071,7 @@ if (signupForm) {
 if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
 
 if (checkOutBtn) {
-  checkOutBtn.addEventListener('click', function () {
-    alert('ok');
-    (0, _checkout.checkOutCart)();
-  });
+  checkOutBtn.addEventListener('click', _checkout.checkOutCart);
 } // if (addToCartBtn) {
 //   addToCartBtn.addEventListener('click', function () {
 //     let newCourse = window.location.pathname.replace("/course/", "");
@@ -9096,28 +9092,20 @@ if (checkOutBtn) {
 //     }
 //   })
 // }
+// if (createCourseBtn) {
+//   createCourseBtn.addEventListener('click', function () {
+//     const data = {};
+//     data["name"] = document.getElementById("main[title]").value;
+//     data["description"] = document.getElementById("id_course_description").value;
+//     data["category"] = document.getElementById("category-selection").value;
+//     data["price"] = document.getElementById("course-price").value;
+//     data["subcategory"] = document.getElementById("subcategory-selection").value;
+//     data["avatar"] = document.getElementById("img-link").value;
+//     data["promotionalVideo"] = document.getElementById("promotional-video-link").value;
+//     createCourse(data);
+//   })
+// }
 
-
-if (buyBtn) {
-  buyBtn.addEventListener('click', function () {
-    var slugName = window.location.pathname.replace("/course/", "");
-    (0, _checkout.buyCourse)(slugName);
-  });
-}
-
-if (createCourseBtn) {
-  createCourseBtn.addEventListener('click', function () {
-    var data = {};
-    data["name"] = document.getElementById("main[title]").value;
-    data["description"] = document.getElementById("id_course_description").value;
-    data["category"] = document.getElementById("category-selection").value;
-    data["price"] = document.getElementById("course-price").value;
-    data["subcategory"] = document.getElementById("subcategory-selection").value;
-    data["avatar"] = document.getElementById("img-link").value;
-    data["promotionalVideo"] = document.getElementById("promotional-video-link").value;
-    (0, _newcourse.createCourse)(data);
-  });
-}
 
 if (courseSort) {
   var _loop = function _loop(index) {
@@ -9162,7 +9150,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52131" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60919" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
