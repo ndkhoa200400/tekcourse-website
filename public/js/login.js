@@ -19,12 +19,10 @@ export const login = async (email, password) => {
       window.setTimeout(() => {
         location.assign("/"); // back to home page
       }, 1500);
-    } else {
-      showAlert('error', "Incorrect password or email");
     }
   } catch (err) {
     let res = err.response.data;
-		alert(err.response.data.message);
+		alert(res.message);
   }
 };
 
@@ -47,12 +45,10 @@ export const signup = async (name, email, password, passwordConfirm) => {
         location.assign("/"); // back to home page
       }, 1000);
     } 
-    else{
-      showAlert('error', "Email has already been taken!");
-    }
+    
   } catch (err) {
-    res = err.response.data;
-		alert(err.response.data.message);
+    let res = err.response.data;
+		alert(res.message);
   }
 };
 
@@ -64,7 +60,7 @@ export const logout = async () => {
     });
 
   } catch (err) {
-    // show alert page here
-    alert("LOI" + err);
+    let res = err.response.data;
+		alert(res.message);
   }
 };

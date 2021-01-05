@@ -8450,7 +8450,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var login = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(email, password) {
-    var _res, _res2;
+    var res, _res;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -8468,15 +8468,13 @@ var login = /*#__PURE__*/function () {
             });
 
           case 3:
-            _res = _context.sent;
+            res = _context.sent;
 
-            if (_res.data.status === "success") {
+            if (res.data.status === "success") {
               (0, _alert.showAlert)('success', 'Logged in successfully');
               window.setTimeout(function () {
                 location.assign("/"); // back to home page
               }, 1500);
-            } else {
-              (0, _alert.showAlert)('error', "Incorrect password or email");
             }
 
             _context.next = 11;
@@ -8485,8 +8483,8 @@ var login = /*#__PURE__*/function () {
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-            _res2 = _context.t0.response.data;
-            alert(_context.t0.response.data.message);
+            _res = _context.t0.response.data;
+            alert(_res.message);
 
           case 11:
           case "end":
@@ -8505,7 +8503,7 @@ exports.login = login;
 
 var signup = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(name, email, password, passwordConfirm) {
-    var _res3;
+    var res, _res2;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -8525,15 +8523,13 @@ var signup = /*#__PURE__*/function () {
             });
 
           case 3:
-            _res3 = _context2.sent;
+            res = _context2.sent;
 
-            if (_res3.data.status === "success") {
+            if (res.data.status === "success") {
               (0, _alert.showAlert)('success', 'Signed up successfully');
               window.setTimeout(function () {
                 location.assign("/"); // back to home page
               }, 1000);
-            } else {
-              (0, _alert.showAlert)('error', "Email has already been taken!");
             }
 
             _context2.next = 11;
@@ -8542,8 +8538,8 @@ var signup = /*#__PURE__*/function () {
           case 7:
             _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
-            res = _context2.t0.response.data;
-            alert(_context2.t0.response.data.message);
+            _res2 = _context2.t0.response.data;
+            alert(_res2.message);
 
           case 11:
           case "end":
@@ -8562,7 +8558,7 @@ exports.signup = signup;
 
 var logout = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var _res4;
+    var res, _res3;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
@@ -8576,17 +8572,17 @@ var logout = /*#__PURE__*/function () {
             });
 
           case 3:
-            _res4 = _context3.sent;
-            _context3.next = 9;
+            res = _context3.sent;
+            _context3.next = 10;
             break;
 
           case 6:
             _context3.prev = 6;
             _context3.t0 = _context3["catch"](0);
-            // show alert page here
-            alert("LOI" + _context3.t0);
+            _res3 = _context3.t0.response.data;
+            alert(_res3.message);
 
-          case 9:
+          case 10:
           case "end":
             return _context3.stop();
         }
@@ -9166,7 +9162,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54537" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52131" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

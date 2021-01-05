@@ -77,7 +77,7 @@
 
                 p1 = this.createEls('p', {}, 'Drop Image File Here');
                 p2 = this.createEls('p', {}, 'Or click here to select image');
-            input = this.createEls('input', {type: 'file', className: 'file-img-input', accept: 'image/*'});
+            input = this.createEls('input', {type: 'file', className: 'custom-file-input', accept: 'image/*'});
 
             Array.prototype.forEach.call(this.info, function (zone) {
                 zone.appendChild(p1);
@@ -94,10 +94,10 @@
 
             div = this.createEls('div', {className: 'loading-modal'});
             table = this.createEls('table', {className: 'loading-table'});
-            img = this.createEls('img', {className: 'loading-image', src: './css/loading-spin.svg'});
+            //img = this.createEls('img', {className: 'loading-image', src: './css/loading-spin.svg'});
 
             div.appendChild(table);
-            table.appendChild(img);
+           // table.appendChild(img);
             document.body.appendChild(div);
         },
         status: function (el) {
