@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 
 const watchlistSchema = new mongoose.Schema(
   {
-    courseID: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Course",
-      },
-    ],
+    courses: [{
+      type: mongoose.Schema.ObjectId,
+      ref: "Course",
+
+    }],
     userID: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
@@ -18,7 +17,9 @@ const watchlistSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-watchlistSchema.pre(/^find/, function(){
+watchlistSchema.index({ userID: 1, courses: 1 });
+
+watchlistSchema.pre(/^find/, function () {
   this.populate('courses')
 })
 

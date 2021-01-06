@@ -45,11 +45,26 @@
 											</div>
 										</a>
 									</div>
+									{{#if user}}
+									{{#is user.role "customer"}}
 									<div class="_215b10">
-										<a href="#" class="_215b11">
-											<span><i class='uil uil-heart-alt'></i></span>Watch List
-										</a>
+										<form action='/watchlist/add' method="POST">
+
+											<div class="_215b11">
+												<input type="hidden" value="{{course.slug}}" name='slug'>
+												{{#if isWatched}}
+												<span><i class="fas fa-heart"></i></span>
+												{{else}}
+												<span><i class='uil uil-heart-alt'></i></span>
+												{{/if}}
+												<input type="submit" value="WatchList" class='_215b03'
+													style="background:none;border:none;color:white">
+											</div>
+										</form>
+
 									</div>
+									{{/is}}
+									{{/if}}
 								</div>
 								<div class="col-xl-8 col-lg-7 col-md-6">
 									<div class="_215b03">
@@ -63,10 +78,10 @@
 
 										{{/if}}
 									</div>
-									<div class="_215b05">
+									<span class="_215b04">
 										{{{course.shortDescription}}}
 
-									</div>
+									</span>
 									<div class="_215b05">
 										<div class="crse_reviews mr-2">
 											<i class="uil uil-star"></i> {{course.ratingsAverage}}

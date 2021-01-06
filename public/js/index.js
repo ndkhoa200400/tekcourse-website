@@ -1,7 +1,7 @@
 // Processing all the events
 import '@babel/polyfill';
 import { login, signup, logout } from './login';
-import { checkOutCart } from './checkout';
+import {buyCourse, checkOutCart } from './checkout';
 import { createCourse } from './newcourse';
 
 const loginForm = document.querySelector(".form--login");
@@ -10,7 +10,7 @@ const logOutBtn = document.querySelector(".logout");
 const checkOutBtn = document.getElementById('check-out-btn');
 const createCourseBtn = document.getElementById('submit-course-btn');
 const courseSort = document.getElementsByClassName('course-sort');
-
+const buyBtn = document.getElementById('buy-btn');
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -89,5 +89,12 @@ if (courseSort) {
     });
 
   }
+}
+
+if (buyBtn) {
+  buyBtn.addEventListener('click', function () {
+    let slugName = window.location.pathname.replace("/course/", "");
+    buyCourse(slugName);
+  });
 }
 

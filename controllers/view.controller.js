@@ -1,6 +1,8 @@
 const Course = require("./../model/course.model");
-const catchAsync = require("./../utils/catchAsync");
 const User = require("./../model/user.model")
+const WatchList = require("./../model/watchlist.model")
+const catchAsync = require("./../utils/catchAsync");
+
 const moment = require("moment");
 const axios = require("axios");
 const registeredCourse = require('./../model/registedCourse.model');
@@ -24,7 +26,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
   let categories = Course.schema.path('category').enumValues; // Get all enum values of category
   //categories = categories.map(category => category[0].toUpperCase() + category.slice(1)); // Uppercase first letter
-  
+
   let user = res.locals.user;
   if (user) user = { name: user.name, email: user.email, role: user.role };
   res.status(200).render("home", {
@@ -34,7 +36,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     topViewedCourses: topViewedCourses,
     topNewestCourses: topNewestCourses,
     topPurchasedCourses: topPurchasedCourses,
-    topCategories : subcategories,
+    topCategories: subcategories,
     categories: categories
   });
 });
@@ -43,40 +45,41 @@ exports.getCourse = catchAsync(async (req, res, next) => {
   const slugName = req.params.slug;
   const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).lean({ virtuals: true });
   let isPurchase = false;
+  let isWatched = false;
   if (!course) {
-    res.redirect("/");
+    res.redirect("back");
     return;
   }
 
   let user = res.locals.user;
 
-  if (user) user = { name: user.name, email: user.email, role: user.role };
 
   if (user.role === 'customer') {
-    const registeredcouse = await registeredCourse.findOne({ userID: res.locals.user.id });
+    const registeredcouse = await registeredCourse.findOne({ userID: user.id, courses: course.id });
     if (registeredcouse)
-      registeredcouse.courses.forEach(element => {
-        if (element.id === course.id) {
-          isPurchase = true;
-          return;
-        }
-      });
+      isPurchase = true;
+    const watchlist = await WatchList.findOne({ userID: user.id, courses: course.id });
+
+    if (watchlist)
+      isWatched = true;
   }
+
+  if (user) user = { name: user.name, email: user.email, role: user.role };
   course.views++;
   res.status(200).render("course_detail_view", {
     title: course.name,
     course: course,
     user: user,
-    isPurchase: isPurchase
+    isPurchase: isPurchase,
+    isWatched: isWatched
   });
 
 });
 
 
 
-exports.getSessionCart = (req, res, next)=>{
-  if (req.session.cart)
-  {
+exports.getSessionCart = (req, res, next) => {
+  if (req.session.cart) {
     res.locals.cart = req.session.cart;
   }
   next();
@@ -196,6 +199,16 @@ exports.getStudentProfile = catchAsync(async (req, res, next) => {
 
 });
 
+exports.editStudentProfile = catchAsync(async (req, res, next) => {
+  let user = req.user;
+  
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+  res.status(200).render("setting", {
+    title: "Edit My Profile",
+    user: user,
+  });
+
+});
 
 exports.getCart = catchAsync(async (req, res, next) => {
   try {
@@ -208,9 +221,8 @@ exports.getCart = catchAsync(async (req, res, next) => {
     let numCourse = 0;
     let courses = [];
     if (cart) {
-      for(let i = 0; i< cart.length; i++)
-      {
-        courses.push(await Course.findOne({slug: cart[i]}).lean());
+      for (let i = 0; i < cart.length; i++) {
+        courses.push(await Course.findOne({ slug: cart[i] }).lean());
       }
 
       courses.forEach(element => {

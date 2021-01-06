@@ -5,12 +5,12 @@ const registeredCourseSchema = new mongoose.Schema(
     courses: [{
       type: mongoose.Schema.ObjectId,
       ref: "Course",
-      
+
     }],
     userID: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
-      required: [true,'Registered Course must belong to a customer']
+      required: [true, 'Registered Course must belong to a customer']
     },
     registedAt: {
       type: Date,
@@ -23,8 +23,9 @@ const registeredCourseSchema = new mongoose.Schema(
   }
 );
 
+registeredCourseSchema.index({ userID: 1, courses: 1 })
 
-registeredCourseSchema.pre(/^find/, function(){
+registeredCourseSchema.pre(/^find/, function () {
   this.populate('courses')
 })
 

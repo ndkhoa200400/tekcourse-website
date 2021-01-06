@@ -55,6 +55,9 @@ const viewRouter = require('./routes/view.route');
 const feedbackRoute = require('./routes/feedback.route');
 const registeredCourse = require("./routes/registeredCourse.route");
 const cartRoute = require('./routes/cart.route');
+const watchListRoute = require('./routes/watchList.route');
+
+
 if (process.env.NODE_ENV === 'development')
   app.use(morgan('dev'));
 app.use(express.static((__dirname + "/public")));
@@ -75,11 +78,13 @@ app.use(express.static(path.join(__dirname, "./", "/public")));
 
 app.use('/', viewRouter);
 app.use('/cart', cartRoute);
+app.use('/watchlist', watchListRoute);
 app.use('/api/user', userRoute);
 app.use('/api/course', courseRoute);
 app.use('/api/lecture', lectureRoute);
 app.use('/api/feedback', feedbackRoute);
 app.use('/api/checkout', registeredCourse);
+
 app.get('*', function (req, res, next) {
   res.status(404);
   // 404 Not Found Error;
