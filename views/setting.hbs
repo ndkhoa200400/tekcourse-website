@@ -3,7 +3,7 @@
 	{{> header}}
 	<!-- Header End -->
 	<!-- Left Sidebar Start -->
-	{{> nav}}
+	{{> nav_2}}
 	<!-- Left Sidebar End -->
 	<!-- Body Start -->
 	<div class="wrapper">
@@ -18,124 +18,69 @@
 								<div class="account_setting">
 									<h4>Your TekCourse Account</h4>
 									
-									<div class="basic_profile">
-										<div class="basic_ptitle">
-											<h4>Basic Profile</h4>
-											<p>Add information about yourself</p>
-										</div>
-										<div class="basic_form">
-											<div class="row">
-												<div class="col-lg-8">
-													<div class="row">
-														<div class="col-lg-6">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon input swdh11 swdh19">
-																	<input class="prompt srch_explore" type="text" name="name" value="Joginder" id="id[name]" required="" maxlength="64" placeholder="First Name">															
-																</div>
-															</div>
-														</div>
-														<div class="col-lg-6">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon input swdh11 swdh19">
-																	<input class="prompt srch_explore" type="text" name="surname" value="Singh" id="id[surname]" required="" maxlength="64" placeholder="Last Name">															
-																</div>
-															</div>
-														</div>
-														<div class="col-lg-12">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon input swdh11 swdh19">
-																	<input class="prompt srch_explore" type="text" name="headline" value="I  am a Web Designer" id="id_headline" required="" maxlength="60" placeholder="Headline">															
-																	<div class="form-control-counter" data-purpose="form-control-counter">36</div>
-																</div>
-																<div class="help-block">Add a professional headline like, "Engineer at Cursus" or "Architect."</div>
-															</div>
-														</div>
-														<div class="col-lg-12">
-															<div class="ui search focus mt-30">																
-																<div class="ui form swdh30">
-																	<div class="field">
-																		<textarea rows="3" name="description" id="id_about" placeholder="Write a little description about you..."></textarea>
-																	</div>
-																</div>
-																<div class="help-block">Links and coupon codes are not permitted in this section.</div>
-															</div>
-														</div>
-														<div class="col-lg-12">
-															<div class="divider-1"></div>
-														</div>
-													</div>
-												</div>
+									<div class="container">
+
+									<hr>
+									<div class="row">
+										<!-- left column -->
+										<div class="col-md-3">
+											<div class="text-center">
+												<img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+												<h6>Upload a different photo...</h6>
+												
+												<input type="file" class="form-control">
 											</div>
 										</div>
-									</div>
-									<div class="basic_profile1">
-										<div class="basic_ptitle">
-											<h4>Profile Links</h4>
-										</div>
-										<div class="basic_form">
-											<div class="row">
+										
+										<!-- edit form column -->
+										<div class="col-md-9 personal-info">
+										
+											<h3>Personal info</h3>
+											
+											<form class="form-horizontal" role="form" method="POST" >
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Name:</label>
 												<div class="col-lg-8">
-													<div class="row">
-														<div class="col-lg-12">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon labeled input swdh11 swdh31">
-																	<div class="ui label lb12">
-																		https://
-																	</div>
-																	<input class="prompt srch_explore" type="text" name="site" value="gambolthemes.net" id="id_site" required="" maxlength="64"  placeholder="yoursite.com">
-																</div>															
-															</div>
-														</div>
-														<div class="col-lg-12">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon labeled input swdh11 swdh31">
-																	<div class="ui label lb12">
-																		http://facebook.com/
-																	</div>
-																	<input class="prompt srch_explore" type="text" name="facebooklink" id="id_facebook" required="" maxlength="64"  placeholder="Facebook Profile">																
-																</div>
-																<div class="help-block">Add your Facebook username (e.g. johndoe).</div>
-															</div>
-														</div>
-														<div class="col-lg-12">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon labeled input swdh11 swdh31">
-																	<div class="ui label lb12">
-																		http://twitter.com/
-																	</div>
-																	<input class="prompt srch_explore" type="text" name="twitterlink" id="id_twitter" required="" maxlength="64"  placeholder="Twitter Profile">																
-																</div>
-																<div class="help-block">Add your Twitter username (e.g. johndoe).</div>
-															</div>
-														</div>														
-														<div class="col-lg-12">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon labeled input swdh11 swdh31">
-																	<div class="ui label lb12">
-																		http://www.linkedin.com/
-																	</div>
-																	<input class="prompt srch_explore" type="text" name="linkedinlink" id="id_linkedin" required="" maxlength="64"  placeholder="Linkedin Profile">																
-																</div>
-																<div class="help-block">Input your LinkedIn resource id (e.g. in/johndoe).</div>
-															</div>
-														</div>
-														<div class="col-lg-12">
-															<div class="ui search focus mt-30">
-																<div class="ui left icon labeled input swdh11 swdh31">
-																	<div class="ui label lb12">
-																		http://www.youtube.com/
-																	</div>
-																	<input class="prompt srch_explore" type="text" name="youtubelink" id="id_youtube" required="" maxlength="64"  placeholder="Youtube Profile">																
-																</div>
-																<div class="help-block">Input your Youtube username (e.g. johndoe).</div>
-															</div>
-														</div>
-													</div>
+												<input class="form-control" type="text" value="{{this.user.name}}" name="name">
 												</div>
 											</div>
+										
+											
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Email:</label>
+												<div class="col-lg-8">
+												<input class="form-control" type="text" value="{{this.user.email}}" name="email">
+												</div>
+											</div>
+											
+				
+											<div class="form-group">
+												<label class="col-md-3 control-label">Password:</label>
+												<div class="col-md-8">
+												<input class="form-control" type="password" value="11111122333" name= "password">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-3 control-label">Confirm password:</label>
+												<div class="col-md-8">
+												<input class="form-control" type="password" value="11111122333" name = "passwordConfirm">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-3 control-label"></label>
+												<div class="col-md-8">
+													<button class="save_btn" type="submit">Save Changes</button>
+													<span></span>
+													{{!-- <button type="reset" class="btn btn-default" value="Cancel">Cancel</button> --}}
+												</div>
+											</div>
+											</form>
 										</div>
+										
 									</div>
-									<button class="save_btn" type="submit">Save Changes</button>
+									<hr>
+									
+									
 								</div>
 							</div>
 					

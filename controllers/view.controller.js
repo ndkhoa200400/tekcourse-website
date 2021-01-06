@@ -83,6 +83,15 @@ exports.getSessionCart = (req, res, next)=>{
 }
 
 exports.getFilteredCourses = catchAsync(async (req, res, next) => {
+  // let page = req.query.page || 1;
+  // if (page < 1) page = 1;
+  // const total = response.data.data.docs.length;
+
+  // const page_numbers = pagination.calcPageNumbers(total, page);
+  // const offset = pagination.calcOffset(page);
+  // const next_page = pagination.calcNextPage(page, page_numbers);
+  // const prev_page = pagination.calcPreviousPage(page, page_numbers);
+
   const queryString = req.url.substring(req.url.indexOf("?"));
   let user = res.locals.user;
   if (user) user = { name: user.name, email: user.email, role: user.role };
@@ -96,8 +105,9 @@ exports.getFilteredCourses = catchAsync(async (req, res, next) => {
     res.status(200).render("search_result", {
       title: "Results",
       course: response.data.data.docs,
-
-
+      // page_numbers,
+      // next_page,
+      // prev_page,
       user: user,
 
     });
@@ -144,7 +154,10 @@ exports.getTeacherProfile = catchAsync(async (req, res, next) => {
     const userID = req.user.id;
 
     const user = await User.findById(userID).lean();
-    const courses = await Course.find({ teacherID: userID }).lean({ virtuals: true });
+   
+      const courses = await Course.find({ teacherID: userID }).lean({ virtuals: true });
+   
+      
     res.status(200).render("profile", {
       title: "Profile",
       user: user,
@@ -183,13 +196,6 @@ exports.getStudentProfile = catchAsync(async (req, res, next) => {
 
 });
 
-exports.editStudentProfile = catchAsync(async (req, res, next) => {
-    res.status(200).render("setting", {
-      title: "Edit My Profile",
-      user: user,
-    });
-
-});
 
 exports.getCart = catchAsync(async (req, res, next) => {
   try {
@@ -227,4 +233,21 @@ exports.getCart = catchAsync(async (req, res, next) => {
     console.log(error);
   }
 
+});
+
+exports.updateUserData = catchAsync(async (req, res, next) => {
+  const updatedUser = await User.findByIdAndUpdate(
+    res.locals.user._id,
+    {
+      name: req.body.name,
+      email: req.body.email
+    },
+    {
+      new: true,
+      runValidators: true
+    }
+  );
+  await updatedUser.save();
+  res.locals.user = updatedUser;
+  res.redirect('/student-profile/edit');
 });
