@@ -3,6 +3,7 @@ const catchAsync = require('./../utils/catchAsync')
 const AppError = require('./../utils/appError')
 const factory = require('./handlerFactory')
 const Course = require('../model/course.model');
+
 exports.addToWatchList = async (req, res, next) => {
     
     try {
@@ -46,3 +47,21 @@ exports.addToWatchList = async (req, res, next) => {
     }
 
 };
+
+exports.removeCourse = async (req, res, next) => {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    let user = res.locals.user;
+    const watchlist = await WatchList
+  .findOne({ userID: user.id})
+  .lean({ virtuals: true });
+
+    const course_id = req.param('remove');
+    // console.log(course_id);
+    // console.log(watchlist.courses);
+    watchlist.courses.pull({ id: course_id });
+
+    await watchlist.save();
+
+    res.redirect('/student-profile/wishlist');
+};
+

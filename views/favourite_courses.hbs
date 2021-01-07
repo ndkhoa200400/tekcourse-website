@@ -18,9 +18,9 @@
 							</div>
 							<div class="tb_145">
 								<div class="wtch125">
-									<span class="vdt14">{{favouriteCourses.length}} Courses</span>
+									<span class="vdt14">{{numCourses}} Courses</span>
 								</div>
-								<a href="#" class="rmv-btn"><i class='uil uil-trash-alt'></i>Remove Saved Courses</a>
+								
 							</div>						
 						</div>							
 					</div>					
@@ -28,16 +28,13 @@
 						<div class="_14d25 mb-20">						
 							<div class="row">
 								<div class="col-md-12">
-									{{#each favouriteCourses}}
-									{{!-- {{#if favouriteCourses.length == 0}}
-									<h4>Your list is empty.</h4>
-									{{/if}} --}}
+									{{#each watchlist}}
 									<div class="fcrse_1">
 										<a href="/course/{{slug}}" class="hf_img">
 											{{#if avatar}}
-											<img src="{{avatar}}" alt="">
+											<img src="{{avatar}}" style ="height :210px" alt="">
 											{{else}}
-											<img src="images/courses/img-1.jpg" alt="">
+											<img src="/images/courses/img-20.jpg" alt="">
 											{{/if}}
 											<div class="course-overlay">
 												<div class="badge_seller">Bestseller</div>
@@ -52,7 +49,9 @@
 										</a>
 										<div class="hs_content">
 											<div class="eps_dots eps_dots10 more_dropdown">
-												<a href="#"><i class="uil uil-ellipsis-v"></i></a>
+												<form action="" method = "POST">
+													<a href="../student-profile/wishlist?remove={{id}}"><i class="uil uil-ellipsis-v"></i></a>
+												</form>
 												<div class="dropdown-content">
 													<span><i class='uil uil-times'></i>Remove</span>
 												</div>
@@ -61,8 +60,8 @@
 												<span class="vdt14">{{views}} views</span>
 												<span class="vdt14">Created at: {{createdDate}}</span>
 											</div>
-											<a href="course_detail_view.html" class="crse14s title900">{{name}}</a>
-											<a href="#" class="crse-cate">{{categoryName}}</a>
+											<a href="../course/{{slug}}" class="crse14s title900">{{name}}</a>
+											<a href="../category/{{category}}" class="crse-cate">{{categoryName}}</a>
 											<div class="auth1lnkprce">
 												<p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
 												<div class="prce142">${{price}}</div>
@@ -79,4 +78,5 @@
 		</div>
 		{{> footer}}
 	</div>
+
 	<!-- Body End -->
