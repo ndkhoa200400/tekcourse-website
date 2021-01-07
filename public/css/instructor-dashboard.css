@@ -2232,7 +2232,7 @@ table {
     height: 8px;
     left: 50%;
     top: 18px;
-    width: 100%;
+    width: 150%;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
 }

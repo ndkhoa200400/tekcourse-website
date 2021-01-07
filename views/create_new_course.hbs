@@ -39,7 +39,21 @@
 		],
 	});
 </script>
+<script>
+	function getFile(filePath) {
+		return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
+	}
 
+	function getoutput() {
+
+
+		var reader = new FileReader();
+		let file = promotionalVideo.files[0];
+
+
+		console.log(document.getElementById('promotionalVideo').files[0]);
+	}
+</script>
 <!-- Header Start -->
 {{> header}}
 <!-- Header End -->
@@ -81,38 +95,38 @@
 					<h2 class="st_title"><i class="uil uil-analysis"></i> Create New Course</h2>
 				</div>
 			</div>
-			<form action="/api/course" method="POST" class='form--create-course'>
-			<div class="row">
-				<div class="col-12">
-					<div class="course_tabs_1">
-						<div id="add-course-tab" class="step-app">
-							<ul class="step-steps">
-								<li class="active">
-									<a href="#tab_step1">
-										<span class="number"></span>
-										<span class="step-name">General Information</span>
-									</a>
-								</li>
-								<li>
-									<a href="#tab_step2">
-										<span class="number"></span>
-										<span class="step-name">View</span>
-									</a>
-								</li>
-								<li>
-									<a href="#tab_step3">
-										<span class="number"></span>
-										<span class="step-name">Course Content</span>
-									</a>
-								</li>
-								<li>
-									<a href="#tab_step4">
-										<span class="number"></span>
-										<span class="step-name">Extra Information</span>
-									</a>
-								</li>
-							</ul>
-							
+			<form action="/api/course" method="POST" class='form--create-course' enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-12">
+						<div class="course_tabs_1">
+							<div id="add-course-tab" class="step-app">
+								<ul class="step-steps">
+									<li class="active">
+										<a href="#tab_step1">
+											<span class="number"></span>
+											<span class="step-name">General Information</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step2">
+											<span class="number"></span>
+											<span class="step-name">View</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step3">
+											<span class="number"></span>
+											<span class="step-name">Course Content</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step4">
+											<span class="number"></span>
+											<span class="step-name">Extra Information</span>
+										</a>
+									</li>
+								</ul>
+
 
 
 								<div class="step-content">
@@ -170,7 +184,8 @@
 																	<div class="textarea_dt">
 																		<div class="ui form swdh339">
 																			<div class="field">
-																				<textarea rows="5" name="shortDescription"
+																				<textarea rows="5"
+																					name="shortDescription"
 																					id="id_course_short_description"
 																					placeholder="Insert your course short description"></textarea>
 																			</div>
@@ -240,7 +255,7 @@
 															</div>
 															<select id="subcategory-selection" name='subcategory'
 																class="ui hj145 dropdown cntry152 prompt srch_explore">
-																
+
 																<option value="Javascript">JavaScript</option>
 																<option value="HTML">HTML</option>
 																<option value="CSS">CSS</option>
@@ -257,7 +272,7 @@
 																<option value="Java">Java</option>
 																<option value="Unity">Unity</option>
 															</select>
-															
+
 														</div>
 													</div>
 												</div>
@@ -306,12 +321,14 @@
 
 																	</div> --}}
 																	<div>Upload your course image here.</div>
-																	<div class="input-group mb-3">
-																		<input id='img-link' type="hidden" value="" name='avatar'
+																	<div>
+																		<input id='img-link' type="hidden" value=""
+																			name='avatar'
 																			data-purpose="edit-course-img">
 
-																		<div class="dropzone custom-file-label">Choose
-																			file
+																		<div class="dropzone">
+																			<label class="custom-file-label">Choose
+																				file</label>
 																		</div>
 																	</div>
 																</div>
@@ -332,9 +349,10 @@
 																	awesome videos. Learn how to make yours
 																	awesome!
 																</p>
-																<input id="promotional-video-link" name="promotionalVideo"
+																<input id="promotionalVideo" name="promotionalVideo"
 																	type="file" class="file"
-																	data-browse-on-zone-click="true" value=''>
+																	data-browse-on-zone-click="true" value=''
+																	onchange="getoutput()">
 															</div>
 														</div>
 
@@ -426,7 +444,6 @@
 																				<div class="ui form swdh339">
 																					<div class="field">
 																						<textarea rows="5"
-																							
 																							id="id_part_description"
 																							placeholder="Insert your course part description"></textarea>
 																					</div>
@@ -612,25 +629,25 @@
 										id="submit-course-btn">Submit Course</button>
 								</div>
 
-						</div>
+							</div>
 
-					</div>
-					</form>
-				</div>
-			</div>
+						</div>
+			</form>
 		</div>
 	</div>
-	{{> footer}}
+</div>
+</div>
+{{> footer}}
 
-	<script src="/js/jquery-3.3.1.min.js"></script>
-	<script src="/js/jquery-steps.min.js"></script>
-	<script>
-		$('#add-course-tab').steps({
-			onFinish: function () {
-				$('.form--create-course').submit();
-			}
-		});		
-	</script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-steps.min.js"></script>
+<script>
+	$('#add-course-tab').steps({
+		onFinish: function () {
+			$('.form--create-course').submit();
+		}
+	});		
+</script>
 </div>
 
 <!-- Body End -->
