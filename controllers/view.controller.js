@@ -57,12 +57,11 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
 exports.getCourse = catchAsync(async (req, res, next) => {
   const slugName = req.params.slug;
-  const course = await Course.findOneAndUpdate(
-    { slug: slugName },
-    { $inc: { views: 1 } }
-  ).lean({ virtuals: true });
+  const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).lean({ virtuals: true });
+  const feedbacks = await Course.find({}, {}); //danh sách các feedbacks của 1 khoá học (bao gồm: studentName, timeFeedback, rating(số nguyên từ 1-5), feedbackContent)
   let isPurchase = false;
   let isWatched = false;
+  let feedbackable = false; //student after registered course could review that course.
   if (!course) {
     res.redirect("back");
     return;
@@ -70,21 +69,21 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 
   let user = res.locals.user;
 
-  if (user.role === "customer") {
-    const registeredcouse = await registeredCourse.findOne({
-      userID: user.id,
-      courses: course.id,
-    });
-    if (registeredcouse) isPurchase = true;
-    const watchlist = await WatchList.findOne({
-      userID: user.id,
-      courses: course.id,
-    });
 
-    if (watchlist) isWatched = true;
+  if (user.role === 'customer') {
+    const registeredcouse = await registeredCourse.findOne({ userID: user.id, courses: course.id });
+    if (registeredcouse)
+      isPurchase = true;
+    const watchlist = await WatchList.findOne({ userID: user.id, courses: course.id });
+
+    if (watchlist)
+      isWatched = true;
   }
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
+  if (user.role === 'customer' && registeredCourse) {
+    reviewable = true;
+  }
   course.views++;
   res.status(200).render("course_detail_view", {
     title: course.name,
@@ -92,7 +91,12 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     user: user,
     isPurchase: isPurchase,
     isWatched: isWatched,
+
+    //feedback
+    feedbackable: feedbackable,
+    feedbacks: feedbacks,
   });
+
 });
 
 exports.getSessionCart = (req, res, next) => {
@@ -221,8 +225,8 @@ exports.getStudentProfile = catchAsync(async (req, res, next) => {
 exports.getStudentWatchedList = catchAsync(async (req, res, next) => {
   let user = res.locals.user;
   const watchlist = await WatchList
-  .findOne({ userID: user.id})
-  .lean({ virtuals: true });
+    .findOne({ userID: user.id })
+    .lean({ virtuals: true });
 
   res.status(200).render("favourite_courses", {
     title: "My Wish List",
