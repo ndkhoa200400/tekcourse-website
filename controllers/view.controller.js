@@ -24,6 +24,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 
     const topTrending = await Course.find({}, { _id: 0, __v: 0 })
       .sort({ ratingsAverage: 1, createdAt: -1 })
+      .limit(5)
       .lean({ virtuals: true });
 
     //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
