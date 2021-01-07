@@ -1,6 +1,7 @@
 const express = require('express');
 const controller = require('../controllers/course.controller')
 const authController = require('../controllers/auth.controller')
+const upload = require("../utils/multer");
 const router = express.Router();
 
 const lectureRoute = require('./lecture.route');
@@ -13,8 +14,8 @@ router.use('/:courseID/feedback', feedbackRoute); // For URL: /courseID/feedback
 router.route('/')
     .get(controller.getAllCourse)
     .post(authController.protect,
-        authController.restrictTo('teacher'),
-        controller.setTeacherID,
+        authController.restrictTo('teacher'),        
+        upload.single('promotionalVideo'),
         controller.createCourse);
 
 

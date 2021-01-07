@@ -10,6 +10,7 @@ const hbs_sections = require('express-handlebars-sections');
 const globalErrorHandler = require("./controllers/error.controller");
 var hbs = require('hbs');
 const session = require('express-session');
+;
 // const numeral = require('numeral');
 
 const app = express();
@@ -73,7 +74,6 @@ app.use(session({
   maxAge: Date.now() + (60 * 60 * 1000)
 }));
 app.use(express.static(path.join(__dirname, "./", "/public")));
-
 
 
 app.use('/', viewRouter);
