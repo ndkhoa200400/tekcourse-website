@@ -75,7 +75,7 @@ courseSchema.index({slug: 1});
 
 courseSchema.index({teacherID: 1});
 
-
+courseSchema.index({name:'text', description:'text'});
 // courseSchema.virtual("lectures", {
 //   ref: "Lecture",
 //   foreignField: "course",

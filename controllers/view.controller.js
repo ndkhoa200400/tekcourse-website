@@ -2,11 +2,10 @@ const Course = require("./../model/course.model");
 const User = require("./../model/user.model");
 const WatchList = require("./../model/watchlist.model");
 const catchAsync = require("./../utils/catchAsync");
-
-const moment = require("moment");
 const axios = require("axios");
 const registeredCourse = require("./../model/registedCourse.model");
 const pagination = require("./../utils/pagination");
+const url = require('url');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   const topViewedCourses = await Course.find({}, { _id: 0, __v: 0 })
@@ -31,7 +30,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     .populate("subcategory")
     .lean({ virtuals: true });
 
-  let date = new Date(Date.now);
+
   //date
   const topPurchasedCourses = await Course.find({}, { _id: 0, __v: 0 })
     .sort({ numStudents: -1 })
@@ -106,38 +105,7 @@ exports.getSessionCart = (req, res, next) => {
   next();
 };
 
-exports.getFilteredCourses = catchAsync(async (req, res, next) => {
-  // let page = req.query.page || 1;
-  // if (page < 1) page = 1;
-  // const total = response.data.data.docs.length;
 
-  // const page_numbers = pagination.calcPageNumbers(total, page);
-  // const offset = pagination.calcOffset(page);
-  // const next_page = pagination.calcNextPage(page, page_numbers);
-  // const prev_page = pagination.calcPreviousPage(page, page_numbers);
-
-  const queryString = req.url.substring(req.url.indexOf("?"));
-  let user = res.locals.user;
-  if (user) user = { name: user.name, email: user.email, role: user.role };
-
-  const response = await axios({
-    method: "GET",
-    url: "http://localhost:8000/api/course" + queryString,
-  });
-
-  if (response.data.status === "success") {
-    res.status(200).render("search_result", {
-      title: "Results",
-      course: response.data.data.docs,
-      // page_numbers,
-      // next_page,
-      // prev_page,
-      user: user,
-    });
-  } else {
-    res.render("error");
-  }
-});
 
 exports.ProByCat = catchAsync(async (req, res, next) => {
   let page = req.query.page || 1;

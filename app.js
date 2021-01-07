@@ -33,8 +33,8 @@ app.engine(
     //   format_number(val) {
     //     return numeral(val).format('0,0');
     //   }
-    
-    
+
+
   })
 );
 
@@ -77,10 +77,10 @@ app.use(express.static(path.join(__dirname, "./", "/public")));
 
 
 app.use('/', viewRouter);
+app.use('/course', courseRoute);
 app.use('/cart', cartRoute);
 app.use('/watchlist', watchListRoute);
 app.use('/api/user', userRoute);
-app.use('/api/course', courseRoute);
 app.use('/api/lecture', lectureRoute);
 app.use('/api/feedback', feedbackRoute);
 app.use('/api/checkout', registeredCourse);

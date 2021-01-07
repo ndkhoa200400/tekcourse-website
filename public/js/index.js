@@ -2,13 +2,11 @@
 import '@babel/polyfill';
 import { login, signup, logout } from './login';
 import {buyCourse, checkOutCart } from './checkout';
-import { createCourse } from './newcourse';
 
 const loginForm = document.querySelector(".form--login");
 const signupForm = document.querySelector(".form--signup");
 const logOutBtn = document.querySelector(".logout");
 const checkOutBtn = document.getElementById('check-out-btn');
-const createCourseBtn = document.getElementById('submit-course-btn');
 const courseSort = document.getElementsByClassName('course-sort');
 const buyBtn = document.getElementById('buy-btn');
 if (loginForm) {
@@ -40,42 +38,6 @@ if(checkOutBtn)
   checkOutBtn.addEventListener('click',checkOutCart);
 }
 
-// if (addToCartBtn) {
-
-//   addToCartBtn.addEventListener('click', function () {
-//     let newCourse = window.location.pathname.replace("/course/", "");
-//     if (!window.sessionStorage.getItem('cart')) {
-//       window.sessionStorage.setItem('cart', JSON.stringify([newCourse]));
-//       alert("Successfully")
-//     }
-//     else {
-//       let courses = JSON.parse(window.sessionStorage.getItem('cart'));
-//       if (!courses.includes(newCourse)) {
-//         courses.push(newCourse)
-//         window.sessionStorage.setItem('cart', JSON.stringify(courses));
-//         alert("Successfully")
-//       }
-//       else {
-//         alert("Already in your cart");
-//       }
-//     }
-//   })
-// }
-
-
-// if (createCourseBtn) {
-//   createCourseBtn.addEventListener('click', function () {
-//     const data = {};
-//     data["name"] = document.getElementById("main[title]").value;
-//     data["description"] = document.getElementById("id_course_description").value;
-//     data["category"] = document.getElementById("category-selection").value;
-//     data["price"] = document.getElementById("course-price").value;
-//     data["subcategory"] = document.getElementById("subcategory-selection").value;
-//     data["avatar"] = document.getElementById("img-link").value;
-//     data["promotionalVideo"] = document.getElementById("promotional-video-link").value;
-//     createCourse(data);
-//   })
-// }
 
 if (courseSort) {
   for (let index = 0; index < courseSort.length; index++) {

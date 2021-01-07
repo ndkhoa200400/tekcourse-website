@@ -20,11 +20,11 @@
 						</div>
 						<div class="titleright">
 							<div class="explore_search">
-								<form action="/course/search?" id="form--search">
+								<form action="/course" id="form--search">
 									<div class="ui search focus">
 										<div class="ui left icon input swdh11 swdh15">
 
-											<input name="name" class="prompt srch_explore" type="text"
+											<input name="q" class="prompt srch_explore" type="text"
 												placeholder="Search">
 											<i class="uil uil-search-alt icon icon2"></i>
 										</div>
@@ -53,7 +53,7 @@
 									<div class="text" id='name-sort'>Sort</div>
 									<i class="dropdown icon"></i>
 									<div class="menu">
-										<div class="item course-sort" data-sort-type="-price"><a
+										<div class="item course-sort" data-sort-type="+price"><a
 												href="?sort="></a>Price: Low to High</a> </div>
 										<div class="item course-sort" data-sort-type="-ratingsAverage"><a
 												href="?sort="></a>Top Rated</div>
@@ -313,6 +313,7 @@
 									</div>
 								</div>
 								{{/each}}
+								
 								<div class="main-loader mt-50">
 									<nav aria-label="Page navigation example">
 										<ul class="pagination justify-content-center">
@@ -322,21 +323,28 @@
 													<span aria-hidden="true">&laquo;</span>
 												</a>
 											</li>
+
 											{{#each this.page_numbers}}
 											{{#if isCurrentPage}}
-											<li class="page-item vien"><a class="page-link acnode" href="javascript:;"
-													style="color:white;background-color:#21d4c5">{{value}}</a></li>
+											<li class="page-item vien">
+												<button class="page-link acnode"
+													style="color:white;background-color:#21d4c5">{{value}}</button>
+											</li>
 											{{else}}
-											<li class="page-item vien"><a class="page-link node" href="?page={{value}}"
-													style="color:#21d4c5">{{value}}</a></li>
+											<li class="page-item vien">
+												<button class="page-link node" 
+													style="color:#21d4c5">{{value}}</button>
+											</li>
 											{{/if}}
 											{{/each}}
 											<li class="page-item vien">
-												<a class="page-link node" href="?page={{this.next_page}}"
+												<button class="page-link node" 
 													style="color:#21d4c5" aria-label="Next">
 													<span aria-hidden="true">&raquo;</span>
-												</a>
+												</button>
+												
 											</li>
+											
 										</ul>
 									</nav>
 								</div>
@@ -365,12 +373,12 @@
 			if (index === -1) {
 				nextURL = nextURL + "?" + str;
 			}
-			else{
-				nextURL = nextURL.substr(0,index);
+			else {
+				nextURL = nextURL.substr(0, index);
 				nextURL = nextURL + "?" + str;
 			}
-			
-			
+
+
 			window.location.replace(nextURL);
 			console.log(nextURL);
 

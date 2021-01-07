@@ -11,17 +11,12 @@
         <a href="/"><img class="logo-inverse" src="/images/ct_logo.svg" alt="" /></a>
     </div>
     <div class="search120">
-        <form action="/course/search?" id="form--search">
+        <form action="/course" id="form--search">
             <div class="ui search">
                 <div class="ui left icon input swdh10">
-
                     <i class="uil uil-search-alt icon icon1"></i>
-
-                    <input name="name" class="prompt srch10" type="text"
+                    <input name="q" class="prompt srch10" type="text"
                         placeholder="Search for Tuts Videos, Tutors, Tests and more.." />
-
-
-
 
                 </div>
             </div>
@@ -152,7 +147,7 @@
                             <div class="pd_content">
                                 <div class="rhte85">
 
-                                {{#with user}}
+                                    {{#with user}}
                                     <h6>{{name}}</h6>
                                     <div class="mef78" title="Verify">
                                         <i class="uil uil-check-circle"></i>
