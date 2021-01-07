@@ -53,7 +53,7 @@
 									<div class="text" id='name-sort'>Sort</div>
 									<i class="dropdown icon"></i>
 									<div class="menu">
-										<div class="item course-sort" data-sort-type="+price"><a
+										<div class="item course-sort" data-sort-type="price"><a
 												href="?sort="></a>Price: Low to High</a> </div>
 										<div class="item course-sort" data-sort-type="-ratingsAverage"><a
 												href="?sort="></a>Top Rated</div>
@@ -313,7 +313,7 @@
 									</div>
 								</div>
 								{{/each}}
-								
+
 								<div class="main-loader mt-50">
 									<nav aria-label="Page navigation example">
 										<ul class="pagination justify-content-center">
@@ -327,24 +327,24 @@
 											{{#each this.page_numbers}}
 											{{#if isCurrentPage}}
 											<li class="page-item vien">
-												<button class="page-link acnode"
+												<button class="page-link acnode" onclick="paginate({{value}})"
 													style="color:white;background-color:#21d4c5">{{value}}</button>
 											</li>
 											{{else}}
 											<li class="page-item vien">
-												<button class="page-link node" 
+												<button class="page-link node" onclick="paginate({{value}})"
 													style="color:#21d4c5">{{value}}</button>
 											</li>
 											{{/if}}
 											{{/each}}
 											<li class="page-item vien">
-												<button class="page-link node" 
+												<button class="page-link node" onclick="paginate({{value}})"
 													style="color:#21d4c5" aria-label="Next">
 													<span aria-hidden="true">&raquo;</span>
 												</button>
-												
+
 											</li>
-											
+
 										</ul>
 									</nav>
 								</div>
@@ -384,7 +384,13 @@
 
 		});
 
+		function paginate(page) {
+			var queryParams = new URLSearchParams(window.location.search);
 
+			queryParams.delete('page');
+			queryParams.append('page', page);
+			window.location.search = queryParams.toString();
+		}
 	</script>
 
 	<!-- Body End -->

@@ -41,33 +41,36 @@ exports.createCourse = async (req, res, next) => {
 exports.getAllCourse = async (req, res) => {
 
     try {
-        // let page = req.query.page || 1;
-        // if (page < 1) page = 1;
-        // const total = res.data.data.docs.length;
 
-        // const page_numbers = pagination.calcPageNumbers(total, page);
-        // const offset = pagination.calcOffset(page);
-        // const next_page = pagination.calcNextPage(page, page_numbers);
-        // const prev_page = pagination.calcPreviousPage(page, page_numbers);
         let user = res.locals.user;
         if (user) user = { name: user.name, email: user.email, role: user.role };
 
+        // Lấy các query từ req
         const query = req.query;
-        const q = query.q || {};
+        const q = query.q;
 
         delete query.q;
-
-        const features = new APIFeatures(Course.find({ $text: { $search: q } }), query)
-            .filter()
-            .sort();
-
+        let features;
+        if (q)
+            // full-text search dựa trên q, còn lại đẩy sang search bình thường
+            features = new APIFeatures(Course.find({ $text: { $search: q } }), query)
+                .filter()
+                .sort();
+        else
+            features = new APIFeatures(Course.find({}), query)
+                .filter()
+                .sort();
         let course = await features.query.lean({ virtuals: true });
 
+        let page = req.query.page || 1;
+        if (page < 1) page = 1;
         const page_numbers = pagination.calcPageNumbers(course.length, page);
         const offset = pagination.calcOffset(page);
         const next_page = pagination.calcNextPage(page, page_numbers);
         const prev_page = pagination.calcPreviousPage(page, page_numbers);
+        // Limit số lượng
         course = course.slice(offset, (offset + 1) * pagination.limit);
+
         res.status(200).render("search_result", {
             title: "Results",
             course,
@@ -86,10 +89,6 @@ exports.getCategory = async (req, res) => {
     try {
         let page = req.query.page || 1;
         if (page < 1) page = 1;
-
-
-
-        // var total = totalCourse.length;
         const category = req.params.category;
 
         const features = new APIFeatures(Course.find(req.params), req.query)
@@ -106,7 +105,9 @@ exports.getCategory = async (req, res) => {
         let user = res.locals.user;
         if (user) user = { name: user.name, email: user.email, role: user.role };
 
-        course = course.slice(offset, (offset + 1) * pagination.limit);
+        // Limit số lượng
+        course = course.slice(offset, (offset) + pagination.limit);
+
         res.status(200).render("search_result", {
             title: req.params.category.toUpperCase(),
             course: course,

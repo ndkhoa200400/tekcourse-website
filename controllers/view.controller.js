@@ -8,50 +8,52 @@ const pagination = require("./../utils/pagination");
 const url = require('url');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  const topViewedCourses = await Course.find({}, { _id: 0, __v: 0 })
-    .sort({ views: -1 })
-    .limit(10)
-    .lean({ virtuals: true });
+  try {
+    let date = new Date();
+    let weekAgo = new Date().setDate(date.getDate()-7)
 
-  const topNewestCourses = await Course.find({}, { _id: 0, __v: 0 })
-    .sort({ createdAt: -1 })
-    .limit(10)
-    .lean({ virtuals: true });
+    const topViewedCourses = await Course.find({}, { _id: 0, __v: 0 })
+      .sort({ views: -1 })
+      .limit(10)
+      .lean({ virtuals: true });
 
-  const topTrending = await Course.find({}, { _id: 0, __v: 0 })
-    .sort({ ratingsAverage: 1, createdAt: -1 })
-    .limit(5)
-    .lean({ virtuals: true });
+    const topNewestCourses = await Course.find({}, { _id: 0, __v: 0 })
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .lean({ virtuals: true });
 
-  //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
-  //const topSubCate = await Course.find({},{_id: 0, __v: 0, }).select('subcategory -_id').lean({ virtuals: true });
-  const subcategories = await Course.find({})
-    .distinct("subcategory")
-    .populate("subcategory")
-    .lean({ virtuals: true });
+    const topTrending = await Course.find({}, { _id: 0, __v: 0 })
+      .sort({ ratingsAverage: 1, createdAt: -1 })
+      .lean({ virtuals: true });
+
+    //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
+    const subcategories = await Course.find({createdAt: {$gt: weekAgo, $lt:date}}).sort({ views: -1 }).limit(5)
+      .distinct("subcategory")
+      .lean({ virtuals: true });
 
 
-  //date
-  const topPurchasedCourses = await Course.find({}, { _id: 0, __v: 0 })
-    .sort({ numStudents: -1 })
-    .limit(5)
-    .lean({ virtuals: true });
+    const topPurchasedCourses = await Course.find({}, { _id: 0, __v: 0 })
+      .sort({ numStudents: -1 })
+      .limit(5)
+      .lean({ virtuals: true });
 
-  let categories = Course.schema.path("category").enumValues; // Get all enum values of category
-  //categories = categories.map(category => category[0].toUpperCase() + category.slice(1)); // Uppercase first letter
+    let categories = Course.schema.path("category").enumValues; // Get all enum values of category
+    let user = res.locals.user;
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+    res.status(200).render("home", {
+      title: "Home",
+      user: user,
+      topTrending: topTrending,
+      topViewedCourses: topViewedCourses,
+      topNewestCourses: topNewestCourses,
+      topPurchasedCourses: topPurchasedCourses,
+      topCategories: subcategories,
+      categories: categories,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
-  let user = res.locals.user;
-  if (user) user = { name: user.name, email: user.email, role: user.role };
-  res.status(200).render("home", {
-    title: "Home",
-    user: user,
-    topTrending: topTrending,
-    topViewedCourses: topViewedCourses,
-    topNewestCourses: topNewestCourses,
-    topPurchasedCourses: topPurchasedCourses,
-    topCategories: subcategories,
-    categories: categories,
-  });
 });
 
 exports.getCourse = catchAsync(async (req, res, next) => {
@@ -84,13 +86,17 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     reviewable = true;
   }
   course.views++;
+  const topTrending = await Course.find({slug: {$ne: slugName}}, { _id: 0, __v: 0 })
+      .sort({ ratingsAverage: 1, createdAt: -1 })
+      .limit(5)
+      .lean({ virtuals: true });
   res.status(200).render("course_detail_view", {
     title: course.name,
     course: course,
     user: user,
     isPurchase: isPurchase,
     isWatched: isWatched,
-
+    topTrending: topTrending,
     //feedback
     feedbackable: feedbackable,
     feedbacks: feedbacks,
@@ -107,41 +113,6 @@ exports.getSessionCart = (req, res, next) => {
 
 
 
-exports.ProByCat = catchAsync(async (req, res, next) => {
-  let page = req.query.page || 1;
-  if (page < 1) page = 1;
-
-  const catName = req.param("catName");
-  const total = await Course.count({ category: catName }).lean({
-    virtuals: true,
-  });
-  // var total = totalCourse.length;
-
-  const page_numbers = pagination.calcPageNumbers(total, page);
-  const offset = pagination.calcOffset(page);
-  const next_page = pagination.calcNextPage(page, page_numbers);
-  const prev_page = pagination.calcPreviousPage(page, page_numbers);
-  let user = res.locals.user;
-
-  const course = await Course.find({ category: catName })
-    .limit(pagination.limit)
-    .skip(offset)
-    .lean({ virtuals: true });
-
-  if (user) user = { name: user.name, email: user.email, role: user.role };
-
-  res.status(200).render("search_result", {
-    title: catName,
-    course: course,
-    user: user,
-    empty: course === null,
-    categories: catName,
-    num: course.length,
-    page_numbers,
-    next_page,
-    prev_page,
-  });
-});
 
 exports.getTeacherProfile = catchAsync(async (req, res, next) => {
   try {

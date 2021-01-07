@@ -45,6 +45,7 @@ class APIFeatures {
             // vd: sort=price là sort theo giá tăng dần
             // sort=-price là giảm dần
             this.query = this.query.sort(sortBy);
+           
         }
         else {
             this.query = this.query.sort('-createdAt');
