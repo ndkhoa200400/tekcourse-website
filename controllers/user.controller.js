@@ -40,17 +40,15 @@ exports.updateMe = (async (req, res, next) => {
         if (req.body.password || req.body.passwordConfirm)
             return next(new AppError('This route is not for password update'), 400)
 
-        // 2) Filter fields to remove some resticted fiels
-        const filteredBody = filterObj(req.body, 'username', 'email');
 
         // 3) Update user document
-        const user = await User.findByIdAndUpdate(req.user.id, filteredBody, { new: true, runValidators: true });
+        const user = await User.findByIdAndUpdate(req.user.id, req.body, { new: true, runValidators: true });
 
         await user.save();
-        res.locals.user = updatedUser;
+        res.locals.user = user;
         res.redirect("/student-profile/edit");
     } catch (error) {
-
+        console.log(error);
     }
 });
 

@@ -1,7 +1,4 @@
 const catchAsync = require("../utils/catchAsync");
-const axios = require('axios');
-
-
 
 exports.addToCart = catchAsync(async (req, res, next) => {
     try {
