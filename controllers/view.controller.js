@@ -10,7 +10,7 @@ const url = require('url');
 exports.getOverview = catchAsync(async (req, res, next) => {
   try {
     let date = new Date();
-    let weekAgo = new Date().setDate(date.getDate()-7)
+    let weekAgo = new Date().setDate(date.getDate() - 7)
 
     const topViewedCourses = await Course.find({}, { _id: 0, __v: 0 })
       .sort({ views: -1 })
@@ -28,7 +28,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
       .lean({ virtuals: true });
 
     //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
-    const subcategories = await Course.find({createdAt: {$gt: weekAgo, $lt:date}}).sort({ views: -1 }).limit(5)
+    const subcategories = await Course.find({ createdAt: { $gt: weekAgo, $lt: date } }).sort({ views: -1 }).limit(5)
       .distinct("subcategory")
       .lean({ virtuals: true });
 
@@ -87,10 +87,10 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     reviewable = true;
   }
   course.views++;
-  const topTrending = await Course.find({slug: {$ne: slugName}}, { _id: 0, __v: 0 })
-      .sort({ ratingsAverage: 1, createdAt: -1 })
-      .limit(5)
-      .lean({ virtuals: true });
+  const topTrending = await Course.find({ slug: { $ne: slugName } }, { _id: 0, __v: 0 })
+    .sort({ ratingsAverage: 1, createdAt: -1 })
+    .limit(5)
+    .lean({ virtuals: true });
   res.status(200).render("course_detail_view", {
     title: course.name,
     course: course,
@@ -124,12 +124,18 @@ exports.getTeacherProfile = catchAsync(async (req, res, next) => {
     const courses = await Course.find({ teacherID: userID }).lean({
       virtuals: true,
     });
-
+    let numStudents = 0;
+    courses.forEach((course)=>{
+      numStudents += course.numStudents
+     
+    })
+ 
     res.status(200).render("profile", {
       title: "Profile",
       user: user,
       courses: courses,
       numCourse: courses.length,
+      numStudents
     });
   } catch (error) {
     console.log(error);
@@ -163,17 +169,30 @@ exports.getStudentProfile = catchAsync(async (req, res, next) => {
 });
 
 exports.getStudentWatchedList = catchAsync(async (req, res, next) => {
-  let user = res.locals.user;
-  const watchlist = await WatchList
-    .findOne({ userID: user.id })
-    .lean({ virtuals: true });
-
-  res.status(200).render("favourite_courses", {
-    title: "My Wish List",
-    user: user,
-    watchlist: watchlist.courses,
-    numCourses: watchlist.courses.length,
-  });
+  try {
+    let user = res.locals.user;
+    const watchlist = await WatchList
+      .findOne({ userID: user.id })
+      .lean({ virtuals: true });
+    if(watchlist)
+      res.status(200).render("favourite_courses", {
+        title: "My Wish List",
+        user: user,
+        watchlist: watchlist.courses,
+        numCourses: watchlist.courses.length,
+      });
+    else{
+      res.status(200).render("favourite_courses", {
+        title: "My Wish List",
+        user: user,
+        
+        numCourses: 0,
+      });
+    }
+  } catch (error) {
+    console.log(error); 
+  }
+ 
 });
 
 exports.editStudentProfile = catchAsync(async (req, res, next) => {
@@ -219,21 +238,4 @@ exports.getCart = catchAsync(async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-});
-
-exports.updateUserData = catchAsync(async (req, res, next) => {
-  const updatedUser = await User.findByIdAndUpdate(
-    res.locals.user._id,
-    {
-      name: req.body.name,
-      email: req.body.email,
-    },
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
-  await updatedUser.save();
-  res.locals.user = updatedUser;
-  res.redirect("/student-profile/edit");
 });

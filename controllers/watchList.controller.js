@@ -5,7 +5,7 @@ const factory = require('./handlerFactory')
 const Course = require('../model/course.model');
 
 exports.addToWatchList = async (req, res, next) => {
-    
+
     try {
         const userID = req.user.id;
         const courseSlugName = req.body.slug;
@@ -19,7 +19,7 @@ exports.addToWatchList = async (req, res, next) => {
 
         if (!course) {
             await WatchList.create({ userID: userID, courses: [selectedCourse.id] });
-       
+
         }
         else {
             let isExisted = false;
@@ -49,19 +49,43 @@ exports.addToWatchList = async (req, res, next) => {
 };
 
 exports.removeCourse = async (req, res, next) => {
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    let user = res.locals.user;
-    const watchlist = await WatchList
-  .findOne({ userID: user.id})
-  .lean({ virtuals: true });
+    try {
 
-    const course_id = req.param('remove');
-    // console.log(course_id);
-    // console.log(watchlist.courses);
-    watchlist.courses.pull({ id: course_id });
+        let user = res.locals.user;
+        const watchlist = await WatchList.findOne({ userID: user.id })
+        let index = -1;
+        for (let i = 0; i < watchlist.courses.length; i++) {
+            if (watchlist.courses[i].id === req.body.id) {
+               
+                index = i;
+                break;
+            }
+        }
+        if (index >-1) {
+            watchlist.courses.splice(index, 1);
+        }
+        await watchlist.save();
 
-    await watchlist.save();
-
-    res.redirect('/student-profile/wishlist');
+        res.redirect('back');
+    } catch (error) {
+        console.log(error);
+    }
 };
 
+exports.removeAll = async (req, res, next) => {
+    try {
+
+        let user = res.locals.user;
+        const watchlist = await WatchList.findOne({ userID: user.id })
+        if (watchlist)
+        {
+            await watchlist.delete();
+            
+        }
+       
+
+        res.redirect('back');
+    } catch (error) {
+        console.log(error);
+    }
+};

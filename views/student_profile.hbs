@@ -43,9 +43,10 @@
 									</ul>
 								</div>
 								<ul class="_bty149">
-								
+
 									<li><button class="studio-link-btn btn500"
-											onclick="window.location.href = '/student-profile/edit';">Edit My Profile</button></li>
+											onclick="window.location.href = '/student-profile/edit';">Edit My
+											Profile</button></li>
 								</ul>
 
 							</div>
@@ -115,7 +116,7 @@
 
 													<a href="course/{{slug}}" class="fcrse_img">
 														{{#if this.avatar}}
-														<img src="{{this.avatar}}" style="height: 180px; alt="">
+														<img src="{{this.avatar}}" style="height: 180px;" alt="">
 														{{else}}
 														<img src="images/courses/img-1.jpg" alt="">
 														{{/if}}
@@ -142,12 +143,12 @@
 															<span class="vdt14">{{this.views}} views</span>
 															<span class="vdt14">{{this.createdDate}}</span>
 														</div>
-													
+
 														<a href="#" class="crse-cate">
 															<a href="/course/{{this.slug}}">{{this.name}}</a>
-															| <a href="/category/{{this.category}}"
-															>{{this.category}}</a>
-															</a>
+															| <a
+																href="/category/{{this.category}}">{{this.category}}</a>
+														</a>
 														{{#if this.subcategory}}
 														<span style="padding-left:5px; padding-right:5px"></span>
 														<a href="/course/search?subcategory={{capitalize this.subcategory}}"
@@ -174,4 +175,5 @@
 		</div>
 	</div>
 	{{> footer}}
+
 </div>

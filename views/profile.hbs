@@ -18,15 +18,21 @@
 									</div>
 									<div class="prfledt1">
 										<h2>{{this.user.name}}</h2>
-										<span>UI / UX Designer and Web Developer</span>
+
 									</div>
 								</div>
 								<ul class="_ttl120">
 									<li>
 										<div class="_ttl121">
 											<div class="_ttl122">Enroll Students</div>
-											<div class="_ttl123">612K</div>
+											<div class="_ttl123">{{this.numStudents}}</div>
 										</div>
+									</li>
+									<li>
+
+									</li>
+									<li>
+										
 									</li>
 									<li>
 										<div class="_ttl121">
@@ -34,18 +40,7 @@
 											<div class="_ttl123">{{numCourse}}</div>
 										</div>
 									</li>
-									<li>
-										<div class="_ttl121">
-											<div class="_ttl122">Reviews</div>
-											<div class="_ttl123">11K</div>
-										</div>
-									</li>
-									<li>
-										<div class="_ttl121">
-											<div class="_ttl122">Subscriptions</div>
-											<div class="_ttl123">452K</div>
-										</div>
-									</li>
+															
 								</ul>
 							</div>
 							<div class="col-lg-5">
@@ -71,8 +66,7 @@
 									href="#nav-about" role="tab" aria-selected="true">About</a>
 								<a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses"
 									role="tab" aria-selected="false">My Courses</a>
-								<a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses"
-									role="tab" aria-selected="false">Watched List</a>
+							
 							</div>
 						</nav>
 					</div>
@@ -120,9 +114,13 @@
 											<div class="col-lg-3 col-md-4">
 												<div class="fcrse_1 mt-30">
 													<a href="/course/{{this.slug}}" class="fcrse_img">
+														{{#if this.avatar}}
+														<img src="{{this.avatar}}g" alt="">
+														{{else}}
 														<img src="images/courses/img-1.jpg" alt="">
+														{{/if}}
 														<div class="course-overlay">
-															<div class="badge_seller">Bestseller</div>
+
 															<div class="crse_reviews">
 																<i class="uil uil-star"></i>4.5
 															</div>
@@ -144,8 +142,10 @@
 															<span class="vdt14">{{this.views}} views</span>
 															<span class="vdt14">15 days ago</span>
 														</div>
-															<a href="/course/{{this.slug}}" class="crse14s">{{this.name}}</a>
-															<a href="#" class="crse-cate">{{this.categoryName}} | {{this.subcategory}}</a>
+														<a href="/course/{{this.slug}}"
+															class="crse14s">{{this.name}}</a>
+														<a href="#" class="crse-cate">{{this.categoryName}} |
+															{{this.subcategory}}</a>
 														<div class="auth1lnkprce">
 															<p class="cr1fot">By <a href="#">{{this.user.name}}</a></p>
 															<div class="prce142">{{this.price}}</div>
@@ -155,365 +155,14 @@
 											</div>
 											{{/each}}
 
-											
+
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade show" id="nav-purchased" role="tabpanel">
-								<div class="_htg451">
-									<div class="_htg452">
-										<h3>Purchased Courses</h3>
-										<div class="row">
-											<div class="col-md-9">
-												<div class="fcrse_1 mt-20">
-													<a href="course_detail_view.html" class="hf_img">
-														<img src="images/courses/img-1.jpg" alt="">
-														<div class="course-overlay">
-															<div class="badge_seller">Bestseller</div>
-															<div class="crse_reviews">
-																<i class="uil uil-star"></i>4.5
-															</div>
-															<span class="play_btn1"><i class="uil uil-play"></i></span>
-															<div class="crse_timer">
-																25 hours
-															</div>
-														</div>
-													</a>
-													<div class="hs_content">
-														<div class="eps_dots eps_dots10 more_dropdown">
-															<a href="#"><i class="uil uil-ellipsis-v"></i></a>
-															<div class="dropdown-content">
-																<span><i
-																		class="uil uil-download-alt"></i>Download</span>
-																<span><i class="uil uil-trash-alt"></i>Delete</span>
-															</div>
-														</div>
-														<div class="vdtodt">
-															<span class="vdt14">109k views</span>
-															<span class="vdt14">15 days ago</span>
-														</div>
-														<a href="course_detail_view.html"
-															class="crse14s title900">Complete Python Bootcamp: Go from
-															zero to hero in Python 3</a>
-														<a href="#" class="crse-cate">Web Development | Python</a>
-														<div class="purchased_badge">Purchased</div>
-														<div class="auth1lnkprce">
-															<p class="cr1fot">By <a href="#">John Doe</a></p>
-															<div class="prce142">$10</div>
-														</div>
-													</div>
-												</div>
-												<div class="fcrse_1 mt-30">
-													<a href="course_detail_view.html" class="hf_img">
-														<img src="images/courses/img-2.jpg" alt="">
-														<div class="course-overlay">
-															<div class="badge_seller">Bestseller</div>
-															<div class="crse_reviews">
-																<i class="uil uil-star"></i>4.5
-															</div>
-															<span class="play_btn1"><i class="uil uil-play"></i></span>
-															<div class="crse_timer">
-																28 hours
-															</div>
-														</div>
-													</a>
-													<div class="hs_content">
-														<div class="eps_dots eps_dots10 more_dropdown">
-															<a href="#"><i class="uil uil-ellipsis-v"></i></a>
-															<div class="dropdown-content">
-																<span><i
-																		class="uil uil-download-alt"></i>Download</span>
-																<span><i class="uil uil-trash-alt"></i>Delete</span>
-															</div>
-														</div>
-														<div class="vdtodt">
-															<span class="vdt14">5M views</span>
-															<span class="vdt14">15 days ago</span>
-														</div>
-														<a href="course_detail_view.html" class="crse14s title900">The
-															Complete JavaScript Course 2020: Build Real Projects!</a>
-														<a href="#" class="crse-cate">Development | JavaScript</a>
-														<div class="purchased_badge">Purchased</div>
-														<div class="auth1lnkprce">
-															<p class="cr1fot">By <a href="#">Jassica William</a></p>
-															<div class="prce142">$5</div>
-														</div>
-													</div>
-												</div>
-												<div class="fcrse_1 mt-30">
-													<a href="course_detail_view.html" class="hf_img">
-														<img src="images/courses/img-3.jpg" alt="">
-														<div class="course-overlay">
-															<div class="badge_seller">Bestseller</div>
-															<div class="crse_reviews">
-																<i class="uil uil-star"></i>4.5
-															</div>
-															<span class="play_btn1"><i class="uil uil-play"></i></span>
-															<div class="crse_timer">
-																12 hours
-															</div>
-														</div>
-													</a>
-													<div class="hs_content">
-														<div class="eps_dots eps_dots10 more_dropdown">
-															<a href="#"><i class="uil uil-ellipsis-v"></i></a>
-															<div class="dropdown-content">
-																<span><i
-																		class="uil uil-download-alt"></i>Download</span>
-																<span><i class="uil uil-trash-alt"></i>Delete</span>
-															</div>
-														</div>
-														<div class="vdtodt">
-															<span class="vdt14">1M views</span>
-															<span class="vdt14">18 days ago</span>
-														</div>
-														<a href="course_detail_view.html"
-															class="crse14s title900">Beginning C++ Programming - From
-															Beginner to Beyond</a>
-														<a href="#" class="crse-cate">Development | C++</a>
-														<div class="purchased_badge">Purchased</div>
-														<div class="auth1lnkprce">
-															<p class="cr1fot">By <a href="#">Joginder Singh</a></p>
-															<div class="prce142">$13</div>
-														</div>
-													</div>
-												</div>
-												<div class="fcrse_1 mt-30">
-													<a href="course_detail_view.html" class="hf_img">
-														<img src="images/courses/img-4.jpg" alt="">
-														<div class="course-overlay">
-															<div class="badge_seller">Bestseller</div>
-															<div class="crse_reviews">
-																<i class="uil uil-star"></i>5.0
-															</div>
-															<span class="play_btn1"><i class="uil uil-play"></i></span>
-															<div class="crse_timer">
-																1 hours
-															</div>
-														</div>
-													</a>
-													<div class="hs_content">
-														<div class="eps_dots eps_dots10 more_dropdown">
-															<a href="#"><i class="uil uil-ellipsis-v"></i></a>
-															<div class="dropdown-content">
-																<span><i
-																		class="uil uil-download-alt"></i>Download</span>
-																<span><i class="uil uil-trash-alt"></i>Delete</span>
-															</div>
-														</div>
-														<div class="vdtodt">
-															<span class="vdt14">153k views</span>
-															<span class="vdt14">3 months ago</span>
-														</div>
-														<a href="course_detail_view.html" class="crse14s title900">The
-															Complete Digital Marketing Course - 12 Courses in 1</a>
-														<a href="#" class="crse-cate">Digital Marketing | Marketing</a>
-														<div class="purchased_badge">Purchased</div>
-														<div class="auth1lnkprce">
-															<p class="cr1fot">By <a href="#">Poonam Verma</a></p>
-															<div class="prce142">$12</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="nav-reviews" role="tabpanel">
-								<div class="student_reviews">
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="review_right">
-												<div class="review_right_heading">
-													<h3>Discussions</h3>
-												</div>
-											</div>
-											<div class="cmmnt_1526">
-												<div class="cmnt_group">
-													<div class="img160">
-														<img src="images/hd_dp.jpg" alt="">
-													</div>
-													<textarea class="_cmnt001"
-														placeholder="Add a public comment"></textarea>
-												</div>
-												<button class="cmnt-btn" type="submit">Comment</button>
-											</div>
-											<div class="review_all120">
-												<div class="review_item">
-													<div class="review_usr_dt">
-														<img src="images/left-imgs/img-1.jpg" alt="">
-														<div class="rv1458">
-															<h4 class="tutor_name1">John Doe</h4>
-															<span class="time_145">2 hour ago</span>
-														</div>
-														<div class="eps_dots more_dropdown">
-															<a href="#"><i class="uil uil-ellipsis-v"></i></a>
-															<div class="dropdown-content">
-																<span><i
-																		class='uil uil-comment-alt-edit'></i>Edit</span>
-																<span><i class='uil uil-trash-alt'></i>Delete</span>
-															</div>
-														</div>
-													</div>
-													<p class="rvds10">Nam gravida elit a velit rutrum, eget dapibus ex
-														elementum. Interdum et malesuada fames ac ante ipsum primis in
-														faucibus. Fusce lacinia, nunc sit amet tincidunt venenatis.</p>
-													<div class="rpt101">
-														<a href="#" class="report155"><i class='uil uil-thumbs-up'></i>
-															10</a>
-														<a href="#" class="report155"><i
-																class='uil uil-thumbs-down'></i> 1</a>
-														<a href="#" class="report155"><i class='uil uil-heart'></i></a>
-														<a href="#" class="report155 ml-3">Reply</a>
-													</div>
-												</div>
-												<div class="review_reply">
-													<div class="review_item">
-														<div class="review_usr_dt">
-															<img src="images/left-imgs/img-3.jpg" alt="">
-															<div class="rv1458">
-																<h4 class="tutor_name1">Rock Doe</h4>
-																<span class="time_145">1 hour ago</span>
-															</div>
-															<div class="eps_dots more_dropdown">
-																<a href="#"><i class="uil uil-ellipsis-v"></i></a>
-																<div class="dropdown-content">
-																	<span><i class='uil uil-trash-alt'></i>Delete</span>
-																</div>
-															</div>
-														</div>
-														<p class="rvds10">Fusce lacinia, nunc sit amet tincidunt
-															venenatis.</p>
-														<div class="rpt101">
-															<a href="#" class="report155"><i
-																	class='uil uil-thumbs-up'></i> 4</a>
-															<a href="#" class="report155"><i
-																	class='uil uil-thumbs-down'></i> 2</a>
-															<a href="#" class="report155"><i
-																	class='uil uil-heart'></i></a>
-															<a href="#" class="report155 ml-3">Reply</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="tab-pane fade show" id="nav-subscriptions" role="tabpanel">
-								<div class="_htg451">
-									<div class="_htg452">
-										<h3>Subscriptions</h3>
-										<div class="row">
-											<div class="col-lg-3 col-md-4">
-												<div class="fcrse_1 mt-30">
-													<div class="tutor_img">
-														<a href="#"><img src="images/left-imgs/img-1.jpg" alt=""></a>
-													</div>
-													<div class="tutor_content_dt">
-														<div class="tutor150">
-															<a href="#" class="tutor_name">John Doe</a>
-															<div class="mef78" title="Verify">
-																<i class="uil uil-check-circle"></i>
-															</div>
-														</div>
-														<div class="tutor_cate">Wordpress &amp; Plugin Tutor</div>
-														<ul class="tutor_social_links">
-															<li><button class="sbbc145">Subscribed</button></li>
-															<li><button class="sbbc146"><i
-																		class="uil uil-bell"></i></button></li>
-														</ul>
-														<div class="tut1250">
-															<span class="vdt15">100K Students</span>
-															<span class="vdt15">15 Courses</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4">
-												<div class="fcrse_1 mt-30">
-													<div class="tutor_img">
-														<a href="#"><img src="images/left-imgs/img-2.jpg" alt=""></a>
-													</div>
-													<div class="tutor_content_dt">
-														<div class="tutor150">
-															<a href="#" class="tutor_name">Kerstin Cable</a>
-															<div class="mef78" title="Verify">
-																<i class="uil uil-check-circle"></i>
-															</div>
-														</div>
-														<div class="tutor_cate">Language Learning Coach, Writer, Online
-															Tutor</div>
-														<ul class="tutor_social_links">
-															<li><button class="sbbc145">Subscribed</button></li>
-															<li><button class="sbbc146"><i
-																		class="uil uil-bell"></i></button></li>
-														</ul>
-														<div class="tut1250">
-															<span class="vdt15">14K Students</span>
-															<span class="vdt15">11 Courses</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4">
-												<div class="fcrse_1 mt-30">
-													<div class="tutor_img">
-														<a href="#"><img src="images/left-imgs/img-3.jpg" alt=""></a>
-													</div>
-													<div class="tutor_content_dt">
-														<div class="tutor150">
-															<a href="#" class="tutor_name">Jose Portilla</a>
-															<div class="mef78" title="Verify">
-																<i class="uil uil-check-circle"></i>
-															</div>
-														</div>
-														<div class="tutor_cate">Head of Data Science, Pierian Data Inc.
-														</div>
-														<ul class="tutor_social_links">
-															<li><button class="sbbc145">Subscribed</button></li>
-															<li><button class="sbbc146"><i
-																		class="uil uil-bell"></i></button></li>
-														</ul>
-														<div class="tut1250">
-															<span class="vdt15">1M Students</span>
-															<span class="vdt15">25 Courses</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4">
-												<div class="fcrse_1 mt-30">
-													<div class="tutor_img">
-														<a href="#"><img src="images/left-imgs/img-3.jpg" alt=""></a>
-													</div>
-													<div class="tutor_content_dt">
-														<div class="tutor150">
-															<a href="#" class="tutor_name">Jose Portilla</a>
-															<div class="mef78" title="Verify">
-																<i class="uil uil-check-circle"></i>
-															</div>
-														</div>
-														<div class="tutor_cate">Head of Data Science, Pierian Data Inc.
-														</div>
-														<ul class="tutor_social_links">
-															<li><button class="sbbc145">Subscribed</button></li>
-															<li><button class="sbbc146"><i
-																		class="uil uil-bell"></i></button></li>
-														</ul>
-														<div class="tut1250">
-															<span class="vdt15">1M Students</span>
-															<span class="vdt15">25 Courses</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+
+						
+							
 						</div>
 					</div>
 				</div>

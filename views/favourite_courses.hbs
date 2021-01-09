@@ -1,82 +1,89 @@
-﻿
-	<!-- Header Start -->
-	{{> header}}
-	<!-- Header End -->
-	<!-- Left Sidebar Start -->
-	{{> nav_2}}
-	<!-- Left Sidebar End -->
-	<!-- Body Start -->
-	<div class="wrapper">
-		<div class="sa4d25">
-			<div class="container-fluid">			
-				<div class="row">
-					<div class="col-lg-3 col-md-4 ">
-						<div class="section3125 hstry142">
-							<div class="grp_titles pt-0">
-								<div class="ht_title">Wish List</div>
-								<a href="#" class="ht_clr">Remove All</a>
+﻿<!-- Header Start -->
+{{> header}}
+<!-- Header End -->
+<!-- Left Sidebar Start -->
+{{> nav_2}}
+<!-- Left Sidebar End -->
+<!-- Body Start -->
+<div class="wrapper">
+	<div class="sa4d25">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-3 col-md-4 ">
+					<div class="section3125 hstry142">
+						<div class="grp_titles pt-0">
+							<form action="/watchlist/removeAll" method="POST">
+							
+								<button type="submit" class="btn btn-light">Remove All</button>
+							</form>
+						</div>
+						<div class="tb_145">
+							<div class="wtch125">
+								<span class="vdt14">{{numCourses}} Courses</span>
 							</div>
-							<div class="tb_145">
-								<div class="wtch125">
-									<span class="vdt14">{{numCourses}} Courses</span>
-								</div>
-								
-							</div>						
-						</div>							
-					</div>					
-					<div class="col-md-9">
-						<div class="_14d25 mb-20">						
-							<div class="row">
-								<div class="col-md-12">
-									{{#each watchlist}}
-									<div class="fcrse_1">
-										<a href="/course/{{slug}}" class="hf_img">
-											{{#if avatar}}
-											<img src="{{avatar}}" style ="height :210px" alt="">
-											{{else}}
-											<img src="/images/courses/img-20.jpg" alt="">
-											{{/if}}
-											<div class="course-overlay">
-												<div class="badge_seller">Bestseller</div>
-												<div class="crse_reviews">
-													<i class="uil uil-star"></i>{{ratingsAverage}}
-												</div>
-												<span class="play_btn1"><i class="uil uil-play"></i></span>
-												<div class="crse_timer">
-													25 hours
-												</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="_14d25 mb-20">
+						<div class="row">
+							<div class="col-md-12">
+								{{#each watchlist}}
+								<div class="fcrse_1">
+									<a href="/course/{{slug}}" class="hf_img">
+										{{#if avatar}}
+										<img src="{{avatar}}" style="height :210px" alt="">
+										{{else}}
+										<img src="/images/courses/img-20.jpg" alt="">
+										{{/if}}
+										<div class="course-overlay">
+											<div class="badge_seller">Bestseller</div>
+											<div class="crse_reviews">
+												<i class="uil uil-star"></i>{{ratingsAverage}}
 											</div>
-										</a>
-										<div class="hs_content">
-											<div class="eps_dots eps_dots10 more_dropdown">
-												<form action="" method = "POST">
-													<a href="../student-profile/wishlist?remove={{id}}"><i class="uil uil-ellipsis-v"></i></a>
-												</form>
-												<div class="dropdown-content">
-													<span><i class='uil uil-times'></i>Remove</span>
-												</div>
-											</div>
-											<div class="vdtodt">
-												<span class="vdt14">{{views}} views</span>
-												<span class="vdt14">Created at: {{createdDate}}</span>
-											</div>
-											<a href="../course/{{slug}}" class="crse14s title900">{{name}}</a>
-											<a href="../category/{{category}}" class="crse-cate">{{categoryName}}</a>
-											<div class="auth1lnkprce">
-												<p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
-												<div class="prce142">${{price}}</div>
+											<span class="play_btn1"><i class="uil uil-play"></i></span>
+											<div class="crse_timer">
+												25 hours
 											</div>
 										</div>
+									</a>
+									<div class="hs_content">
+										<div class="eps_dots eps_dots10 more_dropdown">
+											<form action="/watchlist/remove" method="POST">
+												<i class="uil uil-ellipsis-v"></i>
+												<div class="dropdown-content">
+													<input type="hidden" name="id" value={{id}}>
+													<button class="btn btn-light" style="width:100%">Remove</i></button>
+												</div>
+											</form>
+										</div>
+										<div class="vdtodt">
+											<span class="vdt14">{{views}} views</span>
+											<span class="vdt14">Created at: {{createdDate}}</span>
+										</div>
+										<a href="../course/{{slug}}" class="crse14s title900">{{name}}</a>
+										<a href="../category/{{category}}" class="crse-cate">{{categoryName}}</a>
+										<div class="auth1lnkprce">
+											<p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
+											<div class="prce142">${{price}}</div>
+										</div>
 									</div>
-									{{/each}}
-								</div>								
-							</div>																		
-						</div>								
-					</div>				
+								</div>
+								{{/each}}
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		{{> footer}}
 	</div>
+	{{> footer}}
+	<script>
+		let menus = document.getElementsByClassName('menu--link');
+		menus[0].className = menus[0].className.replace(' active', '');
+		menus[1].className += " active";
+	</script>
+</div>
 
-	<!-- Body End -->
+<!-- Body End -->

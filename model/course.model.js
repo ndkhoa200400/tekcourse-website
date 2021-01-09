@@ -50,7 +50,7 @@ const courseSchema = new mongoose.Schema({
     required: [true, "Please provide category of course"],
     enum: ["mobile", "website"],
   },
-  subcategory:{
+  subcategory: {
     type: String,
     default: "none"
   },
@@ -62,20 +62,30 @@ const courseSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  views:{
+  views: {
     type: Number,
     default: 0
-  }
-},{
+  },
+  contents: [{
+    name: {
+      type: String,
+      trim: true
+    },
+    lectures: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Lecture'
+    }
+  }]
+}, {
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
 });
 
-courseSchema.index({slug: 1});
+courseSchema.index({ slug: 1 });
 
-courseSchema.index({teacherID: 1});
+courseSchema.index({ teacherID: 1 });
 
-courseSchema.index({name:'text', description:'text'});
+courseSchema.index({ name: 'text', description: 'text' });
 // courseSchema.virtual("lectures", {
 //   ref: "Lecture",
 //   foreignField: "course",
@@ -84,16 +94,16 @@ courseSchema.index({name:'text', description:'text'});
 
 
 
-courseSchema.virtual("createdDate").get(function(){
+courseSchema.virtual("createdDate").get(function () {
   return moment(this.createdAt).format("DD-MM-YYYY");
 });
 
-courseSchema.virtual("lastUpdatedDate").get(function(){
+courseSchema.virtual("lastUpdatedDate").get(function () {
   return moment(this.lastUpdated).format("DD-MM-YYYY");
 });
 
 
-courseSchema.virtual("categoryName").get(function(){
+courseSchema.virtual("categoryName").get(function () {
   if (this.category === "website")
     return "Web Development"
   else
@@ -120,7 +130,7 @@ courseSchema.pre("save", function (next) {
   next();
 });
 
-courseSchema.pre(/^find/, function(){
+courseSchema.pre(/^find/, function () {
   this.populate("teacherID");
 })
 
