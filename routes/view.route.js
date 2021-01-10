@@ -42,7 +42,9 @@ router.get('/course/create-new-course', (req, res) => {
 })
 
 
-router.post("/student-profile/edit", authController.protect,userController.updateMe);
+router.get("/student-profile/edit", authController.protect, controller.editStudentProfile);
+
+router.post("/student-profile/edit", authController.protect, userController.updateMe);
 router.get('/course/:slug', controller.getCourse);
 
 router.get('/signup', (req, res) => {

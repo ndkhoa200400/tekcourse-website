@@ -48,17 +48,17 @@ feedbackSchema.pre(/^find/, function (next) {
 feedbackSchema.statics.calcAverageRatings = async function(CourseId) {
   const stats = await this.aggregate([
     {
-      $match: { Course: CourseId }
+      $match: { courseID: CourseId }
     },
     {
       $group: {
-        _id: '$course',
+        _id: '$courseId',
         nRating: { $sum: 1 },
         avgRating: { $avg: '$rating' }
       }
     }
   ]);
-  // console.log(stats);
+  console.log(stats);
 
   if (stats.length > 0) {
     await Course.findByIdAndUpdate(CourseId, {
@@ -87,7 +87,7 @@ feedbackSchema.pre(/^findOneAnd/, async function(next) {
 
 feedbackSchema.post(/^findOneAnd/, async function() {
   // await this.findOne(); does NOT work here, query has already executed
-  await this.r.constructor.calcAverageRatings(this.r.Course);
+  await this.r.constructor.calcAverageRatings(this.r.courseID);
 });
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);

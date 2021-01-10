@@ -1775,7 +1775,7 @@
 									<div class="reviews_left">
 										<h3>Student Feedback</h3>
 										<div class="total_rating">
-											<div class="_rate001">4.6</div>
+											<div class="_rate001">{{this.course.ratingsAverage}}</div>
 											<div class="rating-box">
 												<span class="rating-star full-star"></span>
 												<span class="rating-star full-star"></span>
@@ -1788,7 +1788,7 @@
 										<div class="_rate003">
 											<div class="_rate004">
 												<div class="progress progress1">
-													<div class="progress-bar w-70" role="progressbar" aria-valuenow="70"
+													<div class="progress-bar w-{{this.feedbackStat.[4]}}" role="progressbar" aria-valuenow="70"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 												<div class="rating-box">
@@ -1798,11 +1798,11 @@
 													<span class="rating-star full-star"></span>
 													<span class="rating-star full-star"></span>
 												</div>
-												<div class="_rate002">70%</div>
+												<div class="_rate002">{{this.feedbackStat.[4]}}%</div>
 											</div>
 											<div class="_rate004">
 												<div class="progress progress1">
-													<div class="progress-bar w-30" role="progressbar" aria-valuenow="30"
+													<div class="progress-bar w-{{this.feedbackStat.[3]}}" role="progressbar" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 												<div class="rating-box">
@@ -1812,11 +1812,11 @@
 													<span class="rating-star full-star"></span>
 													<span class="rating-star empty-star"></span>
 												</div>
-												<div class="_rate002">40%</div>
+												<div class="_rate002">{{this.feedbackStat.[3]}}%</div>
 											</div>
 											<div class="_rate004">
 												<div class="progress progress1">
-													<div class="progress-bar w-5" role="progressbar" aria-valuenow="10"
+													<div class="progress-bar w-{{this.feedbackStat.[2]}}" role="progressbar" aria-valuenow="10"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 												<div class="rating-box">
@@ -1826,11 +1826,11 @@
 													<span class="rating-star empty-star"></span>
 													<span class="rating-star empty-star"></span>
 												</div>
-												<div class="_rate002">5%</div>
+												<div class="_rate002">{{this.feedbackStat.[2]}}%</div>
 											</div>
 											<div class="_rate004">
 												<div class="progress progress1">
-													<div class="progress-bar w-2" role="progressbar" aria-valuenow="2"
+													<div class="progress-bar w-{{this.feedbackStat.[1]}}" role="progressbar" aria-valuenow="2"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 												<div class="rating-box">
@@ -1840,11 +1840,11 @@
 													<span class="rating-star empty-star"></span>
 													<span class="rating-star empty-star"></span>
 												</div>
-												<div class="_rate002">1%</div>
+												<div class="_rate002">{{this.feedbackStat.[1]}}%</div>
 											</div>
 											<div class="_rate004">
 												<div class="progress progress1">
-													<div class="progress-bar w-1" role="progressbar" aria-valuenow="0"
+													<div class="progress-bar w-{{this.feedbackStat.[0]}}" role="progressbar" aria-valuenow="0"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 												<div class="rating-box">
@@ -1854,7 +1854,7 @@
 													<span class="rating-star empty-star"></span>
 													<span class="rating-star empty-star"></span>
 												</div>
-												<div class="_rate002">1%</div>
+												<div class="_rate002">{{this.feedbackStat.[0]}}%</div>
 											</div>
 										</div>
 									</div>
@@ -1876,14 +1876,14 @@
 											<div class="review_usr_dt">
 												<img src="/images/left-imgs/img-1.jpg" alt="">
 												<div class="rv1458">
-													<h4 class="tutor_name1">{{studentName}}</h4>
-													<span class="time_145">{{timeFeedback}}</span>
+													<h4 class="tutor_name1">{{userID.name}}</h4>
+													<span class="time_145">{{moment createdAt format='DD-MM-YYYY'}}</span>
 												</div>
 											</div>
 											<div class="rating-box mt-20">
-												{{rating}}<span class="rating-star full-star"></span>
+												{{rating}} <span class="rating-star full-star"></span>
 											</div>
-											<p class="rvds10">{{feedbackContent}}</p>
+											<p class="rvds10">{{review}}</p>
 											<div class="rpt100">
 												<span>Was this feedback helpful?</span>
 												<div class="radio--group-inline-container">
@@ -1904,7 +1904,35 @@
 								</div>
 							</div>
 							{{!-- Send Review --}}
-							
+							{{#if feedbackable}}
+							<form action="/feedback" method="POST">
+
+								<div class="row" style="margin-top: 15px;">
+									<div class="col-lg-5">
+										<div class="textarea_dt">
+											<div class="ui form swdh339">
+												<div class="field">
+													<textarea rows="5" name="review" id="reviewContent"
+														placeholder="Insert your review.."></textarea>
+												</div>
+												<select class="form-select" aria-label="Default select example"
+													style="float: left; width: 40%; margin-right: 10px;" name='rating'>
+													<option value="">Rating</option>
+													<option value="1">&star;</option>
+													<option value="2">&star; &star;</option>
+													<option value="3">&star; &star; &star;</option>
+													<option value="4">&star; &star; &star; &star;</option>
+													<option value="5">&star; &star; &star; &star; &star;</option>
+												</select>
+												<input type="hidden" name="courseID" value="{{this.course.id}}">
+												<button type="submit" class="btn1542">Send review</button>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</form>
+							{{/if}}
 						</div>
 								</div>
 							</div></div>

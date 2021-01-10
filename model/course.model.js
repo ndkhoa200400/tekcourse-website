@@ -71,10 +71,10 @@ const courseSchema = new mongoose.Schema({
       type: String,
       trim: true
     },
-    lectures: {
+    lectures: [{
       type: mongoose.Schema.ObjectId,
       ref: 'Lecture'
-    }
+    }]
   }]
 }, {
   toJSON: { virtuals: true },
