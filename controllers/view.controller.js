@@ -84,7 +84,7 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
   if (user.role === 'customer' && registeredCourse) {
-    reviewable = true;
+    feedbackable = true;
   }
   course.views++;
   const topTrending = await Course.find({ slug: { $ne: slugName } }, { _id: 0, __v: 0 })

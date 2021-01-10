@@ -65,7 +65,10 @@ router.get('/check-out', (req, res) => {
 });
 
 router.get('/instructor', (req, res) => {
-  res.render('instructor_courses')
+  res.render('instructor_courses',{
+    layout: 'main_teacher',
+    title : 'Create A Course'
+  })
 });
 
 
