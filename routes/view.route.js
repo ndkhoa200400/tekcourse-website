@@ -1,7 +1,7 @@
 const express = require('express');
 const controller = require('./../controllers/view.controller');
 const authController = require('./../controllers/auth.controller')
-const watchlistController =  require('./../controllers/watchList.controller');
+const watchlistController = require('./../controllers/watchList.controller');
 const userController = require('./../controllers/user.controller');
 var hbs = require('hbs');
 const Course = require('../model/course.model');
@@ -22,7 +22,7 @@ router.get('/student-profile', authController.protect, controller.getStudentProf
 
 router.get('/student-profile/wishlist', authController.protect, controller.getStudentWatchedList)
 
-router.post('/student-profile/wishlist',watchlistController.removeCourse);
+router.post('/student-profile/wishlist', watchlistController.removeCourse);
 
 
 // router.get('/student-profile/wishlist', authController.protect, controller.getStudentWatchedList);
@@ -72,8 +72,12 @@ router.get('/instructor', (req, res) => {
     title : 'Create A Course'
   })
 });
+//test admin
+router.get('/admin', (req, res) => {
+  res.render('admin', {
 
-
+  })
+})
 
 
 module.exports = router;

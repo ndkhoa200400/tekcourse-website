@@ -21,7 +21,7 @@
   "homepage": "https://github.com/Kerevin/tekcourse-website#readme",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "cloudinary": "^1.23.0",
     "cookie-parser": "^1.4.5",
