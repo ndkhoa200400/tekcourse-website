@@ -163,7 +163,7 @@
 }
 
 .sub_menu--link.active {
-	color: #da1f27;
+	color: #20c9bb;
 	font-weight: 500;
 }
 
@@ -241,7 +241,7 @@
 
 .collapse_menu:hover {
 	color: #fff;
-	background: #af1f24;
+	background: #20c9bb;
 }
 
 .collapse_menu .collapse_menu--icon {

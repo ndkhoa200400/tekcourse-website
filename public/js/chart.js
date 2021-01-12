@@ -61,7 +61,7 @@ $(document).ready(function() {
             pointBorderWidth: 2,
             backgroundColor: "transparent",
             borderWidth: 2,
-            borderColor: "#ed2a26",
+            borderColor: "#21d4c5",
             data: [0, 2, 4.3, 8, 5, 1.8, 2.2]
           }
         ]
@@ -1061,7 +1061,7 @@ $(document).ready(function() {
             label: "",
             data: [15, 30, 27, 43, 39, 18, 42, 25, 13, 18, 59],
             // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
-            backgroundColor: "#ed2a26"
+            backgroundColor: "#21d4c5"
           }
         ]
       },
@@ -1647,7 +1647,7 @@ if (barX !== null) {
           label: "Subscribe",
           data: [6, 3, 4, 3, 6, 9, 4, 8, 9, 5, 8, 3, 4],
           // data: [6, 3, 4, 3, 6, 9, 4, 8, 9, 5, 8, 3, 4],
-          backgroundColor: "#ed2a26"
+          backgroundColor: "#21d4c5"
         }
       ]
     },

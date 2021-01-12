@@ -45,7 +45,11 @@ router.get('/course/create-new-course', (req, res) => {
 router.get("/student-profile/edit", authController.protect, controller.editStudentProfile);
 
 router.post("/student-profile/edit", authController.protect, userController.updateMe);
+
+
 router.get('/course/:slug', controller.getCourse);
+
+router.get('/course/:slug/edit', controller.editCourse);
 
 router.get('/signup', (req, res) => {
   res.render('sign_up', {
@@ -66,14 +70,22 @@ router.get('/check-out', (req, res) => {
   });
 });
 
-router.get('/instructor', (req, res) => {
+router.get('/instructor', async (req, res) => {
+  let user = res.locals.user;
+  const courses = await Course.find({ teacherID: user.id }).lean({
+    virtuals: true,
+  });
+
+  if (user) user = { name: user.name, email: user.email, role: user.role };
   res.render('instructor_courses',{
+    user :user,
     layout: 'main_teacher',
-    title : 'Create A Course'
+    title : 'Create A Course',
+    courses: courses
   })
 });
 
 
-
+//router.get('/instructor/:slug/:lecture/edit', controller.editLecture);
 
 module.exports = router;

@@ -138,6 +138,31 @@ exports.getCourse = catchAsync(async (req, res, next) => {
   }
 });
 
+exports.editCourse = catchAsync(async (req, res, next) => {
+  try {
+    const slugName = req.params.slug;
+    const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).lean({ virtuals: true });
+
+    if (!course) {
+      res.redirect("back");
+      return;
+    }
+
+    let user = res.locals.user;
+
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+
+
+    res.status(200).render("create_new_lecture", {
+      title: course.name,
+      course: course,
+      user: user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 exports.getSessionCart = (req, res, next) => {
   if (req.session.cart) {
     res.locals.cart = req.session.cart;
