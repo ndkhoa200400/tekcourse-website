@@ -1,0 +1,235 @@
+{{> header}}
+<!-- Header End -->
+<!-- Left Sidebar Start -->
+{{> nav}}
+<!-- Left Sidebar End -->
+<!-- Body Start -->
+<!-- Mirrored from gambolthemes.net/html-items/cursus_demo_f12/instructor_courses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 12:59:06 GMT -->
+
+<div class="wrapper">
+    <div class="sa4d25">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="st_title"><i class="uil uil-eye"></i>Admin Page</h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="card_dash1">
+                        <div class="card_dash_left1">
+                            <i class="uil uil-eye"></i>
+                            <h1>Admin</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="my_courses_tabs">
+                        <ul class="nav nav-pills my_crse_nav" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-my-courses-tab" data-toggle="pill"
+                                    href="#pills-my-courses" role="tab" aria-controls="pills-my-courses"
+                                    aria-selected="true"><i class="uil uil-book-alt"></i>List of Teachers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-my-purchases-tab" data-toggle="pill"
+                                    href="#pills-my-purchases" role="tab" aria-controls="pills-my-purchases"
+                                    aria-selected="false"><i class="uil uil-book-alt"></i>List of Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-upcoming-courses-tab" data-toggle="pill"
+                                    href="#pills-upcoming-courses" role="tab" aria-controls="pills-upcoming-courses"
+                                    aria-selected="false"><i class="uil uil-book-alt"></i>List of Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-promotions-tab" data-toggle="pill"
+                                    href="#pills-promotions" role="tab" aria-controls="pills-promotions"
+                                    aria-selected="false"><i class="uil uil-file"></i>Create New Teacher
+                                    Account</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-my-courses" role="tabpanel">
+                                <div class="table-responsive mt-30">
+                                    {{!-- list of teachers --}}
+
+                                    <table class="table ucp-table">
+                                        <thead class="thead-s">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th class="text-center" scope="col">Email</th>
+                                                <th class="text-center" scope="col">Status</th>
+                                                <th class="text-center" scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each listTeacherAccounts}}
+                                            <tr>
+                                                <td><a href="#"><b class="course_active">{{teacherName}}</b></a></td>
+                                                <td class="text-center">{{teacherMail}}</td>
+                                                {{!-- Dưới đây là trạng thái của tài khoản trong trường hợp block, nếu m
+                                                xoá hẳn tài khoản thì bỏ luôn cái này với xoá dòng Status phía trên --}}
+                                                {{#if isTeacherActive}}
+                                                <td class="text-center"><b style="color: green;">Active</b></td>
+                                                {{else}}
+                                                <td class="text-center"><b style="color: red;">Blocked</b></td>
+                                                {{/if}}
+                                                <td class="text-center">
+                                                    <a href="#" title="Delete" class="gray-s"><i
+                                                            class="uil uil-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-my-purchases" role="tabpanel">
+                                <div class="table-responsive mt-30">
+                                    {{!-- list of students --}}
+                                    <table class="table ucp-table">
+                                        <thead class="thead-s">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th class="text-center" scope="col">Email</th>
+                                                <th class="text-center" scope="col">Status</th>
+                                                <th class="text-center" scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each listStudentAccounts}}
+                                            <tr>
+                                                <td><a href="#"><b class="course_active">{{studentName}}</b></a></td>
+                                                <td class="text-center">{{studentMail}}</td>
+                                                {{!-- Dưới đây là trạng thái của tài khoản trong trường hợp block, nếu m
+                                                xoá hẳn tài khoản thì bỏ luôn cái này với xoá dòng Status phía trên --}}
+                                                {{#if isStudentActive}}
+                                                <td class="text-center"><b style="color: green;">Active</b></td>
+                                                {{else}}
+                                                <td class="text-center"><b style="color: red;">Blocked</b></td>
+                                                {{/if}}
+                                                <td class="text-center">
+                                                    <a href="#" title="Delete" class="gray-s"><i
+                                                            class="uil uil-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-upcoming-courses" role="tabpanel">
+                                <div class="table-responsive mt-30">
+                                    {{!-- list of courses --}}
+                                    <table class="table ucp-table">
+                                        <thead class="thead-s">
+                                            <tr>
+                                                <th class="cell-ta">Title</th>
+                                                <th class="text-center">Category</th>
+                                                <th class="text-center">Sub Category</th>
+                                                <th class="text-center">Price</th>
+                                                <th class="text-center">Date</th>
+                                                <th class="text-center" scope="col">Status</th>
+                                                <th class="text-center" scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each listCourses}}
+                                            <tr>
+                                                <td class="cell-ta"><b class="course_active">{{courseTitle}}</b></td>
+                                                <td class="text-center"><a href="{{categoryLink}}">{{category}}</a></td>
+                                                <td class="text-center">{{subCategory}}</td>
+                                                <td class="text-center">{{price}}</td>
+                                                <td class="text-center">{{createDate}}</td>
+                                                {{#if isCourseActive}}
+                                                <td class="text-center"><b style="color: green;">Active</b></td>
+                                                {{else}}
+                                                <td class="text-center"><b style="color: red;">Blocked</b></td>
+                                                {{/if}}
+                                                <td class="text-center">
+                                                    <a href="#" onclick="openForm()" title="Edit" class="gray-s"><i
+                                                            class="uil uil-edit-alt"></i></a>
+                                                    <a href="#" title="Delete" class="gray-s"><i
+                                                            class="uil uil-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {{!-- form pop up để sửa thông tin courses --}}
+                            <div class="loginPopup">
+                                <div class="formPopup" id="popupForm">
+                                    <form action="/action_page.php" class="formContainer">
+                                        <label for="titleCourse">
+                                            <strong style="color: black;">Title</strong>
+                                        </label>
+                                        <input type="text" id="titleCourse" value="titleCourse" name="titleCourse"
+                                            required>
+
+                                        <label for="category">
+                                            <strong style="color: black;">Category</strong>
+                                        </label>
+                                        <input type="text" id="category" value="category" name="category" required>
+
+                                        <label for="subCategory">
+                                            <strong style="color: black;">Sub Category</strong>
+                                        </label>
+                                        <input type="text" id="subCategory" value="subCategory" name="subCategory"
+                                            required>
+
+                                        <label for="priceCourse">
+                                            <strong style="color: black;">Price</strong>
+                                        </label>
+                                        <input type="text" id="priceCourse" value="priceCourse" name="priceCourse"
+                                            required>
+
+                                        <button type="submit" class="btn">Save</button>
+                                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                            {{!-- Thêm tài khoản cho giáo viên --}}
+                            <div class="tab-pane fade" id="pills-promotions" role="tabpanel"
+                                aria-labelledby="pills-promotions-tab">
+                                <div class="promotion_tab mb-10">
+                                    <form class="form--signup">
+                                        <div class="ui search focus">
+                                            <div class="ui left icon input swdh11 swdh19">
+                                                <input class="prompt srch_explore" type="text" name="fullname" value=""
+                                                    id="id_fullname" required="" maxlength="64" placeholder="Full Name">
+                                            </div>
+                                        </div>
+                                        <div class="ui search focus mt-15">
+                                            <div class="ui left icon input swdh11 swdh19">
+                                                <input class="prompt srch_explore" type="email" name="emailaddress"
+                                                    value="" id="id_email" required="" maxlength="64"
+                                                    placeholder="Email Address">
+                                            </div>
+                                        </div>
+                                        <div class="ui search focus mt-15">
+                                            <div class="ui left icon input swdh11 swdh19">
+                                                <input class="prompt srch_explore" type="password" name="password"
+                                                    value="" id="id_password" required="" maxlength="64"
+                                                    placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <button class="login-btn" style="width: 30%; margin-left: 35%;"
+                                            type="submit">Create Teacher
+                                            Account</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>footer}}
+</div>
+<!-- Body End -->
+
+<!-- Mirrored from gambolthemes.net/html-items/cursus_demo_f12/instructor_courses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 12:59:08 GMT -->
