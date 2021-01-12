@@ -135,6 +135,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {{#each listCourses}}
                                             <tr>
                                                 <td class="cell-ta"><b class="course_active">{{courseTitle}}</b></td>
                                                 <td class="text-center"><a href="{{categoryLink}}">{{category}}</a></td>
@@ -147,15 +148,47 @@
                                                 <td class="text-center"><b style="color: red;">Blocked</b></td>
                                                 {{/if}}
                                                 <td class="text-center">
-                                                    <a href="#" title="Edit" class="gray-s"><i
+                                                    <a href="#" onclick="openForm()" title="Edit" class="gray-s"><i
                                                             class="uil uil-edit-alt"></i></a>
                                                     <a href="#" title="Delete" class="gray-s"><i
                                                             class="uil uil-trash-alt"></i></a>
                                                 </td>
                                             </tr>
-
+                                            {{/each}}
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            {{!-- form pop up để sửa thông tin courses --}}
+                            <div class="loginPopup">
+                                <div class="formPopup" id="popupForm">
+                                    <form action="/action_page.php" class="formContainer">
+                                        <label for="titleCourse">
+                                            <strong style="color: black;">Title</strong>
+                                        </label>
+                                        <input type="text" id="titleCourse" value="titleCourse" name="titleCourse"
+                                            required>
+
+                                        <label for="category">
+                                            <strong style="color: black;">Category</strong>
+                                        </label>
+                                        <input type="text" id="category" value="category" name="category" required>
+
+                                        <label for="subCategory">
+                                            <strong style="color: black;">Sub Category</strong>
+                                        </label>
+                                        <input type="text" id="subCategory" value="subCategory" name="subCategory"
+                                            required>
+
+                                        <label for="priceCourse">
+                                            <strong style="color: black;">Price</strong>
+                                        </label>
+                                        <input type="text" id="priceCourse" value="priceCourse" name="priceCourse"
+                                            required>
+
+                                        <button type="submit" class="btn">Save</button>
+                                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                    </form>
                                 </div>
                             </div>
                             {{!-- Thêm tài khoản cho giáo viên --}}
