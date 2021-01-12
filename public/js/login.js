@@ -6,7 +6,7 @@ export const login = async (email, password) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "http://localhost:8000/api/user/login",
+      url: "http://localhost:8000/user/login",
       data: {
         email,
         password,
@@ -30,7 +30,7 @@ export const signup = async (name, email, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "http://localhost:8000/api/user/signup",
+      url: "http://localhost:8000/user/signup",
       data: {
         name,
         email,
@@ -56,7 +56,7 @@ export const logout = async () => {
   try {
     const res = await axios({
       method: "GET",
-      url: "http://localhost:8000/api/user/logout",
+      url: "http://localhost:8000/user/logout",
     });
 
   } catch (err) {
@@ -64,3 +64,29 @@ export const logout = async () => {
 		alert(res.message);
   }
 };
+
+export const changePassword = async (passwordCurrent, password, passwordConfirm) => {
+  try {
+    const res = await axios({
+      method: "PATCH",
+      url: "http://localhost:8000/user/updatePassword",
+      data: {
+        passwordCurrent: passwordCurrent,
+        password: password,
+        passwordConfirm: passwordConfirm
+      }
+    });
+    if (res.data.status === 'success') {
+      alert("Changed password successfully");
+      window.setTimeout(() => {
+        window.location = '/student-profile/edit'; // back to home page
+      }, 1000);
+    } else {
+   
+      console.log(res.data);
+    }
+  } catch (error) {
+    let res = error.response.data;
+    alert(res.message)
+  }
+}

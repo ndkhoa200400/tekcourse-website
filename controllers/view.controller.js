@@ -65,13 +65,15 @@ const getStatFeedback = (feedbacks) => {
 
   // Thống kê số lượng các lượt đánh giá
   const stars = [0, 0, 0, 0, 0];
+
   for (let i = 0; i < numFeebacks; i++) {
     stars[feedbacks[i].rating - 1] += 1;
   }
-  for(let i = 0; i < 5; i++)
-  {
-    stars[i] = Math.round((stars[i]/numFeebacks)*100);
-  }
+  if (numFeebacks > 0)
+    for(let i = 0; i < 5; i++)
+    {
+      stars[i] = Math.round((stars[i]/numFeebacks)*100);
+    }
   return stars;
 }
 

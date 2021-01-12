@@ -38,11 +38,134 @@ const createSendToken = (user, statusCode, res) => {
     },
   });
 };
+const createToken = (user, statusCode, res) => {
+  // Create token in server-side rendering
+  const token = signToken(user._id);
+  const cookieOptions = {
+    // options for cookie
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true, // prevent XSS atack
+  };
 
-exports.signup = catchAsync(async (req, res, next) => {
-  const newUser = await User.create(req.body);
-  createSendToken(newUser, 201, res);
-});
+  // Khi ở production mới set sercure = true để HTTPS protect cookie
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+  res.cookie("jwt", token, cookieOptions);
+
+  // Remove the password from the output
+  user.password = undefined;
+
+};
+exports.signup = async (req, res, next) => {
+  const opt = req.session.register.otp;
+  const userOtp = req.body.otp;
+  const body = req.session.register.body;
+  if (opt != userOtp){
+    return res.render('otp_page', {
+      title: 'OTP Authentication',
+      layout: false,
+      message: "Incorrect OTP code",
+      email: body.email,
+
+  })
+  }
+  
+  try {
+    const newUser = await User.create(body);
+    createToken(newUser, 201, res);
+    res.redirect('/')
+  } catch (e) {
+    return res.send(`
+      <script>
+        alert("${e.message}");
+        window.location = '/signup'
+      </script>
+    `)
+  }
+};
+
+exports.otp = catchAsync(async(req,res,next)=>{
+  var nodemailer = require("nodemailer"); // gửi otp
+  // gửi OTP
+  function generateOTP() {
+    var digits = "0123456789";
+    let OTP = "";
+    for (let i = 0; i < 6; i++) {
+      OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+  }
+  
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "tekcoursesp@gmail.com", //email ID
+      pass: "Tekcourse123", //Password
+    },
+  });
+  function sendMail(email, otp) {
+    var details = {
+      from: "tekcoursesp@gmail.com", // sender address same as above
+      to: email, // Receiver's email id
+      subject: "OTP verification", // Subject of the mail.
+      html: otp, // Sending OTP
+    };
+
+    transporter.sendMail(details, function (error, data) {
+      if (error) console.log(error);
+      else console.log(data);
+    });
+  }
+
+  var otp = generateOTP();
+  sendMail(req.body.email, otp);
+
+  req.session.register = {
+    body:req.body,
+    otp,
+  };
+  res.redirect("/user/signup/otp");
+})
+exports.resendOtp = catchAsync(async(req,res,next)=>{
+  var nodemailer = require("nodemailer"); // gửi otp
+  // gửi OTP
+  function generateOTP() {
+    var digits = "0123456789";
+    let OTP = "";
+    for (let i = 0; i < 6; i++) {
+      OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+  }
+  
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "tekcoursesp@gmail.com", //email ID
+      pass: "Tekcourse123", //Password
+    },
+  });
+  function sendMail(email, otp) {
+    var details = {
+      from: "tekcoursesp@gmail.com", // sender address same as above
+      to: email, // Receiver's email id
+      subject: "OTP verification", // Subject of the mail.
+      html: otp, // Sending OTP
+    };
+
+    transporter.sendMail(details, function (error, data) {
+      if (error) console.log(error);
+    });
+  }
+
+  var otp = generateOTP();
+  sendMail(req.session.register.body.email, otp);
+
+  req.session.register.otp = otp;
+  res.redirect("/user/signup/otp");
+})
 
 exports.createTeacherAccount = catchAsync(async (req, res, next) => {
   req.body.role = "teacher";
@@ -61,8 +184,12 @@ exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   // 1) Check if email or username and password exist
   if (!email || !password) {
-    res.redirect("/users/login");
-    return next(new appError("Please provide email or password!", 400));
+    return res.send(`
+      <script>
+        alert("Please provide email or password!");
+        window.location = "/login";
+      </script>
+    `)
   }
 
   // 2) Check if user exists && password is correct
@@ -71,10 +198,24 @@ exports.login = catchAsync(async (req, res, next) => {
   user = await User.findOne({ email: email }).select("+password");
 
   if (!user || !(await user.correctPassword(password, user.password))) {
-    return next(new appError("Incorrect email or username or password", 401));
+    return res.send(`
+      <script>
+        alert("Incorrect email or username or password");
+        window.location = "/login";
+      </script>
+    `)
+  
   }
   // 3) IF everything is ok, send token to client
-  createSendToken(user, 200, res);
+  createToken(user, 200, res);
+
+  res.send(`
+    <script>
+      alert("Logged in successfully");
+      window.location = "/";
+    </script>
+  `)
+
 });
 
 exports.logout = (req, res) => {
@@ -229,22 +370,21 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  // 1) Get user from collection
-  const user = await User.findById(req.user.id).select("+password");
-
-  // 2) Check if POSTed current password is correct
-  if (!user.correctPassword(req.body.currpassword, user.password)) {
-    return next(new appError("Your current password is wrong", 401));
-  }
-
-  // 3) If so, update password
-  user.password = req.body.password;
-  user.passwordConfirm = req.body.passwordConfirm;
-  await user.save();
-  // findByIDAndUpdate will not work
-
-  // 4) Log user in, send JWT
-  createSendToken(user, 200, res);
+   // 1) Get user from collection
+   const user = await User.findById(req.user.id).select("+password +passwordConfirm");
+   // 2) Check if POSTed current password is correct
+   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+     return next(new appError("Incorrect password!", 401));
+   }
+   // 3) If so, update password
+   user.password = req.body.password;
+   user.passwordConfirm = req.body.passwordConfirm;
+   await user.save();
+   // findByIDAndUpdate will not work
+ 
+   // 4) Log user in, send JWT
+   createSendToken(user, 200, res);
+   res.redirect('back');
 });
 
 exports.allowedToLecture = catchAsync(async (req, res, next) => {
