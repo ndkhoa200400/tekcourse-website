@@ -2,17 +2,17 @@ const express = require("express");
 const controller = require("../controllers/lecture.controller");
 const authController = require("../controllers/auth.controller");
 const router = express.Router({mergeParams: true});
-
-// api/:courdeID/lecture
+const upload = require("../utils/multer");
+// coruse/:slug/lecture
 // or
 // api/lecture
 router
-  .route("/")
-  .get(controller.getAllLectures)
+  .route("/add")
   .post(
     authController.protect,
     authController.restrictTo("teacher"),
-    controller.setCourseID,
+    //controller.setCourseID,
+    upload.single('reference'),
     controller.createLecture
   );
 

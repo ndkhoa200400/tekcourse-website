@@ -1,4 +1,8 @@
-﻿<body>
+﻿<head>
+	<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+</head>
+
+<body>
 	<!-- Video Model Start -->
 	<div class="modal vd_mdl fade" id="videoModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
@@ -7,9 +11,15 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<div class="modal-body">
+					{{#if course.promotionalVideo}}
+					<video controls>
+						<source src="{{course.promotionalVideo}}">
+					</video>
+					{{else}}
 					<iframe src="https://www.youtube.com/embed/Ohe_JzKksvA"
 						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 						allowfullscreen></iframe>
+					{{/if}}
 				</div>
 
 			</div>
@@ -194,34 +204,6 @@
 										<div class="_htg452 mt-35">
 											<h3>Description</h3>
 											{{{course.description}}}
-											{{!-- <span class="_abc123">Just updated to include Bootstrap 4.1.3!</span>
-											<p>Hi! Welcome to the Web Developer Bootcamp, the <strong>only course you
-													need to learn web development</strong>. There are a lot of options
-												for online developer training, but this course is without a doubt the
-												most comprehensive and effective on the market. Here's why:</p>
-											<ul class="_abc124">
-												<li><span class="_5f7g11">This is the only online course taught by a
-														professional bootcamp instructor.</span></li>
-												<li><span class="_5f7g11">94% of my in-person bootcamp students go on to
-														get full-time developer jobs. Most of them are complete
-														beginners when I start working with them.</span></li>
-												<li><span class="_5f7g11">The previous 2 bootcamp programs that I taught
-														cost $14,000 and $21,000. This course is just as comprehensive
-														but with brand new content for a fraction of the price.</span>
-												</li>
-												<li><span class="_5f7g11">Everything I cover is up-to-date and relevant
-														to today's developer industry. No PHP or other dated
-														technologies. This course does not cut any corners.</span></li>
-												<li><span class="_5f7g11">This is the only complete beginner full-stack
-														developer course that covers NodeJS.</span></li>
-												<li><span class="_5f7g11">We build 13+ projects, including a gigantic
-														production application called YelpCamp. No other course walks
-														you through the creation of such a substantial
-														application.</span></li>
-												<li><span class="_5f7g11">The course is constantly updated with new
-														content, projects, and modules. Think of it as a subscription to
-														a never-ending supply of developer training.</span></li>
-											</ul> --}}
 
 											<!-- Recommended Courses -->
 
@@ -229,7 +211,7 @@
 												<div class="row">
 													<div class="col-xl-12 col-lg-12">
 														<div class="section3125 mt-50">
-															<h4 class="item_title">On Trending Courses</h4>
+															<h4 class="item_title">Recommended</h4>
 															<a href="#" class="see150">See all</a>
 															<div class="la5lo1">
 																<div class="owl-carousel featured_courses owl-theme">
@@ -315,401 +297,357 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="nav-courses" role="tabpanel">
-						<div class="crse_content">
-							<h3>Course content</h3>
-							<div class="_112456">
-								<ul class="accordion-expand-holder">
-									<li><span class="accordion-expand-all _d1452">Expand all</span></li>
-									<li><span class="_fgr123"> 402 lectures</span></li>
-									<li><span class="_fgr123">47:06:29</span></li>
-								</ul>
-							</div>
+									<div class="crse_content">
+										<h3>Course content</h3>
+										<div class="_112456">
+											<ul class="accordion-expand-holder">
+												<li><span class="accordion-expand-all _d1452">Expand all</span></li>
+												<li><span class="_fgr123"> 402 lectures</span></li>
+												<li><span class="_fgr123">47:06:29</span></li>
+											</ul>
+										</div>
 
-							<div id="accordion" class="ui-accordion ui-widget ui-helper-reset">
-								<a href="javascript:void(0)"
-									class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-									<div class="section-header-left">
-										<span class="section-title-wrapper">
-											<i class='uil uil-presentation-play crse_icon'></i>
-											<span class="section-title-text">Introduction to this Course</span>
-										</span>
-									</div>
-									<div class="section-header-right">
-										
-										<span class="section-header-length">Edit</span>
-									</div>
-								</a>
-								<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-file icon_142'></i>
-											<div class="top">
-												<div class="title">A Note On Asking For Help</div>
-											</div>
-										</div>
-										<div class="details">
-											<span class="content-summary">00:12</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-file icon_142'></i>
-											<div class="top">
-												<div class="title">Introducing Our TA</div>
-											</div>
-										</div>
-										<div class="details">
-											<span class="content-summary">01:42</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-file icon_142'></i>
-											<div class="top">
-												<div class="title">Join the Online Community</div>
-											</div>
-										</div>
-										<div class="details">
-											<span class="content-summary">00:51</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-play-circle icon_142'></i>
-											<div class="top">
-												<div class="title">Why This Course?</div>
-											</div>
-										</div>
-										<div class="details">
-											<a href="#" class="preview-text">Preview</a>
-											<span class="content-summary">07:48</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-file-download-alt icon_142'></i>
-											<div class="top">
-												<div class="title">Syllabus Download</div>
-											</div>
-										</div>
-										<div class="details">
-											<a href="#" class="preview-text">Preview</a>
-											<span class="content-summary">2 pages</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-play-circle icon_142'></i>
-											<div class="top">
-												<div class="title">Syllabus Walkthrough</div>
-											</div>
-										</div>
-										<div class="details">
-											<a href="#" class="preview-text">Preview</a>
-											<span class="content-summary">01:42</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-file icon_142'></i>
-											<div class="top">
-												<div class="title">Lecture Slides</div>
-											</div>
-										</div>
-										<div class="details">
-											<span class="content-summary">00:11</span>
-										</div>
-									</div>
-								</div>
+										<div id="accordion" class="ui-accordion ui-widget ui-helper-reset">
+											{{#each this.contents}}
+											<a href="javascript:void(0)"
+												class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+												<div class="section-header-left">
+													<span class="section-title-wrapper">
+														<i class='uil uil-presentation-play crse_icon'></i>
+														<span class="section-title-text">{{this.name}}</span>
+													</span>
+												</div>
+											</a>
 
-								<a href="javascript:void(0)"
-									class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-									<div class="section-header-left">
-										<span class="section-title-wrapper">
-											<i class='uil uil-presentation-play crse_icon'></i>
-											<span class="section-title-text">Introduction to Front End
-												Development</span>
-										</span>
-									</div>
-									<div class="section-header-right">
-										<span class="num-items-in-section">6 lectures</span>
-										<span class="section-header-length">27:26</span>
-									</div>
-								</a>
+											<div
+												class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+												{{#each this.lectures}}
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-file icon_142'></i>
+														<div class="top">
 
-								<div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-play-circle icon_142'></i>
-											<div class="top">
-												<div class="title">Unit Objectives</div>
+															<div class="title">
+																<button class="btn btn-outline-light btn-sm"
+																	onclick=getVideo("{{this.reference}}")>{{name}}</button>
+
+																<div class="show-video-{{this.name}}">
+																	<video id="my-video" class="video-js" controls
+																		preload="auto" width="640" height="264"
+																		poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+																		<source src="{{this.reference}}" type="video/mp4" />
+																		<p class="vjs-no-js">
+																			To view this video please enable JavaScript,
+																			and
+																			consider upgrading to a
+																			web browser that
+																			<a href="https://videojs.com/html5-video-support/"
+																				target="_blank">supports HTML5 video</a>
+																		</p>
+																	</video>
+																</div>
+
+															</div>
+														</div>
+													</div>
+													<div class="details">
+														<span class="content-summary">00:12</span>
+													</div>
+												</div>
+												{{/each}}
+
 											</div>
-										</div>
-										<div class="details">
-											<a href="#" class="preview-text">Preview</a>
-											<span class="content-summary">01.40</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-file icon_142'></i>
-											<div class="top">
-												<div class="title">Note about Setting Up Front-End Developer Environment
+											{{/each}}
+											<div
+												class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-play-circle icon_142'></i>
+														<div class="top">
+															<div class="title">Unit Objectives</div>
+														</div>
+													</div>
+													<div class="details">
+														<a href="#" class="preview-text">Preview</a>
+														<span class="content-summary">01.40</span>
+													</div>
+												</div>
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-file icon_142'></i>
+														<div class="top">
+															<div class="title">Note about Setting Up Front-End Developer
+																Environment
+															</div>
+														</div>
+													</div>
+													<div class="details">
+														<span class="content-summary">00:30</span>
+													</div>
+												</div>
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-play-circle icon_142'></i>
+														<div class="top">
+															<div class="title">Setting Up Front-End Developer
+																Environment</div>
+														</div>
+													</div>
+													<div class="details">
+														<span class="content-summary">03:11</span>
+													</div>
+												</div>
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-file icon_142'></i>
+														<div class="top">
+															<div class="title">Note about Introduction to the Web</div>
+														</div>
+													</div>
+													<div class="details">
+														<span class="content-summary">00:11</span>
+													</div>
+												</div>
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-play-circle icon_142'></i>
+														<div class="top">
+															<div class="title">Introduction to the Web</div>
+														</div>
+													</div>
+													<div class="details">
+														<span class="content-summary">10.08</span>
+													</div>
+												</div>
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-play-circle icon_142'></i>
+														<div class="top">
+															<div class="title">The Front End Holy Trinity</div>
+														</div>
+													</div>
+													<div class="details">
+														<a href="#" class="preview-text">Preview</a>
+														<span class="content-summary">11:46</span>
+													</div>
 												</div>
 											</div>
+
 										</div>
-										<div class="details">
-											<span class="content-summary">00:30</span>
-										</div>
+										<a class="btn1458" href="#">20 More Sections</a>
 									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-play-circle icon_142'></i>
-											<div class="top">
-												<div class="title">Setting Up Front-End Developer Environment</div>
-											</div>
-										</div>
-										<div class="details">
-											<span class="content-summary">03:11</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-file icon_142'></i>
-											<div class="top">
-												<div class="title">Note about Introduction to the Web</div>
-											</div>
-										</div>
-										<div class="details">
-											<span class="content-summary">00:11</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-play-circle icon_142'></i>
-											<div class="top">
-												<div class="title">Introduction to the Web</div>
-											</div>
-										</div>
-										<div class="details">
-											<span class="content-summary">10.08</span>
-										</div>
-									</div>
-									<div class="lecture-container">
-										<div class="left-content">
-											<i class='uil uil-play-circle icon_142'></i>
-											<div class="top">
-												<div class="title">The Front End Holy Trinity</div>
-											</div>
-										</div>
-										<div class="details">
-											<a href="#" class="preview-text">Preview</a>
-											<span class="content-summary">11:46</span>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-							<a class="btn1458" href="#">20 More Sections</a>
-						</div>
 								</div>
 								<div class="tab-pane fade" id="nav-reviews" role="tabpanel">
-						<div class="student_reviews"><div class="row">
-								<div class="col-lg-5">
-									
-									<div class="reviews_left">
-										<h3>Student Feedback</h3>
-										<div class="total_rating">
-											<div class="_rate001">{{this.course.ratingsAverage}}</div>
-											<div class="rating-box">
-												<span class="rating-star full-star"></span>
-												<span class="rating-star full-star"></span>
-												<span class="rating-star full-star"></span>
-												<span class="rating-star full-star"></span>
-												<span class="rating-star half-star"></span>
-											</div>
-											<div class="_rate002">Course Rating</div>
-										</div>
-										<div class="_rate003">
-											<div class="_rate004">
-												<div class="progress progress1">
-													<div class="progress-bar w-{{this.feedbackStat.[4]}}" role="progressbar" aria-valuenow="70"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<div class="rating-box">
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-												</div>
-												<div class="_rate002">{{this.feedbackStat.[4]}}%</div>
-											</div>
-											<div class="_rate004">
-												<div class="progress progress1">
-													<div class="progress-bar w-{{this.feedbackStat.[3]}}" role="progressbar" aria-valuenow="30"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<div class="rating-box">
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star empty-star"></span>
-												</div>
-												<div class="_rate002">{{this.feedbackStat.[3]}}%</div>
-											</div>
-											<div class="_rate004">
-												<div class="progress progress1">
-													<div class="progress-bar w-{{this.feedbackStat.[2]}}" role="progressbar" aria-valuenow="10"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<div class="rating-box">
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star empty-star"></span>
-													<span class="rating-star empty-star"></span>
-												</div>
-												<div class="_rate002">{{this.feedbackStat.[2]}}%</div>
-											</div>
-											<div class="_rate004">
-												<div class="progress progress1">
-													<div class="progress-bar w-{{this.feedbackStat.[1]}}" role="progressbar" aria-valuenow="2"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<div class="rating-box">
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star empty-star"></span>
-													<span class="rating-star empty-star"></span>
-													<span class="rating-star empty-star"></span>
-												</div>
-												<div class="_rate002">{{this.feedbackStat.[1]}}%</div>
-											</div>
-											<div class="_rate004">
-												<div class="progress progress1">
-													<div class="progress-bar w-{{this.feedbackStat.[0]}}" role="progressbar" aria-valuenow="0"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<div class="rating-box">
-													<span class="rating-star full-star"></span>
-													<span class="rating-star empty-star"></span>
-													<span class="rating-star empty-star"></span>
-													<span class="rating-star empty-star"></span>
-													<span class="rating-star empty-star"></span>
-												</div>
-												<div class="_rate002">{{this.feedbackStat.[0]}}%</div>
-											</div>
-										</div>
-									</div>
-								
-								</div>
-								<div class="col-lg-7">
-									<div class="review_right">
-										<div class="review_right_heading">
-											<h3>Feedbacks</h3>
-											{{!-- <div class="review_search">
-												<input class="rv_srch" type="text" placeholder="Search reviews...">
-												<button class="rvsrch_btn"><i class='uil uil-search'></i></button>
-											</div> --}}
-										</div>
-									</div>
-									<div class="review_all120">
-										{{#each feedbacks}}
-										<div class="review_item">
-											<div class="review_usr_dt">
-												<img src="/images/left-imgs/img-1.jpg" alt="">
-												<div class="rv1458">
-													<h4 class="tutor_name1">{{userID.name}}</h4>
-													<span class="time_145">{{moment createdAt format='DD-MM-YYYY'}}</span>
-												</div>
-											</div>
-											<div class="rating-box mt-20">
-												{{rating}} <span class="rating-star full-star"></span>
-{{!-- 												
-												{{#switch rating}} 
-													{{#case "1"}} 
-													<span class="rating-star full-star"></span>
-													 {{/case}} 
-													{{#case "2"}} 
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													 {{/case}} 
-													 {{#case "3"}} 
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													 {{/case}}
-													 {{#case "4"}} 
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													 {{/case}}
-													 {{#case "5"}} 
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													<span class="rating-star full-star"></span>
-													 {{/case}}
+									<div class="student_reviews">
+										<div class="row">
+											<div class="col-lg-5">
 
-												{{/switch}} --}}
-
-											</div>
-											<p class="rvds10">{{review}}</p>
-											<div class="rpt100">
-												<span>Was this feedback helpful?</span>
-												<div class="radio--group-inline-container">
-													<div class="radio-item">
-														<input id="radio-1" name="radio" type="radio">
-														<label for="radio-1" class="radio-label">Yes</label>
+												<div class="reviews_left">
+													<h3>Student Feedback</h3>
+													<div class="total_rating">
+														<div class="_rate001">{{this.course.ratingsAverage}}</div>
+														<div class="rating-box">
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star half-star"></span>
+														</div>
+														<div class="_rate002">Course Rating</div>
 													</div>
-													<div class="radio-item">
-														<input id="radio-2" name="radio" type="radio">
-														<label for="radio-2" class="radio-label">No</label>
+													<div class="_rate003">
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[4]}}"
+																	role="progressbar" aria-valuenow="70"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[4]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[3]}}"
+																	role="progressbar" aria-valuenow="30"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[3]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[2]}}"
+																	role="progressbar" aria-valuenow="10"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[2]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[1]}}"
+																	role="progressbar" aria-valuenow="2"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[1]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[0]}}"
+																	role="progressbar" aria-valuenow="0"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[0]}}%</div>
+														</div>
 													</div>
 												</div>
-												<a href="#" class="report145">Report</a>
+
+											</div>
+											<div class="col-lg-7">
+												<div class="review_right">
+													<div class="review_right_heading">
+														<h3>Feedbacks</h3>
+														{{!-- <div class="review_search">
+															<input class="rv_srch" type="text"
+																placeholder="Search reviews...">
+															<button class="rvsrch_btn"><i
+																	class='uil uil-search'></i></button>
+														</div> --}}
+													</div>
+												</div>
+												<div class="review_all120">
+													{{#each feedbacks}}
+													<div class="review_item">
+														<div class="review_usr_dt">
+															<img src="/images/left-imgs/img-1.jpg" alt="">
+															<div class="rv1458">
+																<h4 class="tutor_name1">{{userID.name}}</h4>
+																<span class="time_145">{{moment createdAt
+																	format='DD-MM-YYYY'}}</span>
+															</div>
+														</div>
+														<div class="rating-box mt-20">
+															{{rating}} <span class="rating-star full-star"></span>
+															{{!--
+															{{#switch rating}}
+															{{#case "1"}}
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "2"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "3"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "4"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "5"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
+
+															{{/switch}} --}}
+
+														</div>
+														<p class="rvds10">{{review}}</p>
+														<div class="rpt100">
+															<span>Was this feedback helpful?</span>
+															<div class="radio--group-inline-container">
+																<div class="radio-item">
+																	<input id="radio-1" name="radio" type="radio">
+																	<label for="radio-1" class="radio-label">Yes</label>
+																</div>
+																<div class="radio-item">
+																	<input id="radio-2" name="radio" type="radio">
+																	<label for="radio-2" class="radio-label">No</label>
+																</div>
+															</div>
+															<a href="#" class="report145">Report</a>
+														</div>
+													</div>
+													{{/each}}
+												</div>
 											</div>
 										</div>
-										{{/each}}
+										{{!-- Send Review --}}
+										{{#if feedbackable}}
+										<form action="/feedback" method="POST">
+
+											<div class="row" style="margin-top: 15px;">
+												<div class="col-lg-5">
+													<div class="textarea_dt">
+														<div class="ui form swdh339">
+															<div class="field">
+																<textarea rows="5" name="review" id="reviewContent"
+																	placeholder="Insert your review.."></textarea>
+															</div>
+															<select class="form-select"
+																aria-label="Default select example"
+																style="float: left; width: 40%; margin-right: 10px;"
+																name='rating'>
+																<option value="1">&star;</option>
+																<option value="2">&star; &star;</option>
+																<option value="3">&star; &star; &star;</option>
+																<option value="4">&star; &star; &star; &star;</option>
+																<option value="5">&star; &star; &star; &star; &star;
+																</option>
+															</select>
+															<input type="hidden" name="courseID"
+																value="{{this.course.id}}">
+															<button type="submit" class="btn1542">Send review</button>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</form>
+										{{/if}}
 									</div>
 								</div>
 							</div>
-							{{!-- Send Review --}}
-							{{#if feedbackable}}
-							<form action="/feedback" method="POST">
-
-								<div class="row" style="margin-top: 15px;">
-									<div class="col-lg-5">
-										<div class="textarea_dt">
-											<div class="ui form swdh339">
-												<div class="field">
-													<textarea rows="5" name="review" id="reviewContent"
-														placeholder="Insert your review.."></textarea>
-												</div>
-												<select class="form-select" aria-label="Default select example"
-													style="float: left; width: 40%; margin-right: 10px;" name='rating'>
-													<option value="1">&star;</option>
-													<option value="2">&star; &star;</option>
-													<option value="3">&star; &star; &star;</option>
-													<option value="4">&star; &star; &star; &star;</option>
-													<option value="5">&star; &star; &star; &star; &star;</option>
-												</select>
-												<input type="hidden" name="courseID" value="{{this.course.id}}">
-												<button type="submit" class="btn1542">Send review</button>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</form>
-							{{/if}}
 						</div>
-								</div>
-							</div></div>
 					</div>
 				</div>
 			</div>
@@ -718,6 +656,13 @@
 	</div>
 	</div>
 	{{> footer}}
+	<script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+	<script>
+		function getVideo(reference)
+		{
+			console.log($(this).html())
+		}
+	</script>
 	</div>
 	<!-- Body End -->
 

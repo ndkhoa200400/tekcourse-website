@@ -38,7 +38,8 @@ app.engine(
 
   })
 );
-
+app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({
   extended: true
 }));
@@ -49,6 +50,8 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
   next();
 });
+
+
 // Routing
 const userRoute = require('./routes/user.route');
 const courseRoute = require('./routes/course.route');
@@ -65,8 +68,7 @@ if (process.env.NODE_ENV === 'development')
 app.use(express.static((__dirname + "/public")));
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
-app.use(express.json());
-app.use(cookieParser());
+
 app.set('trust proxy', 1)
 app.use(session({
   secret: 'SECRET_KEY',

@@ -70,9 +70,8 @@ const getStatFeedback = (feedbacks) => {
     stars[feedbacks[i].rating - 1] += 1;
   }
   if (numFeebacks > 0)
-    for(let i = 0; i < 5; i++)
-    {
-      stars[i] = Math.round((stars[i]/numFeebacks)*100);
+    for (let i = 0; i < 5; i++) {
+      stars[i] = Math.round((stars[i] / numFeebacks) * 100);
     }
   return stars;
 }
@@ -80,7 +79,7 @@ const getStatFeedback = (feedbacks) => {
 exports.getCourse = catchAsync(async (req, res, next) => {
   try {
     const slugName = req.params.slug;
-    const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).lean({ virtuals: true });
+    const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).populate('contents.lectures').lean({ virtuals: true });
 
 
     let isPurchase = false;
@@ -92,35 +91,34 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     }
 
     let user = res.locals.user;
+    if (user) {
+      if (user.role === 'customer') {
+        const registeredcouse = await registeredCourse.findOne({ userID: user.id, courses: course.id });
+        if (registeredcouse)
+          isPurchase = true;
+        const watchlist = await WatchList.findOne({ userID: user.id, courses: course.id });
 
-    if (user.role === 'customer') {
-      const registeredcouse = await registeredCourse.findOne({ userID: user.id, courses: course.id });
-      if (registeredcouse)
-        isPurchase = true;
-      const watchlist = await WatchList.findOne({ userID: user.id, courses: course.id });
-
-      if (watchlist)
-        isWatched = true;
+        if (watchlist)
+          isWatched = true;
+      }
+      user = { name: user.name, email: user.email, role: user.role };
     }
-
-    if (user) user = { name: user.name, email: user.email, role: user.role };
 
     course.views++;
 
 
     const feedbacks = await Feedback.find({ courseID: course.id })
       .populate('userID')
-      .lean(); 
+      .lean();
     const feedbackStat = getStatFeedback(feedbacks);
-    console.log(feedbackStat);
+
     const numFeedbacks = feedbacks.length || 0;
 
 
-    const topTrending = await Course.find({ slug: { $ne: slugName } }, { _id: 0, __v: 0 })
+    const topTrending = await Course.find({ slug: { $ne: slugName }, category: course.category }, { _id: 0, __v: 0 })
       .sort({ ratingsAverage: 1, createdAt: -1 })
       .limit(5)
       .lean({ virtuals: true });
-
 
     res.status(200).render("course_detail_view", {
       title: course.name,
@@ -133,7 +131,8 @@ exports.getCourse = catchAsync(async (req, res, next) => {
       feedbackable: isPurchase,
       feedbacks: feedbacks,
       feedbackStat,
-      numFeedbacks
+      numFeedbacks,
+      contents: course.contents
     });
   } catch (error) {
     console.log(error);
@@ -143,7 +142,7 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 exports.editCourse = catchAsync(async (req, res, next) => {
   try {
     const slugName = req.params.slug;
-    const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).lean({ virtuals: true });
+    const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
 
     if (!course) {
       res.redirect("back");

@@ -75,7 +75,11 @@ const courseSchema = new mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       ref: 'Lecture'
     }]
-  }]
+  }],
+  isCompleted: {
+    type: Boolean,
+    default: false
+  }
 }, {
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
@@ -86,12 +90,6 @@ courseSchema.index({ slug: 1 });
 courseSchema.index({ teacherID: 1 });
 
 courseSchema.index({ name: 'text', description: 'text' });
-// courseSchema.virtual("lectures", {
-//   ref: "Lecture",
-//   foreignField: "course",
-//   localField: "_id",
-// });
-
 
 
 courseSchema.virtual("createdDate").get(function () {
@@ -113,10 +111,17 @@ courseSchema.virtual("categoryName").get(function () {
 courseSchema.post("findOneAndUpdate", async function () {
   // Sau khi cap nhat thi sua ten slug, va ngay cap nhat
   const updatedDoc = await this.model.findOne(this.getQuery());
-  await this.model.updateOne(this.getQuery(), {
-    slug: slugify(updatedDoc.name, { lower: true }),
-    lastUpdated: Date.now(),
-  });
+  if (!updatedDoc) return;
+  if (updatedDoc.name)
+    await this.model.updateOne(this.getQuery(), {
+      slug: slugify(updatedDoc.name, { lower: true }),
+      lastUpdated: Date.now(),
+    });
+  else{
+    await this.model.updateOne(this.getQuery(), {    
+      lastUpdated: Date.now(),
+    });
+  }
 });
 
 // courseSchema.pre("updateOne", async function(){

@@ -5,16 +5,9 @@ const lectureSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "A lecture must have a name"],
-    trim: true,
-    unique: true
-  },
-  length: {
-    type: String,
+    trim: true
   },
   description: String,
-  video: {
-    type: String,
-  },
   reference: {
     type: String,
   },

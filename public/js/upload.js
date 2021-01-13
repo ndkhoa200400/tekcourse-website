@@ -4,6 +4,7 @@ var feedback = function(res) {
      
         document.getElementById('img-link').value = get_link;
         document.querySelector('.custom-file-label').innerHTML = get_link;
+        document.querySelector('.view__img').innerHTML = "<img src=" +get_link +">";
          //   'Image : ' + '<br><input class="image-url" value=\"' + get_link + '\"/>' + '<img class="img" alt="Imgur-Upload" src=\"' + get_link + '\"/>';
     }
 };

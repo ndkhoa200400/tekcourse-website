@@ -4,9 +4,8 @@ const factory = require('./handlerFactory')
 const cloudinary = require('cloudinary');
 const APIFeatures = require("./../utils/apiFeature");
 const pagination = require("./../utils/pagination");
+
 exports.setTeacherID = catchAsync(async (req, res, next) => {
-
-
 
     next();
 });
@@ -15,13 +14,15 @@ exports.getCourse = factory.getOne(Course);
 
 
 exports.createCourse = async (req, res, next) => {
+
     try {
         req.body.teacherID = req.user.id;
-
-        if (req.file)
-            req.body.promotionalVideo = await cloudinary.v2.uploader.upload(req.file.path, { resource_type: "video", });
-
+        if (req.file) {
+            const video = await cloudinary.v2.uploader.upload(req.file.path, { resource_type: "video", });
+            req.body.promotionalVideo = video.url;
+        }
         const course = await Course.create(req.body);
+
         res.status(200).send(`
         <script>
             alert('Successfully! Check it out!')
@@ -29,6 +30,7 @@ exports.createCourse = async (req, res, next) => {
         </script>
         `)
     } catch (error) {
+        console.log(error.message);
         res.status(400).send(`
         <script>
             alert("${error.message}")

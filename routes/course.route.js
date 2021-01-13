@@ -6,11 +6,12 @@ const router = express.Router();
 
 const lectureRoute = require('./lecture.route');
 const feedbackRoute = require('./feedback.route');
-const { route } = require('./view.route');
 
 
-router.use('/:courseID/lecture', lectureRoute); // For URL: /courseID/lecture/ID...
-router.use('/:courseID/feedback', feedbackRoute); // For URL: /courseID/feedback/ID...
+router.use('/:slug/lecture', lectureRoute); // For URL: /courseID/lecture/ID...
+router.use('/:slug/feedback', feedbackRoute); // For URL: /courseID/feedback/ID...
+
+
 //router.get('/search', controller.getFilteredCourses);
 router.route('/category/:category').get(controller.getCategory);
 router.route('/')
