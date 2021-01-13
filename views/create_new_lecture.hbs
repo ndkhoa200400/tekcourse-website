@@ -38,6 +38,7 @@
 			'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
 		],
 	});
+	
 </script>
 <script>
 	function getFile(filePath) {
@@ -115,7 +116,7 @@
 																<label>Course Name*</label>
 																<div class="ui left icon input swdh19">
 																	<input class="prompt srch_explore" type="text"
-																		placeholder="Insert your course title."
+																		placeholder="{{this.course.name}}"
 																		name="name" data-purpose="edit-course-title"
 																		id="main[title]" value="">
 																	<div class="badge_num">#</div>
@@ -132,7 +133,7 @@
 																				<textarea rows="5"
 																					name="shortDescription"
 																					id="id_course_short_description"
-																					placeholder="Insert your course short description"></textarea>
+																					placeholder="{{{course.shortDescription}}}"></textarea>
 																			</div>
 																		</div>
 																	</div>
@@ -148,7 +149,7 @@
 																			<div class="field">
 																				<textarea rows="5" name="description"
 																					id="id_course_description"
-																					placeholder="Insert your course description"></textarea>
+																					placeholder="{{{course.description}}}"></textarea>
 																			</div>
 																		</div>
 																	</div>
@@ -203,7 +204,7 @@
 
 																<div class="ui left icon input swdh19">
 																	<input class="prompt srch_explore" type="number"
-																		placeholder="Price" name="price"
+																		placeholder="{{course.price}}" name="price"
 																		data-purpose="edit-course-title"
 																		id="course-price" value="">
 
@@ -244,7 +245,16 @@
 																			value="">
 
 																	</div> --}}
-																	
+																	<div>
+																		<input id='img-link' type="hidden" value=""
+																			name='avatar'
+																			data-purpose="edit-course-img">
+
+																		<div class="dropzone">
+																			<label class="custom-file-label">Choose
+																				file</label>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -474,7 +484,7 @@
 														<tr>
 															<th class="text-center" scope="col">Content</th>
 															<th class="cell-ta">Title</th>
-															<th class="text-center" scope="col">lectures</th>
+															<th class="text-center" scope="col">Lectures</th>
 															<th class="text-center" scope="col">Volume</th>
 															<th class="text-center" scope="col">Duration</th>
 															<th class="text-center" scope="col">Upload Date</th>
