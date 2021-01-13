@@ -81,7 +81,7 @@ app.use('/course', courseRoute)
 app.use('/feedback', feedbackRoute);;
 app.use('/cart', cartRoute);
 app.use('/watchlist', watchListRoute);
-app.use('/api/user', userRoute);
+app.use('/user', userRoute);
 app.use('/api/lecture', lectureRoute);
 
 app.use('/api/checkout', registeredCourse);

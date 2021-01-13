@@ -58,7 +58,7 @@ feedbackSchema.statics.calcAverageRatings = async function(CourseId) {
       }
     }
   ]);
-  console.log(stats);
+
 
   if (stats.length > 0) {
     await Course.findByIdAndUpdate(CourseId, {

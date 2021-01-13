@@ -1,6 +1,6 @@
 // Processing all the events
 import '@babel/polyfill';
-import { login, signup, logout } from './login';
+import { login, signup, logout,changePassword } from './login';
 import {buyCourse, checkOutCart } from './checkout';
 
 const loginForm = document.querySelector(".form--login");
@@ -9,26 +9,28 @@ const logOutBtn = document.querySelector(".logout");
 const checkOutBtn = document.getElementById('check-out-btn');
 const courseSort = document.getElementsByClassName('course-sort');
 const buyBtn = document.getElementById('buy-btn');
-if (loginForm) {
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("id_email").value;
-    const password = document.getElementById("id_password").value;
-    login(email, password);
-  });
-}
+const changepassBtn = document.querySelector('.btn_change_pw');
+
+// if (loginForm) {
+//   loginForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     const email = document.getElementById("id_email").value;
+//     const password = document.getElementById("id_password").value;
+//     login(email, password);
+//   });
+// }
 
 
-if (signupForm) {
-  signupForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("id_fullname").value;
-    const email = document.getElementById("id_email").value;
-    const password = document.getElementById("id_password").value;
-    const passwordConfirm = document.getElementById("id_password_confirm").value;
-    signup(name, email, password, passwordConfirm);
-  });
-}
+// if (signupForm) {
+//   signupForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     const name = document.getElementById("id_fullname").value;
+//     const email = document.getElementById("id_email").value;
+//     const password = document.getElementById("id_password").value;
+//     const passwordConfirm = document.getElementById("id_password_confirm").value;
+//     signup(name, email, password, passwordConfirm);
+//   });
+// }
 
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
@@ -60,3 +62,14 @@ if (buyBtn) {
   });
 }
 
+if (changepassBtn) {
+  changepassBtn.addEventListener('click', (e) => {
+    
+    e.preventDefault();
+
+    const passwordCurrent = document.querySelector('.current-pw').value;
+    const password = document.querySelector('.new-pw').value;
+    const passwordConfirm = document.querySelector('.new-pw-cf').value;
+    changePassword(passwordCurrent, password, passwordConfirm);
+  })
+}

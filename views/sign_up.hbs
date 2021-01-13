@@ -14,15 +14,15 @@
 					<div class="sign_form">
 						<h2>Welcome to TekCourse</h2>
 						<p>Sign Up and Start Learning!</p>
-						<form class="form--signup">
+						<form class="form--signup" method="POST" action="user/signup/otp">
 							<div class="ui search focus">
 								<div class="ui left icon input swdh11 swdh19">
-									<input class="prompt srch_explore" type="text" name="fullname" value="" id="id_fullname" required="" maxlength="64" placeholder="Full Name">															
+									<input class="prompt srch_explore" type="text" name="name" value="" id="id_fullname" required="" maxlength="64" placeholder="Full Name">															
 								</div>
 							</div>
 							<div class="ui search focus mt-15">
 								<div class="ui left icon input swdh11 swdh19">
-									<input class="prompt srch_explore" type="email" name="emailaddress" value="" id="id_email" required="" maxlength="64" placeholder="Email Address">															
+									<input class="prompt srch_explore" type="email" name="email" value="" id="id_email" required="" maxlength="64" placeholder="Email Address">															
 								</div>
 							</div>
 							<div class="ui search focus mt-15">
@@ -32,7 +32,7 @@
 							</div>
 							<div class="ui search focus mt-15">
 								<div class="ui left icon input swdh11 swdh19">
-									<input class="prompt srch_explore" type="password" name="password" value="" id="id_password_confirm" required="" maxlength="64" placeholder="Confirm Password">															
+									<input class="prompt srch_explore" type="password" name="passwordConfirm" value="" id="id_password_confirm" required="" maxlength="64" placeholder="Confirm Password">															
 								</div>
 							</div>
 							<button class="login-btn" type="submit">Next</button>
