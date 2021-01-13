@@ -46,6 +46,7 @@
     "parcel-bundler": "^1.12.4",
     "path": "^0.12.7",
     "slugify": "^1.4.6",
+    "sweetalert": "^2.1.2",
     "validator": "^13.5.1"
   },
   "devDependencies": {}

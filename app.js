@@ -10,6 +10,7 @@ const hbs_sections = require('express-handlebars-sections');
 const globalErrorHandler = require("./controllers/error.controller");
 var hbs = require('hbs');
 const session = require('express-session');
+
 ;
 // const numeral = require('numeral');
 

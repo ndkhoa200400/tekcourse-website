@@ -2,7 +2,13 @@
 {{> header}}
 <!-- Header End -->
 <!-- Left Sidebar Start -->
+ {{#is user.role "customer"}}
 {{> nav_2}}
+{{/is}}
+
+{{#is user.role "teacher"}}
+{{> nav_1}}
+{{/is}}
 <!-- Left Sidebar End -->
 <!-- Body Start -->
 <div class="wrapper">
@@ -37,7 +43,7 @@
 
 											<h3>Personal info</h3>
 
-											<form class="form-horizontal" role="form" method="POST"
+											<form id="form_input" class="form-horizontal" role="form" method="POST"
 												action="/student-profile/edit">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">Name:</label>
@@ -57,7 +63,7 @@
 												</div>
 												<div class="form-group">
 													<div class="col-md-8">
-														<button class="save_btn" type="submit">Save Changes</button>
+														<button id="save_btn" class="save_btn" type="submit">Save Changes</button>
 
 													</div>
 												</div>
@@ -67,7 +73,7 @@
 												<div class="divider-1"></div>
 											</div>
 											<h3>Change Password</h3>
-											<form class='form--change-pw'>
+											<form class='form--change-pw' id ="form_input">
 												<div class="form-group">
 													<label class="col-md-3 control-label">Current Password:</label>
 													<div class="col-md-8">
@@ -114,3 +120,34 @@
 		{{> footer}}
 	</div>
 	<!-- Body End -->
+
+<script>
+	document.querySelector('#form_input').addEventListener('submit', function(e) {
+  var form = this;
+
+  e.preventDefault(); // <--- prevent form from submitting
+
+  swal({
+      title: "Are you sure?",
+      text: "Cancelled",
+	  icon:"warning",
+      buttons: [
+        'No, cancel it!',
+        'Yes, I am sure!'
+      ],
+      dangerMode: false,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+        swal({
+          title: 'Save Changes',
+          text: 'Successfully',
+          icon: 'success'
+        }).then(function() {
+          form.submit(); // <--- submit form programmatically
+        });
+      } else {
+        swal("Cancelled", "Cancelled your changes", "error");
+      }
+    })
+});
+</script>

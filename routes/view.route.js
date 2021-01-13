@@ -42,10 +42,13 @@ router.get('/course/create-new-course', (req, res) => {
 })
 
 
-router.get("/student-profile/edit", authController.protect, controller.editStudentProfile);
+router.get("/student-profile/edit", authController.protect, controller.editProfile);
 
 router.post("/student-profile/edit", authController.protect, userController.updateMe);
 
+router.get("/profile/edit", authController.protect, controller.editProfile);
+
+router.post("/profile/edit", authController.protect, userController.updateMe);
 
 router.get('/course/:slug', controller.getCourse);
 

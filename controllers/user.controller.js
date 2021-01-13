@@ -46,7 +46,11 @@ exports.updateMe = (async (req, res, next) => {
 
         await user.save();
         res.locals.user = user;
-        res.redirect("/student-profile/edit");
+        if (user.role === "teacher")
+            res.redirect("/profile/edit");
+        else if (user.role === "customer")
+            res.redirect("/student-profile/edit");
+
     } catch (error) {
         console.log(error);
     }

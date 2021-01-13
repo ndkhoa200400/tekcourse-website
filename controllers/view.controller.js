@@ -253,7 +253,7 @@ exports.getStudentWatchedList = catchAsync(async (req, res, next) => {
 
 });
 
-exports.editStudentProfile = catchAsync(async (req, res, next) => {
+exports.editProfile = catchAsync(async (req, res, next) => {
   let user = req.user;
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
