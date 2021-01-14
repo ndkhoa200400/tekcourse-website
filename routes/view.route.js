@@ -112,7 +112,7 @@ router.get('/admin', async (req, res) => {
   const listSubcategory = require('./../utils/categories');
 
   let list = listSubcategory.subcategories;
-  console.log(list);
+  //console.log(list);
   let fullListSubcate = JSON.parse('[]');
   for (let i = 0; i < list.length; i++) {
     let numCourse = await Course.find({ subcategory: list[i] }).count();
@@ -134,6 +134,7 @@ router.get('/admin/block-unblock-course', controller.blockOrUnblockCourse);
 router.post('/admin/edit-subcategory', controller.editSubCategory);
 router.get('/admin/delete-subcategory', controller.deleteSubCategory);
 router.post('/admin/create-subcategory', controller.createSubCategory)
+router.post('/admin/create-new-teacher-account', controller.createTeacherAccount)
 //router.get('/instructor/:slug/:lecture/edit', controller.editLecture);
 
 module.exports = router;

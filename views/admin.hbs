@@ -144,7 +144,8 @@
                                         <tbody>
                                             {{#each listCourses}}
                                             <tr>
-                                                <td class="cell-ta"><b class="course_active">{{name}}</b>
+                                                <td class="cell-ta"><a href="/course/{{slug}}"><b
+                                                            class="course_active">{{name}}</b></a>
                                                 </td>
                                                 <td class="text-center"><a href="{{categoryLink}}">{{category}}</a></td>
                                                 <td class="text-center">{{subcategory}}</td>
@@ -250,8 +251,8 @@
                                         </div>
                                         <div class="ui search focus mt-15">
                                             <div class="ui left icon input swdh11 swdh19">
-                                                <input class="prompt srch_explore" type="email" name="email"
-                                                    value="" id="id_email" required="" maxlength="64"
+                                                <input class="prompt srch_explore" type="email" name="email" value=""
+                                                    id="id_email" required="" maxlength="64"
                                                     placeholder="Email Address">
                                             </div>
                                         </div>
@@ -264,9 +265,9 @@
                                         </div>
                                         <div class="ui search focus mt-15">
                                             <div class="ui left icon input swdh11 swdh19">
-                                                <input class="prompt srch_explore" type="password" name="passwordConfirm"
-                                                    value="" id="id_passwordConfirm" required="" maxlength="64"
-                                                    placeholder="Password Confirm">
+                                                <input class="prompt srch_explore" type="password"
+                                                    name="passwordConfirm" value="" id="id_passwordConfirm" required=""
+                                                    maxlength="64" placeholder="Password Confirm">
                                             </div>
                                         </div>
                                         <button class="btn1542" style="margin-top: 10px" type="submit">Create Teacher

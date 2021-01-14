@@ -62,16 +62,16 @@ exports.signup = async (req, res, next) => {
   const opt = req.session.register.otp;
   const userOtp = req.body.otp;
   const body = req.session.register.body;
-  if (opt != userOtp){
+  if (opt != userOtp) {
     return res.render('otp_page', {
       title: 'OTP Authentication',
       layout: false,
       message: "Incorrect OTP code",
       email: body.email,
 
-  })
+    })
   }
-  
+
   try {
     const newUser = await User.create(body);
     createToken(newUser, 201, res);
@@ -86,7 +86,7 @@ exports.signup = async (req, res, next) => {
   }
 };
 
-exports.otp = catchAsync(async(req,res,next)=>{
+exports.otp = catchAsync(async (req, res, next) => {
   var nodemailer = require("nodemailer"); // gửi otp
   // gửi OTP
   function generateOTP() {
@@ -97,7 +97,7 @@ exports.otp = catchAsync(async(req,res,next)=>{
     }
     return OTP;
   }
-  
+
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -123,12 +123,12 @@ exports.otp = catchAsync(async(req,res,next)=>{
   sendMail(req.body.email, otp);
 
   req.session.register = {
-    body:req.body,
+    body: req.body,
     otp,
   };
   res.redirect("/user/signup/otp");
 })
-exports.resendOtp = catchAsync(async(req,res,next)=>{
+exports.resendOtp = catchAsync(async (req, res, next) => {
   var nodemailer = require("nodemailer"); // gửi otp
   // gửi OTP
   function generateOTP() {
@@ -139,7 +139,7 @@ exports.resendOtp = catchAsync(async(req,res,next)=>{
     }
     return OTP;
   }
-  
+
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -171,12 +171,12 @@ exports.createTeacherAccount = catchAsync(async (req, res, next) => {
   try {
     req.body.role = "teacher";
     const newTeacher = await User.create(req.body);
-  
+
     res.redirect('/admin')
   } catch (error) {
-    console.log(error.message); 
+    console.log(error.message);
   }
- 
+
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -203,7 +203,15 @@ exports.login = catchAsync(async (req, res, next) => {
         window.location = "/login";
       </script>
     `)
-  
+
+  }
+  if (!user.active) {
+    return res.send(`
+      <script>
+        alert("Your account has been banned. We apologize for this inconvenience.");
+        window.location = "/login";
+      </script>
+    `)
   }
   // 3) IF everything is ok, send token to client
   createToken(user, 200, res);
@@ -219,7 +227,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = (req, res) => {
   res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now() + 2*1000),
+    expires: new Date(Date.now() + 2 * 1000),
     httpOnly: true,
   });
   res.status(200).json({ status: "success" });
@@ -237,9 +245,9 @@ exports.protect = catchAsync(async (req, res, next) => {
     // Get cookie from local storage of browser
     token = req.cookies.jwt;
   }
- 
+
   if (!token) {
-    
+
     return next(
       new appError("You are not logged in! Please log in to get access", 401)
     );
@@ -256,7 +264,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 4) Check if user changed password after the token was issued
   if (freshUser.changePasswordAfter(decoded.iat)) {
-  
+
     return next(
       new appError("User recently changed password! Please log in again.", 401)
     );
@@ -269,7 +277,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   if (req.cookies.jwt) {
-      
+
     const decoded = await promisify(jwt.verify)(
       req.cookies.jwt,
       process.env.JWT_SECRET
@@ -369,20 +377,20 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-   // 1) Get user from collection
-   const user = await User.findById(req.user.id).select("+password +passwordConfirm");
-   // 2) Check if POSTed current password is correct
-   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-     return next(new appError("Incorrect password!", 401));
-   }
-   // 3) If so, update password
-   user.password = req.body.password;
-   user.passwordConfirm = req.body.passwordConfirm;
-   await user.save();
-   // findByIDAndUpdate will not work
- 
-   // 4) Log user in, send JWT
-   createSendToken(user, 200, res);
-   res.redirect('back');
+  // 1) Get user from collection
+  const user = await User.findById(req.user.id).select("+password +passwordConfirm");
+  // 2) Check if POSTed current password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new appError("Incorrect password!", 401));
+  }
+  // 3) If so, update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  // findByIDAndUpdate will not work
+
+  // 4) Log user in, send JWT
+  createSendToken(user, 200, res);
+  res.redirect('back');
 });
 

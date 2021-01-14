@@ -582,3 +582,17 @@ exports.createSubCategory = catchAsync(async (req, res, next) => {
     console.log(error);
   }
 });
+exports.createTeacherAccount = catchAsync(async (req, res, next) => {
+  try {
+    const fullname = req.body.fullname;
+    const email = req.body.emailaddress;
+    const password = req.body.password;
+
+    console.log(fullname, password, email)
+
+
+    res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+  }
+});
