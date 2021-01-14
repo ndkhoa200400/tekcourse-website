@@ -37,7 +37,7 @@
 
 				</div>
 			</div>
-			<form action="/course/{{courseSlug}}/lecture/{{currentContent}}/{{lecture.slug}}/edit" method="POST"
+			<form action="/course/{{courseSlug}}/lecture/{{currentContent}}/{{lecture._id}}/edit" method="POST"
 				class='form--edit-lecture' enctype="multipart/form-data">
 
 				<div class="row">
@@ -70,7 +70,7 @@
 																		<option value="{{currentContent}}">
 																			{{currentContent}}</option>
 																		{{#each contents}}
-																		<option value="{{this.name}}">{{this.name}}
+																		<option value="{{this}}">{{this}}
 																		</option>
 																		{{/each}}
 																	</select>
