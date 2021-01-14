@@ -33,7 +33,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h2 class="st_title"><i class="uil uil-analysis"></i>Add Lecture - {{this.title}}</h2>
+					<h2 class="st_title"><i class="uil uil-analysis"></i>{{this.action}} Lecture - {{this.title}}</h2>
 
 				</div>
 			</div>
@@ -114,7 +114,7 @@
 																<div class="part_input mt-30 lbel25">
 																	<label>File*</label>
 																	<div class="input-group">
-																		<div class="custom-file">
+																		<div class="custom-file ">
 																			<input type="file" class="custom-file-input"
 																				id="inputGroupFile06" value=""
 																				onchange="uploadFile()"
@@ -168,45 +168,51 @@
 																	</div>
 																</div>
 															</div>
-															{{!-- <div class="col-lg-5 col-md-6">
-																<div class="ui search focus mt-30 lbel25">
-																	<label>Volume*</label>
-																	<div class="ui left icon input swdh19 swdh95">
-																		<input class="prompt srch_explore" type="number"
-																			min="0" name="size" required=""
-																			placeholder="0">
-																		<div class="badge_mb">MB</div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-5 col-md-6">
-																<div class="ui search focus mt-30 lbel25">
-																	<label>Duration*</label>
-																	<div class="ui left icon input swdh19 swdh55">
-																		<input id="duration" class="prompt srch_explore"
-																			type="number" min="0" name="duration"
-																			required="" placeholder="0">
-																		<div class="badge_min">Minutes</div>
-																	</div>
-																</div>
-															</div> --}}
+														
 															<div class="col-lg-2 col-md-12">
 																<button class="part_btn_save prt-sv" type="submit">Save
 																	Lecture</button>
 															</div>
 
 															<div class="col-lg-12 col-md-12">
-																{{!-- <div class="save_content">
-																	<button class="save_content_btn" type="Submit">Save
-																		Course Content</button>
-																</div> --}}
+																
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-
+										<div class="table-responsive mt-30">
+												<table class="table ucp-table" id="content-table">
+													<thead class="thead-s">
+														<tr>
+															<th class="text-center" scope="col">Content</th>
+															<th class="cell-ta">Title</th>
+															<th class="text-center" scope="col">lectures</th>
+															<th class="text-center" scope="col">Volume</th>
+															<th class="text-center" scope="col">Duration</th>
+															<th class="text-center" scope="col">Upload Date</th>
+															<th class="text-center" scope="col">Files</th>
+															<th class="text-center" scope="col">Controls</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td class="text-center">1</td>
+															<td class="cell-ta">Course Content Title</td>
+															<td class="text-center">5</td>
+															<td class="text-center">50</td>
+															<td class="text-center">15</td>
+															<td class="text-center">6 April 2019</td>
+															<td class="text-center"><a href="#">View</a></td>
+															<td class="text-center">
+																<a href="#" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
+																<a href="#" title="Delete" class="gray-s"><i class="uil uil-trash-alt"></i></a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+										</div>
 									</div>
 								</div>
 

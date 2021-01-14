@@ -158,7 +158,34 @@ exports.editCourse = catchAsync(async (req, res, next) => {
 
     res.status(200).render("create_new_lecture", {
       title: course.name,
+      action: "Add ",
       course: course,
+      user: user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.editLecture = catchAsync(async (req, res, next) => {
+  try {
+    const slugName = req.params.slug;
+    const lectureName = req.params.lecture;
+    // const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
+    
+    // if (!course) {
+    //   res.redirect("back");
+    //   return;
+    // }
+
+    let user = res.locals.user;
+
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+
+    res.status(200).render("create_new_lecture", {
+      // title: course.name,
+      action: "Edit ",
+      // course: course,
       user: user,
     });
   } catch (error) {

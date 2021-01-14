@@ -57,6 +57,8 @@ router.get('/course/:slug', controller.getCourse);
 
 router.get('/course/:slug/edit', controller.editCourse);
 
+router.get('/course/:slug/:lecture/edit', controller.editLecture);
+
 router.get('/signup', (req, res) => {
   res.render('sign_up', {
     title: 'Sign up'

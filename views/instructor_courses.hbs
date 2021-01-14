@@ -70,7 +70,7 @@
 													<td class="text-center"><a href="../category/{{category}}">{{categoryName}}</a></td>
 													<td class="text-center">
 														
-														 <input  type="checkbox" >
+														 <input id="complete" type="checkbox" >
 														 <b class="course_active" style="color:#20c9bb">Complete</b>
 														</td>
 													<td class="text-center"><a href="../course/{{slug}}">View</a></td>
@@ -93,4 +93,14 @@
 		</div>
 		{{> footer}}
 	</div>
-	<!-- Body End -->
+	<script>
+		$("#complete").click(function () {
+			var str = $('input[type=checkbox]:checked').map(function () {
+				return "true";
+			});
+			console.log(str);
+			if (str != "") str += "";
+			else str += str;
+
+		});
+	</script>
