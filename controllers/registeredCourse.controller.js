@@ -77,18 +77,18 @@ exports.registerNewCourse = catchAsync(async (req, res, next) => {
     if (!registersedCourse) {
 
 
-        await RegisteredCourse.create({ userID: userID, courses: [selectedCourse.id] });
+        await RegisteredCourse.create({ userID: userID, courses: [{course: selectedCourse.id}] });
         await selectedCourse.updateOne({ $inc: { numStudents: 1 } });
 
     }
     else {
 
         registersedCourse.courses.forEach(element => {
-            if (element.id === selectedCourse.id)
+            if (element.course.id === selectedCourse.id)
                 return next(new AppError("You already purchased this course", 400));
         });
 
-        registersedCourse.courses.push(selectedCourse.id);
+        registersedCourse.courses.push({course: selectedCourse.id});
         await selectedCourse.updateOne({ $inc: { numStudents: 1 } });
         await registersedCourse.save();
     }

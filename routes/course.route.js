@@ -14,10 +14,11 @@ router.use('/:slug/feedback', feedbackRoute); // For URL: /courseID/feedback/ID.
 
 //router.get('/search', controller.getFilteredCourses);
 router.route('/category/:category').get(controller.getCategory);
+
 router.route('/')
     .get(controller.getAllCourse)
     .post(authController.protect,
-        authController.restrictTo('teacher'),        
+        authController.restrictTo('teacher'),
         upload.single('promotionalVideo'),
         controller.createCourse);
 
@@ -28,7 +29,7 @@ router.route('/:id')
         authController.restrictTo('teacher'),
         controller.updateCourse)
     .delete(authController.protect,
-        authController.restrictTo('teacher','admin'),
+        authController.restrictTo('teacher', 'admin'),
         controller.deleteCourse);
 
 module.exports = router;

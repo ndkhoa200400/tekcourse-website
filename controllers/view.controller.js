@@ -5,36 +5,57 @@ const Feedback = require('./../model/feedback.model')
 const catchAsync = require("./../utils/catchAsync");
 const registeredCourse = require("./../model/registedCourse.model");
 const pagination = require("./../utils/pagination");
-const url = require('url');
+const categories = require('./../utils/categories')
+
+async function getTopSubcategory(date, weekAgo) {
+  const registeredcourses = await registeredCourse.find().lean();
+  let subcategories = []
+  for (let index = 0; index < registeredcourses.length; index++) {
+    registeredcourses[index].courses.forEach(element => {
+      if (element.registeredAt > weekAgo && element.registeredAt < date) {
+        subcategories.push(element);
+      }
+    });
+
+  }
+  subcategories.sort((a, b) => a.numStudents - b.numStudents)
+
+  for (let i = 0; i < subcategories.length; i++) {
+    subcategories[i] = subcategories[i].course.subcategory;
+  }
+
+
+  return new Set(subcategories);
+
+}
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   try {
     let date = new Date();
     let weekAgo = new Date().setDate(date.getDate() - 7)
 
+    // Top 10 khoá học được xem nhiều nhất
     const topViewedCourses = await Course.find({}, { _id: 0, __v: 0 })
       .sort({ views: -1 })
       .limit(10)
       .lean({ virtuals: true });
 
+    // Top 10 khoá học mới nhất
     const topNewestCourses = await Course.find({}, { _id: 0, __v: 0 })
       .sort({ createdAt: -1 })
       .limit(10)
       .lean({ virtuals: true });
 
-    // khoá học nổi bật nhất trong tuần qua
+    // Top 5 khoá học nổi bật nhất trong tuần qua
     const topTrending = await Course.find({ createdAt: { $gt: weekAgo, $lt: date } }, { _id: 0, __v: 0 })
       .sort({ ratingsAverage: 1, createdAt: -1 })
       .limit(5)
       .lean({ virtuals: true });
 
     //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
-    const subcategories = await Course.find({ createdAt: { $gt: weekAgo, $lt: date } }).sort({ numStudents: -1 }).limit(5)
-      .distinct("subcategory")
-      .lean({ virtuals: true });
+    let subcategories = [...(await getTopSubcategory(date, weekAgo))].slice(0, 5);
 
-
-    const topPurchasedCourses = await Course.find({}, { _id: 0, __v: 0 })
+    const topPurchasedCourses = await Course.find({numStudents: {$gt:0}}, { _id: 0, __v: 0 })
       .sort({ numStudents: -1 })
       .limit(5)
       .lean({ virtuals: true });
@@ -95,10 +116,10 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     let user = res.locals.user;
     if (user) {
       if (user.role === 'customer') {
-        const registeredcouse = await registeredCourse.findOne({ userID: user.id, courses: course.id });
+        const registeredcouse = await registeredCourse.findOne({ userID: user.id, "courses.course": course.id });
         if (registeredcouse)
           isPurchase = true;
-        const watchlist = await WatchList.findOne({ userID: user.id, courses: course.id });
+        const watchlist = await WatchList.findOne({ userID: user.id, courses: course.id }).lean();
 
         if (watchlist)
           isWatched = true;
@@ -145,7 +166,7 @@ exports.editCourse = catchAsync(async (req, res, next) => {
   try {
     const slugName = req.params.slug;
     const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
-    
+
     if (!course) {
       res.redirect("back");
       return;
@@ -188,7 +209,7 @@ exports.getTeacherProfile = catchAsync(async (req, res, next) => {
       numStudents += course.numStudents
 
     })
-    let categories = Course.schema.path("category").enumValues; 
+    let categories = Course.schema.path("category").enumValues;
     res.status(200).render("profile", {
       title: "Profile",
       user: user,
@@ -204,7 +225,7 @@ exports.getTeacherProfile = catchAsync(async (req, res, next) => {
 
 exports.getInstructorView = catchAsync(async (req, res, next) => {
   try {
-    
+
     const id = req.param('id');
     console.log(id);
     const user = await User.findById(id).lean();
@@ -216,7 +237,7 @@ exports.getInstructorView = catchAsync(async (req, res, next) => {
     courses.forEach((course) => {
       numStudents += course.numStudents
     })
-    let categories = Course.schema.path("category").enumValues; 
+    let categories = Course.schema.path("category").enumValues;
 
     res.status(200).render("profile", {
       title: "Profile",
@@ -329,3 +350,18 @@ exports.getCart = catchAsync(async (req, res, next) => {
     console.log(error);
   }
 });
+
+
+exports.createNewCourse = async (req, res) => {
+
+
+  let user = res.locals.user;
+
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+  res.render('create_new_course', {
+    title: "Create New Course",
+    user: user,
+    subcategories: categories.subcategories
+  })
+
+}

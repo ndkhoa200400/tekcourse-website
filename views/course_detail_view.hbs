@@ -13,8 +13,9 @@
 				<div class="modal-body">
 					{{#if course.promotionalVideo}}
 					<video controls id="framevideo">
-						<source src="{{course.promotionalVideo}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-						allowfullscreen>
+						<source src="{{course.promotionalVideo}}"
+							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen>
 					</video>
 
 					{{else}}
@@ -154,7 +155,8 @@
 										<a href="#"><img src="/images/left-imgs/img-3.jpg" alt=""></a>
 									</div>
 									<div class="user_cntnt">
-										<a href="../instructor-profile?id={{course.teacherID._id}}" class="_df7852">{{course.teacherID.name}}</a>
+										<a href="../instructor-profile?id={{course.teacherID._id}}"
+											class="_df7852">{{course.teacherID.name}}</a>
 									</div>
 								</div>
 							</div>
@@ -206,7 +208,7 @@
 										<div class="_htg452 mt-35">
 											<h3>Description</h3>
 											{{{course.description}}}
-										
+
 											<!-- Recommended Courses -->
 
 											<div class="container-fluid">
@@ -299,7 +301,7 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="nav-courses" role="tabpanel">
-									
+
 									<div class="crse_content">
 										<h3>Course content</h3>
 										<div class="_112456">
@@ -314,7 +316,7 @@
 											<div class="accordion" id="myaccordion">
 												<div>
 													{{#each this.contents}}
-													
+
 													<a href="javascript:void(0)"
 														class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
 														<div class="section-header-left">
@@ -334,7 +336,10 @@
 																<div class="top">
 
 																	<div class="title">
-																		<button class="btn btn btn-success btn-sm" aria-expanded="false" data-toggle="collapse" data-target="#popup{{@index}}" data-parent="#myaccordion"
+																		<button class="btn btn btn-success btn-sm"
+																			aria-expanded="false" data-toggle="collapse"
+																			data-target="#popup{{@index}}"
+																			data-parent="#myaccordion"
 																			onclick=getVideo("{{this.reference}}")>{{name}}</button>
 
 																		<div class="show-video-{{this.name}} collapse" id = "popup{{@index}}">
@@ -343,12 +348,14 @@
 																				poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
 																				<source src="{{this.reference}}" type="video/mp4" />
 																				<p class="vjs-no-js">
-																					To view this video please enable JavaScript,
+																					To view this video please enable
+																					JavaScript,
 																					and
 																					consider upgrading to a
 																					web browser that
 																					<a href="https://videojs.com/html5-video-support/"
-																						target="_blank">supports HTML5 video</a>
+																						target="_blank">supports HTML5
+																						video</a>
 																				</p>
 																			</video>
 																		</div>
@@ -376,10 +383,10 @@
 												</div>
 											</div>
 										</div>
-										</div>
-										<a class="btn1458" href="#">20 More Sections</a>
 									</div>
+									<a class="btn1458" href="#">20 More Sections</a>
 								</div>
+
 								<div class="tab-pane fade" id="nav-reviews" role="tabpanel">
 									<div class="student_reviews">
 										<div class="row">
@@ -561,37 +568,40 @@
 											<div class="row" style="margin-top: 15px;">
 												<div class="col-lg-5">
 													<div class="cmmnt_1526">
-													<div class="cmnt_group">
-														<div class="img160">
-															<img src="\images\left-imgs\img-17.jpg" alt="">									
+														<div class="cmnt_group">
+															<div class="img160">
+																<img src="\images\left-imgs\img-17.jpg" alt="">
+															</div>
+															<textarea rows="5" name="review" id="reviewContent"
+																class="_cmnt001"
+																placeholder="Insert your review.."></textarea>
 														</div>
-														<textarea rows="5" name="review" id="reviewContent" class="_cmnt001" placeholder="Insert your review.."></textarea>
+														<div class="cmmnt_1526 mt-10" style="border: none;">
+															<div class="cmnt_group">
+
+																<select class="form-select"
+																	aria-label="Default select example"
+																	style="float: left; width: 40%; margin-right: 10px;"
+																	name='rating'>
+																	<option value="1">&star;</option>
+																	<option value="2">&star; &star;</option>
+																	<option value="3">&star; &star; &star;</option>
+																	<option value="4">&star; &star; &star; &star;
+																	</option>
+																	<option value="5">&star; &star; &star; &star; &star;
+																	</option>
+																</select>
+																<input type="hidden" name="courseID"
+																	value="{{this.course.id}}">
+															</div>
+
+														</div>
+														<button class="cmnt-btn" type="submit">Send Your Review</button>
 													</div>
-													<div class="cmmnt_1526 mt-10" style="border: none;">
-													<div class="cmnt_group">
-													
-														<select class="form-select"
-																aria-label="Default select example"
-																style="float: left; width: 40%; margin-right: 10px;"
-																name='rating'>
-																<option value="1">&star;</option>
-																<option value="2">&star; &star;</option>
-																<option value="3">&star; &star; &star;</option>
-																<option value="4">&star; &star; &star; &star;</option>
-																<option value="5">&star; &star; &star; &star; &star;
-																</option>
-													</select>
-															<input type="hidden" name="courseID"
-																value="{{this.course.id}}">
-													</div>
-													
-													</div>
-													<button class="cmnt-btn" type="submit">Send Your Review</button>
-													</div>
-{{!-- 
+													{{!--
 													<div class="textarea_dt">
 														<div class="ui form swdh339">
-															
+
 															<select class="form-select"
 																aria-label="Default select example"
 																style="float: left; width: 40%; margin-right: 10px;"
@@ -623,11 +633,11 @@
 	</div>
 	</div>
 	</div>
+	</div>
 	{{> footer}}
 	<script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
 	<script>
-		function getVideo(reference)
-		{
+		function getVideo(reference) {
 			console.log($(this).html())
 		}
 	</script>
