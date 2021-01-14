@@ -76,16 +76,73 @@ exports.createLecture = async (req, res, next) => {
     }
 }
 
-exports.editLecture = async (req, res) =>{
-   
+exports.editLecture = async (req, res) => {
+
     try {
-        console.log(req.body);
-        console.log(req.params)
-        if (req.file)
-        {
-            
+        const course = await Course.findOne({ slug: req.params.slug });
+
+
+        const changedContent = req.body.content;
+        const isPreviewed = req.body.isPreviewed === "true" ? true : false;
+
+        let reference = null;
+        if (req.file) {
+            let video = await cloudinary.v2.uploader.upload(req.file.path, {
+                resource_type: "video",
+                chunk_size: 6000000
+            });
+            reference = video.url || "";
         }
+        let lecture = await Lecture.findById(req.params.lecture);
+
+        // Đổi course content của lecture
+        if (changedContent !== req.params.content) {
+            let isRemoved = false;
+            let isAdded = false;
+            for (let i = 0; i < course.contents.length; i++) {
+                // Xóa lecture ở course content cũ
+                if (course.contents[i].name === req.params.content && !isRemoved) {
+                    for (let j = 0; j < course.contents[i].lectures.length; j++) {
+                        if (course.contents[i].lectures[j].equals(req.params.lecture)) {
+                            console.log('ok');
+                            course.contents[i].lectures.splice(j, 1);
+                            isRemoved = true;
+                            break;
+                        }
+                    }
+                }
+                // Thêm lecture ở course content mới
+                else if (course.contents[i].name === changedContent && !isAdded) {
+                    course.contents[i].lectures.push(lecture);
+                    isAdded = true;
+                }
+                if (isAdded && isRemoved)
+                    break;
+            }
+            // Nếu chưa có course content 
+            if (!isAdded) {
+                let temp = { name: changedContent, lectures: [lecture] };
+                course.contents.push(temp);
+            }
+
+            course.lastUpdated = Date.now();
+            await course.save();
+        }
+        if (reference)
+            await lecture.update({ reference: reference, isPreviewed: isPreviewed, name: req.body.name, description: req.description })
+        else {
+            await lecture.update({ isPreviewed: isPreviewed, name: req.body.name, description: req.description })
+        }
+        res.redirect(`/course/${req.params.slug}`)
+
+
+
     } catch (error) {
-        console.log(error);   
+        res.send(`
+            <script>
+                alert("${error.message}");
+                window.history.back();
+            </script>
+        `)
     }
 }
