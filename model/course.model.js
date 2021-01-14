@@ -128,11 +128,7 @@ courseSchema.post("findOneAndUpdate", async function () {
   }
 });
 
-// courseSchema.pre("updateOne", async function(){
-//     await this.model.updateOne(this.getQuery(), {
-//       lastUpdated: Date.now()
-//     });
-// })
+
 
 courseSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });

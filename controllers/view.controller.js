@@ -37,19 +37,19 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     let weekAgo = new Date().setDate(date.getDate() - 7)
 
     // Top 10 khoá học được xem nhiều nhất
-    const topViewedCourses = await Course.find({}, { _id: 0, __v: 0 })
+    const topViewedCourses = await Course.find({active: {$ne: false}}, { _id: 0, __v: 0 })
       .sort({ views: -1 })
       .limit(10)
       .lean({ virtuals: true });
 
     // Top 10 khoá học mới nhất
-    const topNewestCourses = await Course.find({}, { _id: 0, __v: 0 })
+    const topNewestCourses = await Course.find({active: {$ne: false}}, { _id: 0, __v: 0 })
       .sort({ createdAt: -1 })
       .limit(10)
       .lean({ virtuals: true });
 
     // Top 5 khoá học nổi bật nhất trong tuần qua
-    const topTrending = await Course.find({ createdAt: { $gt: weekAgo, $lt: date } }, { _id: 0, __v: 0 })
+    const topTrending = await Course.find({ createdAt: { $gt: weekAgo, $lt: date },active: {$ne: false} }, { _id: 0, __v: 0 })
       .sort({ ratingsAverage: 1, createdAt: -1 })
       .limit(5)
       .lean({ virtuals: true });
@@ -57,7 +57,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
     let subcategories = [...(await getTopSubcategory(date, weekAgo))].slice(0, 5);
 
-    const topPurchasedCourses = await Course.find({ numStudents: { $gt: 0 } }, { _id: 0, __v: 0 })
+    const topPurchasedCourses = await Course.find({ numStudents: { $gt: 0 }, active: {$ne: false} }, { _id: 0, __v: 0 })
       .sort({ numStudents: -1 })
       .limit(5)
       .lean({ virtuals: true });
@@ -407,7 +407,7 @@ exports.createNewLecture = async (req, res) => {
   res.render('create_new_lecture', {
     title: "Create New Lecture",
     user: user,
-    slug :slugName
+    slug: slugName
 
   })
 
@@ -447,21 +447,19 @@ exports.blockOrUnblockUser = catchAsync(async (req, res, next) => {
   try {
 
     const id = req.query.id;
-    let getUser = await User.findById(id).lean();
+    let getUser = await User.findById(id);
 
     //if active is true => block it, else unblock it.
     if (getUser.active) {
-      console.log("help me");
       getUser.active = false;
-      await getUser.save;
-      res.redirect('/admin');
+
     }
     else {
-      console.log("help");
       getUser.active = true;
-      await getUser.save;
-      res.redirect('/admin');
+
     }
+    await getUser.save();
+    res.redirect('/admin');
   } catch (error) {
     console.log(error);
   }
@@ -471,21 +469,20 @@ exports.blockOrUnblockCourse = catchAsync(async (req, res, next) => {
   try {
 
     const id = req.query.id;
-    let getCourse = await Course.findById(id).lean();
+    let getCourse = await Course.findById(id);
 
     //if active is true => block it, else unblock it.
     if (getCourse.active) {
-      console.log("help me");
+
       getCourse.active = false;
-      await getCourse.save;
-      res.redirect('/admin');
+
     }
     else {
-      console.log("help");
       getCourse.active = true;
-      await getCourse.save;
-      res.redirect('/admin');
+
     }
+    await getCourse.save();
+    res.redirect('/admin');
   } catch (error) {
     console.log(error);
   }
@@ -508,7 +505,7 @@ exports.deleteSubCategory = catchAsync(async (req, res, next) => {
       if (err) {
         return console.log(err);
       }
-      console.log("The file was saved!");
+  
     });
 
     res.redirect('/admin');

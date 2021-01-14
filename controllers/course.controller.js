@@ -60,11 +60,11 @@ exports.getAllCourse = async (req, res) => {
         let features;
         if (q)
             // full-text search dựa trên q, còn lại đẩy sang search bình thường
-            features = new APIFeatures(Course.find({ $text: { $search: q } }), query)
+            features = new APIFeatures(Course.find({ $text: { $search: q },active: {$ne: false} }), query)
                 .filter()
                 .sort();
         else
-            features = new APIFeatures(Course.find({}), query)
+            features = new APIFeatures(Course.find({active: {$ne: false}}), query)
                 .filter()
                 .sort();
         let course = await features.query.lean({ virtuals: true });

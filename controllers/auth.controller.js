@@ -168,16 +168,15 @@ exports.resendOtp = catchAsync(async(req,res,next)=>{
 })
 
 exports.createTeacherAccount = catchAsync(async (req, res, next) => {
-  req.body.role = "teacher";
-  const newTeacher = await User.create(req.body);
-
-  res.status(201).json({
-    status: "success",
-
-    data: {
-      teacher: newTeacher,
-    },
-  });
+  try {
+    req.body.role = "teacher";
+    const newTeacher = await User.create(req.body);
+  
+    res.redirect('/admin')
+  } catch (error) {
+    console.log(error.message); 
+  }
+ 
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -387,15 +386,3 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
    res.redirect('back');
 });
 
-exports.allowedToLecture = catchAsync(async (req, res, next) => {
-  // Check if student registed to the lecture or that lecture belongs to that teacher
-  // URL: .../:courseID/:lectureID
-  const userID = req.user.id;
-  const lectureID = req.params.lectureID;
-
-  const course = await Course.find({ userID: userID, lectureID: lectureID });
-  if (!course) {
-    return next(new appError("You are not allowed to see this lecture", 500));
-  }
-  next();
-});

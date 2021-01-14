@@ -87,14 +87,6 @@ userSchema.methods.createPasswordResetToken = function () {
     return resetToken;
 }
 
-userSchema.pre(/^find/, function (next) {
-    // query middleware
-    // this points to current query
-
-    // Only find user who is active
-    this.find({ active: { $ne: false } });
-    next();
-});
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

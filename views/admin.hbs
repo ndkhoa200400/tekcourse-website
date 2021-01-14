@@ -241,16 +241,16 @@
                             <div class="tab-pane fade" id="pills-promotions" role="tabpanel"
                                 aria-labelledby="pills-promotions-tab">
                                 <div class="promotion_tab mb-10">
-                                    <form class="form--signup">
+                                    <form class="form--create-teacher-account" method="POST" action="/user/teacher">
                                         <div class="ui search focus">
                                             <div class="ui left icon input swdh11 swdh19">
-                                                <input class="prompt srch_explore" type="text" name="fullname" value=""
+                                                <input class="prompt srch_explore" type="text" name="name" value=""
                                                     id="id_fullname" required="" maxlength="64" placeholder="Full Name">
                                             </div>
                                         </div>
                                         <div class="ui search focus mt-15">
                                             <div class="ui left icon input swdh11 swdh19">
-                                                <input class="prompt srch_explore" type="email" name="emailaddress"
+                                                <input class="prompt srch_explore" type="email" name="email"
                                                     value="" id="id_email" required="" maxlength="64"
                                                     placeholder="Email Address">
                                             </div>
@@ -260,6 +260,13 @@
                                                 <input class="prompt srch_explore" type="password" name="password"
                                                     value="" id="id_password" required="" maxlength="64"
                                                     placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="ui search focus mt-15">
+                                            <div class="ui left icon input swdh11 swdh19">
+                                                <input class="prompt srch_explore" type="password" name="passwordConfirm"
+                                                    value="" id="id_passwordConfirm" required="" maxlength="64"
+                                                    placeholder="Password Confirm">
                                             </div>
                                         </div>
                                         <button class="btn1542" style="margin-top: 10px" type="submit">Create Teacher
