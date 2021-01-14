@@ -309,6 +309,7 @@
 												<li><span class="accordion-expand-all _d1452">Expand all</span></li>
 												<li><span class="_fgr123"> 2 lectures</span></li>
 												<li><span class="_fgr123">47:06:29</span></li>
+												<li><span class="section-header-length"><button type="button" id="add_lecture" class="btn btn-outline-secondary">Add</button></span></li>
 											</ul>
 										</div>
 
@@ -327,7 +328,7 @@
 															</div>
 															<div class="section-header-right">
 																<span class="num-items-in-section">8 sessions</span>
-																<span class="section-header-length"><button type="button" id="add_lecture" class="btn btn-outline-secondary">Add</button></span>
+																
 											
 															</div>
 													</a>
@@ -632,7 +633,7 @@
 
 		$('#add_lecture').click(function() {
 			var nextURL = window.location.href;
-  			nextURL = nextURL+ '/edit';
+  			nextURL = nextURL+ '/create-new-lecture';
 			  console.log(nextURL);
 			window.location.replace(nextURL);
 		});

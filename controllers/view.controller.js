@@ -397,6 +397,21 @@ exports.createNewCourse = async (req, res) => {
   })
 
 }
+exports.createNewLecture = async (req, res) => {
+
+  const slugName = req.params.slug;
+  let user = res.locals.user;
+
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+  res.render('create_new_lecture', {
+    title: "Create New Lecture",
+    user: user,
+    slug :slugName
+
+  })
+
+}
+
 exports.isCompleted = async (req, res) => {
   const slugName = req.params.slug;
   console.log(slugName);

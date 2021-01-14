@@ -34,6 +34,7 @@ router.get('/instructor-profile', controller.getInstructorView);
 
 router.get('/course/create-new-course', controller.createNewCourse)
 
+router.get('/course/:slug/lecture/add', controller.createNewLecture)
 
 router.get("/student-profile/edit", authController.protect, controller.editProfile);
 
