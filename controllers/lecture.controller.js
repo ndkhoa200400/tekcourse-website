@@ -12,32 +12,26 @@ exports.createLecture = async (req, res, next) => {
     try {
         const courseSlug = req.params.slug;
         const course = await Course.findOne({ slug: courseSlug });
-        console.log(req.body);
+       
         let reference = "";
         if (req.file) {
         
-            try {
+            
                 let video = await cloudinary.v2.uploader.upload(req.file.path, {
                     resource_type: "video",
                     chunk_size: 6000000
                 });
                 reference = video.url || "";
-                console.log(video);
-            } catch (error) {
-                return res.send(`
-                <script>
-                    alert("${error.message}")
-                    window.location.replace("/course/${req.params.slug}");
-                </script>
-    
-            `)
-            }
+               
+            
 
         }
 
         if (course) {
             const courseContent = req.body.content;
-            const lecture = await Lecture.create({ name: req.body.name, description: req.body.description, reference: reference });
+
+            const isPreviwed = req.body.isPreviwed === "true" ? true : false;
+            const lecture = await Lecture.create({ name: req.body.name, description: req.body.description, reference: reference, isPreviwed: isPreviwed });
             if (courseContent) {
                 if (course.contents.length == 0) {
                     let temp = { name: courseContent, lectures: [lecture] };
@@ -74,7 +68,7 @@ exports.createLecture = async (req, res, next) => {
         res.send(`
             <script>
                 alert("${error.message}")
-                window.location.replace("/course/${req.params.slug}");
+                window.location.replace("/course/${req.params.slug}/edit");
             </script>
 
         `)

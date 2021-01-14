@@ -339,7 +339,7 @@
 
 																		<div class="show-video-{{this.name}} collapse" id = "popup{{@index}}">
 																			<video id="my-video" class="video-js" controls
-																				preload="auto" width="640" height="264"
+																				preload="auto" width="640" height="264" 
 																				poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
 																				<source src="{{this.reference}}" type="video/mp4" />
 																				<p class="vjs-no-js">
@@ -356,8 +356,17 @@
 																	</div>
 																</div>
 															</div>
+															
+															
 															<div class="details">
 																<span class="content-summary">00:12</span>
+															</div>
+															<div class="eps_dots more_dropdown">
+																<div class="dropdown-content">
+																	<a href="#"><i class="uil uil-ellipsis-v"></i></a>
+																	<span><i class="uil uil-share-alt"></i>Share</span>
+																	<span><i class="uil uil-edit-alt"></i>Edit</span>
+																</div>
 															</div>
 														</div>
 														{{/each}}
