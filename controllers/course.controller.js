@@ -131,7 +131,16 @@ exports.getCategory = async (req, res) => {
     }
 }
 
-exports.updateCourse = factory.updateOne(Course);
+exports.updateCourse = async (req, res) =>{
+    try {
+        const slugName = req.params.slug;
+        req.body.lastUpdated = Date.now();
+        const course = await Course.findOneAndUpdate({slug: slugName}, req.body);
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 exports.deleteCourse = factory.deleteOne(Course);
 

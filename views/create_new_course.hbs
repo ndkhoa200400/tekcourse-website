@@ -152,23 +152,10 @@
 														</div>
 														<select id="subcategory-selection" name='subcategory'
 															class="ui hj145 dropdown cntry152 prompt srch_explore">
-
-															<option value="Javascript">JavaScript</option>
-															<option value="HTML">HTML</option>
-															<option value="CSS">CSS</option>
-															<option value="Angular">Angular</option>
-															<option value="React">React</option>
-															<option value="CSS">CSS</option>
-															<option value="PHP">PHP</option>
-															<option value="Node.Js">Node.Js</option>
-															<option value="WordPress">WordPress</option>
-															<option value="Vue JS">Vue JS</option>
-															<option value="Flutter">Flutter</option>
-															<option value="C#">C#</option>
-															<option value="Kotlin">Kotlin</option>
-															<option value="Java">Java</option>
-															<option value="Unity">Unity</option>
-														</select>
+															{{#each this.subcategories}}
+															<option value="{{this}}">{{this}}</option>
+															{{/each}}
+													</select>
 
 													</div>
 												</div>

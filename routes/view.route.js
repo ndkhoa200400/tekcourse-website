@@ -32,16 +32,7 @@ router.get('/profile', authController.protect, controller.getTeacherProfile);
 router.get('/instructor-profile', controller.getInstructorView);
 //router.get('/profile/edit', authController.protect, controller.updateTeacherProfile);
 
-router.get('/course/create-new-course', (req, res) => {
-
-  let user = res.locals.user;
-
-  if (user) user = { name: user.name, email: user.email, role: user.role };
-  res.render('create_new_course', {
-    title: "Create New Course",
-    user: user
-  })
-})
+router.get('/course/create-new-course', controller.createNewCourse)
 
 
 router.get("/student-profile/edit", authController.protect, controller.editProfile);
