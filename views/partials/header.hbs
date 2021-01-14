@@ -133,6 +133,9 @@
                     {{#is user.role "customer"}}
                     <img src="\images\left-imgs\img-17.jpg" alt="" />
                     {{/is}}
+                    {{#is user.role "admin"}}
+                    <img src="\images\left-imgs\img-15.jpg" alt="" />
+                    {{/is}}
                 </a>
                 <div class="menu dropdown_account">
                     <div class="channel_my">
@@ -143,6 +146,9 @@
                             {{/is}}
                             {{#is user.role "customer"}}
                             <img src="\images\left-imgs\img-17.jpg" alt="" />
+                            {{/is}}
+                            {{#is user.role "admin"}}
+                            <img src="\images\left-imgs\img-15.jpg" alt="" />
                             {{/is}}
                             <div class="pd_content">
                                 <div class="rhte85">
@@ -177,6 +183,9 @@
                     </div>
                     {{#is user.role "teacher"}}
                     <a href="/instructor" class="item channel_item">My dashboard</a>
+                    {{/is}}
+                    {{#is user.role "admin"}}
+                    <a href="/admin" class="item channel_item">My dashboard</a>
                     {{/is}}
                     {{#is user.role "customer"}}
                     <a href="/student-profile" class="item channel_item">My courses</a>

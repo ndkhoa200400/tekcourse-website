@@ -49,7 +49,7 @@ router.get('/course/:slug', controller.getCourse);
 
 router.get('/course/:slug/edit', controller.editCourse);
 
-router.get('/course/:slug/:content/:lecture/edit', authController.protect,authController.restrictTo('teacher'),controller.editLecture);
+router.get('/course/:slug/:content/:lecture/edit', authController.protect, authController.restrictTo('teacher'), controller.editLecture);
 
 router.get('/signup', (req, res) => {
   res.render('sign_up', {
@@ -77,30 +77,63 @@ router.get('/instructor', async (req, res) => {
   });
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
-  res.render('instructor_courses',{
-    user :user,
+  res.render('instructor_courses', {
+    user: user,
     layout: 'main_teacher',
-    title : 'Courses',
+    title: 'Courses',
     courses: courses
   })
 });
 
-router.post('/instructor/:slug/completed',controller.isCompleted);
+router.post('/instructor/:slug/completed', controller.isCompleted);
 
-router.get('/instructor/:slug/completed',async (req, res) => {
+router.get('/instructor/:slug/completed', async (req, res) => {
   let user = res.locals.user;
   const courses = await Course.find({ teacherID: user.id }).lean({
     virtuals: true,
   });
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
-  res.render('instructor_courses',{
-    user :user,
+  res.render('instructor_courses', {
+    user: user,
     layout: 'main_teacher',
-    title : 'Courses',
+    title: 'Courses',
     courses: courses
   })
 });
+
+router.get('/admin', async (req, res) => {
+  let user = res.locals.user;
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+
+  const listStudentAccounts = await User.find({ role: "customer" }).lean();
+  const listTeacherAccounts = await User.find({ role: "teacher" }).lean();
+  const listCourses = await Course.find().lean();
+  const listSubcategory = require('./../utils/categories');
+
+  let list = listSubcategory.subcategories;
+  console.log(list);
+  let fullListSubcate = JSON.parse('[]');
+  for (let i = 0; i < list.length; i++) {
+    let numCourse = await Course.find({ subcategory: list[i] }).count();
+    fullListSubcate.push({ 'name': list[i], 'numCourse': numCourse })
+  }
+  res.render('admin', {
+    user: user,
+    layout: 'main_teacher',
+    title: 'Admin',
+    listStudentAccounts: listStudentAccounts,
+    listTeacherAccounts: listTeacherAccounts,
+    listCourses: listCourses,
+    listSubcategory: fullListSubcate,
+  })
+});
+
+router.get('/admin/block-unblock-user', controller.blockOrUnblockUser);
+router.get('/admin/block-unblock-course', controller.blockOrUnblockCourse);
+router.post('/admin/edit-subcategory', controller.editSubCategory);
+router.get('/admin/delete-subcategory', controller.deleteSubCategory);
+router.post('/admin/create-subcategory', controller.createSubCategory)
 //router.get('/instructor/:slug/:lecture/edit', controller.editLecture);
 
 module.exports = router;
