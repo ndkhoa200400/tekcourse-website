@@ -43,6 +43,11 @@
                                     aria-selected="false"><i class="uil uil-book-alt"></i>List of Courses</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" id="pills-category-tab" data-toggle="pill" href="#pills-category"
+                                    role="tab" aria-controls="pills-upcoming-courses" aria-selected="false"><i
+                                        class="uil uil-book-alt"></i>List of Sub Categories</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" id="pills-promotions-tab" data-toggle="pill"
                                     href="#pills-promotions" role="tab" aria-controls="pills-promotions"
                                     aria-selected="false"><i class="uil uil-file"></i>Create New Teacher
@@ -58,7 +63,7 @@
                                         <thead class="thead-s">
                                             <tr>
                                                 <th>Name</th>
-                                                <th class="text-center" scope="col">Email</th>
+                                                <th scope="col">Email</th>
                                                 <th class="text-center" scope="col">Status</th>
                                                 <th class="text-center" scope="col">Action</th>
                                             </tr>
@@ -66,17 +71,18 @@
                                         <tbody>
                                             {{#each listTeacherAccounts}}
                                             <tr>
-                                                <td><a href="#"><b class="course_active">{{teacherName}}</b></a></td>
-                                                <td class="text-center">{{teacherMail}}</td>
+                                                <td><a href="#"><b class="course_active">{{name}}</b></a></td>
+                                                <td>{{email}}</td>
                                                 {{!-- Dưới đây là trạng thái của tài khoản trong trường hợp block, nếu m
                                                 xoá hẳn tài khoản thì bỏ luôn cái này với xoá dòng Status phía trên --}}
-                                                {{#if isTeacherActive}}
+                                                {{#if active}}
                                                 <td class="text-center"><b style="color: green;">Active</b></td>
                                                 {{else}}
                                                 <td class="text-center"><b style="color: red;">Blocked</b></td>
                                                 {{/if}}
                                                 <td class="text-center">
-                                                    <a href="#" title="Delete" class="gray-s"><i
+                                                    <a href="/admin/block-unblock-user?id={{this._id}}"
+                                                        title="Block/Unblock" class="gray-s"><i
                                                             class="uil uil-trash-alt"></i></a>
                                                 </td>
                                             </tr>
@@ -92,7 +98,7 @@
                                         <thead class="thead-s">
                                             <tr>
                                                 <th>Name</th>
-                                                <th class="text-center" scope="col">Email</th>
+                                                <th scope="col">Email</th>
                                                 <th class="text-center" scope="col">Status</th>
                                                 <th class="text-center" scope="col">Action</th>
                                             </tr>
@@ -100,17 +106,18 @@
                                         <tbody>
                                             {{#each listStudentAccounts}}
                                             <tr>
-                                                <td><a href="#"><b class="course_active">{{studentName}}</b></a></td>
-                                                <td class="text-center">{{studentMail}}</td>
+                                                <td><a href="#"><b class="course_active">{{name}}</b></a></td>
+                                                <td>{{email}}</td>
                                                 {{!-- Dưới đây là trạng thái của tài khoản trong trường hợp block, nếu m
                                                 xoá hẳn tài khoản thì bỏ luôn cái này với xoá dòng Status phía trên --}}
-                                                {{#if isStudentActive}}
+                                                {{#if active}}
                                                 <td class="text-center"><b style="color: green;">Active</b></td>
                                                 {{else}}
                                                 <td class="text-center"><b style="color: red;">Blocked</b></td>
                                                 {{/if}}
                                                 <td class="text-center">
-                                                    <a href="#" title="Delete" class="gray-s"><i
+                                                    <a href="/admin/block-unblock-user?id={{this._id}}"
+                                                        title="Block/Unblock" class="gray-s"><i
                                                             class="uil uil-trash-alt"></i></a>
                                                 </td>
                                             </tr>
@@ -129,7 +136,7 @@
                                                 <th class="text-center">Category</th>
                                                 <th class="text-center">Sub Category</th>
                                                 <th class="text-center">Price</th>
-                                                <th class="text-center">Date</th>
+                                                <th>Teacher</th>
                                                 <th class="text-center" scope="col">Status</th>
                                                 <th class="text-center" scope="col">Actions</th>
                                             </tr>
@@ -137,20 +144,20 @@
                                         <tbody>
                                             {{#each listCourses}}
                                             <tr>
-                                                <td class="cell-ta"><b class="course_active">{{courseTitle}}</b></td>
+                                                <td class="cell-ta"><b class="course_active">{{name}}</b>
+                                                </td>
                                                 <td class="text-center"><a href="{{categoryLink}}">{{category}}</a></td>
-                                                <td class="text-center">{{subCategory}}</td>
-                                                <td class="text-center">{{price}}</td>
-                                                <td class="text-center">{{createDate}}</td>
-                                                {{#if isCourseActive}}
+                                                <td class="text-center">{{subcategory}}</td>
+                                                <td class="text-center">${{price}}</td>
+                                                <td>{{teacherID.name}}</td>
+                                                {{#if active}}
                                                 <td class="text-center"><b style="color: green;">Active</b></td>
                                                 {{else}}
                                                 <td class="text-center"><b style="color: red;">Blocked</b></td>
                                                 {{/if}}
                                                 <td class="text-center">
-                                                    <a href="#" onclick="openForm()" title="Edit" class="gray-s"><i
-                                                            class="uil uil-edit-alt"></i></a>
-                                                    <a href="#" title="Delete" class="gray-s"><i
+                                                    <a href="/admin/block-unblock-course?id={{this._id}}"
+                                                        title="Block/Unblock" class="gray-s"><i
                                                             class="uil uil-trash-alt"></i></a>
                                                 </td>
                                             </tr>
@@ -159,36 +166,75 @@
                                     </table>
                                 </div>
                             </div>
-                            {{!-- form pop up để sửa thông tin courses --}}
-                            <div class="loginPopup">
-                                <div class="formPopup" id="popupForm">
-                                    <form action="/action_page.php" class="formContainer">
-                                        <label for="titleCourse">
-                                            <strong style="color: black;">Title</strong>
-                                        </label>
-                                        <input type="text" id="titleCourse" value="titleCourse" name="titleCourse"
-                                            required>
+                            {{!-- list of categories --}}
+                            <div class="tab-pane fade" id="pills-category" role="tabpanel">
+                                <a title="Save" class="btn1542" onclick="showInputSubcate('create-new-cate-form')"
+                                    style="margin-top: 20px; margin-bottom:20px; float:left;">Create new
+                                    Sub Category</a>
+                                {{!-- input new sub category --}}
+                                <div class="ui search focus" style="float: right; margin-top: 20px;"
+                                    id="create-new-cate-form" hidden='true'>
+                                    <div class="ui left icon input swdh11 swdh19">
+                                        <form action="/admin/create-subcategory" method="POST" class="form--create-sub">
+                                            <input class="prompt srch_explore" type="text" name="nameSubcate" value=""
+                                                id="nameSubcate" required="" maxlength="64"
+                                                placeholder="Name of Sub Category" style="height: 40px;">
+                                            <button title="Save" type="submit" class="btn1542">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="table-responsive mt-30">
 
-                                        <label for="category">
-                                            <strong style="color: black;">Category</strong>
-                                        </label>
-                                        <input type="text" id="category" value="category" name="category" required>
+                                    <table class="table ucp-table">
+                                        <thead class="thead-s">
+                                            <tr>
+                                                <th>Sub Category</th>
+                                                <th class="text-center">Number of courses</th>
+                                                <th class="text-center" scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each listSubcategory}}
+                                            <tr>
+                                                <td class="cell-ta"><b class="course_active">{{name}}</b>
+                                                </td>
+                                                <td class="text-center">{{numCourse}}</td>
+                                                <td class="text-center">
+                                                    {{#is numCourse 0}}
+                                                    <a href="/admin/delete-subcategory?name={{name}}" title="Delete"
+                                                        class="gray-s"><i class="uil uil-trash-alt"></i></a>
+                                                    {{/is}}
+                                                    <a onclick="showInputSubcate('{{name}}')" title="Edit"
+                                                        class="gray-s"><i class="uil uil-edit-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr id="{{name}}" hidden='true'>
+                                                <td class="text-center">
+                                                    <div class="ui search focus">
+                                                        <div class="ui left icon input swdh11 swdh19">
+                                                            <form action="/admin/edit-subcategory?name={{name}}"
+                                                                method="POST" class="form--edit-sub">
+                                                                <input class="prompt srch_explore" type="text"
+                                                                    name="nameSubcate" value="{{name}}" id="{{name}}"
+                                                                    required="" maxlength="64"
+                                                                    placeholder="Name of Sub category"
+                                                                    style="height: 30px;">
+                                                                <button title="Save" type="submit" class="btn1542"
+                                                                    style="margin-left: 15px;">Save</i></button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
 
-                                        <label for="subCategory">
-                                            <strong style="color: black;">Sub Category</strong>
-                                        </label>
-                                        <input type="text" id="subCategory" value="subCategory" name="subCategory"
-                                            required>
+                                                </td>
+                                                <td>
 
-                                        <label for="priceCourse">
-                                            <strong style="color: black;">Price</strong>
-                                        </label>
-                                        <input type="text" id="priceCourse" value="priceCourse" name="priceCourse"
-                                            required>
-
-                                        <button type="submit" class="btn">Save</button>
-                                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                                    </form>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             {{!-- Thêm tài khoản cho giáo viên --}}
@@ -216,8 +262,7 @@
                                                     placeholder="Password">
                                             </div>
                                         </div>
-                                        <button class="login-btn" style="width: 30%; margin-left: 35%;"
-                                            type="submit">Create Teacher
+                                        <button class="btn1542" style="margin-top: 10px" type="submit">Create Teacher
                                             Account</button>
                                     </form>
                                 </div>
@@ -229,7 +274,13 @@
         </div>
     </div>
     {{>footer}}
+    <script>
+        function showInputSubcate(x) {
+            document.getElementById(x).hidden = false;
+        };
+    </script>
 </div>
+
 <!-- Body End -->
 
 <!-- Mirrored from gambolthemes.net/html-items/cursus_demo_f12/instructor_courses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 12:59:08 GMT -->

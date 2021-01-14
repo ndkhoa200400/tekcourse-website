@@ -7,6 +7,7 @@ const registeredCourse = require("./../model/registedCourse.model");
 const pagination = require("./../utils/pagination");
 const categories = require('./../utils/categories');
 const Lecture = require("../model/lecture.model");
+const fs = require('fs');
 
 async function getTopSubcategory(date, weekAgo) {
   const registeredcourses = await registeredCourse.find().lean();
@@ -146,7 +147,7 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     res.status(200).render("course_detail_view", {
       title: course.name,
       course: course,
-      
+
       user: user,
       isPurchase: isPurchase,
       isWatched: isWatched,
@@ -196,14 +197,14 @@ exports.editLecture = catchAsync(async (req, res, next) => {
     const lectureSlug = req.params.lecture;
 
     const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
-    const lecture = await Lecture.findOne({slug: lectureSlug}).lean();
+    const lecture = await Lecture.findOne({ slug: lectureSlug }).lean();
     // Các contents trong course trừ content của lecture đang edit
-    let contents  = course.contents.map(value => value.name).filter(value => value !== content);
+    let contents = course.contents.map(value => value.name).filter(value => value !== content);
 
     let user = res.locals.user;
-    
+
     if (user) user = { name: user.name, email: user.email, role: user.role };
-    
+
 
     res.render("edit_lecture", {
       title: course.name,
@@ -407,6 +408,165 @@ exports.isCompleted = async (req, res) => {
     new: true
   });
   res.redirect("back");
-  
+
 
 }
+// access to admin page
+exports.getAdmin = catchAsync(async (req, res, next) => {
+  const listCourses = await Course.findAll({});
+  //const listTeacherAccounts;
+  //const listStudentAccounts;
+
+  try {
+    let user = res.locals.user;
+    res.status(200).render("admin", {
+      title: "Admin",
+      //user: user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.blockOrUnblockUser = catchAsync(async (req, res, next) => {
+  try {
+
+    const id = req.query.id;
+    let getUser = await User.findById(id).lean();
+
+    //if active is true => block it, else unblock it.
+    if (getUser.active) {
+      console.log("help me");
+      getUser.active = false;
+      await getUser.save;
+      res.redirect('/admin');
+    }
+    else {
+      console.log("help");
+      getUser.active = true;
+      await getUser.save;
+      res.redirect('/admin');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.blockOrUnblockCourse = catchAsync(async (req, res, next) => {
+  try {
+
+    const id = req.query.id;
+    let getCourse = await Course.findById(id).lean();
+
+    //if active is true => block it, else unblock it.
+    if (getCourse.active) {
+      console.log("help me");
+      getCourse.active = false;
+      await getCourse.save;
+      res.redirect('/admin');
+    }
+    else {
+      console.log("help");
+      getCourse.active = true;
+      await getCourse.save;
+      res.redirect('/admin');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.deleteSubCategory = catchAsync(async (req, res, next) => {
+  try {
+    const name = req.query.name;
+    let subcategory = require('./../utils/categories').subcategories;
+
+    for (let i = 0; i < subcategory.length; i++) {
+      if (subcategory[i] == name) {
+        subcategory = subcategory.splice(i, 1);
+        break;
+      }
+    }
+
+    const writeContent = "exports.subcategories = " + JSON.stringify(subcategory);
+    fs.writeFile("./../tekcourse-website/utils/categories.js", writeContent, function (err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+    });
+
+    res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.editSubCategory = catchAsync(async (req, res, next) => {
+  try {
+    const newSubName = req.body.nameSubcate;
+    const oldSubName = req.query.name;
+    let subcategory = require('./../utils/categories').subcategories;
+
+    if (subcategory.findIndex(element => element == newSubName) >= 0) {
+      res.send(`
+        <script>
+          alert("The new name of sub category is duplicated");
+          window.location = "/admin";
+        </script>
+      `);
+    }
+    else {
+      const i = subcategory.findIndex(element => element == oldSubName);
+      subcategory[i] = newSubName;
+
+      const writeContent = "exports.subcategories = " + JSON.stringify(subcategory);
+      fs.writeFile("./../tekcourse-website/utils/categories.js", writeContent, function (err) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("The file was saved!");
+      });
+    }
+
+    res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.createSubCategory = catchAsync(async (req, res, next) => {
+  try {
+    const newSubName = req.body.nameSubcate;
+    let subcategory = require('./../utils/categories').subcategories;
+
+    if (subcategory.findIndex(element => element == newSubName) >= 0) {
+      res.send(`
+        <script>
+          alert("The new name of sub category is duplicated");
+          window.location = "/admin";
+        </script>
+      `);
+    }
+    else {
+      subcategory.push(newSubName);
+      const writeContent = "exports.subcategories = " + JSON.stringify(subcategory);
+      fs.writeFile("./../tekcourse-website/utils/categories.js", writeContent, function (err) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("The file was saved!");
+      });
+      res.send(`
+        <script>
+          alert("Create new sub category successfully");
+          window.location = "/admin";
+        </script>
+      `);
+    }
+
+    res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+  }
+});

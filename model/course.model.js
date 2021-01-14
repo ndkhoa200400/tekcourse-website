@@ -79,6 +79,10 @@ const courseSchema = new mongoose.Schema({
   isCompleted: {
     type: Boolean,
     default: false
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 }, {
   toJSON: { virtuals: true },
@@ -117,8 +121,8 @@ courseSchema.post("findOneAndUpdate", async function () {
       slug: slugify(updatedDoc.name, { lower: true }),
       lastUpdated: Date.now(),
     });
-  else{
-    await this.model.updateOne(this.getQuery(), {    
+  else {
+    await this.model.updateOne(this.getQuery(), {
       lastUpdated: Date.now(),
     });
   }
