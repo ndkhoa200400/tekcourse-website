@@ -1,0 +1,251 @@
+﻿<!-- Mirrored from gambolthemes.net/html-items/cursus_demo_f12/create_new_course.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 12:55:52 GMT -->
+
+<link rel="icon" type="image/png" href="/images/fav.png">
+
+<!-- Stylesheets -->
+<link href='/http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet'>
+<link href='/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+<link href="/css/vertical-responsive-menu1.min.css" rel="stylesheet">
+<link href="/css/instructor-dashboard.css" rel="stylesheet">
+<link href="/css/instructor-responsive.css" rel="stylesheet">
+<link href="/css/night-mode.css" rel="stylesheet">
+<link href="/css/jquery-steps.css" rel="stylesheet">
+
+<script src="https://cdn.tiny.cloud/1/ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6/tinymce/5/tinymce.min.js"
+	referrerpolicy="origin"></script>
+<script>
+	tinymce.init({
+		selector: '#id_course_description',
+		plugins: 'paste image link autolink lists table media',
+		menubar: false,
+		toolbar: [
+			'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+		],
+	});	
+	tinymce.init({
+		selector: '#id_part_description',
+		plugins: 'paste image link autolink lists table media',
+		menubar: false,
+		toolbar: [
+			'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+		],
+	});
+</script>
+
+<!-- Header Start -->
+{{> header}}
+{{> nav_1}}
+
+<!-- Body Start -->
+<div class="wrapper">
+	<div class="sa4d25">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="st_title"><i class="uil uil-analysis"></i> {{this.action}}Course - {{this.title}} </h2>
+				</div>
+			</div>
+			<form action="/course" method="POST" class='form--create-course' enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-12">
+					<div class="course_tabs_1">
+						<div id="add-course-tab" class="step-app">
+						
+
+							
+								<div class="step-tab-panel step-tab-info active" id="tab_step1">
+									<div class="tab-from-content">
+										<div class="title-icon">
+											<h3 class="title"><i class="uil uil-info-circle"></i>General Information
+											</h3>
+										</div>
+										<div class="course__form">
+											<div class="general_info10">
+												<div class="row">
+													<div class="col-lg-12 col-md-12">
+														<div class="ui search focus mt-30 lbel25">
+															<label>Course Name*</label>
+															<div class="ui left icon input swdh19">
+																<input class="prompt srch_explore" type="text"
+																	placeholder="{{this.course.name}}" name="name"
+																	data-purpose="edit-course-title" id="main[title]"
+																	value="" required>
+																<div class="badge_num">#</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-12 col-md-12">
+														<div class="course_des_textarea mt-30 lbel25">
+															<label>Course Short Description*</label>
+															<div class="course_des_bg">
+																
+																<div class="textarea_dt">
+																	<div class="ui form swdh339">
+																		<div class="field">
+																			<textarea rows="5" name="shortDescription"
+																				id="id_course_short_description"
+																				placeholder="{{this.course.shortDescription}}"></textarea>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-12 col-md-12">
+														<div class="course_des_textarea mt-30 lbel25">
+															<label>Course Description*</label>
+															<div class="course_des_bg">
+															
+																<div class="textarea_dt">
+																	<div class="ui form swdh339">
+																		<div class="field">
+																			<textarea rows="5" name="description"
+																				id="id_course_description"
+																				placeholder="{{this.course.description}}"></textarea>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-lg-4 col-md-6">
+														<div class="mt-30 lbel25">
+															<label>Course Category*</label>
+														</div>
+														<select id="category-selection" name='category'
+															class="ui hj145 dropdown cntry152 prompt srch_explore">
+															<option value="">Select Category</option>
+															<option value="website">Web Development</option>
+															<option value="mobile">Mobile Development</option>
+
+														</select>
+													</div>
+													<div class="col-lg-4 col-md-6">
+														<div class="mt-30 lbel25">
+															<label>Course Subcategory*</label>
+														</div>
+														<select id="subcategory-selection" name='subcategory'
+															class="ui hj145 dropdown cntry152 prompt srch_explore">
+															{{#each this.subcategories}}
+															<option value="{{this}}">{{this}}</option>
+															{{/each}}
+													</select>
+
+													</div>
+												</div>
+											</div>
+											<div class="price_course">
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="price_title">
+															<h4><i class="uil uil-dollar-sign-alt"></i>Pricing</h4>
+															<div class="ui left icon input swdh19">
+																<input class="prompt srch_explore" type="number"
+																	placeholder="{{this.course.price}}" name="price"
+																	data-purpose="edit-course-title" id="course-price"
+																	value="">
+
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="step-tab-panel step-tab-gallery" id="tab_step2">
+									<div class="tab-from-content">
+										<div class="title-icon">
+											<h3 class="title"><i class="uil uil-image-upload"></i>View</h3>
+										</div>
+										<div class="course__form">
+											<div class="view_info10">
+												<div class="row">
+													<div class="col-lg-12">
+														{{!-- Upload Photo --}}
+														<div class="view_all_dt">
+															<div class="view_img_left">
+																<div class="view__img">
+																	<img src="/images/courses/add_img.jpg" alt="">
+																</div>
+															</div>
+															<div class="view_img_right">
+																<h4>Cover Photo</h4>
+																<p>Upload your course image here. It must meet our
+																	course image quality standards to be accepted.
+																	Important guidelines: 750x422 pixels; .jpg, .jpeg,.
+																	gif, or .png. no text on the image.</p>
+
+																<div>
+																	<input id='img-link' type="hidden" value=""
+																		name='avatar' data-purpose="edit-course-img">
+
+																	<div class="dropzone">
+																		<label class="custom-file-label">Choose
+																			file</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													{{!-- Upload Review Video --}}
+													<div class="view_all_dt">
+														<div class="view_img_left">
+															<h4>Promotional Video</h4>
+
+															<div>
+																<input id="promotionalVideo" name="promotionalVideo"
+																	type="file" class="file"
+																	data-browse-on-zone-click="true" value=''>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+			
+
+							
+							<div class="step-footer step-tab-pager">
+		
+								<button data-direction="next" class="btn btn-default steps_btn">Next</button>
+								<button data-direction="finish" class="btn btn-default steps_btn" type='submit'
+									id="submit-course-btn">Submit Course</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{{> footer}}
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-steps.min.js"></script>
+<script>
+	$('#add-course-tab').steps({
+		onFinish: function () {
+			$('.form--create-course').submit();
+		}
+	});		
+</script>
+</div>
+
+<!-- Body End -->
+
+
+
+
+
+<!-- Mirrored from gambolthemes.net/html-items/cursus_demo_f12/create_new_course.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 12:56:02 GMT -->

@@ -69,8 +69,10 @@
 													<td class="text-center">${{price}}</td>
 													<td class="text-center"><a href="../category/{{category}}">{{categoryName}}</a></td>
 													<td class="text-center">
+														<form action="./isCompleted" method="POST">
+															 <input id="complete" type="checkbox" onclick="myFunction()">
+														</form>
 														
-														 <input id="complete" type="checkbox" >
 														 <b class="course_active" style="color:#20c9bb">Complete</b>
 														</td>
 													<td class="text-center"><a href="../course/{{slug}}">View</a></td>
@@ -94,13 +96,17 @@
 		{{> footer}}
 	</div>
 	<script>
-		$("#complete").click(function () {
-			var str = $('input[type=checkbox]:checked').map(function () {
-				return "true";
-			});
-			console.log(str);
-			if (str != "") str += "";
-			else str += str;
+		function myFunction() {
+			console.log("AAA");
+		  // Get the checkbox
+			var checkBox = document.getElementById("complete");
+			// Get the output text
 
-		});
+			// If the checkbox is checked, display the output text
+			if (checkBox.checked == true){
+				console.log("yes");
+			} else {
+				console.log("no");
+			}
+		}
 	</script>

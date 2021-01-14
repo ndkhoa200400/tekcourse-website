@@ -104,7 +104,6 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     const slugName = req.params.slug;
     const course = await Course.findOneAndUpdate({ slug: slugName }, { $inc: { views: 1 } }).populate('contents.lectures').lean({ virtuals: true });
 
-
     let isPurchase = false;
     let isWatched = false;
 
@@ -146,6 +145,7 @@ exports.getCourse = catchAsync(async (req, res, next) => {
     res.status(200).render("course_detail_view", {
       title: course.name,
       course: course,
+      
       user: user,
       isPurchase: isPurchase,
       isWatched: isWatched,
@@ -177,9 +177,9 @@ exports.editCourse = catchAsync(async (req, res, next) => {
     if (user) user = { name: user.name, email: user.email, role: user.role };
 
 
-    res.status(200).render("create_new_lecture", {
+    res.status(200).render("edit_course", {
       title: course.name,
-      action: "Add ",
+      action: "Edit ",
       course: course,
       user: user,
     });

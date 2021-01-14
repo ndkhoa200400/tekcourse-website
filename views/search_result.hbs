@@ -273,7 +273,7 @@
 								{{else}}
 								{{#each course}}
 								<div class="fcrse_1 mb-4">
-									<a href="/course/{{slug}}" class="hf_img">
+									<a href="../course/{{slug}}" class="hf_img">
 										{{#if avatar}}
 										<img src="{{avatar}}" style="height: 210px;" alt="">
 										{{else}}
@@ -304,10 +304,10 @@
 											<span class="vdt14">{{views}} views</span>
 											<span class="vdt14">Created at: {{createdDate}}</span>
 										</div>
-										<a href="../course/{{slug}}" class="crse14s title900">{{name}}</a>
+										<a href="../{{slug}}" class="crse14s title900">{{name}}</a>
 										<a href="../category/{{category}}" class="crse-cate">{{categoryName}}</a>
 										<div class="auth1lnkprce">
-											<p class="cr1fot">By <a href="#">{{teacherID.name}}</a></p>
+											<p class="cr1fot">By <a href="http://localhost:8000/instructor-profile?id={{{this.teacherID._id}}}">{{teacherID.name}}</a></p>
 											<div class="prce142">${{price}}</div>
 										</div>
 									</div>

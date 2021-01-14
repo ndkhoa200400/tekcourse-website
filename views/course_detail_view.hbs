@@ -33,7 +33,7 @@
 	{{> header}}
 	<!-- Header End -->
 	<!-- Left Sidebar Start -->
-	{{> nav_2}}
+	{{> nav_1}}
 	<!-- Left Sidebar End -->
 	<!-- Body Start -->
 	<div class="wrapper _bg4586">
@@ -319,12 +319,17 @@
 
 													<a href="javascript:void(0)"
 														class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-														<div class="section-header-left">
-															<span class="section-title-wrapper">
-																<i class='uil uil-presentation-play crse_icon'></i>
-																<span class="section-title-text">{{this.name}}</span>
-															</span>
-														</div>
+															<div class="section-header-left">
+																<span class="section-title-wrapper">
+																	<i class='uil uil-presentation-play crse_icon'></i>
+																	<span class="section-title-text">{{this.name}}</span>
+																</span>
+															</div>
+															<div class="section-header-right">
+																<span class="num-items-in-section">8 sessions</span>
+																<span class="section-header-length"><button type="button" id="add_lecture" class="btn btn-outline-secondary">Add</button></span>
+											
+															</div>
 													</a>
 
 													<div
@@ -368,12 +373,14 @@
 																</div>
 															</div>
 
-
+															{{#if isPreviewed}}
 															<div class="details">
-
+																
 																<a href="#"
-																	class="preview-text">Preview</a>
-																<a href="../course/{{../this.name}}/{{this.name}}/edit"
+																	class="preview-text" aria-expanded="false" data-toggle="collapse" data-target="#popup{{@index}}">Preview</a>
+															{{/if}}
+															
+																<a href="../course/{{this.name}}/{{../this.name}}/{{this.name}}/edit"
 																	class="content-summary"><i
 																		class="uil uil-edit-alt"></i>Edit</a>
 
@@ -388,244 +395,227 @@
 											</div>
 										</div>
 									</div>
-									<a class="btn1458" href="#">20 More Sections</a>
+									{{!-- <a class="btn1458" href="#">20 More Sections</a> --}}
 								</div>
-							</div>
-							<div class="tab-pane fade" id="nav-reviews" role="tabpanel">
-								<div class="student_reviews">
-									<div class="row">
-										<div class="col-lg-5">
-
-											<div class="reviews_left">
-												<h3>Student Feedback</h3>
-												<div class="total_rating">
-													<div class="_rate001">{{this.course.ratingsAverage}}</div>
-													<div class="rating-box">
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star half-star"></span>
-													</div>
-													<div class="_rate002">Course Rating</div>
-												</div>
-												<div class="_rate003">
-													<div class="_rate004">
-														<div class="progress progress1">
-															<div class="progress-bar w-{{this.feedbackStat.[4]}}"
-																role="progressbar" aria-valuenow="70" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="rating-box">
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-														</div>
-														<div class="_rate002">{{this.feedbackStat.[4]}}%</div>
-													</div>
-													<div class="_rate004">
-														<div class="progress progress1">
-															<div class="progress-bar w-{{this.feedbackStat.[3]}}"
-																role="progressbar" aria-valuenow="30" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="rating-box">
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star empty-star"></span>
-														</div>
-														<div class="_rate002">{{this.feedbackStat.[3]}}%</div>
-													</div>
-													<div class="_rate004">
-														<div class="progress progress1">
-															<div class="progress-bar w-{{this.feedbackStat.[2]}}"
-																role="progressbar" aria-valuenow="10" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="rating-box">
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star empty-star"></span>
-															<span class="rating-star empty-star"></span>
-														</div>
-														<div class="_rate002">{{this.feedbackStat.[2]}}%</div>
-													</div>
-													<div class="_rate004">
-														<div class="progress progress1">
-															<div class="progress-bar w-{{this.feedbackStat.[1]}}"
-																role="progressbar" aria-valuenow="2" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="rating-box">
-															<span class="rating-star full-star"></span>
-															<span class="rating-star full-star"></span>
-															<span class="rating-star empty-star"></span>
-															<span class="rating-star empty-star"></span>
-															<span class="rating-star empty-star"></span>
-														</div>
-														<div class="_rate002">{{this.feedbackStat.[1]}}%</div>
-													</div>
-													<div class="_rate004">
-														<div class="progress progress1">
-															<div class="progress-bar w-{{this.feedbackStat.[0]}}"
-																role="progressbar" aria-valuenow="0" aria-valuemin="0"
-																aria-valuemax="100"></div>
-														</div>
-														<div class="rating-box">
-															<span class="rating-star full-star"></span>
-															<span class="rating-star empty-star"></span>
-															<span class="rating-star empty-star"></span>
-															<span class="rating-star empty-star"></span>
-															<span class="rating-star empty-star"></span>
-														</div>
-														<div class="_rate002">{{this.feedbackStat.[0]}}%</div>
-													</div>
-												</div>
-											</div>
-
-										</div>
-										<div class="col-lg-7">
-											<div class="review_right">
-												<div class="review_right_heading">
-													<h3>Feedbacks</h3>
-													{{!-- <div class="review_search">
-														<input class="rv_srch" type="text"
-															placeholder="Search reviews...">
-														<button class="rvsrch_btn"><i
-																class='uil uil-search'></i></button>
-													</div> --}}
-												</div>
-											</div>
-											<div class="review_all120">
-												{{#each feedbacks}}
-												<div class="review_item">
-													<div class="review_usr_dt">
-														<img src="/images/left-imgs/img-17.jpg" alt="">
-														<div class="rv1458">
-															<h4 class="tutor_name1">{{userID.name}}</h4>
-															<span class="time_145">{{moment createdAt
-																format='DD-MM-YYYY'}}</span>
-														</div>
-													</div>
-													<div class="rating-box mt-20">
-														{{rating}} <span class="rating-star full-star"></span>
-														{{!--
-														{{#switch rating}}
-														{{#case "1"}}
-														<span class="rating-star full-star"></span>
-														{{/case}}
-														{{#case "2"}}
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														{{/case}}
-														{{#case "3"}}
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														{{/case}}
-														{{#case "4"}}
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														{{/case}}
-														{{#case "5"}}
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														<span class="rating-star full-star"></span>
-														{{/case}}
-
-														{{/switch}} --}}
-
-													</div>
-													<p class="rvds10">{{review}}</p>
-													<div class="rpt100">
-														<span>Was this feedback helpful?</span>
-														<div class="radio--group-inline-container">
-															<div class="radio-item">
-																<input id="radio-1" name="radio" type="radio">
-																<label for="radio-1" class="radio-label">Yes</label>
-															</div>
-															<div class="radio-item">
-																<input id="radio-2" name="radio" type="radio">
-																<label for="radio-2" class="radio-label">No</label>
-															</div>
-														</div>
-														<a href="#" class="report145">Report</a>
-													</div>
-												</div>
-												{{/each}}
-											</div>
-										</div>
-									</div>
-									{{!-- Send Review --}}
-									{{#if feedbackable}}
-									<form action="/feedback" method="POST">
-
-										<div class="row" style="margin-top: 15px;">
+								<div class="tab-pane fade" id="nav-reviews" role="tabpanel">
+									<div class="student_reviews">
+										<div class="row">
 											<div class="col-lg-5">
-												<div class="cmmnt_1526">
-													<div class="cmnt_group">
-														<div class="img160">
-															<img src="\images\left-imgs\img-17.jpg" alt="">
-														</div>
-														<textarea rows="5" name="review" id="reviewContent"
-															class="_cmnt001"
-															placeholder="Insert your review.."></textarea>
-													</div>
-													<div class="cmmnt_1526 mt-10" style="border: none;">
-														<div class="cmnt_group">
 
-															<select class="form-select"
-																aria-label="Default select example"
-																style="float: left; width: 40%; margin-right: 10px;"
-																name='rating'>
-																<option value="1">&star;</option>
-																<option value="2">&star; &star;</option>
-																<option value="3">&star; &star; &star;</option>
-																<option value="4">&star; &star; &star; &star;</option>
-																<option value="5">&star; &star; &star; &star; &star;
-																</option>
-															</select>
-															<input type="hidden" name="courseID"
-																value="{{this.course.id}}">
+												<div class="reviews_left">
+													<h3>Student Feedback</h3>
+													<div class="total_rating">
+														<div class="_rate001">{{this.course.ratingsAverage}}</div>
+														<div class="rating-box">
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star half-star"></span>
 														</div>
-
+														<div class="_rate002">Course Rating</div>
 													</div>
-													<button class="cmnt-btn" type="submit">Send Your Review</button>
+													<div class="_rate003">
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[4]}}"
+																	role="progressbar" aria-valuenow="70" aria-valuemin="0"
+																	aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[4]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[3]}}"
+																	role="progressbar" aria-valuenow="30" aria-valuemin="0"
+																	aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[3]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[2]}}"
+																	role="progressbar" aria-valuenow="10" aria-valuemin="0"
+																	aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[2]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[1]}}"
+																	role="progressbar" aria-valuenow="2" aria-valuemin="0"
+																	aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[1]}}%</div>
+														</div>
+														<div class="_rate004">
+															<div class="progress progress1">
+																<div class="progress-bar w-{{this.feedbackStat.[0]}}"
+																	role="progressbar" aria-valuenow="0" aria-valuemin="0"
+																	aria-valuemax="100"></div>
+															</div>
+															<div class="rating-box">
+																<span class="rating-star full-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+																<span class="rating-star empty-star"></span>
+															</div>
+															<div class="_rate002">{{this.feedbackStat.[0]}}%</div>
+														</div>
+													</div>
 												</div>
-												{{!--
-												<div class="textarea_dt">
-													<div class="ui form swdh339">
 
-														<select class="form-select" aria-label="Default select example"
-															style="float: left; width: 40%; margin-right: 10px;"
-															name='rating'>
-															<option value="1">&star;</option>
-															<option value="2">&star; &star;</option>
-															<option value="3">&star; &star; &star;</option>
-															<option value="4">&star; &star; &star; &star;</option>
-															<option value="5">&star; &star; &star; &star; &star;
-															</option>
-														</select>
-														<input type="hidden" name="courseID" value="{{this.course.id}}">
-													</div>
-												</div> --}}
 											</div>
+											<div class="col-lg-7">
+												<div class="review_right">
+													<div class="review_right_heading">
+														<h3>Feedbacks</h3>
+														{{!-- <div class="review_search">
+															<input class="rv_srch" type="text"
+																placeholder="Search reviews...">
+															<button class="rvsrch_btn"><i
+																	class='uil uil-search'></i></button>
+														</div> --}}
+													</div>
+												</div>
+												<div class="review_all120">
+													{{#each feedbacks}}
+													<div class="review_item">
+														<div class="review_usr_dt">
+															<img src="/images/left-imgs/img-17.jpg" alt="">
+															<div class="rv1458">
+																<h4 class="tutor_name1">{{userID.name}}</h4>
+																<span class="time_145">{{moment createdAt
+																	format='DD-MM-YYYY'}}</span>
+															</div>
+														</div>
+														<div class="rating-box mt-20">
+															{{rating}} <span class="rating-star full-star"></span>
+															{{!--
+															{{#switch rating}}
+															{{#case "1"}}
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "2"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "3"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "4"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
+															{{#case "5"}}
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															<span class="rating-star full-star"></span>
+															{{/case}}
 
+															{{/switch}} --}}
+
+														</div>
+														<p class="rvds10">{{review}}</p>
+														<div class="rpt100">
+															<span>Was this feedback helpful?</span>
+															<div class="radio--group-inline-container">
+																<div class="radio-item">
+																	<input id="radio-1" name="radio" type="radio">
+																	<label for="radio-1" class="radio-label">Yes</label>
+																</div>
+																<div class="radio-item">
+																	<input id="radio-2" name="radio" type="radio">
+																	<label for="radio-2" class="radio-label">No</label>
+																</div>
+															</div>
+															<a href="#" class="report145">Report</a>
+														</div>
+													</div>
+													{{/each}}
+												</div>
+											</div>
 										</div>
-									</form>
-									{{/if}}
+										{{!-- Send Review --}}
+										{{#if feedbackable}}
+										<form action="/feedback" method="POST">
+
+											<div class="row" style="margin-top: 15px;">
+												<div class="col-lg-5">
+													<div class="cmmnt_1526">
+														<div class="cmnt_group">
+															<div class="img160">
+																<img src="\images\left-imgs\img-17.jpg" alt="">
+															</div>
+															<textarea rows="5" name="review" id="reviewContent"
+																class="_cmnt001"
+																placeholder="Insert your review.."></textarea>
+														</div>
+														<div class="cmmnt_1526 mt-10" style="border: none;">
+															<div class="cmnt_group">
+
+																<select class="form-select"
+																	aria-label="Default select example"
+																	style="float: left; width: 40%; margin-right: 10px;"
+																	name='rating'>
+																	<option value="1">&star;</option>
+																	<option value="2">&star; &star;</option>
+																	<option value="3">&star; &star; &star;</option>
+																	<option value="4">&star; &star; &star; &star;</option>
+																	<option value="5">&star; &star; &star; &star; &star;
+																	</option>
+																</select>
+																<input type="hidden" name="courseID"
+																	value="{{this.course.id}}">
+															</div>
+
+														</div>
+														<button class="cmnt-btn" type="submit">Send Your Review</button>
+													</div>
+												
+												</div>
+
+											</div>
+										</form>
+										{{/if}}
+									</div>
 								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -640,7 +630,15 @@
 		function getVideo(reference) {
 			console.log($(this).html())
 		}
+
+		$('#add_lecture').click(function() {
+			var nextURL = window.location.href;
+  			nextURL = nextURL+ '/edit';
+			  console.log(nextURL);
+			window.location.replace(nextURL);
+		});
 	</script>
+
 	</div>
 	<!-- Body End -->
 
