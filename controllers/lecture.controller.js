@@ -76,7 +76,16 @@ exports.createLecture = async (req, res, next) => {
     }
 }
 
-exports.updateLecture = factory.updateOne(Lecture);
-
-exports.deleteLecture = factory.deleteOne(Lecture);
-
+exports.editLecture = async (req, res) =>{
+   
+    try {
+        console.log(req.body);
+        console.log(req.params)
+        if (req.file)
+        {
+            
+        }
+    } catch (error) {
+        console.log(error);   
+    }
+}

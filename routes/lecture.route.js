@@ -1,11 +1,16 @@
 const express = require("express");
 const controller = require("../controllers/lecture.controller");
 const authController = require("../controllers/auth.controller");
-const router = express.Router({mergeParams: true});
+const router = express.Router({ mergeParams: true });
 const upload = require("../utils/multer");
-// coruse/:slug/lecture
+// course/:slug/lecture/...
 // or
 // api/lecture
+
+
+
+router.post('/:content/:lecture/edit', authController.protect,authController.restrictTo("teacher"), upload.single('reference'), controller.editLecture);
+
 router
   .route("/add")
   .post(
@@ -16,15 +21,6 @@ router
     controller.createLecture
   );
 
-router.use(authController.protect);
-router.use(authController.allowedToLecture);
-router
-  .route("/:id")
-  .get(controller.getLecture)
-  .patch(authController.restrictTo("teacher"), controller.updateLecture)
-  .delete(
-    authController.restrictTo("teacher", "admin"),
-    controller.deleteLecture
-  );
+
 
 module.exports = router;
