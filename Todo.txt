@@ -1,0 +1,60 @@
+1. Alert khi yêu cầu đăng nhập
+2. Stop video
+3. sửa lại cái alert khác
+4. Làm edit a lecture
+5. Sửa lại logo
+6. Trang đăng ký account cho giáo viên
+
+	{{#each this.lectures}}
+												<div class="modal vd_mdl fade" id="popup_overlay" tabindex="-1" role="dialog" aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+															<div class="modal-body">
+																<video controls id="framevideo">
+																	<source  src="{{this.reference}}" type="video/mp4" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+																	allowfullscreen>
+																</video>
+															</div>
+
+														</div>
+													</div>
+												</div>
+
+												<div class="lecture-container">
+													<div class="left-content">
+														<i class='uil uil-play-circle icon_142'></i>
+														<div class="top">
+
+															<div class="title">
+																<button class="btn btn-outline-light btn-sm" data-toggle="modal" data-target="#popup_overlay"
+																	>{{name}}</button>
+
+															</div>
+														</div>
+													</div>
+
+													<div class="details">
+														<a href="#" class="preview-text" data-toggle="modal" data-target="#popup_overlay">Preview</a>
+														<span class="content-summary">00:12</span>
+													</div>
+
+													{{!-- <div id="popup_overlay" class="collapse show-video-{{this.name}}">
+																	<video id="my-video" class="video-js" controls
+																		preload="auto" width="640" height="264"
+																		poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+																		<source src="{{this.reference}}" type="video/mp4" />
+																		<p class="vjs-no-js">
+																			To view this video please enable JavaScript,
+																			and
+																			consider upgrading to a
+																			web browser that
+																			<a href="https://videojs.com/html5-video-support/"
+																				target="_blank">supports HTML5 video</a>
+																		</p>
+																	</video>
+													</div> --}}
+
+													</div>

@@ -79,7 +79,7 @@
 								<a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab"
 									href="#nav-about" role="tab" aria-selected="true">About</a>
 								<a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses"
-									role="tab" aria-selected="false">My Courses</a>
+									role="tab" aria-selected="false">Courses</a>
 							
 							</div>
 						</nav>
@@ -107,7 +107,7 @@
 							</div>
 							<div class="tab-pane fade" id="nav-courses" role="tabpanel">
 								<div class="crse_content">
-									<h3>My courses ({{numCourse}})</h3>
+									<h3>Courses ({{numCourse}})</h3>
 									<div class="_14d25">
 										<div class="row">
 											{{#each this.courses}}
@@ -115,7 +115,7 @@
 												<div class="fcrse_1 mt-30">
 													<a href="/course/{{this.slug}}" class="fcrse_img">
 														{{#if this.avatar}}
-														<img src="{{this.avatar}}" alt="">
+														<img src="{{this.avatar}}" alt="" style="height: 180px">
 														{{else}}
 														<img src="/images/courses/img-1.jpg" alt="">
 														{{/if}}

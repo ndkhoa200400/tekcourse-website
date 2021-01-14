@@ -58,6 +58,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 });
 
 
+
 const getStatFeedback = (feedbacks) => {
   // Thống kê feedback của một course
 
@@ -173,6 +174,7 @@ exports.getSessionCart = (req, res, next) => {
 
 exports.getTeacherProfile = catchAsync(async (req, res, next) => {
   try {
+
     const userID = req.user.id;
 
     const user = await User.findById(userID).lean();
@@ -185,13 +187,43 @@ exports.getTeacherProfile = catchAsync(async (req, res, next) => {
       numStudents += course.numStudents
 
     })
+    let categories = Course.schema.path("category").enumValues; 
+    res.status(200).render("profile", {
+      title: "Profile",
+      user: user,
+      courses: courses,
+      numCourse: courses.length,
+      numStudents,
+      categories
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.getInstructorView = catchAsync(async (req, res, next) => {
+  try {
+    
+    const id = req.param('id');
+    console.log(id);
+    const user = await User.findById(id).lean();
+
+    const courses = await Course.find({ teacherID: user._id }).lean({
+      virtuals: true,
+    });
+    let numStudents = 0;
+    courses.forEach((course) => {
+      numStudents += course.numStudents
+    })
+    let categories = Course.schema.path("category").enumValues; 
 
     res.status(200).render("profile", {
       title: "Profile",
       user: user,
       courses: courses,
       numCourse: courses.length,
-      numStudents
+      numStudents,
+      categories
     });
   } catch (error) {
     console.log(error);

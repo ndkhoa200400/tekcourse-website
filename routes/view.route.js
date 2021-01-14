@@ -28,6 +28,8 @@ router.post('/student-profile/wishlist', watchlistController.removeCourse);
 // router.get('/student-profile/wishlist', authController.protect, controller.getStudentWatchedList);
 
 router.get('/profile', authController.protect, controller.getTeacherProfile);
+
+router.get('/instructor-profile', controller.getInstructorView);
 //router.get('/profile/edit', authController.protect, controller.updateTeacherProfile);
 
 router.get('/course/create-new-course', (req, res) => {
@@ -51,6 +53,7 @@ router.get("/profile/edit", authController.protect, controller.editProfile);
 router.post("/profile/edit", authController.protect, userController.updateMe);
 
 router.get('/course/:slug', controller.getCourse);
+
 
 router.get('/course/:slug/edit', controller.editCourse);
 

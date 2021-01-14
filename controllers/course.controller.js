@@ -25,7 +25,12 @@ exports.createCourse = async (req, res, next) => {
 
         res.status(200).send(`
         <script>
-            alert('Successfully! Check it out!')
+            
+            swal({
+                title: 'Successfully',
+                text: 'Check it out',
+                icon: 'success'
+            })
             window.location.replace('/course/${course.slug}');
         </script>
         `)
@@ -33,7 +38,7 @@ exports.createCourse = async (req, res, next) => {
         console.log(error.message);
         res.status(400).send(`
         <script>
-            alert("${error.message}")
+            swal("Something went wrong", "${error.message}", "error");
             window.location.replace("/course/create-new-course");
         </script>
         `)

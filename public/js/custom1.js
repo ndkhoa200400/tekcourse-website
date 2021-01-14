@@ -160,7 +160,11 @@ $('input[name="paymentmethod"]').on('click', function () {
 window.oncontextmenu = function () {
 	return false;
 }
+var p = $(".modal-content");
 
+$(".close").click(function() {
+	p.css("visibility", "hidden").css("opacity", "0");
+	$('#framevideo').get(0).pause()
+	toggleVideo("hide");
 
-
-
+});
