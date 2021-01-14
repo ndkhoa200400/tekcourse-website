@@ -15,9 +15,26 @@ exports.createLecture = async (req, res, next) => {
         console.log(req.body);
         let reference = "";
         if (req.file) {
-            let video = await cloudinary.v2.uploader.upload(req.file.path, { resource_type: "video", });
-            reference = video.url;
+        
+            try {
+                let video = await cloudinary.v2.uploader.upload(req.file.path, {
+                    resource_type: "video",
+                    chunk_size: 6000000
+                });
+                reference = video.url || "";
+                console.log(video);
+            } catch (error) {
+                return res.send(`
+                <script>
+                    alert("${error.message}")
+                    window.location.replace("/course/${req.params.slug}");
+                </script>
+    
+            `)
+            }
+
         }
+
         if (course) {
             const courseContent = req.body.content;
             const lecture = await Lecture.create({ name: req.body.name, description: req.body.description, reference: reference });
@@ -37,7 +54,7 @@ exports.createLecture = async (req, res, next) => {
                     }
                     // Chưa có course content
                     if (isContentExisted == false) {
-                        let temp = {name: courseContent, lectures: [lecture]};
+                        let temp = { name: courseContent, lectures: [lecture] };
                         course.contents.push(temp);
                     }
                 }
@@ -45,9 +62,22 @@ exports.createLecture = async (req, res, next) => {
                 await course.save();
             }
         }
-        res.redirect('back');
+        res.send(`
+        <script>
+            alert("Successfully")
+            window.location.replace("/instructor");
+        </script>
+
+    `)
     } catch (error) {
-        res.redirect('back');
+
+        res.send(`
+            <script>
+                alert("${error.message}")
+                window.location.replace("/course/${req.params.slug}");
+            </script>
+
+        `)
         console.log(error);
     }
 }
