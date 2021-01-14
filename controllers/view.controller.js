@@ -198,7 +198,7 @@ exports.editLecture = catchAsync(async (req, res, next) => {
     const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
     const lecture = await Lecture.findOne({slug: lectureSlug}).lean();
     // Các contents trong course trừ content của lecture đang edit
-    contents  = course.contents.map(value => value.name).filter(value => value !== content);
+    let contents  = course.contents.map(value => value.name).filter(value => value !== content);
 
     let user = res.locals.user;
     
@@ -395,5 +395,18 @@ exports.createNewCourse = async (req, res) => {
     user: user,
     subcategories: categories.subcategories
   })
+
+}
+exports.isCompleted = async (req, res) => {
+  const slugName = req.params.slug;
+  console.log(slugName);
+  const filter = { slug: slugName };
+  const update = { isCompleted: true };
+
+  let doc = await Course.findOneAndUpdate(filter, update, {
+    new: true
+  });
+  res.redirect("back");
+  
 
 }

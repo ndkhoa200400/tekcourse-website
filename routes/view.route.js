@@ -79,11 +79,27 @@ router.get('/instructor', async (req, res) => {
   res.render('instructor_courses',{
     user :user,
     layout: 'main_teacher',
-    title : 'Create A Course',
+    title : 'Courses',
     courses: courses
   })
 });
 
+router.post('/instructor/:slug/completed',controller.isCompleted);
+
+router.get('/instructor/:slug/completed',async (req, res) => {
+  let user = res.locals.user;
+  const courses = await Course.find({ teacherID: user.id }).lean({
+    virtuals: true,
+  });
+
+  if (user) user = { name: user.name, email: user.email, role: user.role };
+  res.render('instructor_courses',{
+    user :user,
+    layout: 'main_teacher',
+    title : 'Courses',
+    courses: courses
+  })
+});
 //router.get('/instructor/:slug/:lecture/edit', controller.editLecture);
 
 module.exports = router;

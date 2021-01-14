@@ -69,11 +69,15 @@
 													<td class="text-center">${{price}}</td>
 													<td class="text-center"><a href="../category/{{category}}">{{categoryName}}</a></td>
 													<td class="text-center">
-														<form action="./isCompleted" method="POST">
-															 <input id="complete" type="checkbox" onclick="myFunction()">
+														<form action="/instructor/{{this.slug}}/completed" method="POST" id="form">
+														{{#if this.isCompleted}}
+														<input id="complete1" type="checkbox" autocomplete="on" checked>
+														{{else}}
+														<input id="complete" type="checkbox" autocomplete="on">
+														{{/if}}
+												
 														</form>
-														
-														 <b class="course_active" style="color:#20c9bb">Complete</b>
+														 <b class="course_active" for="complete" style="color:#20c9bb">Complete</b>
 														</td>
 													<td class="text-center"><a href="../course/{{slug}}">View</a></td>
 													<td class="text-center">
@@ -96,17 +100,11 @@
 		{{> footer}}
 	</div>
 	<script>
-		function myFunction() {
-			console.log("AAA");
-		  // Get the checkbox
-			var checkBox = document.getElementById("complete");
-			// Get the output text
+		$('.course_active').click(function() {
+			$( "#complete" ).prop( "checked", true );
+				$('#form').submit();
+				var nextURL = window.location.href;
+				window.location.reload = ""
+		});
 
-			// If the checkbox is checked, display the output text
-			if (checkBox.checked == true){
-				console.log("yes");
-			} else {
-				console.log("no");
-			}
-		}
 	</script>
