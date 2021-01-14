@@ -307,9 +307,11 @@
 										<div class="_112456">
 											<ul class="accordion-expand-holder">
 												<li><span class="accordion-expand-all _d1452">Expand all</span></li>
-												<li><span class="_fgr123"> 2 lectures</span></li>
-												<li><span class="_fgr123">47:06:29</span></li>
-												<li><span class="section-header-length"><button type="button" id="add_lecture" class="btn btn-outline-secondary">Add</button></span></li>
+												{{#if isTeacher}}
+												<li><span class="section-header-length"><button type="button"
+															id="add_lecture"
+															class="btn btn-outline-secondary">Add</button></span></li>
+												{{/if}}
 											</ul>
 										</div>
 
@@ -320,17 +322,17 @@
 
 													<a href="javascript:void(0)"
 														class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-															<div class="section-header-left">
-																<span class="section-title-wrapper">
-																	<i class='uil uil-presentation-play crse_icon'></i>
-																	<span class="section-title-text">{{this.name}}</span>
-																</span>
-															</div>
-															<div class="section-header-right">
-																<span class="num-items-in-section">8 sessions</span>
-																
-											
-															</div>
+														<div class="section-header-left">
+															<span class="section-title-wrapper">
+																<i class='uil uil-presentation-play crse_icon'></i>
+																<span class="section-title-text">{{this.name}}</span>
+															</span>
+														</div>
+														<div class="section-header-right">
+															<span class="num-items-in-section">8 sessions</span>
+
+
+														</div>
 													</a>
 
 													<div
@@ -340,7 +342,8 @@
 															<div class="left-content">
 																<i class='uil uil-file icon_142'></i>
 																<div class="top">
-
+																
+																	{{#if ../../isPurchase}}
 																	<div class="title">
 																		<button class="btn btn btn-success btn-sm"
 																			aria-expanded="false" data-toggle="collapse"
@@ -371,18 +374,81 @@
 																		</div>
 
 																	</div>
+																	{{else if ../../isTeacher}}									
+																		<div class="title">
+																			<button class="btn btn btn-success btn-sm"
+																				aria-expanded="false" data-toggle="collapse"
+																				data-target="#popup{{@index}}"
+																				data-parent="#myaccordion"
+																				onclick=getVideo("{{this.reference}}")>{{name}}</button>
+
+																			<div class="show-video-{{this.name}} collapse"
+																				id="popup{{@index}}">
+																				<video id="my-video" class="video-js"
+																					controls preload="auto" width="640"
+																					height="264"
+																					poster="MY_VIDEO_POSTER.jpg"
+																					data-setup="{}">
+																					<source src="{{this.reference}}"
+																						type="video/mp4" />
+																					<p class="vjs-no-js">
+																						To view this video please enable
+																						JavaScript,
+																						and
+																						consider upgrading to a
+																						web browser that
+																						<a href="https://videojs.com/html5-video-support/"
+																							target="_blank">supports HTML5
+																							video</a>
+																					</p>
+																				</video>
+																			</div>
+
+																		</div>
+																	{{else}}
+																		<div class="title">
+																			<span>{{name}}</span>	
+																				<div class="show-video-{{this.name}} collapse"
+																				id="popup{{@index}}">
+																				<video id="my-video" class="video-js"
+																					controls preload="auto" width="640"
+																					height="264"
+																					poster="MY_VIDEO_POSTER.jpg"
+																					data-setup="{}">
+																					<source src="{{this.reference}}"
+																						type="video/mp4" />
+																					<p class="vjs-no-js">
+																						To view this video please enable
+																						JavaScript,
+																						and
+																						consider upgrading to a
+																						web browser that
+																						<a href="https://videojs.com/html5-video-support/"
+																							target="_blank">supports HTML5
+																							video</a>
+																					</p>
+																				</video>
+																			</div>
+														
+																		</div>
+																	
+																	{{/if}}
+
+
 																</div>
 															</div>
-
-															{{#if isPreviewed}}
 															<div class="details">
-																
-																<a href="#"
-																	class="preview-text" aria-expanded="false"  data-toggle="collapse" data-target="#popup{{@index}}">Preview</a>
-															{{/if}}
+																{{#if isPreviewed}}
+																<a href="#" class="preview-text" aria-expanded="false"
+																	data-toggle="collapse"
+																	data-target="#popup{{@index}}">Preview</a>
+																{{/if}}
+
+																{{#if ../../isTeacher}}
 																<a href="{{../../course.slug}}/{{../this.name}}/{{this.slug}}/edit"
 																	class="content-summary"><i
 																		class="uil uil-edit-alt"></i>Edit</a>
+																{{/if}}
 
 															</div>
 
@@ -419,8 +485,8 @@
 														<div class="_rate004">
 															<div class="progress progress1">
 																<div class="progress-bar w-{{this.feedbackStat.[4]}}"
-																	role="progressbar" aria-valuenow="70" aria-valuemin="0"
-																	aria-valuemax="100"></div>
+																	role="progressbar" aria-valuenow="70"
+																	aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 															<div class="rating-box">
 																<span class="rating-star full-star"></span>
@@ -434,8 +500,8 @@
 														<div class="_rate004">
 															<div class="progress progress1">
 																<div class="progress-bar w-{{this.feedbackStat.[3]}}"
-																	role="progressbar" aria-valuenow="30" aria-valuemin="0"
-																	aria-valuemax="100"></div>
+																	role="progressbar" aria-valuenow="30"
+																	aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 															<div class="rating-box">
 																<span class="rating-star full-star"></span>
@@ -449,8 +515,8 @@
 														<div class="_rate004">
 															<div class="progress progress1">
 																<div class="progress-bar w-{{this.feedbackStat.[2]}}"
-																	role="progressbar" aria-valuenow="10" aria-valuemin="0"
-																	aria-valuemax="100"></div>
+																	role="progressbar" aria-valuenow="10"
+																	aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 															<div class="rating-box">
 																<span class="rating-star full-star"></span>
@@ -464,8 +530,8 @@
 														<div class="_rate004">
 															<div class="progress progress1">
 																<div class="progress-bar w-{{this.feedbackStat.[1]}}"
-																	role="progressbar" aria-valuenow="2" aria-valuemin="0"
-																	aria-valuemax="100"></div>
+																	role="progressbar" aria-valuenow="2"
+																	aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 															<div class="rating-box">
 																<span class="rating-star full-star"></span>
@@ -479,8 +545,8 @@
 														<div class="_rate004">
 															<div class="progress progress1">
 																<div class="progress-bar w-{{this.feedbackStat.[0]}}"
-																	role="progressbar" aria-valuenow="0" aria-valuemin="0"
-																	aria-valuemax="100"></div>
+																	role="progressbar" aria-valuenow="0"
+																	aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 															<div class="rating-box">
 																<span class="rating-star full-star"></span>
@@ -596,8 +662,10 @@
 																	<option value="1">&star;</option>
 																	<option value="2">&star; &star;</option>
 																	<option value="3">&star; &star; &star;</option>
-																	<option value="4">&star; &star; &star; &star;</option>
-																	<option value="5">&star; &star; &star; &star; &star;
+																	<option value="4">&star; &star; &star; &star;
+																	</option>
+																	<option value="5">&star; &star; &star; &star;
+																		&star;
 																	</option>
 																</select>
 																<input type="hidden" name="courseID"
@@ -605,9 +673,10 @@
 															</div>
 
 														</div>
-														<button class="cmnt-btn" type="submit">Send Your Review</button>
+														<button class="cmnt-btn" type="submit">Send Your
+															Review</button>
 													</div>
-												
+
 												</div>
 
 											</div>
@@ -616,6 +685,7 @@
 									</div>
 								</div>
 							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -631,10 +701,10 @@
 			console.log($(this).html())
 		}
 
-		$('#add_lecture').click(function() {
+		$('#add_lecture').click(function () {
 			var nextURL = window.location.href;
-  			nextURL = nextURL+ '/create-new-lecture';
-			  console.log(nextURL);
+			nextURL = nextURL + '/lecture/add';
+			console.log(nextURL);
 			window.location.replace(nextURL);
 		});
 	</script>

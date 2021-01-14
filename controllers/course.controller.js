@@ -24,13 +24,8 @@ exports.createCourse = async (req, res, next) => {
         const course = await Course.create(req.body);
 
         res.status(200).send(`
-        <script>
-            
-            swal({
-                title: 'Successfully',
-                text: 'Check it out',
-                icon: 'success'
-            })
+        <script>     
+            alert("Successfully");
             window.location.replace('/course/${course.slug}');
         </script>
         `)
@@ -133,12 +128,24 @@ exports.getCategory = async (req, res) => {
 
 exports.updateCourse = async (req, res) =>{
     try {
-        const slugName = req.params.slug;
+        const id = req.params.id;
+        
         req.body.lastUpdated = Date.now();
-        const course = await Course.findOneAndUpdate({slug: slugName}, req.body);
-
+        const course = await Course.findByIdAndUpdate(id, req.body);
+        console.log(req.body);
+        res.send(`
+            <script>
+                alert("Successfully");
+                window.location = "/instructor"
+            </script>
+        `)
     } catch (error) {
         console.log(error.message);
+        res.send(`
+        <script>
+            alert("${error.message}");
+            window.history.back()
+        </script>`)
     }
 }
 

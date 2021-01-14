@@ -21,7 +21,10 @@ router.route('/')
         authController.restrictTo('teacher'),
         upload.single('promotionalVideo'),
         controller.createCourse);
-
+router.post('/:id/edit', authController.protect,
+        authController.restrictTo('teacher'), 
+        upload.single('promotionalVideo'), 
+        controller.updateCourse)
 
 router.route('/:id')
     .get(controller.getCourse)

@@ -113,8 +113,10 @@ exports.getCourse = catchAsync(async (req, res, next) => {
       res.redirect("back");
       return;
     }
-
+   
     let user = res.locals.user;
+  
+    let isTeacher = false;
     if (user) {
       if (user.role === 'customer') {
         const registeredcouse = await registeredCourse.findOne({ userID: user.id, "courses.course": course.id });
@@ -125,7 +127,9 @@ exports.getCourse = catchAsync(async (req, res, next) => {
         if (watchlist)
           isWatched = true;
       }
+      isTeacher = course.teacherID._id.equals(user.id);
       user = { name: user.name, email: user.email, role: user.role };
+    
     }
 
     course.views++;
@@ -143,7 +147,7 @@ exports.getCourse = catchAsync(async (req, res, next) => {
       .sort({ ratingsAverage: 1, createdAt: -1 })
       .limit(5)
       .lean({ virtuals: true });
-
+    console.log(isTeacher);
     res.status(200).render("course_detail_view", {
       title: course.name,
       course: course,
@@ -157,7 +161,8 @@ exports.getCourse = catchAsync(async (req, res, next) => {
       feedbacks: feedbacks,
       feedbackStat,
       numFeedbacks,
-      contents: course.contents
+      contents: course.contents,
+      isTeacher
     });
   } catch (error) {
     console.log(error);
@@ -184,6 +189,7 @@ exports.editCourse = catchAsync(async (req, res, next) => {
       action: "Edit ",
       course: course,
       user: user,
+      subcategories: categories.subcategories
     });
   } catch (error) {
     console.log(error);
@@ -402,12 +408,17 @@ exports.createNewLecture = async (req, res) => {
 
   const slugName = req.params.slug;
   let user = res.locals.user;
+  const course = await Course.findOne({slug: slugName}).lean();
+
+
+
 
   if (user) user = { name: user.name, email: user.email, role: user.role };
   res.render('create_new_lecture', {
     title: "Create New Lecture",
     user: user,
-    slug: slugName
+    slug: slugName,
+    course
 
   })
 

@@ -21,7 +21,7 @@
 		toolbar: [
 			'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
 		],
-	});	
+	});
 	tinymce.init({
 		selector: '#id_part_description',
 		plugins: 'paste image link autolink lists table media',
@@ -45,14 +45,14 @@
 					<h2 class="st_title"><i class="uil uil-analysis"></i> {{this.action}}Course - {{this.title}} </h2>
 				</div>
 			</div>
-			<form action="/course" method="POST" class='form--create-course' enctype="multipart/form-data">
-			<div class="row">
-				<div class="col-12">
-					<div class="course_tabs_1">
-						<div id="add-course-tab" class="step-app">
-						
+			<form action="/course/{{this.course._id}}/edit" method="POST" class='form--create-course' enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-12">
+						<div class="course_tabs_1">
+							<div id="add-course-tab" class="step-app">
 
-							
+
+
 								<div class="step-tab-panel step-tab-info active" id="tab_step1">
 									<div class="tab-from-content">
 										<div class="title-icon">
@@ -67,9 +67,9 @@
 															<label>Course Name*</label>
 															<div class="ui left icon input swdh19">
 																<input class="prompt srch_explore" type="text"
-																	placeholder="{{this.course.name}}" name="name"
+																	placeholder="" name="name"
 																	data-purpose="edit-course-title" id="main[title]"
-																	value="" required>
+																	value="{{this.course.name}}" required>
 																<div class="badge_num">#</div>
 															</div>
 														</div>
@@ -78,13 +78,13 @@
 														<div class="course_des_textarea mt-30 lbel25">
 															<label>Course Short Description*</label>
 															<div class="course_des_bg">
-																
+
 																<div class="textarea_dt">
 																	<div class="ui form swdh339">
 																		<div class="field">
 																			<textarea rows="5" name="shortDescription"
 																				id="id_course_short_description"
-																				placeholder="{{this.course.shortDescription}}"></textarea>
+																				placeholder="">{{this.course.shortDescription}}</textarea>
 																		</div>
 																	</div>
 																</div>
@@ -95,13 +95,13 @@
 														<div class="course_des_textarea mt-30 lbel25">
 															<label>Course Description*</label>
 															<div class="course_des_bg">
-															
+
 																<div class="textarea_dt">
 																	<div class="ui form swdh339">
 																		<div class="field">
 																			<textarea rows="5" name="description"
 																				id="id_course_description"
-																				placeholder="{{this.course.description}}"></textarea>
+																				placeholder="">{{this.course.description}}</textarea>
 																		</div>
 																	</div>
 																</div>
@@ -115,9 +115,14 @@
 														</div>
 														<select id="category-selection" name='category'
 															class="ui hj145 dropdown cntry152 prompt srch_explore">
-															<option value="">Select Category</option>
+															{{#is this.course.category "website"}}
 															<option value="website">Web Development</option>
 															<option value="mobile">Mobile Development</option>
+															{{/is}}
+															{{#is this.course.category "mobile"}}
+															<option value="mobile">Mobile Development</option>
+															<option value="website">Web Development</option>
+															{{/is}}
 
 														</select>
 													</div>
@@ -127,10 +132,12 @@
 														</div>
 														<select id="subcategory-selection" name='subcategory'
 															class="ui hj145 dropdown cntry152 prompt srch_explore">
+															<option value="{{this.course.subcategory}}">
+																{{this.course.subcategory}}</option>
 															{{#each this.subcategories}}
 															<option value="{{this}}">{{this}}</option>
 															{{/each}}
-													</select>
+														</select>
 
 													</div>
 												</div>
@@ -142,9 +149,9 @@
 															<h4><i class="uil uil-dollar-sign-alt"></i>Pricing</h4>
 															<div class="ui left icon input swdh19">
 																<input class="prompt srch_explore" type="number"
-																	placeholder="{{this.course.price}}" name="price"
+																	placeholder="" name="price"
 																	data-purpose="edit-course-title" id="course-price"
-																	value="">
+																	value="{{this.course.price}}">
 
 															</div>
 														</div>
@@ -180,7 +187,7 @@
 																	gif, or .png. no text on the image.</p>
 
 																<div>
-																	<input id='img-link' type="hidden" value=""
+																	<input id='img-link' type="hidden" value="{{this.course.avatar}}"
 																		name='avatar' data-purpose="edit-course-img">
 
 																	<div class="dropzone">
@@ -200,7 +207,7 @@
 															<div>
 																<input id="promotionalVideo" name="promotionalVideo"
 																	type="file" class="file"
-																	data-browse-on-zone-click="true" value=''>
+																	data-browse-on-zone-click="true" value='{{this.course.promotionalVideo}}'>
 
 															</div>
 														</div>
@@ -211,19 +218,19 @@
 									</div>
 								</div>
 
-			
 
-							
-							<div class="step-footer step-tab-pager">
-		
-								<button data-direction="next" class="btn btn-default steps_btn">Next</button>
-								<button data-direction="finish" class="btn btn-default steps_btn" type='submit'
-									id="submit-course-btn">Submit Course</button>
+
+
+								<div class="step-footer step-tab-pager">
+
+									<button data-direction="next" class="btn btn-default steps_btn">Next</button>
+									<button data-direction="finish" class="btn btn-default steps_btn" type='submit'
+										id="submit-course-btn">Submit Course</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</form>
 		</div>
 	</div>
