@@ -11,6 +11,10 @@ const lectureSchema = new mongoose.Schema({
   reference: {
     type: String,
   },
+  isPreviewed: {
+    type: Boolean,
+    default: false
+  }
 });
 
 lectureSchema.pre('save', function(next){

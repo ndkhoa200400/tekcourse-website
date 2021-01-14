@@ -22,13 +22,14 @@ exports.getOverview = catchAsync(async (req, res, next) => {
       .limit(10)
       .lean({ virtuals: true });
 
-    const topTrending = await Course.find({}, { _id: 0, __v: 0 })
+    // khoá học nổi bật nhất trong tuần qua
+    const topTrending = await Course.find({ createdAt: { $gt: weekAgo, $lt: date } }, { _id: 0, __v: 0 })
       .sort({ ratingsAverage: 1, createdAt: -1 })
       .limit(5)
       .lean({ virtuals: true });
 
     //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
-    const subcategories = await Course.find({ createdAt: { $gt: weekAgo, $lt: date } }).sort({ views: -1 }).limit(5)
+    const subcategories = await Course.find({ createdAt: { $gt: weekAgo, $lt: date } }).sort({ numStudents: -1 }).limit(5)
       .distinct("subcategory")
       .lean({ virtuals: true });
 
@@ -144,7 +145,7 @@ exports.editCourse = catchAsync(async (req, res, next) => {
   try {
     const slugName = req.params.slug;
     const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
-
+    
     if (!course) {
       res.redirect("back");
       return;

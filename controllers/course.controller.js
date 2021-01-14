@@ -46,9 +46,9 @@ exports.createCourse = async (req, res, next) => {
 }
 
 exports.getAllCourse = async (req, res) => {
-
+    // Tìm kiếm tất cả course
     try {
-
+        
         let user = res.locals.user;
         if (user) user = { name: user.name, email: user.email, role: user.role };
 

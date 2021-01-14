@@ -39,7 +39,7 @@
 			</div>
 			<form action="/course/{{course.slug}}/lecture/add" method="POST" class='form--add-lecture'
 				enctype="multipart/form-data">
-			
+
 				<div class="row">
 					<div class="col-12">
 						<div class="course_tabs_1">
@@ -58,7 +58,7 @@
 													</div>
 													<div class="view_info10">
 														<div class="row">
-															<div class="col-lg-12 col-md-12">
+															{{!-- <div class="col-lg-12 col-md-12">
 																<div class="ui search focus mt-30 lbel25">
 																	<label>Course Content Title*</label>
 																	<div class="ui left icon input swdh19">
@@ -69,6 +69,26 @@
 																			data-purpose="edit-course-title"
 																			maxlength="60" value="" required>
 																	</div>
+																</div> --}}
+																<div class="col-lg-12 col-md-12">
+																	<div class="mt-30 lbel25">
+																		<label>Course Content*</label>
+																	</div>
+																	<div class="content-input">
+																		<select id="course-content" name='content'
+																			class="ui hj145 dropdown cntry152 prompt srch_explore">
+																			{{#each course.contents}}
+																			<option value="{{this.name}}">{{this.name}}</option>
+																			{{/each}}
+																		</select>
+																	</div>
+
+																	<button type="button" class="btn1542"
+																		style="margin-top: 10px;"
+																		onclick="addNewContent()">
+																		Add new Content
+																	</button>
+
 																</div>
 															</div>
 															<div class="col-lg-12 col-md-12">
@@ -84,7 +104,8 @@
 																			id="lecture-title"
 																			placeholder="Insert your lecture title."
 																			name="name" data-purpose="edit-course-title"
-																			maxlength="60" id="lecture[title]" value="" required>
+																			maxlength="60" id="lecture[title]" value=""
+																			required>
 																	</div>
 																</div>
 															</div>
@@ -269,6 +290,7 @@
 <script src="/js/jquery-steps.min.js"></script>
 
 <script>
+	var contentInputType = 1;
 	function uploadFile() {
 		const inputFileName = document.getElementById("inputGroupFile06").files[0].name;
 		const lblFileName = document.querySelector('.file-name');
@@ -277,13 +299,42 @@
 
 
 	}
+	function addNewContent() {
+		if (contentInputType === 1) {
+			$('.content-input').html(`
+																	
+																	<div class="ui left icon input swdh19">
+																		<input class="prompt srch_explore" type="text"
+																			id="course-content"
+																			placeholder="Insert your course content title."
+																			name="content"
+																			data-purpose="edit-course-title"
+																			maxlength="60" value="" required>
+																	
+																`)
+			contentInputType = 0;
+		}
+		else {
+			console.log("{{ course.name }}")
+			$('.content-input').html(`
+						<div>
+							<select id="course-content" name='content'
+								class="ui hj145 dropdown cntry152 prompt srch_explore">
+								<option value="Javascript">JavaScript
+								</option>
+								<option value="HTML">HTML</option>
+							</select>
+						</div>`)
+			contentInputType = 1;
+		}
+
+	}
 	$('.part_btn_save').on('click', function () {
-		console.log($('.srch_explore').val())
 		$('.form--add-lecture').submit();
-	});		
+	});
+
+
 </script>
 </div>
 
 <!-- Body End -->
-
-
