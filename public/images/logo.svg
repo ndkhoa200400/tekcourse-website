@@ -4,27 +4,24 @@
 	 viewBox="0 0 711.9 168.7" style="enable-background:new 0 0 711.9 168.7;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#21D4C5;}
-	.st1{fill:none;}
-	.st2{fill:#FFFFFF;}
-	.st3{font-family:'Roboto-BoldItalic';}
-	.st4{font-size:72px;}
-	.st5{fill:#21D4C5;stroke:#6BC7F1;stroke-miterlimit:10;}
-	.st6{font-size:88.0355px;}
-	.st7{fill:#F44914;}
-	.st8{font-family:'Roboto-LightItalic';}
-	.st9{font-size:24px;}
+	.st1{fill:#FFFFFF;}
+	.st2{font-family:'Roboto-BoldItalic';}
+	.st3{font-size:78.7567px;}
+	.st4{font-size:96.297px;}
+	.st5{fill:none;stroke:#6BC7F1;stroke-miterlimit:10;}
+	.st6{fill:#F44914;}
+	.st7{font-family:'Roboto-LightItalic';}
+	.st8{font-size:26.2522px;}
 </style>
-<rect x="277" y="35" class="st0" width="55" height="98"/>
-<image style="overflow:visible;enable-background:new    ;" width="512" height="512" xlink:href="7B631316.png"  transform="matrix(0.3162 0 0 0.3169 5.5 3.2125)">
+<image style="overflow:visible;enable-background:new    ;" width="512" height="512" xlink:href="C:\Users\Admin\Documents\GitHub\tekcourse-website\public\images\7B631316.png"  transform="matrix(0.3162 0 0 0.3169 5.5 3.2125)">
 </image>
-<rect x="332" y="164" class="st1" width="0" height="4.7"/>
-<image style="overflow:visible;" width="270" height="270" xlink:href="D:\Web\cursus2\cursus\images\get-img.jpg"  transform="matrix(1 0 0 1 0 1080)">
-</image>
-<rect x="203.9" y="35" class="st0" width="55" height="98"/>
-<text transform="matrix(1 0 0 1 207.2842 112.9258)" class="st2 st3 st4">T</text>
-<text transform="matrix(1 0 0 1 281.4182 112.9258)" class="st2 st3 st4">E</text>
-<rect x="350.1" y="35" class="st0" width="55" height="98"/>
-<text transform="matrix(1 0 0 1 353.9503 112.9258)" class="st2 st3 st4">K</text>
-<text transform="matrix(1 0 0 1 415.6904 98.5732)" class="st5 st3 st6">Course</text>
-<text transform="matrix(1.0122 0 0 1 421.6836 131.6436)" class="st7 st8 st9">Start Learning From Now!</text>
+<rect x="258.6" y="30.8" class="st0" width="60.2" height="107.2"/>
+<rect x="178.6" y="30.8" class="st0" width="60.2" height="107.2"/>
+<text transform="matrix(1 0 0 1 182.3027 115.9895)" class="st1 st2 st3">T</text>
+<text transform="matrix(1 0 0 1 263.394 115.9895)" class="st1 st2 st3">E</text>
+<rect x="338.5" y="30.8" class="st0" width="60.2" height="107.2"/>
+<text transform="matrix(1 0 0 1 342.7324 115.9895)" class="st1 st2 st3">K</text>
+<text transform="matrix(1 0 0 1 410.2666 100.2903)" class="st0 st2 st4">Course</text>
+<text transform="matrix(1 0 0 1 410.2666 100.2903)" class="st5 st2 st4">Course</text>
+<text transform="matrix(1.0122 0 0 1 416.8223 136.4641)" class="st6 st7 st8">Start Learning From Now!</text>
 </svg>
