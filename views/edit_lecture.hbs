@@ -1,0 +1,275 @@
+﻿<!-- Mirrored from gambolthemes.net/html-items/cursus_demo_f12/create_new_course.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 12:55:52 GMT -->
+
+<link rel="icon" type="image/png" href="/images/fav.png">
+
+<!-- Stylesheets -->
+<link href='/http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet'>
+<link href='/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+<link href="/css/vertical-responsive-menu1.min.css" rel="stylesheet">
+<link href="/css/instructor-dashboard.css" rel="stylesheet">
+<link href="/css/instructor-responsive.css" rel="stylesheet">
+<link href="/css/night-mode.css" rel="stylesheet">
+<link href="/css/jquery-steps.css" rel="stylesheet">
+
+<script src="https://cdn.tiny.cloud/1/ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6/tinymce/5/tinymce.min.js"
+	referrerpolicy="origin"></script>
+<script>
+	tinymce.init({
+		selector: '#id_part_description',
+		plugins: 'paste image link autolink lists table media',
+		menubar: false,
+		toolbar: [
+			'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+		],
+	});
+
+</script>
+<!-- Header Start -->
+{{> header}}
+{{> nav_1}}
+<!-- Body Start -->
+<div class="wrapper">
+	<div class="sa4d25">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="st_title"><i class="uil uil-analysis"></i>Edit Lecture - {{lecture.name}}</h2>
+
+				</div>
+			</div>
+			<form action="/course/{{courseSlug}}/lecture/{{currentContent}}/{{lecture.slug}}/edit" method="POST"
+				class='form--edit-lecture' enctype="multipart/form-data">
+
+				<div class="row">
+					<div class="col-12">
+						<div class="course_tabs_1">
+							<div id="add-course-tab" class="step-app">
+
+								<div class="step-tab-panel step-tab-location" id="tab_step3">
+									<div class="tab-from-content">
+										<div class="title-icon">
+											<h3 class="title"><i class="uil uil-film"></i>Course Content</h3>
+										</div>
+										<div class="course__form">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="extra_info">
+														<h4 class="part__title">New Course Content</h4>
+													</div>
+													<div class="view_info10">
+														<div class="row">
+															<div class="col-lg-12 col-md-12">
+
+
+																<div class="mt-30 lbel25">
+																	<label>Course Content*</label>
+																</div>
+																<div class="content-input">
+																	<select id="course-content" name='content'
+																		class="ui hj145 dropdown cntry152 prompt srch_explore">
+																		<option value="{{currentContent}}">
+																			{{currentContent}}</option>
+																		{{#each contents}}
+																		<option value="{{this.name}}">{{this.name}}
+																		</option>
+																		{{/each}}
+																	</select>
+																</div>
+
+																<button type="button" class="btn1542"
+																	style="margin-top: 10px;" onclick="addNewContent()">
+																	Add new Content
+																</button>
+
+
+															</div>
+															<div class="col-lg-12 col-md-12">
+																<div class="lecture_title">
+																	<h4>Edit Lecture</h4>
+																</div>
+															</div>
+															<div class="col-lg-4 col-md-12">
+																<div class="ui search focus mt-30 lbel25">
+																	<label>Lecture Title</label>
+																	<div class="ui left icon input swdh19">
+																		<input class="prompt srch_explore" type="text"
+																			id="lecture-title" name="name"
+																			data-purpose="edit-course-title"
+																			maxlength="60" id="lecture[title]"
+																			value="{{lecture.name}}" required>
+																	</div>
+																</div>
+															</div>
+															<div class="col-lg-4 col-md-6">
+																<div class="part_input mt-30 lbel25">
+																	<label>File*</label>
+																	<div class="input-group">
+																		<div class="custom-file ">
+																			<input type="file" class="custom-file-input"
+																				id="inputGroupFile06" value=""
+																				onchange="uploadFile()"
+																				name="reference">
+																			<label class="custom-file-label file-name"
+																				for="inputGroupFile06">{{lecture.reference}}</label>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-lg-4 col-md-6">
+																{{!-- <div class="ui search focus mt-30 lbel25">
+																	<label>Sort</label>
+																	<div class="ui left icon input swdh19">
+																		<input class="prompt srch_explore" type="number"
+																			name="sort" min="0" max="100"
+																			placeholder="0">
+																	</div>
+																</div> --}}
+															</div>
+															<div class="col-lg-12 col-md-12">
+																<div class="course_des_textarea mt-30 lbel25">
+																	<label>Description*</label>
+																	<div class="course_des_bg">
+
+																		<div class="textarea_dt">
+																			<div class="ui form swdh339">
+																				<div class="field">
+																					<textarea rows="5"
+																						name="description"
+																						id="id_part_description"
+																						value="{{lecture.description}}"></textarea>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-lg-5 col-md-6">
+																<div class="ui search focus mt-30">
+
+																	<div class="form-check">
+																		{{#if isPreviewed}}
+																		<input class="form-check-input" type="checkbox"
+																			name="isPreviewed" value="true"
+																			id="flexCheckDefault" checked>
+																		<label class="form-check-label"
+																			for="flexCheckDefault">
+																			Allow previewed
+																		</label>
+
+																		{{else}}
+																		<input class="form-check-input" type="checkbox"
+																			name="isPreviewed" value="true"
+																			id="flexCheckDefault">
+																		<label class="form-check-label"
+																			for="flexCheckDefault">
+																			Allow previewed
+																		</label>
+
+																		{{/if}}
+																	</div>
+																</div>
+															</div>
+
+															<div class="col-lg-2 col-md-12">
+																<button class="part_btn_save prt-sv" type="submit">Save
+																	Lecture</button>
+															</div>
+
+															<div class="col-lg-12 col-md-12">
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="table-responsive mt-30">
+											<table class="table ucp-table" id="content-table">
+												<thead class="thead-s">
+													<tr>
+														<th class="text-center" scope="col">Content</th>
+														<th class="cell-ta">Title</th>
+														<th class="text-center" scope="col">lectures</th>
+														<th class="text-center" scope="col">Volume</th>
+														<th class="text-center" scope="col">Duration</th>
+														<th class="text-center" scope="col">Upload Date</th>
+														<th class="text-center" scope="col">Files</th>
+														<th class="text-center" scope="col">Controls</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="text-center">1</td>
+														<td class="cell-ta">Course Content Title</td>
+														<td class="text-center">5</td>
+														<td class="text-center">50</td>
+														<td class="text-center">15</td>
+														<td class="text-center">6 April 2019</td>
+														<td class="text-center"><a href="#">View</a></td>
+														<td class="text-center">
+															<a href="#" title="Edit" class="gray-s"><i
+																	class="uil uil-edit-alt"></i></a>
+															<a href="#" title="Delete" class="gray-s"><i
+																	class="uil uil-trash-alt"></i></a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+
+
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{{> footer}}
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-steps.min.js"></script>
+
+<script>
+	var contentInputType = 1;
+	function uploadFile() {
+		const inputFileName = document.getElementById("inputGroupFile06").files[0].name;
+		const lblFileName = document.querySelector('.file-name');
+		lblFileName.innerHTML = inputFileName;
+
+
+
+	}
+	function addNewContent() {
+		if (contentInputType === 1) {
+			$('.content-input').html(`
+																	
+				<div class="ui left icon input swdh19">
+					<input class="prompt srch_explore" type="text"
+						id="course-content"
+						placeholder="Insert your course content title."
+						name="content"
+						data-purpose="edit-course-title"
+						maxlength="60" value="" required>
+																	
+																`)
+			contentInputType = 0;
+		}
+
+	}
+	$('.part_btn_save').on('click', function () {
+		console.log("OK")
+		$('.form--edit-lecture').submit();
+	});
+
+
+</script>
+</div>
+
+<!-- Body End -->

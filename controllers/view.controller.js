@@ -5,7 +5,8 @@ const Feedback = require('./../model/feedback.model')
 const catchAsync = require("./../utils/catchAsync");
 const registeredCourse = require("./../model/registedCourse.model");
 const pagination = require("./../utils/pagination");
-const categories = require('./../utils/categories')
+const categories = require('./../utils/categories');
+const Lecture = require("../model/lecture.model");
 
 async function getTopSubcategory(date, weekAgo) {
   const registeredcourses = await registeredCourse.find().lean();
@@ -55,7 +56,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     //top lĩnh vực được đăng ký học nhiều nhất trong tuần qua
     let subcategories = [...(await getTopSubcategory(date, weekAgo))].slice(0, 5);
 
-    const topPurchasedCourses = await Course.find({numStudents: {$gt:0}}, { _id: 0, __v: 0 })
+    const topPurchasedCourses = await Course.find({ numStudents: { $gt: 0 } }, { _id: 0, __v: 0 })
       .sort({ numStudents: -1 })
       .limit(5)
       .lean({ virtuals: true });
@@ -191,23 +192,27 @@ exports.editCourse = catchAsync(async (req, res, next) => {
 exports.editLecture = catchAsync(async (req, res, next) => {
   try {
     const slugName = req.params.slug;
-    const lectureName = req.params.lecture;
-    // const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
-    
-    // if (!course) {
-    //   res.redirect("back");
-    //   return;
-    // }
+    const content = req.params.content;
+    const lectureSlug = req.params.lecture;
+
+    const course = await Course.findOne({ slug: slugName }).lean({ virtuals: true });
+    const lecture = await Lecture.findOne({slug: lectureSlug}).lean();
+    // Các contents trong course trừ content của lecture đang edit
+    contents  = course.contents.map(value => value.name).filter(value => value !== content);
 
     let user = res.locals.user;
-
+    
     if (user) user = { name: user.name, email: user.email, role: user.role };
+    
 
-    res.status(200).render("create_new_lecture", {
-      // title: course.name,
-      action: "Edit ",
+    res.render("edit_lecture", {
+      title: course.name,
       // course: course,
+      courseSlug: slugName,
+      currentContent: content,
+      contents,
       user: user,
+      lecture
     });
   } catch (error) {
     console.log(error);
