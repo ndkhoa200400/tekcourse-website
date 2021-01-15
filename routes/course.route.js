@@ -27,7 +27,6 @@ router.post('/:id/edit', authController.protect,
         controller.updateCourse)
 
 router.route('/:id')
-    .get(controller.getCourse)
     .patch(authController.protect,
         authController.restrictTo('teacher'),
         controller.updateCourse)
