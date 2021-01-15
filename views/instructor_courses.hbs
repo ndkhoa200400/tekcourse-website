@@ -69,15 +69,15 @@
 													<td class="text-center">${{price}}</td>
 													<td class="text-center"><a href="../category/{{category}}">{{categoryName}}</a></td>
 													<td class="text-center">
-														<form action="/instructor/{{this.slug}}/completed" method="POST" id="form">
-														{{#if this.isCompleted}}
-														<input id="complete1" type="checkbox" autocomplete="on" checked>
-														{{else}}
-														<input id="complete" type="checkbox" autocomplete="on">
-														{{/if}}
+														<form action="/instructor/{{this.slug}}/completed" method="POST" id="form{{@index}}">
+															{{#if this.isCompleted}}
+															<input id="complete" type="checkbox" autocomplete="on" checked>
+															{{else}}
+															<input id="complete{{@index}}" type="checkbox" autocomplete="on">
+															{{/if}}
 												
 														</form>
-														 <b class="course_active" for="complete" style="color:#20c9bb">Complete</b>
+														 <b class="course_active" for="complete{{@index}}" style="color:#20c9bb">Complete</b>
 														</td>
 													<td class="text-center"><a href="../course/{{slug}}">View</a></td>
 													<td class="text-center">
@@ -101,10 +101,15 @@
 	</div>
 	<script>
 		$('.course_active').click(function() {
-			$( "#complete" ).prop( "checked", true );
-				$('#form').submit();
+			var index = $(this).index(".course_active");
+
+			var $id =$("complete" + index );
+			$('#complete'+index).prop( "checked", true );
+			 	$('#form'+index).submit();
 				var nextURL = window.location.href;
-				window.location.reload = ""
+				window.location.reload = "";
 		});
+
+		
 
 	</script>

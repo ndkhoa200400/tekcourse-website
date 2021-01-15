@@ -33,7 +33,15 @@
 	{{> header}}
 	<!-- Header End -->
 	<!-- Left Sidebar Start -->
+	{{#is user.role "teacher"}}
 	{{> nav_1}}
+	{{/is}}
+	{{#is user.role "customer"}}
+	{{> nav_2}}
+	{{/is}}
+	{{#is user.role "admin"}}
+	{{> nav}}
+	{{/is}}
 	<!-- Left Sidebar End -->
 	<!-- Body Start -->
 	<div class="wrapper _bg4586">

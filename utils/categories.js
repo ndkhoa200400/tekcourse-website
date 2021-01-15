@@ -1,1 +1,17 @@
-exports.subcategories = ["Javascript","HTML","CSS 3","Angular","React","CSS","PHP","Node.Js","WordPress","Vue JS","Flutter","Kotlin","Java","Swift","Python 3"]
+exports.subcategories = [
+  "Javascript",
+  "HTML",
+  "CSS 3",
+  "Angular",
+  "React",
+  "CSS",
+  "PHP",
+  "Node.Js",
+  "WordPress",
+  "Vue JS",
+  "Flutter",
+  "Kotlin",
+  "Java",
+  "Swift",
+  "Python 3",
+];
