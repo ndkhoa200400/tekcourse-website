@@ -101,8 +101,8 @@ exports.otp = catchAsync(async (req, res, next) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "tekcoursesp@gmail.com", //email ID
-      pass: "Tekcourse123", //Password
+      user: "mongoloidad@gmail.com", //email ID
+      pass: "Mongoloid@admin", //Password
     },
   });
   function sendMail(email, otp) {

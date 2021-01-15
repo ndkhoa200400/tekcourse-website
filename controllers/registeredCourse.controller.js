@@ -38,7 +38,7 @@ exports.registerManyCourses = catchAsync(async (req, res, next) => {
 
                 }
                 if (isExisted) continue;
-                registersedCourse.courses.push(selectedCourse.id);
+                registersedCourse.courses.push({course: selectedCourse.id});
                 selectedCourse.updateOne({ $inc: { numStudents: 1 } });
             }
 

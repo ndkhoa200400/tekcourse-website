@@ -9,7 +9,6 @@ exports.setTeacherID = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.getCourse = factory.getOne(Course);
 
 exports.createCourse = async (req, res, next) => {
   try {
