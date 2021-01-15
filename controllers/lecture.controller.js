@@ -30,7 +30,7 @@ exports.createLecture = async (req, res, next) => {
         if (course) {
             const courseContent = req.body.content;
 
-            const isPreviwed = req.body.isPreviwed === "true" ? true : false;
+            const isPreviewed = req.body.isPreviewed === "true" ? true : false;
             const lecture = await Lecture.create({ name: req.body.name, description: req.body.description, reference: reference, isPreviwed: isPreviwed });
             if (courseContent) {
                 if (course.contents.length == 0) {
