@@ -247,8 +247,7 @@
 																					</div>
 																					<span class="play_btn1"><i
 																							class="uil uil-play"></i></span>
-																					<div class="crse_timer">25 hours
-																					</div>
+
 																				</div>
 																			</a>
 																			<div class="fcrse_content">
@@ -350,7 +349,7 @@
 															<div class="left-content">
 																<i class='uil uil-file icon_142'></i>
 																<div class="top">
-																
+
 																	{{#if ../../isPurchase}}
 																	<div class="title">
 																		<button class="btn btn btn-success btn-sm"
@@ -382,64 +381,64 @@
 																		</div>
 
 																	</div>
-																	{{else if ../../isTeacher}}									
-																		<div class="title">
-																			<button class="btn btn btn-success btn-sm"
-																				aria-expanded="false" data-toggle="collapse"
-																				data-target="#popup{{@index}}"
-																				data-parent="#myaccordion"
-																				onclick=getVideo("{{this.reference}}")>{{name}}</button>
+																	{{else if ../../isTeacher}}
+																	<div class="title">
+																		<button class="btn btn btn-success btn-sm"
+																			aria-expanded="false" data-toggle="collapse"
+																			data-target="#popup{{@index}}"
+																			data-parent="#myaccordion"
+																			onclick=getVideo("{{this.reference}}")>{{name}}</button>
 
-																			<div class="show-video-{{this.name}} collapse"
-																				id="popup{{@index}}">
-																				<video id="my-video" class="video-js"
-																					controls preload="auto" width="640"
-																					height="264"
-																					poster="MY_VIDEO_POSTER.jpg"
-																					data-setup="{}">
-																					<source src="{{this.reference}}"
-																						type="video/mp4" />
-																					<p class="vjs-no-js">
-																						To view this video please enable
-																						JavaScript,
-																						and
-																						consider upgrading to a
-																						web browser that
-																						<a href="https://videojs.com/html5-video-support/"
-																							target="_blank">supports HTML5
-																							video</a>
-																					</p>
-																				</video>
-																			</div>
-
+																		<div class="show-video-{{this.name}} collapse"
+																			id="popup{{@index}}">
+																			<video id="my-video" class="video-js"
+																				controls preload="auto" width="640"
+																				height="264"
+																				poster="MY_VIDEO_POSTER.jpg"
+																				data-setup="{}">
+																				<source src="{{this.reference}}"
+																					type="video/mp4" />
+																				<p class="vjs-no-js">
+																					To view this video please enable
+																					JavaScript,
+																					and
+																					consider upgrading to a
+																					web browser that
+																					<a href="https://videojs.com/html5-video-support/"
+																						target="_blank">supports HTML5
+																						video</a>
+																				</p>
+																			</video>
 																		</div>
+
+																	</div>
 																	{{else}}
-																		<div class="title">
-																			<span>{{name}}</span>	
-																				<div class="show-video-{{this.name}} collapse"
-																				id="popup{{@index}}">
-																				<video id="my-video" class="video-js"
-																					controls preload="auto" width="640"
-																					height="264"
-																					poster="MY_VIDEO_POSTER.jpg"
-																					data-setup="{}">
-																					<source src="{{this.reference}}"
-																						type="video/mp4" />
-																					<p class="vjs-no-js">
-																						To view this video please enable
-																						JavaScript,
-																						and
-																						consider upgrading to a
-																						web browser that
-																						<a href="https://videojs.com/html5-video-support/"
-																							target="_blank">supports HTML5
-																							video</a>
-																					</p>
-																				</video>
-																			</div>
-														
+																	<div class="title">
+																		<span>{{name}}</span>
+																		<div class="show-video-{{this.name}} collapse"
+																			id="popup{{@index}}">
+																			<video id="my-video" class="video-js"
+																				controls preload="auto" width="640"
+																				height="264"
+																				poster="MY_VIDEO_POSTER.jpg"
+																				data-setup="{}">
+																				<source src="{{this.reference}}"
+																					type="video/mp4" />
+																				<p class="vjs-no-js">
+																					To view this video please enable
+																					JavaScript,
+																					and
+																					consider upgrading to a
+																					web browser that
+																					<a href="https://videojs.com/html5-video-support/"
+																						target="_blank">supports HTML5
+																						video</a>
+																				</p>
+																			</video>
 																		</div>
-																	
+
+																	</div>
+
 																	{{/if}}
 
 
