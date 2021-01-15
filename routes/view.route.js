@@ -18,6 +18,11 @@ router.use(controller.getSessionCart);
 
 router.get('/', controller.getOverview);
 
+router.get('/course/getTopTrending',controller.getTopTrendingCourse);
+router.get('/course/getTopNewest',controller.getTopNewestCourse);
+router.get('/course/getTopViewd',controller.getTopViewdCourse);
+router.get('/course/getTopPurchased',controller.getTopPurchasedCourse);
+
 router.get('/student-profile', authController.protect, controller.getStudentProfile)
 
 router.get('/student-profile/wishlist', authController.protect, controller.getStudentWatchedList)

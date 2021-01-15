@@ -14,7 +14,7 @@ router.use('/:slug/feedback', feedbackRoute); // For URL: /courseID/feedback/ID.
 
 //router.get('/search', controller.getFilteredCourses);
 router.route('/category/:category').get(controller.getCategory);
-
+//
 router.route('/')
     .get(controller.getAllCourse)
     .post(authController.protect,
@@ -31,8 +31,6 @@ router.route('/:id')
     .patch(authController.protect,
         authController.restrictTo('teacher'),
         controller.updateCourse)
-    .delete(authController.protect,
-        authController.restrictTo('teacher', 'admin'),
-        controller.deleteCourse);
+ 
 
 module.exports = router;

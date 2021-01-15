@@ -31,6 +31,7 @@ async function getTopSubcategory(date, weekAgo) {
 
 }
 
+
 exports.getOverview = catchAsync(async (req, res, next) => {
   try {
     let date = new Date();
@@ -108,7 +109,6 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 
     let isPurchase = false;
     let isWatched = false;
-
     if (!course) {
       res.redirect("back");
       return;
@@ -603,6 +603,153 @@ exports.createTeacherAccount = catchAsync(async (req, res, next) => {
 
 
     res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.getTopTrendingCourse = catchAsync(async (req, res, next) => {
+  try {
+    let date = new Date();
+    let weekAgo = new Date().setDate(date.getDate() - 7)
+
+    let topTrending = await Course.find(
+      { createdAt: { $gt: weekAgo, $lt: date }, active: { $ne: false } },
+      { _id: 0, __v: 0 }
+    )
+      .sort({ ratingsAverage: 1, createdAt: -1 })
+      .lean({ virtuals: true });
+
+    let page = req.query.page || 1;
+    if (page < 1) page = 1;
+
+    const page_numbers = pagination.calcPageNumbers(topTrending.length, page);
+    const offset = pagination.calcOffset(page);
+    const next_page = pagination.calcNextPage(page, page_numbers);
+    const prev_page = pagination.calcPreviousPage(page, page_numbers);
+
+   
+    let user = res.locals.user;
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+    topTrending = topTrending.slice(offset, offset + pagination.limit);
+    res.status(200).render("search_result", {
+      title: "Result",
+      user: user,
+      course: topTrending,
+      empty: topTrending === null,
+      page_numbers,
+      next_page,
+      prev_page,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.getTopNewestCourse = catchAsync(async (req, res, next) => {
+  try {
+    let date = new Date();
+    let weekAgo = new Date().setDate(date.getDate() - 7)
+
+      let topNewestCourses = await Course.find({active: {$ne: false}}, { _id: 0, __v: 0 })
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .lean({ virtuals: true });
+
+    let page = req.query.page || 1;
+    if (page < 1) page = 1;
+
+    const page_numbers = pagination.calcPageNumbers(topNewestCourses.length, page);
+    const offset = pagination.calcOffset(page);
+    const next_page = pagination.calcNextPage(page, page_numbers);
+    const prev_page = pagination.calcPreviousPage(page, page_numbers);
+
+   
+    let user = res.locals.user;
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+    topNewestCourses = topNewestCourses.slice(offset, offset + pagination.limit);
+    res.status(200).render("search_result", {
+      title: "Result",
+      user: user,
+      course: topNewestCourses,
+      empty: topNewestCourses === null,
+      page_numbers,
+      next_page,
+      prev_page,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.getTopViewdCourse = catchAsync(async (req, res, next) => {
+  try {
+    let date = new Date();
+    let weekAgo = new Date().setDate(date.getDate() - 7)
+
+    let topViewedCourses = await Course.find({active: {$ne: false}}, { _id: 0, __v: 0 })
+      .sort({ views: -1 })
+      .limit(10)
+      .lean({ virtuals: true });
+
+    let page = req.query.page || 1;
+    if (page < 1) page = 1;
+
+    const page_numbers = pagination.calcPageNumbers(topViewedCourses.length, page);
+    const offset = pagination.calcOffset(page);
+    const next_page = pagination.calcNextPage(page, page_numbers);
+    const prev_page = pagination.calcPreviousPage(page, page_numbers);
+
+   
+    let user = res.locals.user;
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+    topViewedCourses = topViewedCourses.slice(offset, offset + pagination.limit);
+
+    res.status(200).render("search_result", {
+      title: "Result",
+      user: user,
+      course: topViewedCourses,
+      empty: topViewedCourses === null,
+      page_numbers,
+      next_page,
+      prev_page,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+exports.getTopPurchasedCourse = catchAsync(async (req, res, next) => {
+  try {
+    let date = new Date();
+    let weekAgo = new Date().setDate(date.getDate() - 7)
+
+    let topPurchasedCourses = await Course.find({ numStudents: { $gt: 0 }, active: {$ne: false} }, { _id: 0, __v: 0 })
+      .sort({ numStudents: -1 })
+ 
+      .lean({ virtuals: true });
+
+    let page = req.query.page || 1;
+    if (page < 1) page = 1;
+
+    const page_numbers = pagination.calcPageNumbers(topPurchasedCourses.length, page);
+    const offset = pagination.calcOffset(page);
+    const next_page = pagination.calcNextPage(page, page_numbers);
+    const prev_page = pagination.calcPreviousPage(page, page_numbers);
+
+   
+    let user = res.locals.user;
+    if (user) user = { name: user.name, email: user.email, role: user.role };
+    topPurchasedCourses = topPurchasedCourses.slice(offset, offset + pagination.limit);
+    res.status(200).render("search_result", {
+      title: "Result",
+      user: user,
+      course: topPurchasedCourses,
+      empty: topPurchasedCourses === null,
+      page_numbers,
+      next_page,
+      prev_page,
+    });
   } catch (error) {
     console.log(error);
   }
