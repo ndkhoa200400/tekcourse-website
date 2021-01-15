@@ -21,7 +21,7 @@
 		toolbar: [
 			'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
 		],
-	});	
+	});
 	tinymce.init({
 		selector: '#id_part_description',
 		plugins: 'paste image link autolink lists table media',
@@ -46,38 +46,38 @@
 				</div>
 			</div>
 			<form action="/course" method="POST" class='form--create-course' enctype="multipart/form-data">
-			<div class="row">
-				<div class="col-12">
-					<div class="course_tabs_1">
-						<div id="add-course-tab" class="step-app">
-							{{!-- <ul class="step-steps">
-								<li class="active">
-									<a href="#tab_step1">
-										<span class="number"></span>
-										<span class="step-name">General Information</span>
-									</a>
-								</li>
-								<li>
-									<a href="#tab_step2">
-										<span class="number"></span>
-										<span class="step-name">View</span>
-									</a>
-								</li>
-								<li>
-									<a href="#tab_step3">
-										<span class="number"></span>
-										<span class="step-name">Course Content</span>
-									</a>
-								</li>
-								<li>
-									<a href="#tab_step4">
-										<span class="number"></span>
-										<span class="step-name">Extra Information</span>
-									</a>
-								</li>
-							</ul> --}}
+				<div class="row">
+					<div class="col-12">
+						<div class="course_tabs_1">
+							<div id="add-course-tab" class="step-app">
+								{{!-- <ul class="step-steps">
+									<li class="active">
+										<a href="#tab_step1">
+											<span class="number"></span>
+											<span class="step-name">General Information</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step2">
+											<span class="number"></span>
+											<span class="step-name">View</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step3">
+											<span class="number"></span>
+											<span class="step-name">Course Content</span>
+										</a>
+									</li>
+									<li>
+										<a href="#tab_step4">
+											<span class="number"></span>
+											<span class="step-name">Extra Information</span>
+										</a>
+									</li>
+								</ul> --}}
 
-							
+
 								<div class="step-tab-panel step-tab-info active" id="tab_step1">
 									<div class="tab-from-content">
 										<div class="title-icon">
@@ -103,7 +103,7 @@
 														<div class="course_des_textarea mt-30 lbel25">
 															<label>Course Short Description*</label>
 															<div class="course_des_bg">
-																
+
 																<div class="textarea_dt">
 																	<div class="ui form swdh339">
 																		<div class="field">
@@ -120,7 +120,7 @@
 														<div class="course_des_textarea mt-30 lbel25">
 															<label>Course Description*</label>
 															<div class="course_des_bg">
-															
+
 																<div class="textarea_dt">
 																	<div class="ui form swdh339">
 																		<div class="field">
@@ -155,7 +155,7 @@
 															{{#each this.subcategories}}
 															<option value="{{this}}">{{this}}</option>
 															{{/each}}
-													</select>
+														</select>
 
 													</div>
 												</div>
@@ -236,19 +236,18 @@
 									</div>
 								</div>
 
-			
 
-							
-							<div class="step-footer step-tab-pager">
-								<button data-direction="prev" class="btn btn-default steps_btn">PREVIOUS</button>
-								<button data-direction="next" class="btn btn-default steps_btn">Next</button>
-								<button data-direction="finish" class="btn btn-default steps_btn" type='submit'
-									id="submit-course-btn">Submit Course</button>
+
+
+								<div class="step-footer step-tab-pager">
+									<button data-direction="next" class="btn btn-default steps_btn">Next</button>
+									<button data-direction="finish" class="btn btn-default steps_btn" type='submit'
+										id="submit-course-btn">Submit Course</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</form>
 		</div>
 	</div>
